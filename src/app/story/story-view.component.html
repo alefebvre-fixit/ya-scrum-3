@@ -1,0 +1,137 @@
+<md-toolbar color="primary" class="section-nav-bar">
+  <span>Story</span>
+  <span class="toolbar-spacer"></span>
+
+  <button md-icon-button [mdMenuTriggerFor]="menu">
+    <md-icon>more_vert</md-icon>
+  </button>
+  <md-menu #menu="mdMenu">
+    <button md-menu-item (click)="editStory(story)">
+      <md-icon>edit</md-icon>
+      <span>Edit</span>
+    </button>
+    <button md-menu-item disabled>
+      <md-icon>delete</md-icon>
+      <span>Delete</span>
+    </button>
+  </md-menu>
+
+</md-toolbar>
+
+
+
+<div class="story-detail-container">
+
+      <div class="flex-container" 
+        fxLayout
+        fxLayoutWrap="wrap"
+        fxLayout.xs="column"
+        fxLayoutAlign="start start"
+        fxLayoutAlign.xs="start">
+
+        <div class="flex-item" fxFlex="70%">
+
+          <md-card class="story-card">
+            <md-card-header>
+              <md-card-title>{{(story)?.name}}</md-card-title>
+              <md-card-subtitle>Dog Breed</md-card-subtitle>
+            </md-card-header>
+            <md-card-content>
+              <h3 md-subheader>Description</h3>
+              <p>
+                {{(story)?.description}}
+              </p>
+
+              <h3 md-subheader>Acceptance Criterias</h3>
+              <p>
+                {{(story)?.acceptanceCriterias}}
+              </p>
+
+            </md-card-content>
+          </md-card>
+
+
+        </div>
+        <div class="flex-item" fxFlex="30%">
+        
+          <md-card class="story-card">
+            <md-card-content>
+                <table class="analytics-list ranked">
+                    <tbody>
+                        <tr>
+                            <td>Status</td>
+                            <td>
+                              <md-chip-list>
+                                  <md-chip color="accent" selected="true">{{story?.status}}</md-chip>
+                              </md-chip-list>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Type</td>
+                            <td>
+                              {{story?.type}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Priority</td>
+                            <td>
+                              {{story?.priority}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Size</td>
+                            <td>
+                              {{story?.size}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Progress</td>
+                            <td>
+                              {{progressAsPercentage()/100| percent:'1.0-0'}}
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </md-card-content>
+          </md-card>
+
+        </div>
+        <div class="flex-item" fxFlex="50%">
+          <md-card class="story-card">
+            <md-card-content>
+          		<div style="display: block">
+                <canvas height="180" baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"
+                  [legend]="false" [colors]="colors" [options]="options"></canvas>
+	          	</div>
+            </md-card-content>
+          </md-card>
+        </div>
+        <div class="flex-item" fxFlex="50%">
+          <md-card class="story-card">
+            <md-card-content>
+
+
+                <table class="analytics-list ranked">
+                    <tbody>
+                        <tr *ngFor="let progress of story?.history; let i = index;">
+                            <td>#{{i}}</td>
+                            <td>{{progress.remaining}}</td>
+                            <td>
+                                {{progress.daily}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
+            </md-card-content>
+          </md-card>
+        </div>
+
+
+    </div> 
+
+
+</div>

@@ -1,0 +1,12 @@
+    <div class="flex-container" 
+        fxLayout
+        fxLayoutWrap="wrap"
+        fxLayout.xs="column"
+        fxLayoutAlign="start start"
+        fxLayoutAlign.xs="start">
+
+        <div class="flex-item" fxFlex="33%" *ngFor="let story of stories;">
+            <story-card [story]="story"></story-card>
+        </div>
+
+    </div> 
