@@ -88,7 +88,6 @@
                             <td>Progress</td>
                             <td>
                               {{progressAsPercentage()/100| percent:'1.0-0'}}
-
                             </td>
                         </tr>
                     </tbody>
@@ -108,26 +107,7 @@
           </md-card>
         </div>
         <div class="flex-item" fxFlex="50%">
-          <md-card class="story-card">
-            <md-card-content>
-
-
-                <table class="analytics-list ranked">
-                    <tbody>
-                        <tr *ngFor="let progress of story?.history; let i = index;">
-                            <td>#{{i}}</td>
-                            <td>{{progress.remaining}}</td>
-                            <td>
-                                {{progress.daily}}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-
-
-            </md-card-content>
-          </md-card>
+          <story-schedule [story]="story"></story-schedule>
         </div>
 
 

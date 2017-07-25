@@ -2,18 +2,20 @@ import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 
-import { StoryService, SprintService, UserService } from '../services/index';
+import { StoryService, SprintService } from '../services/index';
 import { Story, StoryProgress, Sprint, User } from '../models/index';
 
 import { MdDialog, MdDialogRef } from '@angular/material';
 
 import { StoryEditComponent } from './story-edit.component';
 import { StoryCardComponent } from './story-card.component';
+import { UserService } from '../user';
 
 @Component({
   selector: 'story-view',
   templateUrl: './story-view.component.html',
-  styleUrls: ['./story-view.component.css']
+  styleUrls: ['./story-view.component.css'],
+  providers: [ UserService ]
 })
 export class StoryViewComponent implements OnInit {
 
@@ -70,10 +72,6 @@ export class StoryViewComponent implements OnInit {
   }
 
   assignProductOwner() {
-    /*
-    let selectorModal = this.modalCtrl.create(ProductOwnerSelectorPage, { storyId: this.story.$key });
-    selectorModal.present();
-    */
   }
 
   navigateToProductOwner(user: User) {

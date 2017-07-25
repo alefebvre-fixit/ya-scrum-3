@@ -1,0 +1,42 @@
+<md-card>
+
+  <md-card-header>
+    <md-icon md-card-avatar color="primary">today</md-icon>
+    <!-- <div md-card-avatar class="example-header-image"></div> -->
+    <md-card-title>STORY PROGRESS</md-card-title>
+  </md-card-header>
+
+  <md-card-content>
+
+             <td-data-table
+              #dataTable
+              [data]="data"
+              [columns]="columns"
+              [selectable]="selectable"
+              [clickable]="clickable"
+              [(ngModel)]="selectedRows">
+
+                <ng-template tdDataTableTemplate="day" let-value="value" let-row="row" let-column="column">
+                  <div layout="row">
+                    #{{value}}
+                  </div>
+                </ng-template>
+
+                <!-- <ng-template tdDataTableTemplate="daily" let-value="value" let-row="row" let-column="column">
+                  <div layout="row">
+                    {{value}}
+                  </div>
+                </ng-template> -->
+
+                <ng-template tdDataTableTemplate="trend" let-value="value" let-row="row" let-column="column">
+                  <div layout="row">
+                    <trend [amount]="row['daily']"></trend>                  
+                  </div>
+                </ng-template>
+
+
+            </td-data-table> 
+
+
+  </md-card-content>
+</md-card>

@@ -13,49 +13,17 @@
     <md-sidenav #sidenav mode="side" opened="true" style="width:257px;border-right:1px solid #ccc">
       <div flex class="md-content bgc-grey-50">
         <md-nav-list>
-          <a md-list-item class="active"><md-icon>contacts</md-icon>Contacts</a>
-          <a md-list-item><md-icon>history</md-icon>Frequently contacted</a>
-          <a md-list-item><md-icon>business</md-icon>Directory</a>
-          <a md-list-item><md-icon>content_copy</md-icon>Duplicates</a>
+          <a md-list-item [routerLink]="['/stories']"><md-icon>contacts</md-icon>Stories</a>
+          <a md-list-item [routerLink]="['/sprints']"><md-icon>contacts</md-icon>Sprints</a>
           <md-divider></md-divider>
-          <a md-list-item><md-icon>add</md-icon>Create label</a>
-          <md-divider></md-divider>
-          <a md-list-item><md-icon>settings</md-icon>Settings</a>
-          <a md-list-item><md-icon>announcement</md-icon>Send feedback</a>
-          <a md-list-item><md-icon>help</md-icon>Help</a>
-          <a md-list-item><md-icon>exit_to_app</md-icon>Go to the old version</a>
+          <a md-list-item class="active" [routerLink]="['/contacts']"><md-icon>contacts</md-icon>Contacts</a>
         </md-nav-list>
       </div>
     </md-sidenav>
-    <!-- ng content or router would go here -->
-    <div layout layout-fill class="bgc-white" tdMediaToggle="gt-xs" [mediaClasses]="['pad-right-xxl', 'pad-left-lg', 'pad-top']">
-      <md-tab-group>
-
-        <md-tab label="In Progress">
-          <story-grid [stories]="storiesInProgress"></story-grid>
-        </md-tab>
-
-        <md-tab label="Pending">
-          <story-grid [stories]="storiesPending"></story-grid>
-        </md-tab>
-
-        <md-tab label="Closed">
-          <story-grid [stories]="storiesClosed"></story-grid>
-        </md-tab>
-
-      </md-tab-group>
-
-
-
-      <md-nav-list flex>
-        <ng-template let-item let-i="index" let-last="last" ngFor [ngForOf]="[0,1,2,3,4,5,6,7,8,9]">
-          <a md-list-item (click)="openDialog()">
-            <img md-list-avatar src="http://lorempixel.com/40/40/people/{{i}}" />
-            <h4 md-line class="cursor-pointer"> Firstname Lastname </h4>
-            <span flex="none" class="md-caption tc-grey-600">555-444-1234</span>
-          </a>
-        </ng-template>
-      </md-nav-list>
+    <div layout layout-fill class="bgc-white">
+       <span flex>
+         <router-outlet></router-outlet>
+       </span>
     </div>
   </md-sidenav-container>
   <a md-fab color="accent" class="mat-fab-bottom-right fixed fab-pad">

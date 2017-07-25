@@ -2,17 +2,18 @@ import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 
-import { StoryService, SprintService, UserService } from '../services/index';
+import { StoryService, SprintService } from '../services/index';
 import { Story, Sprint, User } from '../models/index';
 
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-
+import { UserService } from '../user';
 
 @Component({
   selector: 'story-edit',
   templateUrl: './story-edit.component.html',
-  styleUrls: ['./story-edit.component.css']
+  styleUrls: ['./story-edit.component.css'],
+  providers: [ UserService ]
 })
 export class StoryEditComponent implements OnInit {
 

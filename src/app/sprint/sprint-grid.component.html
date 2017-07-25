@@ -1,0 +1,12 @@
+    <div class="flex-container" 
+        fxLayout
+        fxLayoutWrap="wrap"
+        fxLayout.xs="column"
+        fxLayoutAlign="start start"
+        fxLayoutAlign.xs="start">
+
+        <div class="flex-item" fxFlex="33%" *ngFor="let sprint of sprints;">
+            <sprint-card [sprint]="sprint"></sprint-card>
+        </div>
+
+    </div> 
