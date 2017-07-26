@@ -5,7 +5,11 @@ import { StoryCardComponent} from './story-card.component';
 import { StoryGridComponent} from './story-grid.component';
 import { StoryViewComponent} from './story-view.component';
 import { StoryEditComponent} from './story-edit.component';
+
 import { StoryScheduleComponent} from './story-schedule.component';
+import { ProgressEditComponent} from './progress-edit.component';
+
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
@@ -39,6 +43,7 @@ import { StoryService } from '../services/index';
     StoryViewComponent,
     StoryEditComponent,
     StoryScheduleComponent,
+    ProgressEditComponent,
   ],
   exports: [
     StoryCardComponent,
@@ -49,6 +54,7 @@ import { StoryService } from '../services/index';
   ],
   entryComponents: [
     StoryEditComponent,
+    ProgressEditComponent,
   ],
   providers: [StoryService]
 })

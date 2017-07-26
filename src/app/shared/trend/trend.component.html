@@ -1,5 +1,5 @@
 <div [ngSwitch]="trend">
-    <md-icon color="accent" *ngSwitchCase="'down'">trending_down</md-icon>
-    <md-icon color="warn" *ngSwitchCase="'up'">trending_up</md-icon>
-    <md-icon color="primary" *ngSwitchCase="'flat'">trending_flat</md-icon>
+    <md-icon class="trend-down" *ngSwitchCase="'down'">trending_down</md-icon>
+    <md-icon class="trend-up" *ngSwitchCase="'up'">trending_up</md-icon>
+    <md-icon class="trend-flat" *ngSwitchCase="'flat'">trending_flat</md-icon>
 </div>

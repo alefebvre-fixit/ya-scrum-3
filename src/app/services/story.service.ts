@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { Story, Progress } from '../models/index';
+import { Story, StoryProgress } from '../models/index';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 const STORIES = 'stories';
@@ -137,25 +137,83 @@ export class StoryService {
 
   }
 
-  public increment(story: Story, progress: Progress, increment: number) {
+
+  public setDailyProgress(story: Story, progress: StoryProgress, daily: number): StoryProgress {
+    
+    const result: StoryProgress = Object.assign({}, progress);
+
+    let value = daily;
+
+    result.total = result.previous;
+    result.remaining = story.size - result.total;
+
+    if (daily > 0 && daily > result.remaining) {
+      value = result.remaining;
+    } else if (daily < 0 && -daily > result.daily) {
+      value = - result.daily;
+    }
+
+    result.daily = value;
+    result.total = result.previous + result.daily;
+    result.remaining = story.size - result.total;
+
+    return result;
+  }
+
+
+  public incrementDailyProgress(story: Story, progress: StoryProgress, increment: number): StoryProgress {
+
+    const result: StoryProgress = Object.assign({}, progress);
 
     let value = increment;
 
-    if (increment > 0 && increment > progress.remaining) {
-      value = progress.remaining;
-    } else if (increment < 0 && -increment > progress.daily) {
-      value = - progress.daily;
+    if (increment > 0 && increment > result.remaining) {
+      value = result.remaining;
+    } else if (increment < 0 && -increment > result.daily) {
+      value = - result.daily;
     }
 
-    progress.daily = progress.daily + value;
-    progress.total = progress.previous + progress.daily;
-    progress.remaining = story.size - progress.total;
+    result.daily = result.daily + value;
+    result.total = result.previous + result.daily;
+    result.remaining = story.size - result.total;
+
+    return result;
+
   }
+
+  public assignDailyProgress(story: Story, progress: StoryProgress): Story {
+
+    story.history[progress.day - 1] = progress;
+
+    if (story.history) {
+      story.progress = story.history.reduce(function (sum: number, progress: StoryProgress) {
+        progress.previous = sum;
+        progress.remaining = story.size - progress.previous - progress.daily;
+        return progress.previous + progress.daily;
+      }, 0);
+
+      if (story.progress > 0) {
+        if (story.progress >= story.size) {
+          story.status = "closed"
+        } else {
+          story.status = "started"
+        }
+      } else {
+        story.status = "assigned";
+      }
+    }
+
+    return story;
+
+  }
+
+
+
 
   public calculateProgress(story: Story) {
     console.log("calculateProgress=");
     if (story.history) {
-      story.progress = story.history.reduce(function (sum: number, progress: Progress) {
+      story.progress = story.history.reduce(function (sum: number, progress: StoryProgress) {
         progress.previous = sum;
         progress.remaining = story.size - progress.previous - progress.daily;
         return progress.previous + progress.daily;
