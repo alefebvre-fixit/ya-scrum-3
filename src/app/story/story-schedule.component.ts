@@ -29,7 +29,6 @@ export class StoryScheduleComponent implements OnInit, OnChanges {
   selectedRows: any[] = [];
 
   constructor(
-    private _dataTableService: TdDataTableService,
     public dialog: MdDialog
   ) {
   }

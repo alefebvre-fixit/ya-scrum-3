@@ -34,7 +34,7 @@
           <md-card class="story-card">
             <md-card-header>
               <md-card-title>{{(story)?.name}}</md-card-title>
-              <md-card-subtitle>Dog Breed</md-card-subtitle>
+              <md-card-subtitle>Story Subtitle</md-card-subtitle>
             </md-card-header>
             <md-card-content>
               <h3 md-subheader>Description</h3>
@@ -53,7 +53,6 @@
 
         </div>
         <div class="flex-item" fxFlex="30%">
-        
           <md-card class="story-card">
             <md-card-content>
                 <table class="analytics-list ranked">
@@ -94,17 +93,9 @@
                 </table>
             </md-card-content>
           </md-card>
-
         </div>
         <div class="flex-item" fxFlex="50%">
-          <md-card class="story-card">
-            <md-card-content>
-          		<div style="display: block">
-                <canvas height="180" baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"
-                  [legend]="false" [colors]="colors" [options]="options"></canvas>
-	          	</div>
-            </md-card-content>
-          </md-card>
+          <progress-view [story]="story"></progress-view>
         </div>
         <div class="flex-item" fxFlex="50%">
           <story-schedule [story]="story"></story-schedule>

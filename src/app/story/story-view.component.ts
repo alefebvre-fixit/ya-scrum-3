@@ -14,29 +14,17 @@ import { UserService } from '../user';
 @Component({
   selector: 'story-view',
   templateUrl: './story-view.component.html',
-  styleUrls: ['./story-view.component.css'],
-  providers: [ UserService ]
+  styleUrls: ['./story-view.component.scss'],
+  providers: [UserService]
 })
 export class StoryViewComponent implements OnInit {
 
   public story: Story;
   public progress: StoryProgress;
 
-
   public sprint: Sprint;
   public productOwner: User;
 
-
-    // Doughnut
-  public doughnutChartLabels: string[] = ['previous', 'daily', 'remaining'];
-  public doughnutChartData: number[] = [0, 0, 1];
-  public doughnutChartType: string = 'doughnut';
-  public colors: any = [{ backgroundColor: ["#15B7B9", "#10DDC2", "#F5F5F5"] }];
-  public options = {
-    tooltips: {
-      enabled: false
-    }
-  };
 
   constructor(
     private route: ActivatedRoute,
@@ -53,8 +41,6 @@ export class StoryViewComponent implements OnInit {
       .subscribe((id) => {
         this.storyService.findOne(id).subscribe(story => {
           this.story = story;
-
-          this.displayProgressForDay(1);
 
           if (story.sprintId) {
             this.sprintService.findOne(story.sprintId).subscribe(sprint => {
@@ -91,28 +77,6 @@ export class StoryViewComponent implements OnInit {
 
   public progressAsPercentage(): number {
     return Story.progressAsPercentage(this.story);
-  }
-
-
-  public displayProgressForDay(day: number) {
-    let progress: StoryProgress = Story.getProgress(this.story, day);
-
-    if (progress === undefined) {
-      progress = Story.createProgress(this.story, day);
-      Story.setProgress(this.story, progress);
-
-      console.log("Applying progress to story");
-      console.log(this.story);
-      
-      this.storyService.calculateProgress(this.story);
-    }
-
-    this.progress = progress;
-    this.updateChart(progress);
-  }
-
-    public updateChart(progress: StoryProgress) {
-    this.doughnutChartData = [progress.previous, progress.daily, progress.remaining];
   }
 
 }

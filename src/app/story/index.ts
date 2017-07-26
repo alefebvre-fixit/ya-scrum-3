@@ -8,6 +8,7 @@ import { StoryEditComponent} from './story-edit.component';
 
 import { StoryScheduleComponent} from './story-schedule.component';
 import { ProgressEditComponent} from './progress-edit.component';
+import { ProgressViewComponent} from './progress-view.component';
 
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -44,6 +45,7 @@ import { StoryService } from '../services/index';
     StoryEditComponent,
     StoryScheduleComponent,
     ProgressEditComponent,
+    ProgressViewComponent,
   ],
   exports: [
     StoryCardComponent,

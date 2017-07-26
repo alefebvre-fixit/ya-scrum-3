@@ -23,7 +23,6 @@ export class TrendComponent implements OnInit, OnChanges {
   }
 
   private getTrend(value: any): string {
-    console.log(value);
     const v = -value;
     if (v > 0) {
         return 'up';

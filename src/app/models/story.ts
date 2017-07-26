@@ -75,6 +75,13 @@ export class Story {
         return undefined;
     }
 
+    public static getLatestProgress(story: Story): StoryProgress {
+        if (story && story.history) {
+            return Story.getProgress(story, story.history.length);
+        }
+        return undefined;
+    }
+
     public static createProgress(story: Story, day: number): StoryProgress {
 
         const result = new StoryProgress();

@@ -18,7 +18,7 @@ import { UserService } from '../user';
 export class ProgressEditComponent implements OnInit {
 
   public story: Story;
-  public progress:StoryProgress;
+  public progress: StoryProgress;
 
   public storyForm: FormGroup; // our model driven form
 

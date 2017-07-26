@@ -5,7 +5,7 @@ import { Story } from '../models/index';
 @Component({
   selector: 'story-grid',
   templateUrl: './story-grid.component.html',
-  styleUrls: ['./story-grid.component.css']
+  styleUrls: ['./story-grid.component.scss']
 })
 export class StoryGridComponent  {
 
