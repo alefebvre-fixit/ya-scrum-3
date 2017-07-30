@@ -5,11 +5,7 @@ import { StoryCardComponent} from './story-card.component';
 import { StoryGridComponent} from './story-grid.component';
 import { StoryViewComponent} from './story-view.component';
 import { StoryEditComponent} from './story-edit.component';
-
-import { StoryScheduleComponent} from './story-schedule.component';
-import { ProgressEditComponent} from './progress-edit.component';
-import { ProgressViewComponent} from './progress-view.component';
-
+import { StoryStatusComponent} from './story-status.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
@@ -23,8 +19,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 import { SharedModule } from '../shared';
+import { StoryProgressModule } from './progress';
 
-import { StoryService } from '../services/index';
+import { StoryService } from './services';
 
 @NgModule({
   imports: [
@@ -36,6 +33,7 @@ import { StoryService } from '../services/index';
     ChartsModule,
     CovalentDataTableModule,
     SharedModule,
+    StoryProgressModule
   ],
   declarations: [
     StoryCardComponent,
@@ -43,9 +41,7 @@ import { StoryService } from '../services/index';
     ProductBacklogComponent,
     StoryViewComponent,
     StoryEditComponent,
-    StoryScheduleComponent,
-    ProgressEditComponent,
-    ProgressViewComponent,
+    StoryStatusComponent,
   ],
   exports: [
     StoryCardComponent,
@@ -56,13 +52,12 @@ import { StoryService } from '../services/index';
   ],
   entryComponents: [
     StoryEditComponent,
-    ProgressEditComponent,
   ],
   providers: [StoryService]
 })
 
 export class StoryModule { }
 
-export * from '../models/story';
-export * from '../services/story.service';
+export * from './models';
+export * from './services';
 export * from './product-backlog.component';

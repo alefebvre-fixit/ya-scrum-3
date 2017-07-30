@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { StoryService } from '../services/index';
-import { Story } from '../models/index';
+import { StoryService } from './services';
+import { Story } from './models';
 
 @Component({
   selector: 'product-backlog',
   templateUrl: './product-backlog.component.html',
-  styleUrls: ['./product-backlog.component.css']
+  styleUrls: ['./product-backlog.component.scss']
 })
 export class ProductBacklogComponent implements OnInit{
 

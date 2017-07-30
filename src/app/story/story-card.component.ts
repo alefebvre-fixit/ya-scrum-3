@@ -2,12 +2,12 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { Router } from '@angular/router';
 
-import { Story } from '../models/index';
+import { Story } from './models';
 
 @Component({
   selector: 'story-card',
   templateUrl: './story-card.component.html',
-  styleUrls: ['./story-card.component.css']
+  styleUrls: ['./story-card.component.scss']
 })
 export class StoryCardComponent {
 

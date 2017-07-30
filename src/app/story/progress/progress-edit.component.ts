@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-
-import { ActivatedRoute } from '@angular/router';
-
-import { StoryService, SprintService } from '../services/index';
-import { Story, StoryProgress, Sprint, User } from '../models/index';
-
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { UserService } from '../user';
+import { ActivatedRoute } from '@angular/router';
+
+import { Sprint, SprintService } from '../../sprint';
+import { User, UserService } from '../../user';
+
+import { StoryService } from '../services';
+import { Story, StoryProgress } from '../models';
+
+
 
 @Component({
-  selector: 'progress-edit',
+  selector: 'story-progress-edit',
   templateUrl: './progress-edit.component.html',
   styleUrls: ['./progress-edit.component.scss'],
   providers: [ UserService ]

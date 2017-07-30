@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-
 import { ActivatedRoute } from '@angular/router';
-
-import { StoryService, SprintService } from '../services/index';
-import { Story, Sprint, User } from '../models/index';
-
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { UserService } from '../user';
+
+import { Sprint, SprintService } from '../sprint';
+import { User, UserService } from '../user';
+
+import { StoryService } from './services';
+import { Story, StoryProgress } from './models';
+
+
 
 @Component({
   selector: 'story-edit',

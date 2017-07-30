@@ -1,11 +1,11 @@
 import { Component, OnInit, Input} from '@angular/core';
 
-import { Sprint } from '../models/index';
+import { Sprint } from './models';
 
 @Component({
   selector: 'sprint-grid',
   templateUrl: './sprint-grid.component.html',
-  styleUrls: ['./sprint-grid.component.css']
+  styleUrls: ['./sprint-grid.component.scss']
 })
 export class SprintGridComponent  {
 

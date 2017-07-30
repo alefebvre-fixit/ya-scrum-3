@@ -1,4 +1,7 @@
-export class Progress {
+import { StoryProgress } from '../../story';
+
+export class SprintProgress {
+
 
     date: Date;
     day: number = 1;
@@ -7,14 +10,6 @@ export class Progress {
     daily: number = 0;
     remaining: number = 0;
 
-}
-
-export class StoryProgress extends Progress {
-    storyId: string;
-}
-
-
-export class SprintProgress extends Progress {
     sprintId: string;
     storiesProgress: StoryProgress[];
 

@@ -1,13 +1,17 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-
 import { ActivatedRoute } from '@angular/router';
 
-import { StoryService, SprintService } from '../services/index';
-import { Story, StoryProgress, Sprint, User } from '../models/index';
 import { TdDataTableService, TdDataTableSortingOrder, ITdDataTableSortChangeEvent, ITdDataTableColumn } from '@covalent/core';
 
+import { Sprint, SprintService } from '../../sprint';
+import { User, UserService } from '../../user';
+
+import { StoryService } from '../services';
+import { Story, StoryProgress } from '../models';
+
+
 @Component({
-  selector: 'progress-view',
+  selector: 'story-progress-view',
   templateUrl: './progress-view.component.html',
   styleUrls: ['./progress-view.component.scss'],
   providers: []

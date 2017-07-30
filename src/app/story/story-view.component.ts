@@ -2,14 +2,16 @@ import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 
-import { StoryService, SprintService } from '../services/index';
-import { Story, StoryProgress, Sprint, User } from '../models/index';
-
 import { MdDialog, MdDialogRef } from '@angular/material';
+
+import { Sprint, SprintService } from '../sprint';
+import { User, UserService } from '../user';
+
+import { StoryService } from './services';
+import { Story, StoryProgress } from './models';
 
 import { StoryEditComponent } from './story-edit.component';
 import { StoryCardComponent } from './story-card.component';
-import { UserService } from '../user';
 
 @Component({
   selector: 'story-view',

@@ -53,52 +53,13 @@
 
         </div>
         <div class="flex-item" fxFlex="30%">
-          <md-card class="story-card">
-            <md-card-content>
-                <table class="analytics-list ranked">
-                    <tbody>
-                        <tr>
-                            <td>Status</td>
-                            <td>
-                              <md-chip-list>
-                                  <md-chip color="accent" selected="true">{{story?.status}}</md-chip>
-                              </md-chip-list>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Type</td>
-                            <td>
-                              {{story?.type}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Priority</td>
-                            <td>
-                              {{story?.priority}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Size</td>
-                            <td>
-                              {{story?.size}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Progress</td>
-                            <td>
-                              {{progressAsPercentage()/100| percent:'1.0-0'}}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </md-card-content>
-          </md-card>
+          <story-status [story]="story"></story-status>
         </div>
         <div class="flex-item" fxFlex="50%">
-          <progress-view [story]="story"></progress-view>
+          <story-progress-view [story]="story"></story-progress-view>
         </div>
         <div class="flex-item" fxFlex="50%">
-          <story-schedule [story]="story"></story-schedule>
+          <story-progress-schedule [story]="story"></story-progress-schedule>
         </div>
 
 

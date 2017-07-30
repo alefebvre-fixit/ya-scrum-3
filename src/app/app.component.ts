@@ -10,7 +10,7 @@ export class AppComponent {
   title = 'app works!';
 
 
-    public storiesPending: Story[];
+  public storiesPending: Story[];
   public storiesClosed: Story[];
   public storiesInProgress: Story[];
 
@@ -35,7 +35,7 @@ export class AppComponent {
   }
 
 
-  
+
 }
 
 

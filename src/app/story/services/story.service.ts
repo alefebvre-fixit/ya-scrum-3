@@ -155,8 +155,8 @@ export class StoryService {
 
     result.daily = value;
     result.total = result.previous + result.daily;
-    result.remaining = story.size - result.total;
-
+    result.remaining = this.filterPositive(story.size - result.total);
+    
     return result;
   }
 
@@ -175,7 +175,7 @@ export class StoryService {
 
     result.daily = result.daily + value;
     result.total = result.previous + result.daily;
-    result.remaining = story.size - result.total;
+    result.remaining = this.filterPositive(story.size - result.total);
 
     return result;
 
@@ -188,7 +188,7 @@ export class StoryService {
     if (story.history) {
       story.progress = story.history.reduce(function (sum: number, progress: StoryProgress) {
         progress.previous = sum;
-        progress.remaining = story.size - progress.previous - progress.daily;
+        progress.remaining = this.filterPositive(story.size - progress.previous - progress.daily);
         return progress.previous + progress.daily;
       }, 0);
 
@@ -207,7 +207,13 @@ export class StoryService {
 
   }
 
-
+  public filterPositive(value: number) : number{
+    if (value > 0) {
+      return value;
+    } else {
+      return 0;
+    }
+  }
 
 
   public calculateProgress(story: Story) {
@@ -215,7 +221,8 @@ export class StoryService {
     if (story.history) {
       story.progress = story.history.reduce(function (sum: number, progress: StoryProgress) {
         progress.previous = sum;
-        progress.remaining = story.size - progress.previous - progress.daily;
+        progress.remaining = this.filterPositive(story.size - progress.previous - progress.daily);
+
         return progress.previous + progress.daily;
       }, 0);
 

@@ -1,0 +1,40 @@
+<md-card>
+  <md-card-content>
+    <md-chip-list>
+      <table class="key-value-table">
+        <tbody>
+          <tr>
+            <td>Status</td>
+            <td>
+              <md-chip color="accent" selected="true">{{story?.status}}</md-chip>
+            </td>
+          </tr>
+          <tr>
+            <td>Type</td>
+            <td>
+              {{story?.type}}
+            </td>
+          </tr>
+          <tr>
+            <td>Priority</td>
+            <td>
+              {{story?.priority}}
+            </td>
+          </tr>
+          <tr>
+            <td>Size</td>
+            <td>
+              {{story?.size}}
+            </td>
+          </tr>
+          <tr>
+            <td>Progress</td>
+            <td>
+              {{progressAsPercentage()/100| percent:'1.0-0'}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </md-chip-list>
+  </md-card-content>
+</md-card>

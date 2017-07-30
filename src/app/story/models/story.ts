@@ -1,4 +1,4 @@
-import { StoryProgress } from './progress';
+import { StoryProgress } from './story-progress';
 
 export class Story {
 

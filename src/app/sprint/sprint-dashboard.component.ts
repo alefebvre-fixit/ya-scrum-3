@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { SprintService } from '../services/index';
-import { Sprint } from '../models/index';
+
+import { SprintService } from './services';
+import { Sprint } from './models';
 
 @Component({
   selector: 'sprint-dashboard',
   templateUrl: './sprint-dashboard.component.html',
-  styleUrls: ['./sprint-dashboard.component.css']
+  styleUrls: ['./sprint-dashboard.component.scss']
 })
 export class SprintDashboardComponent implements OnInit{
 

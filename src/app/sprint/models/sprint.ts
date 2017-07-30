@@ -1,5 +1,5 @@
-import { Story } from './story';
-import { SprintProgress } from './progress';
+import { Story } from '../../story';
+import { SprintProgress } from './sprint-progress';
 
 export class Sprint {
 

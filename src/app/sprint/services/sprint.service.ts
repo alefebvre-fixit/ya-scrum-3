@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { Sprint, Story, StoryProgress, SprintProgress } from '../models/index';
+import { Sprint, SprintProgress } from '../models';
+import { Story, StoryProgress } from '../../story';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 const SPRINTS = '/sprints';
