@@ -3,11 +3,9 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { TdDataTableService, TdDataTableSortingOrder, ITdDataTableSortChangeEvent, ITdDataTableColumn } from '@covalent/core';
 
-import { Sprint, SprintService } from '../../sprint';
-import { User, UserService } from '../../user';
+import { StoryService, SprintService, UserService } from '../../services';
+import { Story, StoryProgress, Sprint, SprintProgress, User } from '../../models';
 
-import { StoryService } from '../services';
-import { Story, StoryProgress } from '../models';
 
 import { ProgressEditComponent } from './progress-edit.component';
 
@@ -55,7 +53,7 @@ export class StoryProgressScheduleComponent implements OnInit, OnChanges {
   private edit(progress: StoryProgress) {
     console.log(progress);
 
-    const dialogRef = this.dialog.open(ProgressEditComponent, {width: '600px'});
+    const dialogRef = this.dialog.open(ProgressEditComponent, { width: '600px' });
     dialogRef.componentInstance.story = this.story;
     dialogRef.componentInstance.progress = progress;
 

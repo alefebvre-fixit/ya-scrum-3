@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Sprint } from './models';
+import { Sprint } from '../models';
 import { Router } from '@angular/router';
 
 @Component({

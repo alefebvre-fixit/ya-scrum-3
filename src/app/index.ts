@@ -26,14 +26,11 @@ import {CovalentMediaModule} from '@covalent/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
-import { StoryModule } from './story';
-import { StoryService } from './story/services';
-
-import { SprintModule } from './sprint';
-import { SprintService } from './sprint/services';
-
 import { UserModule } from './user';
-import { UserService } from './user/services';
+import { StoryModule } from './story';
+import { SprintModule } from './sprint';
+
+import { StoryService, SprintService, UserService } from './services';
 
 export const firebaseConfig = {
     apiKey: 'AIzaSyBRVBLO8VXkurLDQR1eVcVXOmNXyt8SCoc',

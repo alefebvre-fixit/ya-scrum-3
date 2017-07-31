@@ -5,9 +5,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { NguUtilityModule } from 'ngu-utility/ngu-utility.module'; // <-- import the module
 
-import { UserService } from './services';
 import { UserListComponent } from './user-list.component';
-import { SprintService } from '../sprint/services';
 
 @NgModule({
   imports: [
@@ -24,12 +22,9 @@ import { SprintService } from '../sprint/services';
   ],
   entryComponents: [],
   providers: [
-    SprintService
   ]
 })
 
 export class UserModule { }
 
-export { User } from './models';
-export { UserService } from './services';
 export { UserListComponent } from './user-list.component';

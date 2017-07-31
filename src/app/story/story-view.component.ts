@@ -4,11 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { MdDialog, MdDialogRef } from '@angular/material';
 
-import { Sprint, SprintService } from '../sprint';
-import { User, UserService } from '../user';
-
-import { StoryService } from './services';
-import { Story, StoryProgress } from './models';
+import { StoryService, SprintService, UserService } from '../services';
+import { Story, StoryProgress, Sprint, SprintProgress, User } from '../models';
 
 import { StoryEditComponent } from './story-edit.component';
 import { StoryCardComponent } from './story-card.component';

@@ -2,8 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MdDialog, MdDialogRef } from '@angular/material';
 
-import { Sprint, SprintProgress, SprintService } from '../sprint';
-import { User, UserService } from '../user';
+import { StoryService, SprintService, UserService } from '../services';
+import { Story, StoryProgress, Sprint, SprintProgress, User } from '../models';
 
 @Component({
   selector: 'sprint-status',

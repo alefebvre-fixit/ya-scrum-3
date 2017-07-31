@@ -1,9 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { User } from './models';
-import { UserService } from './services';
-import { Story, StoryService } from '../story';
-import { Sprint, SprintService } from '../sprint';
+import { User } from '../models';
+import { UserService } from '../services';
 
 @Component({
   selector: 'user-list',
@@ -16,9 +14,6 @@ export class UserListComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    //private storyService: StoryService,
-    //private sprintService: SprintService,
-
   ) {
   }
 

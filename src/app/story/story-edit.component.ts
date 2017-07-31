@@ -3,13 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
-import { Sprint, SprintService } from '../sprint';
-import { User, UserService } from '../user';
-
-import { StoryService } from './services';
-import { Story, StoryProgress } from './models';
-
-
+import { StoryService, SprintService, UserService } from '../services';
+import { Story, StoryProgress, Sprint, SprintProgress, User } from '../models';
 
 @Component({
   selector: 'story-edit',

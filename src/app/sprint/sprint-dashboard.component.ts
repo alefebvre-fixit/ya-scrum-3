@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { SprintService } from './services';
-import { Sprint } from './models';
+import { SprintService } from '../services';
+import { Sprint } from '../models';
 
 
 @Component({

@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { Router } from '@angular/router';
 
-import { Story } from './models';
+import { Story } from '../models';
 
 @Component({
   selector: 'story-card',

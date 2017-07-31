@@ -3,7 +3,7 @@ export class Conversation {
     messages: Array<Message>;
 }
 
-export class Message {    
+export class Message {
     message: string;
     username: string;
 }

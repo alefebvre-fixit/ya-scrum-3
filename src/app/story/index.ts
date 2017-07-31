@@ -18,7 +18,7 @@ import { ProductBacklogComponent} from './product-backlog.component';
 import { SharedModule } from '../shared';
 import { StoryProgressModule } from './progress';
 
-import { StoryService } from './services';
+import { StoryService } from '../services';
 
 @NgModule({
   imports: [
@@ -55,7 +55,5 @@ import { StoryService } from './services';
 
 export class StoryModule { }
 
-export { Story, StoryProgress } from './models';
-export { StoryService } from './services';
 export { ProductBacklogComponent } from './product-backlog.component';
 export { StoryViewComponent } from './story-view.component';

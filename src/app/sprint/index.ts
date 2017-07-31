@@ -10,16 +10,16 @@ import { SprintStatusComponent} from './sprint-status.component';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { StoryModule } from '../story';
+//import { StoryModule } from '../story';
 
-import { SprintService } from './services';
+import { SprintService } from '../services';
 
 @NgModule({
   imports: [
     CommonModule,
     MaterialModule,
     FlexLayoutModule,
-    StoryModule
+    //StoryModule
   ],
   declarations: [
     SprintCardComponent,
@@ -42,5 +42,3 @@ export class SprintModule { }
 
 export { SprintViewComponent } from './sprint-view.component';
 export { SprintDashboardComponent} from './sprint-dashboard.component';
-export { Sprint, SprintProgress } from './models';
-export { SprintService } from './services';

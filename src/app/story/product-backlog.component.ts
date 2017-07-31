@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { StoryService } from './services';
-import { Story } from './models';
+
+import { StoryService } from '../services';
+import { Story } from '../models';
 
 @Component({
   selector: 'product-backlog',

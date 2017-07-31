@@ -8,16 +8,12 @@ const STORIES = 'stories';
 @Injectable()
 export class StoryService {
 
-  constructor(
-    private database: AngularFireDatabase
-  ) { }
-
   private storyTypes = [
-    { key: "feature", value: "Feature" },
-    { key: "quality", value: "Quality" },
-    { key: "performance", value: "Performance" },
-    { key: "documentation", value: "Documentation" },
-    { key: "design", value: "Design" },
+    { key: 'feature', value: 'Feature' },
+    { key: 'quality', value: 'Quality' },
+    { key: 'performance', value: 'Performance' },
+    { key: 'documentation', value: 'Documentation' },
+    { key: 'design', value: 'Design' },
   ];
 
   private storyStatus = [
@@ -34,6 +30,10 @@ export class StoryService {
     { key: "4", value: "4" },
     { key: "5", value: "5" },
   ];
+
+  constructor(
+    private database: AngularFireDatabase
+  ) { }
 
   public getStoryTypes(): any {
     return this.storyTypes;
