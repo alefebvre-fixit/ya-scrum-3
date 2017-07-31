@@ -1,11 +1,9 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ProductBacklogComponent } from './story';
+import { ProductBacklogComponent, StoryViewComponent } from './story';
 import { SprintDashboardComponent } from './sprint';
-
-import { StoryViewComponent } from './story/story-view.component';
-
+import { UserListComponent } from './user';
 
 // Route Configuration
 export const ROUTES: Routes = [
@@ -17,6 +15,7 @@ export const ROUTES: Routes = [
   },
   { path: 'sprints', component: SprintDashboardComponent },
   { path: 'stories', component: ProductBacklogComponent },
+  { path: 'users', component: UserListComponent },
   {
     path: 'stories/:id',
     component: StoryViewComponent

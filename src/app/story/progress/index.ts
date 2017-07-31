@@ -1,22 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MaterialModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { CovalentDataTableModule } from '@covalent/core';
+
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { StoryProgressScheduleComponent} from './progress-schedule.component';
 import { ProgressEditComponent} from './progress-edit.component';
 import { ProgressViewComponent} from './progress-view.component';
 
-
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ChartsModule } from 'ng2-charts/ng2-charts';
-
-import { CovalentDataTableModule } from '@covalent/core';
-
-import { MaterialModule } from '@angular/material';
-import { FlexLayoutModule } from '@angular/flex-layout';
-
-
 import { SharedModule } from '../../shared';
-
 import { StoryService } from './../services';
 
 @NgModule({
