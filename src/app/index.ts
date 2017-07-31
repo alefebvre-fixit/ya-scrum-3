@@ -27,9 +27,13 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import { StoryModule } from './story';
+import { StoryService } from './story/services';
+
 import { SprintModule } from './sprint';
+import { SprintService } from './sprint/services';
+
 import { UserModule } from './user';
-import { UserService } from './user';
+import { UserService } from './user/services';
 
 export const firebaseConfig = {
     apiKey: 'AIzaSyBRVBLO8VXkurLDQR1eVcVXOmNXyt8SCoc',
@@ -64,13 +68,13 @@ export const firebaseConfig = {
     CovalentMediaModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
-    StoryModule,
     SprintModule,
+    StoryModule,
     UserModule,
     RouterModule.forRoot(ROUTES),
 
   ],
-  providers: [UserService],
+  providers: [UserService, StoryService, SprintService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

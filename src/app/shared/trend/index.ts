@@ -15,5 +15,3 @@ import { MdIconModule } from '@angular/material';
 })
 
 export class TrendModule { }
-
-export * from './trend.component';

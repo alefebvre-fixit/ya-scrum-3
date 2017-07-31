@@ -11,8 +11,8 @@ export class Sprint {
 
     startDate: Date;
     endDate: Date;
-    duration: number;
-    size: number = 0;
+    duration = 15;
+    size = 0;
 
     capacity: number;
 
@@ -39,7 +39,7 @@ export class Sprint {
     }
 
     public static create(): Sprint {
-        let result: Sprint = new Sprint();
+        const result: Sprint = new Sprint();
 
         result.duration = 15;
         result.startDate = new Date();
@@ -52,7 +52,7 @@ export class Sprint {
 
     public static getProgress(sprint: Sprint, day: number): SprintProgress {
         if (sprint.history) {
-            for (let progress of sprint.history) {
+            for (const progress of sprint.history) {
                 if (progress.day == day) {
                     return progress;
                 }
@@ -63,7 +63,7 @@ export class Sprint {
 
     public static createProgress(sprint: Sprint, day: number): SprintProgress {
 
-        let result = new SprintProgress();
+        const result = new SprintProgress();
 
         result.sprintId = sprint.$key;
         result.day = day;
@@ -84,21 +84,28 @@ export class Sprint {
         }
 
         if (progress.day > 0) {
-        //if (progress.day > 0 && progress.day <= sprint.history.length) {
+            //if (progress.day > 0 && progress.day <= sprint.history.length) {
             sprint.history[progress.day - 1] = progress;
         }
 
     }
 
     public static getFilterStatus(status: string): string {
-        if ("started" == status) {
-            return "progress";
+        if ('started' === status) {
+            return 'progress';
         }
-        if ("new" == status || undefined == status) {
-            return "pending";
-        } 
+        if ('new' === status || undefined === status) {
+            return 'pending';
+        }
         return status;
     }
 
+    public static progressAsPercentage(sprint: Sprint): number {
+        if (sprint && sprint.size > 0) {
+            return (sprint.progress / sprint.size) * 100;
+        } else {
+            return 0;
+        }
+    }
 
 }

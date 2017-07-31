@@ -1,1 +1,1 @@
-export * from './sprint.service';
+export { SprintService } from './sprint.service';

@@ -15,8 +15,6 @@ import { StoryEditComponent} from './story-edit.component';
 import { StoryStatusComponent} from './story-status.component';
 import { ProductBacklogComponent} from './product-backlog.component';
 
-
-
 import { SharedModule } from '../shared';
 import { StoryProgressModule } from './progress';
 
@@ -52,12 +50,12 @@ import { StoryService } from './services';
   entryComponents: [
     StoryEditComponent,
   ],
-  providers: [StoryService]
+  providers: []
 })
 
 export class StoryModule { }
 
-export * from './models';
-export * from './services';
-export * from './product-backlog.component';
-export * from './story-view.component';
+export { Story, StoryProgress } from './models';
+export { StoryService } from './services';
+export { ProductBacklogComponent } from './product-backlog.component';
+export { StoryViewComponent } from './story-view.component';

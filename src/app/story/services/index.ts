@@ -1,1 +1,1 @@
-export * from './story.service';
+export { StoryService } from './story.service';

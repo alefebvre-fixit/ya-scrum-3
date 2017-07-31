@@ -7,6 +7,7 @@ import { NguUtilityModule } from 'ngu-utility/ngu-utility.module'; // <-- import
 
 import { UserService } from './services';
 import { UserListComponent } from './user-list.component';
+import { SprintService } from '../sprint/services';
 
 @NgModule({
   imports: [
@@ -23,12 +24,12 @@ import { UserListComponent } from './user-list.component';
   ],
   entryComponents: [],
   providers: [
-    UserService
+    SprintService
   ]
 })
 
 export class UserModule { }
 
-export * from './models';
-export * from './services';
-export * from './user-list.component';
+export { User } from './models';
+export { UserService } from './services';
+export { UserListComponent } from './user-list.component';

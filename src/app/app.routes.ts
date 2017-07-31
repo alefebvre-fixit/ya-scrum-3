@@ -2,7 +2,7 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ProductBacklogComponent, StoryViewComponent } from './story';
-import { SprintDashboardComponent } from './sprint';
+import { SprintDashboardComponent, SprintViewComponent } from './sprint';
 import { UserListComponent } from './user';
 
 // Route Configuration
@@ -13,9 +13,21 @@ export const ROUTES: Routes = [
     redirectTo: 'stories',
     pathMatch: 'full'
   },
-  { path: 'sprints', component: SprintDashboardComponent },
-  { path: 'stories', component: ProductBacklogComponent },
-  { path: 'users', component: UserListComponent },
+  {
+    path: 'users',
+    component: UserListComponent
+  },
+  {
+    path: 'sprints',
+    component: SprintDashboardComponent
+  },
+  {
+    path: 'sprints/:id',
+    component: SprintViewComponent
+  },
+  { path: 'stories',
+    component: ProductBacklogComponent
+  },
   {
     path: 'stories/:id',
     component: StoryViewComponent

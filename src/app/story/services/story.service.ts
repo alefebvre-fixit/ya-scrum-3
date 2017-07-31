@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { Story, StoryProgress } from '../models/index';
+import { Story, StoryProgress } from '../models';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 const STORIES = 'stories';
@@ -68,6 +68,15 @@ export class StoryService {
     return this.database.list(STORIES, {
       query: {
         orderByChild: 'priority'
+      }
+    });
+  }
+
+  public findBySprintId(sprintId: string): Observable<Story[]> {
+    return this.database.list(STORIES, {
+      query: {
+        orderByChild: 'sprintId',
+        equalTo: sprintId
       }
     });
   }

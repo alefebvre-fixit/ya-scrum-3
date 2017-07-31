@@ -44,6 +44,6 @@ import { StoryService } from './../services';
 
 export class StoryProgressModule { }
 
-export * from './progress-schedule.component';
-export * from './progress-edit.component';
-export * from './progress-view.component';
+export { StoryProgressScheduleComponent } from './progress-schedule.component';
+export { ProgressEditComponent } from './progress-edit.component';
+export { ProgressViewComponent } from './progress-view.component';

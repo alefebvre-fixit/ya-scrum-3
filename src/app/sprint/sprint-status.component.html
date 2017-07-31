@@ -1,0 +1,34 @@
+<md-card>
+  <md-card-content>
+    <md-chip-list>
+      <table class="key-value-table">
+        <tbody>
+          <tr>
+            <td>Status</td>
+            <td>
+              <md-chip color="accent" selected="true">{{sprint?.status}}</md-chip>
+            </td>
+          </tr>
+          <tr>
+            <td>Size</td>
+            <td>
+              {{sprint?.size}}
+            </td>
+          </tr>
+          <tr>
+            <td>Capacity</td>
+            <td>
+              {{sprint?.capacity}}
+            </td>
+          </tr>
+          <tr>
+            <td>Progress</td>
+            <td>
+              {{progressAsPercentage()/100| percent:'1.0-0'}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </md-chip-list>
+  </md-card-content>
+</md-card>

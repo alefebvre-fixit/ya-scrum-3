@@ -1,2 +1,2 @@
-export * from './sprint';
-export * from './sprint-progress';
+export { Sprint } from './sprint';
+export { SprintProgress } from './sprint-progress';

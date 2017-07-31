@@ -16,7 +16,7 @@ export class User {
     }
 
     public static create(): User {
-        let result: User = new User();
+        const result: User = new User();
         return result;
     }
 

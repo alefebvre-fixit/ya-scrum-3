@@ -32,15 +32,13 @@ export class Story {
         const result = Object.assign({}, story);
         delete (result.$key);
         delete (result.$exists);
-        console.log("Object to save:");
-        console.log(result);
 
         return result;
     }
 
 
     public static create(): Story {
-        let result: Story = new Story();
+        const result: Story = new Story();
 
         result.priority = 1;
         result.status = 'new';
@@ -55,7 +53,7 @@ export class Story {
         const result: Map<number, StoryProgress> = new Map<number, StoryProgress>();
 
         if (history) {
-            for (let progress of history) {
+            for (const progress of history) {
                 result.set(progress.day, progress);
             }
         }
@@ -66,7 +64,7 @@ export class Story {
     public static getProgress(story: Story, day: number): StoryProgress {
         console.log(story.history);
         if (story.history) {
-            for (let progress of story.history) {
+            for (const progress of story.history) {
                 if (progress.day === day) {
                     return progress;
                 }
@@ -112,11 +110,11 @@ export class Story {
     }
 
     public static getFilterStatus(status: string): string {
-        if ("started" === status || "assigned" === status) {
-            return "progress";
+        if ('started' === status || 'assigned' === status) {
+            return 'progress';
         }
-        if ("new" === status || undefined === status) {
-            return "pending";
+        if ('new' === status || undefined === status) {
+            return 'pending';
         }
         return status;
     }

@@ -17,7 +17,6 @@ import { StoryCardComponent } from './story-card.component';
   selector: 'story-view',
   templateUrl: './story-view.component.html',
   styleUrls: ['./story-view.component.scss'],
-  providers: [UserService]
 })
 export class StoryViewComponent implements OnInit {
 
@@ -30,10 +29,10 @@ export class StoryViewComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    public sprintService: SprintService,
-    public storyService: StoryService,
-    public userService: UserService,
-    public dialog: MdDialog
+    private sprintService: SprintService,
+    private storyService: StoryService,
+    private userService: UserService,
+    private dialog: MdDialog
   ) {
   }
 
