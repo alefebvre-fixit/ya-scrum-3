@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+import { NguUtilityModule } from 'ngu-utility/ngu-utility.module'; // <-- import the module
+
 import { UserService } from './services';
 import { UserListComponent } from './user-list.component';
 
@@ -10,7 +12,8 @@ import { UserListComponent } from './user-list.component';
   imports: [
     CommonModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    NguUtilityModule
   ],
   declarations: [
     UserListComponent
