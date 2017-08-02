@@ -62,6 +62,12 @@ export class SprintService {
     });
   }
 
+  public assigStoriesToSprint(sprint: Sprint, stories: Story[]) {
+  
+  
+  
+  }
+
   public assignToSprint(sprintId: string, storyId: string) {
 
     this.findOne(sprintId).take(1).subscribe(sprint => {

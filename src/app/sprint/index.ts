@@ -10,7 +10,7 @@ import { SprintStatusComponent} from './sprint-status.component';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-//import { StoryModule } from '../story';
+import { StoryModule } from '../story';
 
 import { SprintService } from '../services';
 
@@ -19,7 +19,7 @@ import { SprintService } from '../services';
     CommonModule,
     MaterialModule,
     FlexLayoutModule,
-    //StoryModule
+    StoryModule
   ],
   declarations: [
     SprintCardComponent,

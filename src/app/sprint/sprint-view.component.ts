@@ -16,6 +16,7 @@ export class SprintViewComponent implements OnInit {
 
   public sprint: Sprint;
   public stories: Story[];
+  public allStories: Story[];
   public progress: SprintProgress;
 
   constructor(
@@ -38,6 +39,10 @@ export class SprintViewComponent implements OnInit {
             this.stories = stories;
           });
 
+          this.storyService.findAll().subscribe(stories => {
+            this.allStories = stories;
+          });
+
         });
       });
   }
@@ -58,6 +63,11 @@ export class SprintViewComponent implements OnInit {
     //   console.log('after close');
     // });
 
+  }
+
+  selectStories(stories: Story[]) {
+    this.stories = stories;
+    this.sprintService.assigStoriesToSprint(this.sprint, stories);
   }
 
 

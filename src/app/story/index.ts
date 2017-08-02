@@ -7,9 +7,18 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { CovalentDataTableModule } from '@covalent/core';
+import { CovalentCommonModule } from '@covalent/core';
+import { CovalentSearchModule } from '@covalent/core';
+import { CovalentPagingModule } from '@covalent/core';
+
+
+
+
+import { NguUtilityModule } from 'ngu-utility/ngu-utility.module'; // <-- import the module
 
 import { StoryCardComponent} from './story-card.component';
 import { StoryGridComponent} from './story-grid.component';
+import { StoryListComponent} from './story-list.component';
 import { StoryViewComponent} from './story-view.component';
 import { StoryEditComponent} from './story-edit.component';
 import { StoryStatusComponent} from './story-status.component';
@@ -28,7 +37,11 @@ import { StoryService } from '../services';
     FormsModule,
     ReactiveFormsModule,
     ChartsModule,
+    CovalentCommonModule,
+    CovalentSearchModule,
     CovalentDataTableModule,
+    CovalentPagingModule,
+    NguUtilityModule,
     SharedModule,
     StoryProgressModule
   ],
@@ -39,13 +52,15 @@ import { StoryService } from '../services';
     StoryViewComponent,
     StoryEditComponent,
     StoryStatusComponent,
+    StoryListComponent,
   ],
   exports: [
     StoryCardComponent,
     StoryGridComponent,
     ProductBacklogComponent,
     StoryViewComponent,
-    StoryEditComponent
+    StoryEditComponent,
+    StoryListComponent,
   ],
   entryComponents: [
     StoryEditComponent,
