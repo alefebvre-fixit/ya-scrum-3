@@ -15,7 +15,7 @@ export class SprintService {
 
   public index() {
     this.findAll().take(1).subscribe((sprints: Sprint[]) => {
-      for (let sprint of sprints) {
+      for (const sprint of sprints) {
 
         if (sprint.status === undefined) {
           sprint.status = 'new';
@@ -75,7 +75,7 @@ export class SprintService {
 
     const progress: StoryProgress = Story.createProgress(story, 1);
     Story.setProgress(story, progress);
-    if (sprint.size === undefined){
+    if (sprint.size === undefined) {
       sprint.size = story.size;
     } else {
       sprint.size += story.size;
@@ -101,22 +101,23 @@ export class SprintService {
     return this.database.object('/sprints/' + sprintKey);
   }
 
-  public save(sprint: Sprint) {
+  public save(sprint: Sprint): string {
     if (sprint.$key) {
-      this.update(sprint);
+      return this.update(sprint);
     } else {
-      this.create(sprint);
+      return this.create(sprint);
     }
   }
 
-  public create(sprint: Sprint) {
+  public create(sprint: Sprint): string {
     sprint.filter_status = Sprint.getFilterStatus(sprint.status);
-    this.database.list(SPRINTS).push(sprint);
+    return this.database.list(SPRINTS).push(sprint).key;
   }
 
-  public update(sprint: Sprint) {
+  public update(sprint: Sprint): string {
     sprint.filter_status = Sprint.getFilterStatus(sprint.status);
     this.database.object('/sprints/' + sprint.$key).update(Sprint.getUpdate(sprint));
+    return sprint.$key;
   }
 
   public updateSprintProgress(story: Story) {

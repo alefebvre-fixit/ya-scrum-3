@@ -59,16 +59,14 @@ export class StoryViewComponent implements OnInit {
   }
 
   navigateToProductOwner(user: User) {
-
   }
 
   editStory(story: Story) {
-    const dialogRef = this.dialog.open(StoryEditComponent);
+    const dialogRef = this.dialog.open(StoryEditComponent, {width: '800px'});
     dialogRef.componentInstance.story = this.story;
     dialogRef.afterClosed().subscribe(result => {
       console.log('after close');
     });
-
   }
 
   public progressAsPercentage(): number {

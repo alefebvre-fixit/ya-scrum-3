@@ -6,6 +6,7 @@ import { MdDialog, MdDialogRef } from '@angular/material';
 
 import { StoryService, SprintService, UserService } from '../services';
 import { Story, StoryProgress, Sprint, SprintProgress, User } from '../models';
+import { SprintEditComponent } from './sprint-edit.component';
 
 @Component({
   selector: 'sprint-view',
@@ -51,18 +52,14 @@ export class SprintViewComponent implements OnInit {
   }
 
   navigateToProductOwner(user: User) {
-
   }
 
-  editStory(story: Story) {
-    console.log('editStory');
-
-    // const dialogRef = this.dialog.open(StoryEditComponent);
-    // dialogRef.componentInstance.story = this.story;
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('after close');
-    // });
-
+  editSprint(sprint: Sprint) {
+    const dialogRef = this.dialog.open(SprintEditComponent, {width: '800px'});
+    dialogRef.componentInstance.sprint = this.sprint;
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('after close');
+    });
   }
 
   selectStories(stories: Story[]) {

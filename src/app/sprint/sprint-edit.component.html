@@ -1,4 +1,4 @@
-<h2 md-dialog-title>Create Sprint</h2>
+<h2 md-dialog-title>Create new Sprint</h2>
 
 <md-dialog-content>
     <form [formGroup]="sprintForm" (ngSubmit)="submit()" autocomplete="off" novalidate >
@@ -16,9 +16,9 @@
     </form>
 </md-dialog-content>
 
-<md-dialog-actions [attr.align]="actionsAlignment">
+<md-dialog-actions>
 
     <button md-button color="primary" (click)="apply()">Apply</button>
-
     <button md-button color="secondary" md-dialog-close>Close</button>
+
 </md-dialog-actions>
