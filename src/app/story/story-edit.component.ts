@@ -57,8 +57,6 @@ export class StoryEditComponent implements OnInit {
   }
 
   apply() {
-    console.log("name is" + this.story.name);
-    console.log(this.storyForm.value);
 
     this.story.name = this.storyForm.value.name;
     this.story.description = this.storyForm.value.description;
@@ -67,14 +65,12 @@ export class StoryEditComponent implements OnInit {
     this.story.priority = this.storyForm.value.priority;
     this.story.type = this.storyForm.value.type;
 
-    this.storyService.save(this.story);
-
-    this.dialogRef.close(true);
+    this.dialogRef.close(this.storyService.save(this.story));
 
   }
 
   cancel() {
-    this.dialogRef.close(true);
+    this.dialogRef.close();
   }
 
 

@@ -63,8 +63,6 @@ export class StoryViewComponent implements OnInit {
   }
 
   editStory(story: Story) {
-    console.log('editStory');
-
     const dialogRef = this.dialog.open(StoryEditComponent);
     dialogRef.componentInstance.story = this.story;
     dialogRef.afterClosed().subscribe(result => {

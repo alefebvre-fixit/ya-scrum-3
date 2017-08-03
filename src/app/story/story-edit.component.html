@@ -1,9 +1,8 @@
-<h2 md-dialog-title>{{story?.name}}</h2>
+<h2 md-dialog-title *ngIf="story?.$key">{{story?.name}}</h2>
+<h2 md-dialog-title *ngIf="!story?.$key">Create new Story</h2>
 
 <md-dialog-content>
     <form [formGroup]="storyForm" (ngSubmit)="submit()" autocomplete="off" novalidate >
-
-
         <p>
         <md-input-container class="input-full-width">
             <input mdInput placeholder="Title" formControlName="name">
@@ -42,9 +41,7 @@
     </form>
 </md-dialog-content>
 
-<md-dialog-actions [attr.align]="actionsAlignment">
-
+<md-dialog-actions>
     <button md-button color="primary" (click)="apply()">Apply</button>
-
     <button md-button color="secondary" md-dialog-close>Close</button>
 </md-dialog-actions>

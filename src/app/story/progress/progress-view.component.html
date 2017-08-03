@@ -10,19 +10,19 @@
                 <tr>
                     <td>Previous</td>
                     <td>
-                    <md-chip class="value-chip previous">{{progress?.previous}}</md-chip>
+                    <md-chip class="value-chip previous">{{progress?.previous || "-"}}</md-chip>
                     </td>
                 </tr>
                 <tr>
                     <td>Daily</td>
                     <td>
-                    <md-chip class="value-chip daily">{{progress?.daily}}</md-chip>
+                    <md-chip class="value-chip daily">{{progress?.daily || "-"}}</md-chip>
                     </td>
                 </tr>
                 <tr>
                     <td>Remaining</td>
                     <td>
-                    <md-chip class="value-chip remaining">{{progress?.remaining}}</md-chip>
+                    <md-chip class="value-chip remaining">{{progress?.remaining || "-"}}</md-chip>
                     </td>
                 </tr>
                 </tbody>

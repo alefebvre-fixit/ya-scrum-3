@@ -1,0 +1,24 @@
+<h2 md-dialog-title>Create Sprint</h2>
+
+<md-dialog-content>
+    <form [formGroup]="sprintForm" (ngSubmit)="submit()" autocomplete="off" novalidate >
+        
+        <p>
+        <md-input-container class="input-full-width">
+            <input mdInput placeholder="Title" formControlName="name">
+        </md-input-container>
+        </p>
+
+        <md-input-container class="input-full-width">
+            <textarea mdInput placeholder="Description" rows="8" formControlName="description"></textarea>
+        </md-input-container>
+
+    </form>
+</md-dialog-content>
+
+<md-dialog-actions [attr.align]="actionsAlignment">
+
+    <button md-button color="primary" (click)="apply()">Apply</button>
+
+    <button md-button color="secondary" md-dialog-close>Close</button>
+</md-dialog-actions>

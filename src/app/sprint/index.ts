@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SprintCardComponent} from './sprint-card.component';
 import { SprintGridComponent} from './sprint-grid.component';
 import { SprintDashboardComponent} from './sprint-dashboard.component';
 import { SprintViewComponent} from './sprint-view.component';
+import { SprintEditComponent} from './sprint-edit.component';
 import { SprintStatusComponent} from './sprint-status.component';
 
 import { MaterialModule } from '@angular/material';
@@ -19,6 +21,8 @@ import { SprintService } from '../services';
     CommonModule,
     MaterialModule,
     FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
     StoryModule
   ],
   declarations: [
@@ -26,16 +30,21 @@ import { SprintService } from '../services';
     SprintGridComponent,
     SprintDashboardComponent,
     SprintViewComponent,
-    SprintStatusComponent
+    SprintStatusComponent,
+    SprintEditComponent
   ],
   exports: [
     SprintCardComponent,
     SprintGridComponent,
     SprintDashboardComponent,
-    SprintViewComponent
+    SprintViewComponent,
+    SprintEditComponent
   ],
   providers: [
-  ]
+  ],
+  entryComponents: [
+    SprintEditComponent,
+  ],
 })
 
 export class SprintModule { }

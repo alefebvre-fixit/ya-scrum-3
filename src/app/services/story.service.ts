@@ -17,18 +17,18 @@ export class StoryService {
   ];
 
   private storyStatus = [
-    { key: "new", value: "New" },
-    { key: "assigned", value: "Assigned" },
-    { key: "started", value: "Started" },
-    { key: "closed", value: "Closed" },
+    { key: 'new', value: 'New' },
+    { key: 'assigned', value: 'Assigned' },
+    { key: 'started', value: 'Started' },
+    { key: 'closed', value: 'Closed' },
   ];
 
   private storyPriorities = [
-    { key: "1", value: "1" },
-    { key: "2", value: "2" },
-    { key: "3", value: "3" },
-    { key: "4", value: "4" },
-    { key: "5", value: "5" },
+    { key: '1', value: '1' },
+    { key: '2', value: '2' },
+    { key: '3', value: '3' },
+    { key: '4', value: '4' },
+    { key: '5', value: '5' },
   ];
 
   constructor(
@@ -49,12 +49,10 @@ export class StoryService {
 
   public index() {
     this.findAll().take(1).subscribe((stories: Story[]) => {
-      console.log(stories.length + "stories to be index");
-      for (let story of stories) {
+      for (const story of stories) {
 
-        console.log("Indexing story " + story);
-        if (story.status == undefined) {
-          story.status = "new";
+        if (story.status === undefined) {
+          story.status = 'new';
         }
 
         story.filter_status = Story.getFilterStatus(story.status);
@@ -108,28 +106,23 @@ export class StoryService {
     return this.database.object('/stories/' + storyKey);
   }
 
-  public save(story: Story) {
+  public save(story: Story): string {
     if (story.$key) {
-      this.update(story);
+      return this.update(story);
     } else {
-      this.create(story);
+      return this.create(story);
     }
   }
 
-  public create(story: Story) {
+  public create(story: Story): string {
     story.filter_status = Story.getFilterStatus(story.status);
-
-    console.log("create story " + story)
-
-    this.database.list(STORIES).push(story);
+    return this.database.list(STORIES).push(story).key;
   }
 
-  public update(story: Story) {
+  public update(story: Story): string {
     story.filter_status = Story.getFilterStatus(story.status);
-
-    console.log("update story " + story)
-
     this.database.object('/stories/' + story.$key).update(Story.getUpdate(story));
+    return story.$key;
   }
 
   public unassignStory(story: Story) {
@@ -142,13 +135,13 @@ export class StoryService {
 
     this.database.object(`/storyPerSprint/${sprintId}/${storyId}`).remove();
     this.database.object(`/stories/${storyId}/sprintId`).remove();
-    this.database.object(`/stories/${storyId}`).update({ status: "new", filter_status: Story.getFilterStatus("new") });
+    this.database.object(`/stories/${storyId}`).update({ status: 'new', filter_status: Story.getFilterStatus('new') });
 
   }
 
 
   public setDailyProgress(story: Story, progress: StoryProgress, daily: number): StoryProgress {
-    
+
     const result: StoryProgress = Object.assign({}, progress);
 
     let value = daily;
@@ -165,7 +158,6 @@ export class StoryService {
     result.daily = value;
     result.total = result.previous + result.daily;
     result.remaining = this.filterPositive(story.size - result.total);
-    
     return result;
   }
 
@@ -203,12 +195,12 @@ export class StoryService {
 
       if (story.progress > 0) {
         if (story.progress >= story.size) {
-          story.status = "closed"
+          story.status = 'closed';
         } else {
-          story.status = "started"
+          story.status = 'started';
         }
       } else {
-        story.status = "assigned";
+        story.status = 'assigned';
       }
     }
 
@@ -216,7 +208,7 @@ export class StoryService {
 
   }
 
-  public filterPositive(value: number) : number{
+  public filterPositive(value: number): number {
     if (value > 0) {
       return value;
     } else {
@@ -226,7 +218,7 @@ export class StoryService {
 
 
   public calculateProgress(story: Story) {
-    console.log("calculateProgress=");
+    console.log('calculateProgress=');
     if (story.history) {
       story.progress = story.history.reduce(function (sum: number, progress: StoryProgress) {
         progress.previous = sum;
@@ -237,12 +229,12 @@ export class StoryService {
 
       if (story.progress > 0) {
         if (story.progress >= story.size) {
-          story.status = "closed"
+          story.status = 'closed';
         } else {
-          story.status = "started"
+          story.status = 'started';
         }
       } else {
-        story.status = "assigned";
+        story.status = 'assigned';
       }
     }
     console.log(story);

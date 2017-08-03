@@ -66,7 +66,6 @@ export class SprintViewComponent implements OnInit {
   }
 
   selectStories(stories: Story[]) {
-    this.stories = stories;
     this.sprintService.assigStoriesToSprint(this.sprint, stories);
   }
 

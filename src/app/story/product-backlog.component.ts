@@ -1,21 +1,26 @@
 import { Component, OnInit } from '@angular/core';
+import { MdDialog, MdDialogRef } from '@angular/material';
+import { Router } from '@angular/router';
 
 import { StoryService } from '../services';
 import { Story } from '../models';
+import { StoryEditComponent } from './story-edit.component';
 
 @Component({
   selector: 'product-backlog',
   templateUrl: './product-backlog.component.html',
   styleUrls: ['./product-backlog.component.scss']
 })
-export class ProductBacklogComponent implements OnInit{
+export class ProductBacklogComponent implements OnInit {
 
   public storiesPending: Story[];
   public storiesClosed: Story[];
   public storiesInProgress: Story[];
 
   constructor(
-    public storyService: StoryService
+    private router: Router,
+    private storyService: StoryService,
+    private dialog: MdDialog
   ) {
   }
 
@@ -34,5 +39,18 @@ export class ProductBacklogComponent implements OnInit{
 
   }
 
+  addStory(): void {
+    const dialogRef = this.dialog.open(StoryEditComponent, {width: '800px'});
+    dialogRef.componentInstance.story = Story.create();
+    dialogRef.afterClosed().subscribe(key => {
+      if (key) {
+        this.router.navigate([`/stories/${key}`]);
+      }
+    });
+  }
+
+  public navigateToDetails(id: string) {
+    this.router.navigate([`/stories/${id}`]);
+  }
 
 }

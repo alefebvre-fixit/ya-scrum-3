@@ -63,29 +63,34 @@ export class SprintService {
   }
 
   public assigStoriesToSprint(sprint: Sprint, stories: Story[]) {
-  
-  
-  
+    for (const story of stories) {
+      this.assignStoryToToSprint(sprint, story);
+    }
   }
 
-  public assignToSprint(sprintId: string, storyId: string) {
+  public assignStoryToToSprint(sprint: Sprint, story: Story) {
 
-    this.findOne(sprintId).take(1).subscribe(sprint => {
-      this.findOneStory(storyId).take(1).subscribe(story => {
+    const join = new Object();
+    join[story.$key] = true;
 
-        const join = new Object();
-        join[storyId] = true;
+    const progress: StoryProgress = Story.createProgress(story, 1);
+    Story.setProgress(story, progress);
+    if (sprint.size === undefined){
+      sprint.size = story.size;
+    } else {
+      sprint.size += story.size;
+    }
 
-        const progress: StoryProgress = Story.createProgress(story, 1);
-        Story.setProgress(story, progress);
-        sprint.size += story.size;
-
-        this.database.object('/storyPerSprint/' + sprintId).update(join);
-        this.database.object('/stories/' + storyId).update({ sprintId: sprintId, status: "assigned", progress: 0, duration: sprint.duration, history: story.history });
-        this.database.object('/sprints/' + sprintId).update({ size: sprint.size });
-
-      })
+    this.database.object('/storyPerSprint/' + sprint.$key).update(join);
+    this.database.object('/stories/' + story.$key).update({
+      sprintId: sprint.$key,
+      status: 'assigned',
+      progress: 0,
+      duration: sprint.duration,
+      history: story.history
     });
+
+    this.database.object('/sprints/' + sprint.$key).update({ size: sprint.size });
   }
 
   public assignScrumMaster(sprintId: string, userId: string) {
