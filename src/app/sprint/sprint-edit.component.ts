@@ -35,6 +35,10 @@ export class SprintEditComponent implements OnInit {
     this.sprintForm = this._fb.group({
       name: [this.sprint.name, [<any>Validators.required]],
       description: [this.sprint.description, [<any>Validators.required]],
+      velocity: [this.sprint.velocity],
+      duration: [this.sprint.duration],
+      startDate: [this.sprint.startDate],
+
     });
   }
 
@@ -42,6 +46,9 @@ export class SprintEditComponent implements OnInit {
 
     this.sprint.name = this.sprintForm.value.name;
     this.sprint.description = this.sprintForm.value.description;
+    this.sprint.velocity = this.sprintForm.value.velocity;
+    this.sprint.duration = this.sprintForm.value.duration;
+    this.sprint.startDate = this.sprintForm.value.startDate;
 
     this.sprintService.save(this.sprint);
 

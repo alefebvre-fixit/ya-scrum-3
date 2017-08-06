@@ -10,19 +10,25 @@
             </td>
           </tr>
           <tr>
-            <td>Size</td>
+            <td>Story Size</td>
             <td>
               {{sprint?.size}}
             </td>
           </tr>
           <tr>
-            <td>Capacity</td>
+            <td>Team Velocity</td>
             <td>
-              {{sprint?.capacity}}
+              {{sprint?.velocity}}
             </td>
           </tr>
           <tr>
-            <td>Progress</td>
+            <td>Duration</td>
+            <td>
+              {{sprint?.duration}}
+            </td>
+          </tr>
+          <tr>
+            <td>Story Progress</td>
             <td>
               {{progressAsPercentage()/100| percent:'1.0-0'}}
             </td>

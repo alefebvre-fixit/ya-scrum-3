@@ -16,7 +16,8 @@ export class StoryListComponent implements OnChanges, OnInit {
 
   columns: ITdDataTableColumn[] = [
     { name: 'priority', label: 'priority' },
-    { name: 'name', label: 'name', tooltip: 'Stock Keeping Unit' },
+    { name: 'size', label: 'size' },
+    { name: 'name', label: 'name' },
     { name: 'type', label: 'type' },
     { name: 'description', label: 'description' },
   ];

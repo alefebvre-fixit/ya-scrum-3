@@ -13,6 +13,21 @@
             <textarea mdInput placeholder="Description" rows="8" formControlName="description"></textarea>
         </md-input-container>
 
+        <md-input-container class="input-full-width">
+            <input type="number" mdInput placeholder="Team Velocity" formControlName="velocity">
+        </md-input-container>
+
+        <md-input-container class="input-full-width">
+            <input type="number" mdInput placeholder="Duration" formControlName="duration">
+        </md-input-container>
+
+        <md-input-container>
+            <input mdInput [mdDatepicker]="picker" placeholder="Start Date" formControlName="startDate">
+            <button mdSuffix [mdDatepickerToggle]="picker"></button>
+        </md-input-container>
+        <md-datepicker #picker></md-datepicker>
+
+
     </form>
 </md-dialog-content>
 

@@ -10,6 +10,7 @@ import { CovalentDataTableModule } from '@covalent/core';
 import { CovalentCommonModule } from '@covalent/core';
 import { CovalentSearchModule } from '@covalent/core';
 import { CovalentPagingModule } from '@covalent/core';
+import { CovalentDialogsModule } from '@covalent/core';
 
 
 
@@ -41,9 +42,10 @@ import { StoryService } from '../services';
     CovalentSearchModule,
     CovalentDataTableModule,
     CovalentPagingModule,
+    CovalentDialogsModule,
     NguUtilityModule,
     SharedModule,
-    StoryProgressModule
+    StoryProgressModule,
   ],
   declarations: [
     StoryCardComponent,

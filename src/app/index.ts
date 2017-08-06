@@ -20,8 +20,12 @@ import {MdSidenavModule} from '@angular/material';
 import {MdToolbarModule} from '@angular/material';
 import {MdTooltipModule} from '@angular/material';
 import {MdDialogModule} from '@angular/material';
+import {MdNativeDateModule} from '@angular/material';
 import {CovalentLayoutModule} from '@covalent/core';
 import {CovalentMediaModule} from '@covalent/core';
+
+
+
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -61,6 +65,7 @@ export const firebaseConfig = {
     MdToolbarModule,
     MdTooltipModule,
     MdDialogModule,
+    MdNativeDateModule,
     CovalentLayoutModule,
     CovalentMediaModule,
     AngularFireModule.initializeApp(firebaseConfig),

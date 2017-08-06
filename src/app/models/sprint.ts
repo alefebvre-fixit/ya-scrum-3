@@ -15,6 +15,7 @@ export class Sprint {
     size = 0;
 
     capacity: number;
+    velocity: number;
 
     conversationId: string;
     scrumMasterId: string;

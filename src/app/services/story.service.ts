@@ -127,15 +127,17 @@ export class StoryService {
 
   public unassignStory(story: Story) {
 
-    let storyId = story.$key;
-    let sprintId = story.sprintId;
+    const join = new Object();
+    join[story.$key] = false;
 
-    let join = new Object();
-    join[storyId] = false;
+    this.database.object(`/storyPerSprint/${story.sprintId}/${story.$key}`).remove();
+    this.database.object(`/stories/${story.$key}/sprintId`).remove();
+    this.database.object(`/stories/${story.$key}`).update({ status: 'new', filter_status: Story.getFilterStatus('new'), history: [] });
 
-    this.database.object(`/storyPerSprint/${sprintId}/${storyId}`).remove();
-    this.database.object(`/stories/${storyId}/sprintId`).remove();
-    this.database.object(`/stories/${storyId}`).update({ status: 'new', filter_status: Story.getFilterStatus('new') });
+    return this.database.object('/sprints/' + story.sprintId).take(1).subscribe( sprint => {
+      sprint.size -= story.size;
+      sprint.progress -= story.progress;
+    });
 
   }
 

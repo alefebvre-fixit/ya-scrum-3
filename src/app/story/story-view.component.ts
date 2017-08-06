@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
 import { ActivatedRoute } from '@angular/router';
-
+import { ViewContainerRef } from '@angular/core';
+import { TdDialogService } from '@covalent/core';
 import { MdDialog, MdDialogRef } from '@angular/material';
 
 import { StoryService, SprintService, UserService } from '../services';
@@ -24,12 +24,15 @@ export class StoryViewComponent implements OnInit {
   public productOwner: User;
 
 
+
   constructor(
     private route: ActivatedRoute,
     private sprintService: SprintService,
     private storyService: StoryService,
     private userService: UserService,
-    private dialog: MdDialog
+    private dialog: MdDialog,
+    private _dialogService: TdDialogService,
+    private _viewContainerRef: ViewContainerRef
   ) {
   }
 
@@ -44,12 +47,16 @@ export class StoryViewComponent implements OnInit {
             this.sprintService.findOne(story.sprintId).subscribe(sprint => {
               this.sprint = sprint;
             });
+          } else {
+            this.sprint = undefined;
           }
           if (story.productOwnerId) {
             this.userService.findOne(story.productOwnerId).subscribe(user => {
               this.productOwner = user;
               console.log(this.productOwner);
             });
+          } else {
+            this.productOwner = undefined;
           }
         });
       });
@@ -67,6 +74,49 @@ export class StoryViewComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('after close');
     });
+  }
+
+  deleteStory(story: Story) {
+
+    if (this.sprint){
+      this._dialogService.openConfirm({
+
+        message: 'Do you want to delete current story?',
+        viewContainerRef: this._viewContainerRef, 
+        title: 'Confirm',
+        cancelButton: 'Cancel',
+        acceptButton: 'Unassign',
+      }).afterClosed().subscribe((accept: boolean) => {
+        if (accept) {
+          
+        } else {
+          // DO SOMETHING ELSE
+        }
+      });
+    }
+
+  }
+
+  unassignStory(story: Story) {
+
+    if (this.sprint){
+      this._dialogService.openConfirm({
+
+        message: 'This will un-assign current story from sprint ' + this.sprint.name + ' Do you confirm?',
+        viewContainerRef: this._viewContainerRef,
+        title: 'Confirm',
+        cancelButton: 'Cancel',
+        acceptButton: 'Unassign',
+      }).afterClosed().subscribe((accept: boolean) => {
+        if (accept) {
+          this.storyService.unassignStory(story);
+
+        } else {
+          // DO SOMETHING ELSE
+        }
+      });
+    }
+
   }
 
   public progressAsPercentage(): number {
