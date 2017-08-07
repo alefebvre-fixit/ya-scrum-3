@@ -41,7 +41,7 @@ export class StoryEditComponent implements OnInit {
       comment: [this.story.comment, [<any>Validators.required]],
       type: [this.story.type, [<any>Validators.required]],
       priority: [this.story.priority, [<any>Validators.required]],
-      size: [this.story.priority],
+      estimate: [this.story.estimate],
 
     });
   }
@@ -64,7 +64,7 @@ export class StoryEditComponent implements OnInit {
     this.story.acceptanceCriterias = this.storyForm.value.criterias;
     this.story.comment = this.storyForm.value.comment;
     this.story.priority = this.storyForm.value.priority;
-    this.story.size = this.storyForm.value.size;
+    this.story.estimate = this.storyForm.value.estimate;
     this.story.type = this.storyForm.value.type;
 
     this.dialogRef.close(this.storyService.save(this.story));

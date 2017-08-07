@@ -5,13 +5,13 @@ export class SprintProgress {
 
     date: Date;
     day = 1;
+
     total = 0;
     previous = 0;
     daily = 0;
     remaining = 0;
 
     sprintId: string;
-    storiesProgress: StoryProgress[];
 
 
     public static reset(progress: SprintProgress) {
@@ -26,24 +26,10 @@ export class SprintProgress {
         if (storyProgress.storyId === undefined) {
             return;
         }
-
-        if (sprintProgress.storiesProgress === undefined) {
-            sprintProgress.storiesProgress = new Array<StoryProgress>();
-        }
-
-
-        const index: number = sprintProgress.storiesProgress.findIndex(p => p.storyId === storyProgress.storyId);
-        if (index > 0) {
-            sprintProgress.storiesProgress[index] = storyProgress;
-        } else {
-            sprintProgress.storiesProgress.push(storyProgress);
-        }
-
-        for (const progress of sprintProgress.storiesProgress) {
-            if (progress.storyId === storyProgress.storyId) {
-                return progress;
-            }
-        }
+        sprintProgress.previous += storyProgress.previous;
+        sprintProgress.daily += storyProgress.daily;
+        sprintProgress.remaining += storyProgress.remaining;
+        sprintProgress.total += storyProgress.total;
 
     }
 

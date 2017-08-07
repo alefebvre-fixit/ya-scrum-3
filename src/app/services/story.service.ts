@@ -148,9 +148,15 @@ export class StoryService {
     this.database.object(`/stories/${story.$key}`).update({ status: 'new', filter_status: Story.getFilterStatus('new'), history: [] });
 
     return this.database.object('/sprints/' + sprintId).take(1).subscribe( sprint => {
-      sprint.size -= story.size;
+      sprint.estimate -= story.estimate;
       sprint.progress -= story.progress;
-      this.database.object(`/sprints/${sprintId}`).update({ size: sprint.size, progress: sprint.progress});
+      sprint.remaining -= story.remaining;
+
+      this.database.object(`/sprints/${sprintId}`).update({
+        estimate: sprint.estimate,
+        progress: sprint.progress,
+        remaining: sprint.remaining,
+      });
     });
 
   }
@@ -163,7 +169,7 @@ export class StoryService {
     let value = daily;
 
     result.total = result.previous;
-    result.remaining = story.size - result.total;
+    result.remaining = story.estimate - result.total;
 
     if (daily > 0 && daily > result.remaining) {
       value = result.remaining;
@@ -173,7 +179,7 @@ export class StoryService {
 
     result.daily = value;
     result.total = result.previous + result.daily;
-    result.remaining = StoryService.filterPositive(story.size - result.total);
+    result.remaining = StoryService.filterPositive(story.estimate - result.total);
     return result;
   }
 
@@ -192,7 +198,7 @@ export class StoryService {
 
     result.daily = result.daily + value;
     result.total = result.previous + result.daily;
-    result.remaining = StoryService.filterPositive(story.size - result.total);
+    result.remaining = StoryService.filterPositive(story.estimate - result.total);
 
     return result;
 
@@ -205,12 +211,12 @@ export class StoryService {
     if (story.history) {
       story.progress = story.history.reduce(function (sum: number, p: StoryProgress) {
         p.previous = sum;
-        p.remaining = StoryService.filterPositive(story.size - p.previous - p.daily);
+        p.remaining = StoryService.filterPositive(story.estimate - p.previous - p.daily);
         return p.previous + p.daily;
       }, 0);
 
       if (story.progress > 0) {
-        if (story.progress >= story.size) {
+        if (story.progress >= story.estimate) {
           story.status = 'closed';
         } else {
           story.status = 'started';
@@ -232,13 +238,13 @@ export class StoryService {
     if (story.history) {
       story.progress = story.history.reduce(function (sum: number, progress: StoryProgress) {
         progress.previous = sum;
-        progress.remaining = StoryService.filterPositive(story.size - progress.previous - progress.daily);
+        progress.remaining = StoryService.filterPositive(story.estimate - progress.previous - progress.daily);
 
         return progress.previous + progress.daily;
       }, 0);
 
       if (story.progress > 0) {
-        if (story.progress >= story.size) {
+        if (story.progress >= story.estimate) {
           story.status = 'closed';
         } else {
           story.status = 'started';

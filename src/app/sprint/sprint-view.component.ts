@@ -18,7 +18,9 @@ export class SprintViewComponent implements OnInit {
   public sprint: Sprint;
   public stories: Story[];
   public allStories: Story[];
+
   public progress: SprintProgress;
+  public progressHistory: SprintProgress[];
 
   constructor(
     private route: ActivatedRoute,
@@ -39,16 +41,21 @@ export class SprintViewComponent implements OnInit {
           this.storyService.findBySprintId(sprint.$key).subscribe(stories => {
             this.stories = stories;
             const burndown = this.sprintService.generateBurndowData(sprint, stories);
-            this.lineChartLabels = burndown.labels;
             this.lineChartData = burndown.datas;
+            this.lineChartLabels = burndown.labels;
           });
 
           this.storyService.findNewStories().subscribe(stories => {
             this.allStories = stories;
+            this.progressHistory = this.sprintService.getSprintProgressHistory(this.sprint, this.stories);
           });
 
         });
       });
+  }
+
+  startNewDailyMeeting() {
+    this.sprintService.startNewDailyMeeting(this.sprint, this.stories);
   }
 
   assignProductOwner() {
@@ -58,7 +65,7 @@ export class SprintViewComponent implements OnInit {
   }
 
   editSprint(sprint: Sprint) {
-    const dialogRef = this.dialog.open(SprintEditComponent, {width: '800px'});
+    const dialogRef = this.dialog.open(SprintEditComponent, { width: '800px' });
     dialogRef.componentInstance.sprint = this.sprint;
     dialogRef.afterClosed().subscribe(result => {
       console.log('after close');
@@ -70,15 +77,18 @@ export class SprintViewComponent implements OnInit {
   }
 
 
-    public lineChartData: Array<any> = [
+  public lineChartData: Array<any> = [
     { data: [], label: 'Actual' },
     { data: [], label: 'Ideal' },
   ];
 
-  public lineChartLabels: Array<any> = [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15" ];
+  //public lineChartLabels: Array<any> = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"];
+  public lineChartLabels: Array<any>;
+  
+  
   public lineChartOptions: any = {
     animation: false,
-    responsive: false
+    responsive: true
   };
   public lineChartColors: Array<any> = [
     { // grey

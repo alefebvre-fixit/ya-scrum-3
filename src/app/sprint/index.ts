@@ -2,13 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { CovalentDataTableModule } from '@covalent/core';
 
-import { SprintCardComponent} from './sprint-card.component';
-import { SprintGridComponent} from './sprint-grid.component';
-import { SprintDashboardComponent} from './sprint-dashboard.component';
-import { SprintViewComponent} from './sprint-view.component';
-import { SprintEditComponent} from './sprint-edit.component';
-import { SprintStatusComponent} from './sprint-status.component';
+import { SprintCardComponent } from './sprint-card.component';
+import { SprintGridComponent } from './sprint-grid.component';
+import { SprintDashboardComponent } from './sprint-dashboard.component';
+import { SprintViewComponent } from './sprint-view.component';
+import { SprintEditComponent } from './sprint-edit.component';
+import { SprintStatusComponent } from './sprint-status.component';
+import { SprintProgressScheduleComponent } from './progress-schedule.component';
 
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -16,6 +18,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { StoryModule } from '../story';
 
 import { SprintService } from '../services';
+import { SharedModule } from '../shared';
 
 @NgModule({
   imports: [
@@ -25,6 +28,8 @@ import { SprintService } from '../services';
     FormsModule,
     ReactiveFormsModule,
     ChartsModule,
+    CovalentDataTableModule,
+    SharedModule,
     StoryModule
   ],
   declarations: [
@@ -33,7 +38,8 @@ import { SprintService } from '../services';
     SprintDashboardComponent,
     SprintViewComponent,
     SprintStatusComponent,
-    SprintEditComponent
+    SprintEditComponent,
+    SprintProgressScheduleComponent
   ],
   exports: [
     SprintCardComponent,

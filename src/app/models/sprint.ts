@@ -1,5 +1,4 @@
 import { Story } from './story';
-import { SprintProgress } from './sprint-progress';
 
 export class Sprint {
 
@@ -12,23 +11,23 @@ export class Sprint {
     startDate: Date;
     endDate: Date;
     duration = 15;
-    size = 0;
 
-    capacity: number;
+    estimate = 0;
+    progress = 0;
+    remaining = 0;
+
     velocity: number;
 
     conversationId: string;
     scrumMasterId: string;
 
-    progress: number;
+    meetingNumber = 0;
 
     impediment: Story;
 
     //Index for query
     //http://stackoverflow.com/questions/26700924/query-based-on-multiple-where-clauses-in-firebase
     filter_status: string;
-
-    history: SprintProgress[];
 
     public static getUpdate(sprint: any): any {
 
@@ -51,46 +50,6 @@ export class Sprint {
 
     }
 
-    public static getProgress(sprint: Sprint, day: number): SprintProgress {
-        if (sprint.history) {
-            for (const progress of sprint.history) {
-                if (progress.day == day) {
-                    return progress;
-                }
-            }
-        }
-        return undefined;
-    }
-
-    public static createProgress(sprint: Sprint, day: number): SprintProgress {
-
-        const result = new SprintProgress();
-
-        result.sprintId = sprint.$key;
-        result.day = day;
-        result.date = new Date();
-        result.previous = 0;
-        result.daily = 0;
-        result.total = 0;
-        result.remaining = 0;
-
-        return result;
-
-    }
-
-    public static setProgress(sprint: Sprint, progress: SprintProgress) {
-
-        if (sprint.history == undefined) {
-            sprint.history = new Array<SprintProgress>();
-        }
-
-        if (progress.day > 0) {
-            //if (progress.day > 0 && progress.day <= sprint.history.length) {
-            sprint.history[progress.day - 1] = progress;
-        }
-
-    }
-
     public static getFilterStatus(status: string): string {
         if ('started' === status) {
             return 'progress';
@@ -102,8 +61,8 @@ export class Sprint {
     }
 
     public static progressAsPercentage(sprint: Sprint): number {
-        if (sprint && sprint.size > 0) {
-            return (sprint.progress / sprint.size) * 100;
+        if (sprint && sprint.estimate > 0) {
+            return (sprint.progress / sprint.estimate) * 100;
         } else {
             return 0;
         }

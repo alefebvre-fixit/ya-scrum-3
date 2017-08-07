@@ -13,14 +13,14 @@ export class Story {
     duration: number;
 
     priority: number;
+
     estimate: number;
-    size: number;
-
-    sprintId: string;
-    productOwnerId: string;
-
+    remaining: number;
     progress: number;
 
+    sprintId: string;
+
+    productOwnerId: string;
     history: StoryProgress[];
 
     //Index for query
@@ -43,7 +43,7 @@ export class Story {
         result.priority = 1;
         result.status = 'new';
         result.type = 'feature';
-        result.size = 1;
+        result.estimate = 1;
         result.progress = 0;
 
         return result;
@@ -62,7 +62,6 @@ export class Story {
     }
 
     public static getProgress(story: Story, day: number): StoryProgress {
-        console.log(story.history);
         if (story.history) {
             for (const progress of story.history) {
                 if (progress.day === day) {
@@ -90,7 +89,7 @@ export class Story {
         result.previous = 0;
         result.daily = 0;
         result.total = 0;
-        result.remaining = story.size;
+        result.remaining = story.estimate;
 
         return result;
 
@@ -120,8 +119,8 @@ export class Story {
     }
 
     public static progressAsPercentage(story: Story): number {
-        if (story && story.size > 0) {
-            return (story.progress / story.size) * 100;
+        if (story && story.estimate > 0) {
+            return (story.progress / story.estimate) * 100;
         } else {
             return 0;
         }

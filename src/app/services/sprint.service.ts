@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { Sprint, SprintProgress, Story, StoryProgress } from '../models';
+import { Sprint, Story, StoryProgress, SprintProgress } from '../models';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 const SPRINTS = '/sprints';
@@ -25,10 +25,10 @@ export class SprintService {
         this.save(sprint);
 
         this.findStoryBySprint(sprint.$key).subscribe((stories: Story[]) => {
-          sprint.size = stories.reduce(function (sum: number, story: Story) {
-            return story.size;
+          sprint.estimate = stories.reduce(function (sum: number, story: Story) {
+            return story.estimate;
           }, 0);
-          this.database.object('/sprints/' + sprint.$key).update({ size: sprint.size });
+          this.database.object('/sprints/' + sprint.$key).update({ estimate: sprint.estimate });
         });
 
       }
@@ -71,21 +71,24 @@ export class SprintService {
   public assignStoryToToSprint(sprint: Sprint, story: Story) {
 
 
-    this.database.object('/storyPerSprint/' + sprint.$key).take(1).subscribe( existingJoin => {
+    this.database.object('/storyPerSprint/' + sprint.$key).take(1).subscribe(existingJoin => {
       if (!existingJoin[story.$key]) {
 
         const join = new Object();
         join[story.$key] = true;
 
+
+        /*
         for (let index = 1; index <= sprint.duration; index++) {
           const progress: StoryProgress = Story.createProgress(story, index);
           Story.setProgress(story, progress);
         }
+        */
 
-        if (sprint.size === undefined) {
-          sprint.size = story.size;
+        if (sprint.estimate === undefined) {
+          sprint.estimate = story.estimate;
         } else {
-          sprint.size += story.size;
+          sprint.estimate += story.estimate;
         }
 
         this.database.object('/storyPerSprint/' + sprint.$key).update(join);
@@ -95,18 +98,44 @@ export class SprintService {
           filter_status: Sprint.getFilterStatus('assigned'),
           progress: 0,
           duration: sprint.duration,
-          history: story.history
         });
 
-        this.database.object('/sprints/' + sprint.$key).update({ size: sprint.size });
+        this.database.object('/sprints/' + sprint.$key).update({ estimate: sprint.estimate });
 
       } else {
         console.log('The story is already assigned!');
       }
     });
-
-
   }
+
+  public startNewDailyMeeting(sprint: Sprint, stories: Story[]) {
+
+    if (!sprint.meetingNumber) {
+      sprint.meetingNumber = 1;
+    } else {
+      sprint.meetingNumber++;
+    }
+
+    if (stories) {
+      for (const story of stories) {
+
+        let progress = Story.getProgress(story, sprint.meetingNumber);
+        if (!progress) {
+          progress = Story.createProgress(story, sprint.meetingNumber);
+          Story.setProgress(story, progress);
+          this.database.object('/stories/' + story.$key).update({
+            history: story.history
+          });
+        }
+
+      }
+
+      this.database.object('/sprints/' + sprint.$key).update({ meetingNumber: sprint.meetingNumber });
+
+    }
+  }
+
+
 
   public assignScrumMaster(sprintId: string, userId: string) {
     this.database.object('/sprints/' + sprintId).update({ scrumMasterId: userId });
@@ -135,67 +164,50 @@ export class SprintService {
     return sprint.$key;
   }
 
-  public updateSprintProgress(story: Story) {
-    this.findOne(story.sprintId).take(1).subscribe(sprint => {
+  public getSprintProgressHistory(sprint: Sprint, stories: Story[]): SprintProgress[] {
 
-      for (let storyProgress of story.history) {
-        // find sprintProgress for that day
-        let sprintProgress: SprintProgress = Sprint.getProgress(sprint, storyProgress.day);
-        if (sprintProgress === undefined) {
-          sprintProgress = Sprint.createProgress(sprint, storyProgress.day);
-          Sprint.setProgress(sprint, sprintProgress);
+    const result: SprintProgress[] = [];
+
+    for (let day = 1; day <= sprint.meetingNumber; day++) {
+
+      const sprintProgress = new SprintProgress();
+      result.push(sprintProgress);
+
+      stories.forEach(story => {
+        const storyProgress = Story.getProgress(story, day);
+        if (storyProgress !== undefined) {
+          SprintProgress.setProgress(sprintProgress, storyProgress);
         }
-        SprintProgress.setProgress(sprintProgress, storyProgress);
-      }
-
-      // calculate progress for each day
-      if (sprint.history === undefined) {
-        sprint.history = new Array<SprintProgress>();
-      }
-
-      for (const sprintProgress of sprint.history) {
-        const stories = sprintProgress.storiesProgress;
-
-        if (stories !== undefined) {
-          SprintProgress.reset(sprintProgress);
-          for (const story of stories) {
-            sprintProgress.daily += story.daily;
-            sprintProgress.previous += story.previous;
-            sprintProgress.total += story.total;
-            sprintProgress.remaining += story.remaining;
-          }
-        }
-      }
-      // finaly calculate the overall progress
-      this.calculateProgress(sprint);
-      this.database.object('/sprints/' + sprint.$key).update({
-        status: sprint.status,
-        filter_status: Sprint.getFilterStatus(sprint.status),
-        progress: sprint.progress,
-        duration: sprint.duration,
-        history: sprint.history
       });
 
-    });
+    }
+
+    return result;
+
+
   }
 
-  public calculateProgress(sprint: Sprint) {
-    if (sprint.history) {
-      // TODO Do a sort first
-      sprint.progress = sprint.history.reduce(function (sum: number, progress: SprintProgress) {
-        return progress.total;
-      }, 0);
 
-      if (sprint.progress > 0) {
-        if (sprint.progress >= sprint.size) {
-          sprint.status = 'closed'
-        } else {
-          sprint.status = 'started'
-        }
-      } else {
-        sprint.status = 'new';
-      }
+  public calculateProgress(sprint: Sprint, stories: Story[]) {
+
+    let sprintProgress = 0;
+
+    for (let day = 1; day <= sprint.duration; day++) {
+      stories.forEach(story => {
+        sprintProgress = story.progress;
+      });
     }
+
+    if (sprint.progress > 0) {
+      if (sprint.progress >= sprint.estimate) {
+        sprint.status = 'closed';
+      } else {
+        sprint.status = 'started';
+      }
+    } else {
+      sprint.status = 'new';
+    }
+
   }
 
 
@@ -212,11 +224,17 @@ export class SprintService {
   private generateActualCurve(sprint: Sprint, stories: Story[]): any {
     const result = { data: [], label: 'Actual' };
 
+    result.data[0] = sprint.estimate;
+
     for (let day = 1; day <= sprint.duration; day++) {
       stories.forEach(story => {
         const progress: StoryProgress = Story.getProgress(story, day);
         if (progress !== undefined) {
-          result.data[day - 1] = progress.remaining;
+          if (result.data[day]) {
+            result.data[day] += progress.remaining;
+          } else {
+            result.data[day] = progress.remaining;
+          }
         }
       });
     }
@@ -227,10 +245,11 @@ export class SprintService {
   private generateIdealCurve(sprint: Sprint): any {
 
     const result = { data: [], label: 'Ideal' };
+    result.data[0] = sprint.estimate;
 
     for (let day = 1; day <= sprint.duration; day++) {
-      const remaining = sprint.size - ((sprint.size * day) / sprint.duration);
-      result.data[day - 1] = remaining;
+      const remaining = sprint.estimate - ((sprint.estimate * day) / sprint.duration);
+      result.data[day] = remaining;
     }
 
     return result;
@@ -238,9 +257,10 @@ export class SprintService {
 
   private generateLabels(sprint: Sprint): Array<string> {
     const result: Array<string> = new Array<string>();
+    result.push('0');
 
     for (let day = 1; day <= sprint.duration; day++) {
-      result.push(day.toString());
+      result.push(day.toString() + 'a');
     }
 
     return result;
