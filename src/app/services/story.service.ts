@@ -31,6 +31,14 @@ export class StoryService {
     { key: '5', value: '5' },
   ];
 
+    public static filterPositive(value: number): number {
+    if (value > 0) {
+      return value;
+    } else {
+      return 0;
+    }
+  }
+
   constructor(
     private database: AngularFireDatabase
   ) { }
@@ -77,6 +85,10 @@ export class StoryService {
         equalTo: sprintId
       }
     });
+  }
+
+  public findNewStories(): Observable<Story[]> {
+    return this.findByStatus('pending');
   }
 
   public findByStatus(status: string): Observable<Story[]> {
@@ -127,6 +139,7 @@ export class StoryService {
 
   public unassignStory(story: Story) {
 
+    const sprintId = story.sprintId;
     const join = new Object();
     join[story.$key] = false;
 
@@ -134,9 +147,10 @@ export class StoryService {
     this.database.object(`/stories/${story.$key}/sprintId`).remove();
     this.database.object(`/stories/${story.$key}`).update({ status: 'new', filter_status: Story.getFilterStatus('new'), history: [] });
 
-    return this.database.object('/sprints/' + story.sprintId).take(1).subscribe( sprint => {
+    return this.database.object('/sprints/' + sprintId).take(1).subscribe( sprint => {
       sprint.size -= story.size;
       sprint.progress -= story.progress;
+      this.database.object(`/sprints/${sprintId}`).update({ size: sprint.size, progress: sprint.progress});
     });
 
   }
@@ -159,7 +173,7 @@ export class StoryService {
 
     result.daily = value;
     result.total = result.previous + result.daily;
-    result.remaining = this.filterPositive(story.size - result.total);
+    result.remaining = StoryService.filterPositive(story.size - result.total);
     return result;
   }
 
@@ -178,7 +192,7 @@ export class StoryService {
 
     result.daily = result.daily + value;
     result.total = result.previous + result.daily;
-    result.remaining = this.filterPositive(story.size - result.total);
+    result.remaining = StoryService.filterPositive(story.size - result.total);
 
     return result;
 
@@ -189,10 +203,10 @@ export class StoryService {
     story.history[progress.day - 1] = progress;
 
     if (story.history) {
-      story.progress = story.history.reduce(function (sum: number, progress: StoryProgress) {
-        progress.previous = sum;
-        progress.remaining = this.filterPositive(story.size - progress.previous - progress.daily);
-        return progress.previous + progress.daily;
+      story.progress = story.history.reduce(function (sum: number, p: StoryProgress) {
+        p.previous = sum;
+        p.remaining = StoryService.filterPositive(story.size - p.previous - p.daily);
+        return p.previous + p.daily;
       }, 0);
 
       if (story.progress > 0) {
@@ -210,13 +224,7 @@ export class StoryService {
 
   }
 
-  public filterPositive(value: number): number {
-    if (value > 0) {
-      return value;
-    } else {
-      return 0;
-    }
-  }
+
 
 
   public calculateProgress(story: Story) {
@@ -224,7 +232,7 @@ export class StoryService {
     if (story.history) {
       story.progress = story.history.reduce(function (sum: number, progress: StoryProgress) {
         progress.previous = sum;
-        progress.remaining = this.filterPositive(story.size - progress.previous - progress.daily);
+        progress.remaining = StoryService.filterPositive(story.size - progress.previous - progress.daily);
 
         return progress.previous + progress.daily;
       }, 0);

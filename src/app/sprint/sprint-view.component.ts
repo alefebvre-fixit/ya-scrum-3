@@ -38,9 +38,12 @@ export class SprintViewComponent implements OnInit {
 
           this.storyService.findBySprintId(sprint.$key).subscribe(stories => {
             this.stories = stories;
+            const burndown = this.sprintService.generateBurndowData(sprint, stories);
+            this.lineChartLabels = burndown.labels;
+            this.lineChartData = burndown.datas;
           });
 
-          this.storyService.findAll().subscribe(stories => {
+          this.storyService.findNewStories().subscribe(stories => {
             this.allStories = stories;
           });
 
@@ -66,5 +69,44 @@ export class SprintViewComponent implements OnInit {
     this.sprintService.assigStoriesToSprint(this.sprint, stories);
   }
 
+
+    public lineChartData: Array<any> = [
+    { data: [], label: 'Actual' },
+    { data: [], label: 'Ideal' },
+  ];
+
+  public lineChartLabels: Array<any> = [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15" ];
+  public lineChartOptions: any = {
+    animation: false,
+    responsive: false
+  };
+  public lineChartColors: Array<any> = [
+    { // grey
+      backgroundColor: 'rgba(148,159,177,0.2)',
+      borderColor: 'rgba(148,159,177,1)',
+      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    },
+    { // dark grey
+      backgroundColor: 'rgba(77,83,96,0.2)',
+      borderColor: 'rgba(77,83,96,1)',
+      pointBackgroundColor: 'rgba(77,83,96,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(77,83,96,1)'
+    },
+    { // grey
+      backgroundColor: 'rgba(148,159,177,0.2)',
+      borderColor: 'rgba(148,159,177,1)',
+      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    }
+  ];
+  public lineChartLegend: boolean = false;
+  public lineChartType: string = 'line';
 
 }

@@ -58,6 +58,9 @@ export class StoryViewComponent implements OnInit {
           } else {
             this.productOwner = undefined;
           }
+
+
+
         });
       });
   }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { RouterModule } from '@angular/router';
 
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
@@ -33,6 +34,7 @@ import { StoryService } from '../services';
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
     MaterialModule,
     FlexLayoutModule,
     FormsModule,

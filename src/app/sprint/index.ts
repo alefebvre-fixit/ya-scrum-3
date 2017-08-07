@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { SprintCardComponent} from './sprint-card.component';
 import { SprintGridComponent} from './sprint-grid.component';
@@ -23,6 +24,7 @@ import { SprintService } from '../services';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    ChartsModule,
     StoryModule
   ],
   declarations: [

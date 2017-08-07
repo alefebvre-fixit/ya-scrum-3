@@ -92,6 +92,7 @@ export class SprintService {
         this.database.object('/stories/' + story.$key).update({
           sprintId: sprint.$key,
           status: 'assigned',
+          filter_status: Sprint.getFilterStatus('assigned'),
           progress: 0,
           duration: sprint.duration,
           history: story.history
@@ -198,24 +199,26 @@ export class SprintService {
   }
 
 
-  public generateBurndowData(sprint: Sprint): any {
-    const result = { labels: [], datas: [] }
+  public generateBurndowData(sprint: Sprint, stories: Story[]): any {
+    const result = { labels: [], datas: [] };
     console.log('SprintService::generateBurndowData(sprint: Sprint)');
     result.labels = this.generateLabels(sprint);
     result.datas[0] = this.generateIdealCurve(sprint);
-    result.datas[1] = this.generateActualCurve(sprint);
+    result.datas[1] = this.generateActualCurve(sprint, stories);
 
     return result;
   }
 
-  private generateActualCurve(sprint: Sprint): any {
+  private generateActualCurve(sprint: Sprint, stories: Story[]): any {
     const result = { data: [], label: 'Actual' };
 
     for (let day = 1; day <= sprint.duration; day++) {
-      const progress: SprintProgress = Sprint.getProgress(sprint, day);
-      if (progress != undefined) {
-        result.data[day - 1] = progress.remaining;
-      }
+      stories.forEach(story => {
+        const progress: StoryProgress = Story.getProgress(story, day);
+        if (progress !== undefined) {
+          result.data[day - 1] = progress.remaining;
+        }
+      });
     }
 
     return result;
