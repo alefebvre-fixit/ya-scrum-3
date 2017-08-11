@@ -36,16 +36,10 @@ export class ProgressEditComponent implements OnInit {
   }
 
   apply() {
-    console.log(this.storyForm.value);
 
     this.progress = this.storyService.setDailyProgress(this.story, this.progress, this.storyForm.value.daily);
-
     this.storyService.assignDailyProgress(this.story, this.progress);
-
     this.storyService.save(this.story);
-    //this.storyService.setDailyProgress(this.story, this.progress);
-
-    //this.storyService.save(this.story);
 
     this.dialogRef.close(true);
 

@@ -11,6 +11,8 @@ import { SprintViewComponent } from './sprint-view.component';
 import { SprintEditComponent } from './sprint-edit.component';
 import { SprintStatusComponent } from './sprint-status.component';
 import { SprintProgressScheduleComponent } from './progress-schedule.component';
+import { SprintStoryCardComponent } from './sprint-story-card.component';
+import { SprintStoryGridComponent } from './sprint-story-grid.component';
 
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -39,7 +41,9 @@ import { SharedModule } from '../shared';
     SprintViewComponent,
     SprintStatusComponent,
     SprintEditComponent,
-    SprintProgressScheduleComponent
+    SprintProgressScheduleComponent,
+    SprintStoryCardComponent,
+    SprintStoryGridComponent
   ],
   exports: [
     SprintCardComponent,

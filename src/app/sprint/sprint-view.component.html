@@ -20,64 +20,55 @@
 
 <div class="sprint-detail-container">
 
-      <div class="flex-container" 
-        fxLayout
-        fxLayoutWrap="wrap"
-        fxLayout.xs="column"
-        fxLayoutAlign="start start"
-        fxLayoutAlign.xs="start">
+  <div class="flex-container" fxLayout fxLayoutWrap="wrap" fxLayout.xs="column" fxLayoutAlign="start start" fxLayoutAlign.xs="start">
 
-        <div class="flex-item" fxFlex="70%">
+    <div class="flex-item" fxFlex="70%">
 
-          <md-card class="sprint-card">
-            <md-card-header>
-              <md-card-title>{{(sprint)?.name}}</md-card-title>
-              <md-card-subtitle>Day {{(sprint)?.meetingNumber}}</md-card-subtitle>
-            </md-card-header>
-            <md-card-content>
-              <h3 md-subheader>Description</h3>
-              <p>
-                {{(sprint)?.description}}
-              </p>
-            </md-card-content>
-            <md-card-actions>
-              <button md-button (click)="startNewDailyMeeting()">START DAILY MEETING</button>
-            </md-card-actions>            
-          </md-card>
+      <md-card class="sprint-card">
+        <md-card-header>
+          <md-card-title>{{(sprint)?.name}}</md-card-title>
+          <md-card-subtitle>Day {{(sprint)?.meetingNumber}}</md-card-subtitle>
+        </md-card-header>
+        <md-card-content>
+          <h3 md-subheader>Description</h3>
+          <p>
+            {{(sprint)?.description}}
+          </p>
+        </md-card-content>
+        <md-card-actions>
+          <button md-button (click)="startNewDailyMeeting()">START DAILY MEETING</button>
+        </md-card-actions>
+      </md-card>
 
 
-        </div>
-        <div class="flex-item" fxFlex="30%">
-          <sprint-status [sprint]="sprint"></sprint-status>
-        </div>
+    </div>
+    <div class="flex-item" fxFlex="30%">
+      <sprint-status [sprint]="sprint"></sprint-status>
+    </div>
 
 
-        <div class="flex-item" fxFlex="50%">
-          <md-card>
-            <md-card-header>
-              <md-card-title>Bundown Chart</md-card-title>
-            </md-card-header>
-            <md-card-content>              
-              <canvas *ngIf="lineChartLabels" baseChart width="600" height="300" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
-                [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
-            </md-card-content>
-          </md-card>
-        </div>
-        <div class="flex-item" fxFlex="50%">
-          <sprint-progress-schedule [progressHistory]="progressHistory"></sprint-progress-schedule>
-        </div>
+    <div class="flex-item" fxFlex="50%">
+      <md-card>
+        <md-card-header>
+          <md-card-title>Bundown Chart</md-card-title>
+        </md-card-header>
+        <md-card-content>
+          <canvas *ngIf="lineChartLabels" baseChart width="600" height="300" [datasets]="lineChartData" [labels]="lineChartLabels"
+            [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div class="flex-item" fxFlex="50%">
+      <sprint-progress-schedule [progressHistory]="progressHistory"></sprint-progress-schedule>
+    </div>
 
-        <div class="flex-item" fxFlex="50%">
-        </div>
-        <div class="flex-item" fxFlex="100%">
-          <story-list [stories]="allStories" (onStorySelected)="selectStories($event)"></story-list>
-        </div>
-        <div class="flex-item" fxFlex="100%">
-          <story-grid [stories]="stories"></story-grid>
-        </div>
-
-
-    </div> 
-
-
+    <div class="flex-item" fxFlex="50%">
+    </div>
+    <div class="flex-item" fxFlex="100%">
+      <story-list [stories]="allStories" (onStorySelected)="selectStories($event)"></story-list>
+    </div>
+    <div class="flex-item" fxFlex="100%">
+      <sprint-story-grid [stories]="stories"></sprint-story-grid>
+    </div>
+  </div>
 </div>

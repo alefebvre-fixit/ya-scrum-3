@@ -1,0 +1,26 @@
+<md-card>
+   <md-card-header>
+    <md-icon md-card-avatar color="primary">web</md-icon>
+    <md-card-title>{{(story)?.name}}</md-card-title>
+    <md-card-subtitle>Story subtitle</md-card-subtitle>
+  </md-card-header> 
+  <md-card-content>
+    <div class="progress-chart-container">
+    <canvas #doughnutCanvas></canvas>
+    </div>
+    <br>
+    <div class="points-label">
+      <h3>{{ progress?.daily }} points completed today</h3>
+    </div>  
+  </md-card-content>
+  <md-card-actions>
+
+    <button md-button (click)="navigateToDetails(story?.$key)" class="detail-button"><md-icon>chevron_right</md-icon> View Details</button>
+
+    <span>
+    <button md-mini-fab (click)="add()" class="add-button"><md-icon>keyboard_arrow_up</md-icon></button>
+    <button md-mini-fab (click)="remove()" class="remove-button"><md-icon>keyboard_arrow_down</md-icon></button>
+    </span>
+
+  </md-card-actions>
+</md-card>

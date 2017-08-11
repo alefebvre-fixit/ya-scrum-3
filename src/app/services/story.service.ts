@@ -31,7 +31,7 @@ export class StoryService {
     { key: '5', value: '5' },
   ];
 
-    public static filterPositive(value: number): number {
+  public static filterPositive(value: number): number {
     if (value > 0) {
       return value;
     } else {
@@ -147,10 +147,25 @@ export class StoryService {
     this.database.object(`/stories/${story.$key}/sprintId`).remove();
     this.database.object(`/stories/${story.$key}`).update({ status: 'new', filter_status: Story.getFilterStatus('new'), history: [] });
 
-    return this.database.object('/sprints/' + sprintId).take(1).subscribe( sprint => {
-      sprint.estimate -= story.estimate;
-      sprint.progress -= story.progress;
-      sprint.remaining -= story.remaining;
+    return this.database.object('/sprints/' + sprintId).take(1).subscribe(sprint => {
+
+      if (sprint.estimate !== undefined && sprint.estimate >= story.estimate) {
+        sprint.estimate -= story.estimate;
+      } else {
+        sprint.estimate = 0;
+      };
+
+      if (sprint.progress !== undefined && sprint.progress >= story.progress) {
+        sprint.progress -= story.progress;
+      } else {
+        sprint.progress = 0;
+      };
+
+      if (sprint.remaining !== undefined && sprint.remaining >= story.remaining) {
+        sprint.remaining -= story.remaining;
+      } else {
+        sprint.remaining = 0;
+      };
 
       this.database.object(`/sprints/${sprintId}`).update({
         estimate: sprint.estimate,
@@ -183,25 +198,8 @@ export class StoryService {
     return result;
   }
 
-
   public incrementDailyProgress(story: Story, progress: StoryProgress, increment: number): StoryProgress {
-
-    const result: StoryProgress = Object.assign({}, progress);
-
-    let value = increment;
-
-    if (increment > 0 && increment > result.remaining) {
-      value = result.remaining;
-    } else if (increment < 0 && -increment > result.daily) {
-      value = - result.daily;
-    }
-
-    result.daily = result.daily + value;
-    result.total = result.previous + result.daily;
-    result.remaining = StoryService.filterPositive(story.estimate - result.total);
-
-    return result;
-
+    return this.setDailyProgress(story, progress, progress.daily + increment);
   }
 
   public assignDailyProgress(story: Story, progress: StoryProgress): Story {
@@ -209,12 +207,11 @@ export class StoryService {
     story.history[progress.day - 1] = progress;
 
     if (story.history) {
-      story.progress = story.history.reduce(function (sum: number, p: StoryProgress) {
+      story.progress = story.history.reduce(function (sum: any, p: StoryProgress) {
         p.previous = sum;
         p.remaining = StoryService.filterPositive(story.estimate - p.previous - p.daily);
         return p.previous + p.daily;
       }, 0);
-
       if (story.progress > 0) {
         if (story.progress >= story.estimate) {
           story.status = 'closed';

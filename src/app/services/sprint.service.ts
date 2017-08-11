@@ -77,13 +77,10 @@ export class SprintService {
         const join = new Object();
         join[story.$key] = true;
 
-
-        /*
-        for (let index = 1; index <= sprint.duration; index++) {
+        for (let index = 1; index <= sprint.meetingNumber; index++) {
           const progress: StoryProgress = Story.createProgress(story, index);
           Story.setProgress(story, progress);
         }
-        */
 
         if (sprint.estimate === undefined) {
           sprint.estimate = story.estimate;
@@ -168,23 +165,21 @@ export class SprintService {
 
     const result: SprintProgress[] = [];
 
-    for (let day = 1; day <= sprint.meetingNumber; day++) {
+    if (stories !== undefined && stories.length > 0) {
+      for (let day = 1; day <= sprint.meetingNumber; day++) {
 
-      const sprintProgress = new SprintProgress();
-      result.push(sprintProgress);
+        const sprintProgress = new SprintProgress();
+        result.push(sprintProgress);
 
-      stories.forEach(story => {
-        const storyProgress = Story.getProgress(story, day);
-        if (storyProgress !== undefined) {
-          SprintProgress.setProgress(sprintProgress, storyProgress);
-        }
-      });
-
+        stories.forEach(story => {
+          const storyProgress = Story.getProgress(story, day);
+          if (storyProgress !== undefined) {
+            SprintProgress.setProgress(sprintProgress, storyProgress);
+          }
+        });
+      }
     }
-
     return result;
-
-
   }
 
 
@@ -260,7 +255,7 @@ export class SprintService {
     result.push('0');
 
     for (let day = 1; day <= sprint.duration; day++) {
-      result.push(day.toString() + 'a');
+      result.push(day.toString());
     }
 
     return result;

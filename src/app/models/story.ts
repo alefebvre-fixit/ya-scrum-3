@@ -15,7 +15,11 @@ export class Story {
     priority: number;
 
     estimate: number;
+
+    previous: number;
+    daily: number;
     remaining: number;
+
     progress: number;
 
     sprintId: string;
@@ -76,7 +80,7 @@ export class Story {
         if (story && story.history) {
             return Story.getProgress(story, story.history.length);
         }
-        return undefined;
+        return new StoryProgress();
     }
 
     public static createProgress(story: Story, day: number): StoryProgress {

@@ -61,11 +61,22 @@ export class Sprint {
     }
 
     public static progressAsPercentage(sprint: Sprint): number {
-        if (sprint && sprint.estimate > 0) {
-            return (sprint.progress / sprint.estimate) * 100;
-        } else {
+        let progress = 0;
+
+        if (sprint === undefined) {
             return 0;
         }
+
+        if (sprint.estimate <= 0) {
+            return 0;
+        }
+
+        if (sprint.progress !== undefined) {
+            progress = sprint.progress;
+        }
+
+        return (progress / sprint.estimate) * 100;
+
     }
 
 }
