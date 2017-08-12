@@ -7,6 +7,7 @@ import { MdDialog, MdDialogRef } from '@angular/material';
 import { StoryService, SprintService, UserService } from '../services';
 import { Story, StoryProgress, Sprint, SprintProgress, User } from '../models';
 import { SprintEditComponent } from './sprint-edit.component';
+import { SprintStorySelectorComponent } from './story/sprint-story-selector.component';
 
 @Component({
   selector: 'sprint-view',
@@ -17,7 +18,6 @@ export class SprintViewComponent implements OnInit {
 
   public sprint: Sprint;
   public stories: Story[];
-  public allStories: Story[];
 
   public progress: SprintProgress;
   public progressHistory: SprintProgress[];
@@ -40,10 +40,6 @@ export class SprintViewComponent implements OnInit {
 
           this.storyService.findBySprintId(sprint.$key).subscribe(stories => {
             this.stories = stories;
-          });
-
-          this.storyService.findNewStories().subscribe(stories => {
-            this.allStories = stories;
             this.progressHistory = this.sprintService.getSprintProgressHistory(this.sprint, this.stories);
           });
 
@@ -72,5 +68,17 @@ export class SprintViewComponent implements OnInit {
   selectStories(stories: Story[]) {
     this.sprintService.assigStoriesToSprint(this.sprint, stories);
   }
+
+  addStory() {
+    const dialogRef = this.dialog.open(SprintStorySelectorComponent, { width: '1024px' });
+    dialogRef.componentInstance.sprint = this.sprint;
+    dialogRef.afterClosed().subscribe((stories: Story[]) => {
+      if (stories && stories.length > 0) {
+        this.sprintService.assigStoriesToSprint(this.sprint, stories);
+      }
+    });
+  }
+
+
 
 }

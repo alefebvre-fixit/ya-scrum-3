@@ -1,4 +1,7 @@
-<md-card>
+<h2 md-dialog-title>Story Selector</h2>
+<md-dialog-content>
+
+
   <div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm" [class.mat-selected-title]="selectedRows.length">
           <span *ngIf="!searchBox.searchVisible" class="push-left-sm">
             <span *ngIf="!selectedRows.length" class="md-title">Select stories</span>
@@ -26,7 +29,16 @@
     <div class="md-padding" *ngIf="!dataTable.hasData" layout="row" layout-align="center center">
         <h3>No results to display.</h3>
     </div>
-  <md-card-actions>
-    <button md-button (click)="add()">ADD</button>
-  </md-card-actions>
-</md-card>
+
+
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-button (click)="select()">SELECT</button>
+  <!-- Can optionally provide a result for the closing dialog. -->
+  <button md-button md-dialog-close>CANCEL</button>
+</md-dialog-actions>
+
+
+
+
+

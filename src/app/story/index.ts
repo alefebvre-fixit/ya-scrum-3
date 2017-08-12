@@ -12,9 +12,7 @@ import { CovalentCommonModule } from '@covalent/core';
 import { CovalentSearchModule } from '@covalent/core';
 import { CovalentPagingModule } from '@covalent/core';
 import { CovalentDialogsModule } from '@covalent/core';
-
-
-
+import { CovalentMessageModule } from '@covalent/core';
 
 import { NguUtilityModule } from 'ngu-utility/ngu-utility.module'; // <-- import the module
 
@@ -45,6 +43,7 @@ import { StoryService } from '../services';
     CovalentDataTableModule,
     CovalentPagingModule,
     CovalentDialogsModule,
+    CovalentMessageModule,
     NguUtilityModule,
     SharedModule,
     StoryProgressModule,

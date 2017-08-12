@@ -54,11 +54,6 @@
     <div class="flex-item" fxFlex="50%">
       <sprint-progress-schedule [progressHistory]="progressHistory"></sprint-progress-schedule>
     </div>
-    <div class="flex-item" fxFlex="50%">
-    </div>
-    <div class="flex-item" fxFlex="100%">
-      <story-list [stories]="allStories" (onStorySelected)="selectStories($event)"></story-list>
-    </div>
     <div class="flex-item" fxFlex="100%">
       <sprint-story-grid [stories]="stories"></sprint-story-grid>
     </div>

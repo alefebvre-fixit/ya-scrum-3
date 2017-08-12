@@ -10,7 +10,7 @@
       <md-icon>edit</md-icon>
       <span>Edit</span>
     </button>
-    <button md-menu-item [disabled]="!story?.$key" (click)="deleteStory(story)">
+    <button md-menu-item [disabled]="!story?.$key && story?.status==='new'" (click)="deleteStory(story)">
       <md-icon>delete</md-icon>
       <span>Delete</span>
     </button>

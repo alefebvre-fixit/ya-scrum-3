@@ -2,7 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+
 import { CovalentDataTableModule } from '@covalent/core';
+import { CovalentCommonModule } from '@covalent/core';
+import { CovalentSearchModule } from '@covalent/core';
+import { CovalentPagingModule } from '@covalent/core';
+import { CovalentDialogsModule } from '@covalent/core';
+import { CovalentMessageModule } from '@covalent/core';
 
 import { SprintCardComponent } from './sprint-card.component';
 import { SprintGridComponent } from './sprint-grid.component';
@@ -13,6 +19,7 @@ import { SprintStatusComponent } from './sprint-status.component';
 import { SprintProgressScheduleComponent } from './progress-schedule.component';
 import { SprintStoryCardComponent } from './story/sprint-story-card.component';
 import { SprintStoryGridComponent } from './story/sprint-story-grid.component';
+import { SprintStorySelectorComponent } from './story/sprint-story-selector.component';
 import { SprintBurndownComponent } from './sprint-burndown.component';
 
 import { MaterialModule } from '@angular/material';
@@ -31,7 +38,12 @@ import { SharedModule } from '../shared';
     FormsModule,
     ReactiveFormsModule,
     ChartsModule,
+    CovalentCommonModule,
     CovalentDataTableModule,
+    CovalentSearchModule,
+    CovalentPagingModule,
+    CovalentDialogsModule,
+    CovalentMessageModule,
     SharedModule,
     StoryModule
   ],
@@ -45,7 +57,8 @@ import { SharedModule } from '../shared';
     SprintProgressScheduleComponent,
     SprintStoryCardComponent,
     SprintStoryGridComponent,
-    SprintBurndownComponent
+    SprintBurndownComponent,
+    SprintStorySelectorComponent
   ],
   exports: [
     SprintCardComponent,
@@ -58,6 +71,7 @@ import { SharedModule } from '../shared';
   ],
   entryComponents: [
     SprintEditComponent,
+    SprintStorySelectorComponent
   ],
 })
 

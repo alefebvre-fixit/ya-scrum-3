@@ -137,6 +137,11 @@ export class StoryService {
     return story.$key;
   }
 
+
+  public delete(story: Story)  {
+    return this.database.object('/stories/' + story.$key).remove();
+  }
+
   public unassignStory(story: Story) {
 
     const sprintId = story.sprintId;

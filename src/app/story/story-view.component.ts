@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ViewContainerRef } from '@angular/core';
 import { TdDialogService } from '@covalent/core';
 import { MdDialog, MdDialogRef } from '@angular/material';
@@ -23,10 +23,9 @@ export class StoryViewComponent implements OnInit {
   public sprint: Sprint;
   public productOwner: User;
 
-
-
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private sprintService: SprintService,
     private storyService: StoryService,
     private userService: UserService,
@@ -72,7 +71,7 @@ export class StoryViewComponent implements OnInit {
   }
 
   editStory(story: Story) {
-    const dialogRef = this.dialog.open(StoryEditComponent, {width: '800px'});
+    const dialogRef = this.dialog.open(StoryEditComponent, { width: '800px' , height: '600px'});
     dialogRef.componentInstance.story = this.story;
     dialogRef.afterClosed().subscribe(result => {
       console.log('after close');
@@ -81,17 +80,19 @@ export class StoryViewComponent implements OnInit {
 
   deleteStory(story: Story) {
 
-    if (this.sprint){
+    if (story) {
       this._dialogService.openConfirm({
 
         message: 'Do you want to delete current story?',
-        viewContainerRef: this._viewContainerRef, 
+        viewContainerRef: this._viewContainerRef,
         title: 'Confirm',
         cancelButton: 'Cancel',
-        acceptButton: 'Unassign',
+        acceptButton: 'delete',
       }).afterClosed().subscribe((accept: boolean) => {
         if (accept) {
-          
+          this.storyService.delete(story);
+          this.router.navigate([`/stories`]);
+
         } else {
           // DO SOMETHING ELSE
         }
@@ -100,9 +101,10 @@ export class StoryViewComponent implements OnInit {
 
   }
 
+
   unassignStory(story: Story) {
 
-    if (this.sprint){
+    if (this.sprint) {
       this._dialogService.openConfirm({
 
         message: 'This will un-assign current story from sprint ' + this.sprint.name + ' Do you confirm?',
