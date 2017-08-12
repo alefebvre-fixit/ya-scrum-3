@@ -20,6 +20,16 @@
     justify-content: space-between !important;
 }
 
-.points-label{
+.points-container{
     text-align: center;
+    font-size: 120%;
+}
+
+.point-value{
+    color: #15B7B9;
+    font-weight: bold;
+}
+
+.point-label{
+    color: #757575    
 }

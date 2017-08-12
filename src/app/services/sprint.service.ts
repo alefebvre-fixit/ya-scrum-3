@@ -77,9 +77,12 @@ export class SprintService {
         const join = new Object();
         join[story.$key] = true;
 
-        for (let index = 1; index <= sprint.meetingNumber; index++) {
-          const progress: StoryProgress = Story.createProgress(story, index);
-          Story.setProgress(story, progress);
+        story.history = [];
+        if (sprint.meetingNumber > 0) {
+          for (let index = 1; index <= sprint.meetingNumber; index++) {
+            const progress: StoryProgress = Story.createProgress(story, index);
+            Story.setProgress(story, progress);
+          }
         }
 
         if (sprint.estimate === undefined) {
@@ -95,6 +98,7 @@ export class SprintService {
           filter_status: Sprint.getFilterStatus('assigned'),
           progress: 0,
           duration: sprint.duration,
+          history: story.history
         });
 
         this.database.object('/sprints/' + sprint.$key).update({ estimate: sprint.estimate });

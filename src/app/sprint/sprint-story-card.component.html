@@ -9,13 +9,13 @@
     <canvas #doughnutCanvas></canvas>
     </div>
     <br>
-    <div class="points-label">
-      <h3>{{ progress?.daily }} points completed today</h3>
+    <div class="points-container">
+      <span class="point-value">{{ progress?.daily }} points</span><span class="point-label"> completed today</span>
     </div>  
   </md-card-content>
   <md-card-actions>
 
-    <button md-button (click)="navigateToDetails(story?.$key)" class="detail-button"><md-icon>chevron_right</md-icon> View Details</button>
+    <button md-button (click)="navigateToDetails(story?.$key)" class="detail-button">DETAILS</button>
 
     <span>
     <button md-mini-fab (click)="add()" class="add-button"><md-icon>keyboard_arrow_up</md-icon></button>

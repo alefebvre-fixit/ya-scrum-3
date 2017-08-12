@@ -36,7 +36,7 @@
           </p>
         </md-card-content>
         <md-card-actions>
-          <button md-button (click)="startNewDailyMeeting()">START DAILY MEETING</button>
+          <button md-button (click)="startNewDailyMeeting()" [disabled]="!(stories?.length > 0)">START DAILY MEETING</button>
         </md-card-actions>
       </md-card>
 

@@ -90,10 +90,19 @@ export class Story {
         result.storyId = story.$key;
         result.day = day;
         result.date = new Date();
-        result.previous = 0;
-        result.daily = 0;
-        result.total = 0;
-        result.remaining = story.estimate;
+
+        const previous = Story.getProgress(story, day - 1);
+        if (previous) {
+            result.previous = previous.previous + previous.daily;
+            result.total = previous.previous + previous.daily;
+            result.daily = 0;
+            result.remaining = story.estimate - (previous.previous + previous.daily);
+        } else {
+            result.previous = 0;
+            result.daily = 0;
+            result.total = 0;
+            result.remaining = story.estimate;
+        }
 
         return result;
 
