@@ -1,45 +1,28 @@
 <md-card>
-
   <md-card-header>
     <md-icon md-card-avatar color="primary">today</md-icon>
-    <!-- <div md-card-avatar class="example-header-image"></div> -->
     <md-card-title>SPRINT PROGRESS</md-card-title>
+    <md-card-subtitle>Day {{(sprint)?.meetingNumber}}</md-card-subtitle>
   </md-card-header>
 
   <md-card-content>
-             <td-data-table
-              #dataTable
-              [data]="progressHistory"
-              [columns]="columns"
-              [selectable]="selectable"
-              [clickable]="clickable"
-              [(ngModel)]="selectedRows">
+    <td-data-table #dataTable [data]="progressHistory" [columns]="columns" [selectable]="selectable" [clickable]="clickable"
+      [(ngModel)]="selectedRows">
 
-                <ng-template tdDataTableTemplate="day" let-value="value" let-row="row" let-column="column">
-                  <div layout="row">
-                    #{{value}}
-                  </div>
-                </ng-template>
+      <ng-template tdDataTableTemplate="day" let-value="value" let-row="row" let-column="column">
+        <div layout="row">
+          #{{value}}
+        </div>
+      </ng-template>
+      <ng-template tdDataTableTemplate="trend" let-value="value" let-row="row" let-column="column">
+        <div layout="row">
+          <trend [amount]="row['daily']"></trend>
+        </div>
+      </ng-template>
 
-                <ng-template tdDataTableTemplate="trend" let-value="value" let-row="row" let-column="column">
-                  <div layout="row">
-                    <trend [amount]="row['daily']"></trend>                  
-                  </div>
-                </ng-template>
-
-                <ng-template tdDataTableTemplate="edit" let-value="value" let-row="row" let-column="column">
-                  <div layout="row">
-                    <button md-icon-button (click)="edit(row)"><md-icon>mode_edit</md-icon></button>
-                  </div>
-                </ng-template>
-
-
-
-            </td-data-table> 
-            <div class="md-padding" *ngIf="!dataTable.hasData" layout="row" layout-align="center center">
-              <h3>Story not started yet</h3>
-            </div>
-
-
+    </td-data-table>
+    <div class="md-padding" *ngIf="!dataTable.hasData" layout="row" layout-align="center center">
+      <h3>Story not started yet</h3>
+    </div>
   </md-card-content>
 </md-card>

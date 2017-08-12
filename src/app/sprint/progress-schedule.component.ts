@@ -23,7 +23,6 @@ export class SprintProgressScheduleComponent implements OnInit, OnChanges {
     { name: 'remaining', label: 'Remaining', numeric: true },
     { name: 'daily', label: 'Daily Progress', numeric: true },
     { name: 'trend', label: 'Trend' },
-    { name: 'edit', label: '' },
   ];
 
   selectedRows: any[] = [];

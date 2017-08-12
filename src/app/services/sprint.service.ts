@@ -173,6 +173,7 @@ export class SprintService {
       for (let day = 1; day <= sprint.meetingNumber; day++) {
 
         const sprintProgress = new SprintProgress();
+        sprintProgress.day = day;
         result.push(sprintProgress);
 
         stories.forEach(story => {

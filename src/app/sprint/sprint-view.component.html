@@ -36,7 +36,8 @@
           </p>
         </md-card-content>
         <md-card-actions>
-          <button md-button (click)="startNewDailyMeeting()" [disabled]="!(stories?.length > 0)">START DAILY MEETING</button>
+          <button md-button (click)="startNewDailyMeeting()" [disabled]="!(stories?.length > 0)"><md-icon>today</md-icon> START DAILY MEETING</button>
+          <button md-button (click)="addStory()"> ADD STORY</button>
         </md-card-actions>
       </md-card>
 
@@ -48,20 +49,11 @@
 
 
     <div class="flex-item" fxFlex="50%">
-      <md-card>
-        <md-card-header>
-          <md-card-title>Bundown Chart</md-card-title>
-        </md-card-header>
-        <md-card-content>
-          <canvas *ngIf="lineChartLabels" baseChart width="600" height="300" [datasets]="lineChartData" [labels]="lineChartLabels"
-            [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
-        </md-card-content>
-      </md-card>
+      <sprint-burndown [stories]="stories" [sprint]="sprint"></sprint-burndown>
     </div>
     <div class="flex-item" fxFlex="50%">
       <sprint-progress-schedule [progressHistory]="progressHistory"></sprint-progress-schedule>
     </div>
-
     <div class="flex-item" fxFlex="50%">
     </div>
     <div class="flex-item" fxFlex="100%">
