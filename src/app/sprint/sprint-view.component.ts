@@ -40,9 +40,6 @@ export class SprintViewComponent implements OnInit {
 
           this.storyService.findBySprintId(sprint.$key).subscribe(stories => {
             this.stories = stories;
-            const burndown = this.sprintService.generateBurndowData(sprint, stories);
-            this.lineChartData = burndown.datas;
-            this.lineChartLabels = burndown.labels;
           });
 
           this.storyService.findNewStories().subscribe(stories => {
@@ -75,47 +72,5 @@ export class SprintViewComponent implements OnInit {
   selectStories(stories: Story[]) {
     this.sprintService.assigStoriesToSprint(this.sprint, stories);
   }
-
-
-  public lineChartData: Array<any> = [
-    { data: [], label: 'Actual' },
-    { data: [], label: 'Ideal' },
-  ];
-
-  public lineChartLabels: Array<any>;
-  
-  
-  public lineChartOptions: any = {
-    animation: false,
-    responsive: true
-  };
-  public lineChartColors: Array<any> = [
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    },
-    { // dark grey
-      backgroundColor: 'rgba(77,83,96,0.2)',
-      borderColor: 'rgba(77,83,96,1)',
-      pointBackgroundColor: 'rgba(77,83,96,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(77,83,96,1)'
-    },
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    }
-  ];
-  public lineChartLegend: boolean = false;
-  public lineChartType: string = 'line';
 
 }

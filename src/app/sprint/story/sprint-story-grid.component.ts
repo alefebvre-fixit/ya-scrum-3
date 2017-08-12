@@ -1,6 +1,6 @@
 import { Component, OnInit, Input} from '@angular/core';
 
-import { Story } from '../models';
+import { Story } from '../../models';
 
 @Component({
   selector: 'sprint-story-grid',

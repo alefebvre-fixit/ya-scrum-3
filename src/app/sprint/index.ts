@@ -11,8 +11,8 @@ import { SprintViewComponent } from './sprint-view.component';
 import { SprintEditComponent } from './sprint-edit.component';
 import { SprintStatusComponent } from './sprint-status.component';
 import { SprintProgressScheduleComponent } from './progress-schedule.component';
-import { SprintStoryCardComponent } from './sprint-story-card.component';
-import { SprintStoryGridComponent } from './sprint-story-grid.component';
+import { SprintStoryCardComponent } from './story/sprint-story-card.component';
+import { SprintStoryGridComponent } from './story/sprint-story-grid.component';
 import { SprintBurndownComponent } from './sprint-burndown.component';
 
 import { MaterialModule } from '@angular/material';

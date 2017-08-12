@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 
 import { Chart } from 'chart.js';
 
-import { Story, StoryProgress } from '../models';
-import { StoryService } from '../services';
+import { Story, StoryProgress } from '../../models';
+import { StoryService } from '../../services';
 
 @Component({
   selector: 'sprint-story-card',
