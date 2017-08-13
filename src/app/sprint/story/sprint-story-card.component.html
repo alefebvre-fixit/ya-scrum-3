@@ -1,9 +1,8 @@
 <md-card>
-   <md-card-header>
-    <md-icon md-card-avatar class="icon-card">web</md-icon>
+    <!-- <md-icon md-card-avatar class="icon-card">web</md-icon> -->
     <md-card-title>{{(story)?.name}}</md-card-title>
-    <md-card-subtitle>{{(story)?.type}}</md-card-subtitle>
-  </md-card-header> 
+    <md-card-subtitle>#{{(story)?.type}}</md-card-subtitle>
+  <md-divider></md-divider>
   <md-card-content>
     <div class="progress-chart-container">
     <canvas #doughnutCanvas></canvas>
