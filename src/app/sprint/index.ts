@@ -17,15 +17,13 @@ import { SprintViewComponent } from './sprint-view.component';
 import { SprintEditComponent } from './sprint-edit.component';
 import { SprintStatusComponent } from './sprint-status.component';
 import { SprintProgressScheduleComponent } from './progress-schedule.component';
-import { SprintStoryCardComponent } from './story/sprint-story-card.component';
-import { SprintStoryGridComponent } from './story/sprint-story-grid.component';
-import { SprintStorySelectorComponent } from './story/sprint-story-selector.component';
 import { SprintBurndownComponent } from './sprint-burndown.component';
 
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { StoryModule } from '../story';
+import { SprintStoryModule } from './story';
 
 import { SprintService } from '../services';
 import { SharedModule } from '../shared';
@@ -45,7 +43,8 @@ import { SharedModule } from '../shared';
     CovalentDialogsModule,
     CovalentMessageModule,
     SharedModule,
-    StoryModule
+    StoryModule,
+    SprintStoryModule
   ],
   declarations: [
     SprintCardComponent,
@@ -55,10 +54,7 @@ import { SharedModule } from '../shared';
     SprintStatusComponent,
     SprintEditComponent,
     SprintProgressScheduleComponent,
-    SprintStoryCardComponent,
-    SprintStoryGridComponent,
     SprintBurndownComponent,
-    SprintStorySelectorComponent
   ],
   exports: [
     SprintCardComponent,
@@ -71,7 +67,6 @@ import { SharedModule } from '../shared';
   ],
   entryComponents: [
     SprintEditComponent,
-    SprintStorySelectorComponent
   ],
 })
 
