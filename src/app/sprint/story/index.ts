@@ -22,6 +22,7 @@ import { StoryModule } from '../../story';
 import { SprintService } from '../../services';
 import { SharedModule } from '../../shared';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -37,7 +38,7 @@ import { SharedModule } from '../../shared';
     CovalentDialogsModule,
     CovalentMessageModule,
     SharedModule,
-    StoryModule
+    StoryModule,
   ],
   declarations: [
     SprintStoryCardComponent,

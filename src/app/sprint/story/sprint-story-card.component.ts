@@ -6,6 +6,7 @@ import { Chart } from 'chart.js';
 import { Story, StoryProgress } from '../../models';
 import { StoryService } from '../../services';
 
+
 @Component({
   selector: 'sprint-story-card',
   templateUrl: './sprint-story-card.component.html',
@@ -26,7 +27,6 @@ export class SprintStoryCardComponent implements OnInit, OnChanges {
     private router: Router,
     private storyService: StoryService,
   ) {
-
     Chart.pluginService.register({
       beforeDraw: function (chart) {
         if (chart.config.options.elements.center) {
@@ -136,5 +136,6 @@ export class SprintStoryCardComponent implements OnInit, OnChanges {
   public progressAsPercentage(): number {
     return Story.progressAsPercentage(this.story);
   }
+
 
 }
