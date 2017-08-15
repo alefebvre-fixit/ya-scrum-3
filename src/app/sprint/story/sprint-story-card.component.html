@@ -5,7 +5,11 @@
   <md-divider></md-divider>
   <md-card-content>
     <div class="progress-chart-container">
-    <canvas #doughnutCanvas></canvas>
+    <!-- <canvas #doughnutCanvas></canvas> -->
+
+
+  <ng2-c3 [data]='_data' [chartOptions]='_chartOptions' [configs]='_configs'></ng2-c3>
+
     </div>
     <br>
     <div class="points-container">

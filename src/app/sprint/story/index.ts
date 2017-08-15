@@ -21,6 +21,7 @@ import { StoryModule } from '../../story';
 
 import { SprintService } from '../../services';
 import { SharedModule } from '../../shared';
+import { ChartModule } from '../../charts';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { SharedModule } from '../../shared';
     CovalentMessageModule,
     SharedModule,
     StoryModule,
+    ChartModule,
   ],
   declarations: [
     SprintStoryCardComponent,
