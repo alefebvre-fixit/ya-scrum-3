@@ -3,15 +3,8 @@
     <md-card-title>{{(story)?.name}}</md-card-title>
     <md-card-subtitle>#{{(story)?.type}}</md-card-subtitle>
   <md-divider></md-divider>
+     <div id="{{story.$key}}" ></div> 
   <md-card-content>
-    <div class="progress-chart-container">
-    <!-- <canvas #doughnutCanvas></canvas> -->
-
-
-  <ng2-c3 [data]='_data' [chartOptions]='_chartOptions' [configs]='_configs'></ng2-c3>
-
-    </div>
-    <br>
     <div class="points-container">
       <span class="point-value">{{ progress?.daily }} points</span><span class="point-label"> completed today</span>
     </div>  

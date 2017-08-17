@@ -20,6 +20,8 @@
 
 <div class="sprint-detail-container">
 
+  <div id="chart"></div>
+
   <div class="flex-container" fxLayout fxLayoutWrap="wrap" fxLayout.xs="column" fxLayoutAlign="start start" fxLayoutAlign.xs="start">
 
     <div class="flex-item" fxFlex="70%">
@@ -38,6 +40,7 @@
         <md-card-actions>
           <button md-button (click)="startNewDailyMeeting()" [disabled]="!(stories?.length > 0)"><md-icon>today</md-icon> START DAILY MEETING</button>
           <button md-button (click)="addStory()"> ADD STORY</button>
+          <button md-button (click)="test()"> TEST</button>
         </md-card-actions>
       </md-card>
 

@@ -1,4 +1,4 @@
-import {Component, Input, SimpleChange, ElementRef, ViewEncapsulation, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {Component, Input, SimpleChange, ElementRef, ViewEncapsulation, CUSTOM_ELEMENTS_SCHEMA, OnChanges, OnInit} from '@angular/core';
 //Below Declaration is mandatory
 //As C3 does not export any component
 import * as c3 from 'c3';
@@ -21,13 +21,20 @@ import * as c3 from 'c3';
   inputs:['data', 'chartOptions', 'configs'],
   styles:[`.ng2-c3{ display:block;}`] // This is required for proper positioning of tooltip
 })
-export class Ng2C3 {
+export class Ng2C3 implements OnInit{
+
+  ngOnInit(): void {
+    console.log("OnInit!!!!!");
+    this.testValue = "OnInit";
+  }
 
   // All Inputs for this component declaration
   private data : any; // Configuration for series to be used for generating C3 has to be here
   private chartOptions:any // Includes all the configurations for the chart and also individual chart configurations
   private element : HTMLElement; // Element to which the chart has to be attached to
   private configs:any;
+  private myChart:any = undefined;
+  private testValue = undefined;
 
   // Below configs have been captured from C3 Reference Doc's Need to be updated if in case c3 includes new options
   private c3Configs : Array<string> = ['axis', 'tooltip', 'grid', 'legend', 'zoom', 'regions', 'subchart'];
@@ -47,9 +54,12 @@ export class Ng2C3 {
     // Adding the below line to specify CSS for the ng2-c3 selector
     this.element.className += " ng2-c3";
   }
+  
 
   private __render( inputData:any,  chartOptionsData:any, chartConfigsData:any) : void {
     let _this : Ng2C3 = this;
+
+
     if(this.isValid(inputData)) {
 
       let c3InputData : any = {};
@@ -86,7 +96,15 @@ export class Ng2C3 {
        * }
        * 
        */
-        c3.generate(c3InputData); // Generates the C3 chart for the given configuration and places it inside the directive's element.
+        console.log(_this.myChart);
+        if (_this.myChart === undefined){
+          _this.myChart = "Hello Toi";
+          _this.myChart = c3.generate(c3InputData); // Generates the C3 chart for the given configuration and places it inside the directive's element.
+        } else {
+          _this.myChart.load(c3InputData['data']);
+        }
+        console.log(_this.myChart);
+
     }
 
   }
@@ -128,6 +146,7 @@ export class Ng2C3 {
 
   //Checks for the changes made in the data and re-renders the charts accordingly
   private ngOnChanges( changes: { [propertyName: string]: SimpleChange } ): void {
+    console.log("ngOnChanges!!!!!");
     try {
       this.__render(this.data, this.chartOptions, this.configs);
     } catch(err) {
