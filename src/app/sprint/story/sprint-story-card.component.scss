@@ -3,14 +3,6 @@
     padding-right: 5px;
 }
 
-.add-button{
-    background-color: #10DDC2
-}
-
-.remove-button{
-    background-color: #F57170
-}
-
 .detail-button{
     color: #757575    
 }
@@ -22,7 +14,8 @@
 
 .points-container{
     text-align: center;
-    font-size: 120%;
+    font-size: 110%;
+    margin-bottom: 16px;
 }
 
 .point-value{
@@ -38,11 +31,27 @@
     color: #757575    
 }
 
-.test{
-    width: 200px;
-}
-
 /deep/ .c3-chart-arcs-title{
     font-size: 250%;
     fill: #03a9f4;
+}
+
+.chart-container{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.story-property {
+  font-size: 100%;
+  color: #03a9f4;
+  padding: 4px 8px 4px 8px;
+  border: 1px solid #03a9f4 ;
+  border-radius: 5px;
+  width: 80px;
+  text-align: center;
+  margin-right: 10px
+}
+
+.story-card{
+    //min-width: 400px;
 }
