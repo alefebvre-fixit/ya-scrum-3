@@ -89,6 +89,10 @@ export class SprintStoryCardComponent implements OnInit, OnChanges, AfterViewIni
 
     this.chart = c3.generate({
       bindto: '#' + this.story.$key,
+      size: {
+        width: 250,
+        height: 250
+      },
       data: {
         columns: [
           ['previous', progress.previous],

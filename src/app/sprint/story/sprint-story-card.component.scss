@@ -1,4 +1,17 @@
-.progress-chart-container{
+.story-card{
+    margin: 16px;
+    min-width:300px;
+    max-width:400px;
+}
+
+.story-card-content{
+    height:300px;
+}
+
+
+.chart-container{
+    display: flex;
+    justify-content: center;
     padding-left: 5px;
     padding-right: 5px;
 }
@@ -18,7 +31,7 @@
 }
 
 .point-value{
-    font-size: 120%;
+    font-size: 110%;
     color: #03a9f4;
     font-weight: bold;
 }
@@ -35,9 +48,4 @@
 /deep/ .c3-chart-arcs-title{
     font-size: 250%;
     fill: #03a9f4;
-}
-
-.chart-container{
-    padding-left: 10px;
-    padding-right: 10px;
 }

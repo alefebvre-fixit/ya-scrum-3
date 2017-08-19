@@ -18,9 +18,7 @@
 
 
 
-<div class="sprint-detail-container">
-
-  <div id="chart"></div>
+<div class="page-container">
 
   <div class="flex-container" fxLayout fxLayoutWrap="wrap" fxLayout.xs="column" fxLayoutAlign="start start" fxLayoutAlign.xs="start">
 
@@ -42,34 +40,24 @@
           <button md-button (click)="addStory()"> ADD STORY</button>
         </md-card-actions>
       </md-card>
-
-
     </div>
     <div class="flex-item" fxFlex="30%">
       <sprint-status [sprint]="sprint"></sprint-status>
     </div>
 
-    
 
-    <div class="flex-item" fxFlex="100%">
+  
+  </div>
 
-      <md-card>
-        <md-tab-group>
-          <md-tab label="Burndown">
-            <sprint-burndown [stories]="stories" [sprint]="sprint"></sprint-burndown>
-          </md-tab>
-          <md-tab label="Progress Data">
-            <sprint-progress-schedule [progressHistory]="progressHistory"></sprint-progress-schedule>
-          </md-tab>
-        </md-tab-group>
-      </md-card>
-    </div>
-    <div class="flex-item" fxFlex="100%">
+      <section-title>  Burndown</section-title>
+      <!-- <sprint-burndown [stories]="stories" [sprint]="sprint"></sprint-burndown> -->
 
       <section-title> <section-title-highlight>{{ stories?.length }}</section-title-highlight> Stories</section-title>
-
-
       <sprint-story-grid [stories]="stories"></sprint-story-grid>
-    </div>
-  </div>
+
+      <section-title> <section-title-highlight>{{ progressHistory?.length }}</section-title-highlight> Days Schedule</section-title>
+      <sprint-progress-schedule [progressHistory]="progressHistory"></sprint-progress-schedule>
+
+
+
 </div>

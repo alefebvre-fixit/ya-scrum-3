@@ -1,4 +1,4 @@
-<md-card>
+<md-card class="story-card">
     <md-card-title>{{(story)?.name}}</md-card-title>
     <md-card-subtitle>
       <property-tag>#{{(story)?.type}}</property-tag>
@@ -6,11 +6,13 @@
       <property-tag>{{(story)?.estimate}} points</property-tag>
     </md-card-subtitle>
     <!-- <md-divider></md-divider>       -->
-  <div class="chart-container">
-    <div id="{{story.$key}}"></div> 
-  </div>
-  <div class="points-container">
-    <span class="point-value">{{ progress?.daily }} points</span><br><span class="point-label"> completed today</span>
+  <div class="story-card-content">  
+    <div class="chart-container">
+      <div id="{{story.$key}}"></div> 
+    </div>
+    <div class="points-container">
+      <span class="point-value">{{ progress?.daily }} points</span><br><span class="point-label"> completed today</span>
+    </div> 
   </div>
   <md-card-actions>
     <button md-button (click)="navigateToDetails(story?.$key)" class="detail-button">DETAILS</button>
