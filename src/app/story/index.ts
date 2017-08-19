@@ -5,8 +5,6 @@ import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 
-import { ChartsModule } from 'ng2-charts/ng2-charts';
-
 import { CovalentDataTableModule } from '@covalent/core';
 import { CovalentCommonModule } from '@covalent/core';
 import { CovalentSearchModule } from '@covalent/core';
@@ -37,7 +35,6 @@ import { StoryService } from '../services';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    ChartsModule,
     CovalentCommonModule,
     CovalentSearchModule,
     CovalentDataTableModule,

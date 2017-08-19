@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, AfterViewInit, SimpleChanges, Input } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 
@@ -6,84 +6,89 @@ import { MdDialog, MdDialogRef } from '@angular/material';
 
 import { StoryService, SprintService, UserService } from '../services';
 import { Story, StoryProgress, Sprint, SprintProgress, User } from '../models';
-import { SprintEditComponent } from './sprint-edit.component';
+
+import * as c3 from 'c3';
 
 @Component({
   selector: 'sprint-burndown',
   templateUrl: './sprint-burndown.component.html',
   styleUrls: ['./sprint-burndown.component.scss'],
 })
-export class SprintBurndownComponent implements OnInit, OnChanges {
+export class SprintBurndownComponent implements OnInit, OnChanges, AfterViewInit {
+
 
   @Input() sprint: Sprint;
   @Input() stories: Story[];
 
-  public lineChartData: Array<any> = [
-    { data: [], label: 'Actual' },
-    { data: [], label: 'Ideal' },
-  ];
-
-  public lineChartLabels: Array<any>;
-  public lineChartOptions: any = {
-    animation: false,
-    responsive: true
-  };
-  public lineChartColors: Array<any> = [
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    },
-    { // dark grey
-      backgroundColor: 'rgba(77,83,96,0.2)',
-      borderColor: 'rgba(77,83,96,1)',
-      pointBackgroundColor: 'rgba(77,83,96,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(77,83,96,1)'
-    },
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    }
-  ];
-
-  public lineChartLegend: boolean = false;
-  public lineChartType: string = 'line';
+  private chart;
 
   constructor(
-    private route: ActivatedRoute,
     private sprintService: SprintService,
-    public storyService: StoryService,
-    private userService: UserService,
-    private dialog: MdDialog
   ) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.generateBurndowChart();
+    this.updateChart();
   }
 
-  ngOnInit() {
-    this.generateBurndowChart();
+  ngAfterViewInit() {
+    this.updateChart();
   }
 
-  generateBurndowChart() {
-    if (this.sprint && this.stories) {
-      const burndown = this.sprintService.generateBurndowData(this.sprint, this.stories);
-      this.lineChartData = burndown.datas;
-      this.lineChartLabels = burndown.labels;
+  ngOnInit(): void {
+    this.updateChart();
+  }
+
+
+  private updateChart() {
+    if (this.chart === undefined) {
+      this.createChart();
+    } else {
+      this.chart.load({
+        columns: this.generateChartColumns(),
+      });
     }
   }
 
+  createChart() {
 
+    if (this.sprint && this.stories) {
+
+      this.chart = c3.generate({
+        bindto: '#burndownChart',
+        data: {
+          xs: {
+            'actual': 'x1',
+            'ideal': 'x2',
+          },
+          colors: {
+            actual: '#1565c0',
+            ideal: '#757575',
+          },
+          columns: this.generateChartColumns(),
+        },
+        legend: {
+          show: false
+        },
+        point: {
+          show: false
+        }
+      });
+    }
+
+  }
+
+  generateChartColumns(): any {
+    const columns = [];
+
+    columns[0] = ['x1'].concat(this.sprintService.generateLabels(this.sprint));
+    columns[1] = ['x2'].concat(this.sprintService.generateLabels(this.sprint));
+
+    columns[2] = ['ideal'].concat(this.sprintService.generateIdealCurve(this.sprint));
+    columns[3] = ['actual'].concat(this.sprintService.generateActualCurve(this.sprint, this.stories));
+
+    return columns;
+  }
 
 
 }

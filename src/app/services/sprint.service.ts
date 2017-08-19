@@ -221,19 +221,19 @@ export class SprintService {
     return result;
   }
 
-  private generateActualCurve(sprint: Sprint, stories: Story[]): any {
-    const result = { data: [], label: 'Actual' };
+  public generateActualCurve(sprint: Sprint, stories: Story[]): Array<any> {
+    const result = [];
 
-    result.data[0] = sprint.estimate;
+    result[0] = sprint.estimate;
 
     for (let day = 1; day <= sprint.duration; day++) {
       stories.forEach(story => {
         const progress: StoryProgress = Story.getProgress(story, day);
         if (progress !== undefined) {
-          if (result.data[day]) {
-            result.data[day] += progress.remaining;
+          if (result[day]) {
+            result[day] += progress.remaining;
           } else {
-            result.data[day] = progress.remaining;
+            result[day] = progress.remaining;
           }
         }
       });
@@ -242,20 +242,20 @@ export class SprintService {
     return result;
   }
 
-  private generateIdealCurve(sprint: Sprint): any {
+  public generateIdealCurve(sprint: Sprint): Array<any> {
 
-    const result = { data: [], label: 'Ideal' };
-    result.data[0] = sprint.estimate;
+    const result = [];
+    result[0] = sprint.estimate;
 
     for (let day = 1; day <= sprint.duration; day++) {
       const remaining = sprint.estimate - ((sprint.estimate * day) / sprint.duration);
-      result.data[day] = remaining;
+      result[day] = remaining;
     }
 
     return result;
   }
 
-  private generateLabels(sprint: Sprint): Array<string> {
+  public generateLabels(sprint: Sprint): Array<string> {
     const result: Array<string> = new Array<string>();
     result.push('0');
 

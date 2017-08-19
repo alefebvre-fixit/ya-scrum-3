@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, OnChanges, ViewChild, SimpleChanges, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Chart } from 'chart.js';
-
 import { Story, StoryProgress } from '../../models';
 import { StoryService } from '../../services';
 import * as c3 from 'c3';
@@ -18,11 +16,6 @@ export class SprintStoryCardComponent implements OnInit, OnChanges, AfterViewIni
   @Input() story: Story;
 
   private progress: StoryProgress;
-
-  private _data: any;
-  private _chartOptions: any;
-  private _configs: any;
-
   private chart;
 
   constructor(

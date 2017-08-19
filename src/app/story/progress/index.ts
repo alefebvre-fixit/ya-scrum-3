@@ -6,8 +6,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CovalentDataTableModule } from '@covalent/core';
 
-import { ChartsModule } from 'ng2-charts/ng2-charts';
-
 import { StoryProgressScheduleComponent} from './progress-schedule.component';
 import { ProgressEditComponent} from './progress-edit.component';
 import { ProgressViewComponent} from './progress-view.component';
@@ -22,7 +20,6 @@ import { SharedModule } from '../../shared';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    ChartsModule,
     CovalentDataTableModule,
     SharedModule,
   ],

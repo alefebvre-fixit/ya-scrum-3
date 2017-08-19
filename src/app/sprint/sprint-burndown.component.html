@@ -1,11 +1,5 @@
 <md-card>
-  <md-card-header>
-    <md-icon md-card-avatar color="primary">trending_up</md-icon>
-    <md-card-title>BURNDOWN CHART</md-card-title>
-    <md-card-subtitle>Day {{(sprint)?.meetingNumber}}</md-card-subtitle>
-  </md-card-header>
-  <md-card-content>
-    <canvas *ngIf="lineChartLabels" baseChart width="600" height="300" [datasets]="lineChartData" [labels]="lineChartLabels"
-      [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
-  </md-card-content>
+    <md-card-content>
+<div id="burndownChart"></div>
+    </md-card-content> 
 </md-card>
