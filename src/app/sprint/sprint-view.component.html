@@ -40,7 +40,6 @@
         <md-card-actions>
           <button md-button (click)="startNewDailyMeeting()" [disabled]="!(stories?.length > 0)"><md-icon>today</md-icon> START DAILY MEETING</button>
           <button md-button (click)="addStory()"> ADD STORY</button>
-          <button md-button (click)="test()"> TEST</button>
         </md-card-actions>
       </md-card>
 
@@ -50,12 +49,20 @@
       <sprint-status [sprint]="sprint"></sprint-status>
     </div>
 
+    
 
-    <div class="flex-item" fxFlex="50%">
-      <sprint-burndown [stories]="stories" [sprint]="sprint"></sprint-burndown>
-    </div>
-    <div class="flex-item" fxFlex="50%">
-      <sprint-progress-schedule [progressHistory]="progressHistory"></sprint-progress-schedule>
+    <div class="flex-item" fxFlex="100%">
+
+      <md-card>
+        <md-tab-group>
+          <md-tab label="Burndown">
+            <sprint-burndown [stories]="stories" [sprint]="sprint"></sprint-burndown>
+          </md-tab>
+          <md-tab label="Progress Data">
+            <sprint-progress-schedule [progressHistory]="progressHistory"></sprint-progress-schedule>
+          </md-tab>
+        </md-tab-group>
+      </md-card>
     </div>
     <div class="flex-item" fxFlex="100%">
       <sprint-story-grid [stories]="stories"></sprint-story-grid>

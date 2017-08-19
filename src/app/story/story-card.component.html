@@ -1,25 +1,44 @@
 <md-card class="story-card">
-  <md-card-header>
-    <div md-card-avatar class="example-header-image"></div>
     <md-card-title>{{(story)?.name}}</md-card-title>
-    <md-card-subtitle>Dog Breed</md-card-subtitle>
-  </md-card-header>
-  <img md-card-image src="assets/img/themes/blueprint-large.jpg">
-  <md-card-content>
-    <p>
-      {{(story)?.description}}
-    </p>
-
-    <section class="example-section">
-      
+    <md-card-subtitle>
+      <property-tag>#{{(story)?.type}}</property-tag>
+      <property-tag>{{(story)?.priority}} priority</property-tag>
+      <property-tag>{{(story)?.estimate}} points</property-tag>
+    </md-card-subtitle>
+      <section class="example-section">      
       <md-progress-bar
           class="example-margin"
           [mode]="'determinate'"
           [value]="progressAsPercentage()">
       </md-progress-bar>
-
     </section>
+  <md-card-content>
+    <p>
+      {{(story)?.description}}
+    </p>
   </md-card-content>
+
+    <md-divider></md-divider>
+    <md-list>
+      <md-list-item >
+        <ngu-letter-avatar 
+        md-list-avatar avatar-data='{{story?.name}}' 
+        avatar-shape='round' 
+        avatarborder='true' 
+        avatar-height="40"
+        avatar-width="40"
+        avatar-font-size="20"	>
+      </ngu-letter-avatar>
+        <h3 md-line> {{story?.name}} </h3>
+        <p md-line>
+          <span> {{story?.name}} </span>
+          <span class="demo-2"> -- {{story?.name}} </span>
+        </p>
+      </md-list-item>
+    </md-list>
+
+
+
   <md-card-actions>
     <button md-button (click)="navigateToDetails(story?.$key)">LEARN MORE</button>
   </md-card-actions>

@@ -14,16 +14,17 @@
 
 .points-container{
     text-align: center;
-    font-size: 110%;
     margin-bottom: 16px;
 }
 
 .point-value{
+    font-size: 120%;
     color: #03a9f4;
     font-weight: bold;
 }
 
 .point-label{
+    font-size: 100%;
     color: #757575    
 }
 
@@ -39,19 +40,4 @@
 .chart-container{
     padding-left: 10px;
     padding-right: 10px;
-}
-
-.story-property {
-  font-size: 100%;
-  color: #03a9f4;
-  padding: 4px 8px 4px 8px;
-  border: 1px solid #03a9f4 ;
-  border-radius: 5px;
-  width: 80px;
-  text-align: center;
-  margin-right: 10px
-}
-
-.story-card{
-    //min-width: 400px;
 }
