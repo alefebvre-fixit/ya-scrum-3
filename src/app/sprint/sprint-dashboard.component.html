@@ -4,18 +4,18 @@
   <button md-button (click)="addSprint()">ADD</button>
 </md-toolbar>
 
-<md-tab-group>
 
-  <md-tab label="In Progress">
-    <sprint-grid [sprints]="sprintsProgress"></sprint-grid>
-  </md-tab>
+<div class="page-container">
 
-  <md-tab label="Pending">
-    <sprint-grid [sprints]="sprintsPending"></sprint-grid>
-  </md-tab>
+  <section-title> <section-title-highlight>{{ sprintsProgress?.length }}</section-title-highlight> sprints in progress</section-title>
+  <sprint-grid [sprints]="sprintsProgress"></sprint-grid>
 
-  <md-tab label="Closed">
-    <sprint-grid [sprints]="sprintsClosed"></sprint-grid>
-  </md-tab>
+  <section-title> <section-title-highlight>{{ sprintsPending?.length }}</section-title-highlight> upcoming sprints</section-title>
+  <sprint-grid [sprints]="sprintsPending"></sprint-grid>
 
-</md-tab-group>
+  <section-title> <section-title-highlight>{{ sprintsPending?.length }}</section-title-highlight> sprints completed</section-title>
+  <sprint-grid [sprints]="sprintsClosed"></sprint-grid>
+
+
+</div>  
+

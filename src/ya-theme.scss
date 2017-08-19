@@ -14,6 +14,14 @@ $warn:    mat-palette($mat-red, 600);
 
 $theme: mat-light-theme($primary, $accent, $warn);
 
+
+
+$title-grey : #757575;
+$background-grey: #f6f6f6;
+
+$blue-light: #03a9f4;
+$blue-dark: #1565c0;
+
 @include angular-material-theme($theme);
 @include covalent-theme($theme);
 

@@ -1,9 +1,3 @@
-<md-card>
-    <md-card-header>
-        <md-card-title>Sprint Stories</md-card-title>
-    </md-card-header>
-</md-card>
-
 <div class="flex-container" fxLayout fxLayoutWrap="wrap" fxLayout.xs="column" fxLayoutAlign="start start" fxLayoutAlign.xs="start">
     <div class="flex-item" fxFlex="25%" *ngFor="let story of stories;trackBy: trackStory">
         <sprint-story-card [story]="story"></sprint-story-card>

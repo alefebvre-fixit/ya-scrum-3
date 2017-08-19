@@ -4,18 +4,15 @@
   <button md-button (click)="addStory()">ADD</button>
 </md-toolbar>
 
-<md-tab-group>
+<div class="page-container">
 
-  <md-tab label="In Progress">
-    <story-grid [stories]="storiesInProgress"></story-grid>
-  </md-tab>
+  <section-title> <section-title-highlight>{{ storiesInProgress?.length }}</section-title-highlight> story in progress</section-title>
+  <story-grid [stories]="storiesInProgress"></story-grid>
 
-  <md-tab label="Pending">
-    <story-grid [stories]="storiesPending"></story-grid>
-  </md-tab>
+  <section-title> <section-title-highlight>{{ storiesPending?.length }}</section-title-highlight> new story</section-title>
+  <story-grid [stories]="storiesPending"></story-grid>
 
-  <md-tab label="Closed">
-    <story-grid [stories]="storiesClosed"></story-grid>
-  </md-tab>
+  <section-title> <section-title-highlight>{{ storiesClosed?.length }}</section-title-highlight> story closed</section-title>
+  <story-grid [stories]="storiesClosed"></story-grid>
 
-</md-tab-group>
+</div>

@@ -1,0 +1,19 @@
+@import '../../../ya-theme';
+
+
+  h1, h2 {
+    color: $title-grey;
+    span{
+      color: $blue-light;
+    }
+  }
+
+  span{
+    color: $blue-light;
+  }
+
+  /deep/ section-title-highlight{
+    color: $blue-light; 
+  }
+
+  

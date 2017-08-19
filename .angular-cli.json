@@ -19,8 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css",
         "ya-theme.scss",
+        "styles.scss",
         "../node_modules/@covalent/core/common/platform.scss",
         "../node_modules/c3/c3.min.css"
 
