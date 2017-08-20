@@ -44,13 +44,12 @@
     <div class="flex-item" fxFlex="30%">
       <sprint-status [sprint]="sprint"></sprint-status>
     </div>
-
-
   
   </div>
-
       <section-title>Burndown Chart: <section-title-highlight>{{(sprint)?.meetingNumber}} days</section-title-highlight> </section-title>
-      <sprint-burndown [stories]="stories" [sprint]="sprint"></sprint-burndown>
+      <div class="burndown-container">
+        <sprint-burndown [stories]="stories" [sprint]="sprint"></sprint-burndown>
+      </div>
 
       <section-title>Sprint Backlog: <section-title-highlight>{{ stories?.length }} stories</section-title-highlight> </section-title>
       <sprint-story-grid [stories]="stories"></sprint-story-grid>
