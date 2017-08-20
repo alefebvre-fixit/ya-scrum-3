@@ -66,8 +66,8 @@ export class SprintBurndownComponent implements OnInit, OnChanges, AfterViewInit
             ideal: '#cdcdcd',
           },
           types: {
-              ideal: 'area',
-              actual: 'spline',
+              ideal: 'area-spline',
+              actual: 'area-spline',
           },
           columns: this.generateChartColumns(),
         },
