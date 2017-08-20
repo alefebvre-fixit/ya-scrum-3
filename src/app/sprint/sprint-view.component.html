@@ -23,7 +23,6 @@
   <div class="flex-container" fxLayout fxLayoutWrap="wrap" fxLayout.xs="column" fxLayoutAlign="start start" fxLayoutAlign.xs="start">
 
     <div class="flex-item" fxFlex="70%">
-
       <md-card class="sprint-card">
         <md-card-header>
           <md-card-title>{{(sprint)?.name}}</md-card-title>
@@ -44,12 +43,19 @@
     <div class="flex-item" fxFlex="30%">
       <sprint-status [sprint]="sprint"></sprint-status>
     </div>
-  
-  </div>
+    <div class="flex-item" fxFlex="100%">
       <section-title>Burndown Chart: <section-title-highlight>{{(sprint)?.meetingNumber}} days</section-title-highlight> </section-title>
-      <div class="burndown-container">
-        <sprint-burndown [stories]="stories" [sprint]="sprint"></sprint-burndown>
-      </div>
+    </div>
+    <div class="flex-item" fxFlex="10%">
+    </div>
+    <div class="flex-item" fxFlex="80%">
+      <sprint-burndown [stories]="stories" [sprint]="sprint"></sprint-burndown>
+    </div>
+    <div class="flex-item" fxFlex="10%">
+    </div>
+
+
+  </div>
 
       <section-title>Sprint Backlog: <section-title-highlight>{{ stories?.length }} stories</section-title-highlight> </section-title>
       <sprint-story-grid [stories]="stories"></sprint-story-grid>

@@ -56,10 +56,6 @@ export class SprintBurndownComponent implements OnInit, OnChanges, AfterViewInit
 
       this.chart = c3.generate({
         bindto: '#burndownChart',
-        size: {
-          width: 850,
-          height: 400,
-        },
         data: {
           xs: {
             'actual': 'x1',
