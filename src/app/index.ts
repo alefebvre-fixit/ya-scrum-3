@@ -36,13 +36,8 @@ import { SprintModule } from './sprint';
 
 import { StoryService, SprintService, UserService } from './services';
 
-export const firebaseConfig = {
-    apiKey: 'AIzaSyBRVBLO8VXkurLDQR1eVcVXOmNXyt8SCoc',
-    authDomain: 'ya-scrum.firebaseapp.com',
-    databaseURL: 'https://ya-scrum.firebaseio.com',
-    storageBucket: 'ya-scrum.appspot.com',
-    messagingSenderId: '873493349647'
-};
+import { environment } from '../environments/environment';
+
 
 @NgModule({
   declarations: [
@@ -68,7 +63,7 @@ export const firebaseConfig = {
     MdNativeDateModule,
     CovalentLayoutModule,
     CovalentMediaModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     SprintModule,
     StoryModule,

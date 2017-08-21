@@ -1,3 +1,10 @@
 export const environment = {
-  production: true
+  production: true,
+  firebaseConfig: {
+    apiKey: 'AIzaSyBRVBLO8VXkurLDQR1eVcVXOmNXyt8SCoc',
+    authDomain: 'ya-scrum.firebaseapp.com',
+    databaseURL: 'https://ya-scrum.firebaseio.com',
+    storageBucket: 'ya-scrum.appspot.com',
+    messagingSenderId: '873493349647'
+  }
 };
