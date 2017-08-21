@@ -2,12 +2,11 @@
   <md-card-header>
     <md-icon md-card-avatar color="primary">today</md-icon>
     <md-card-title>SPRINT PROGRESS</md-card-title>
-    <md-card-subtitle>Day {{(sprint)?.meetingNumber}}</md-card-subtitle>
+    <md-card-subtitle>Day x</md-card-subtitle>
   </md-card-header>
 
   <md-card-content>
-    <td-data-table #dataTable [data]="progressHistory" [columns]="columns" [selectable]="selectable" [clickable]="clickable"
-      [(ngModel)]="selectedRows">
+    <td-data-table #dataTable [data]="progressHistory" [columns]="columns">
 
       <ng-template tdDataTableTemplate="day" let-value="value" let-row="row" let-column="column">
         <div layout="row">

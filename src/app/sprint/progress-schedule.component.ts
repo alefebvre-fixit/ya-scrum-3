@@ -25,8 +25,6 @@ export class SprintProgressScheduleComponent implements OnInit, OnChanges {
     { name: 'trend', label: 'Trend' },
   ];
 
-  selectedRows: any[] = [];
-
   constructor(
     public dialog: MdDialog
   ) {
@@ -37,13 +35,5 @@ export class SprintProgressScheduleComponent implements OnInit, OnChanges {
 
   ngOnChanges(): void {
   }
-
-  private extractData(story: Story) {
-    if (story) {
-      this.data = story.history;
-    }
-  }
-
-
 
 }

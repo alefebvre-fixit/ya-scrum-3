@@ -1,7 +1,7 @@
 <h2 md-dialog-title>{{story?.name}} - Day {{progress?.day}}</h2>
 
 <md-dialog-content>
-    <form [formGroup]="storyForm" (ngSubmit)="submit()" autocomplete="off" novalidate>
+    <form [formGroup]="storyForm" autocomplete="off" novalidate>
 
         <p>
             <md-input-container class="input-full-width">
@@ -49,7 +49,7 @@
     </form>
 </md-dialog-content>
 
-<md-dialog-actions [attr.align]="actionsAlignment">
+<md-dialog-actions>
 
     <button md-button color="primary" (click)="apply()">Apply</button>
     <button md-button color="secondary" md-dialog-close>Close</button>

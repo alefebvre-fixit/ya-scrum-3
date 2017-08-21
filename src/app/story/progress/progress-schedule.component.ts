@@ -29,8 +29,6 @@ export class StoryProgressScheduleComponent implements OnInit, OnChanges {
     { name: 'edit', label: '' },
   ];
 
-  selectedRows: any[] = [];
-
   constructor(
     public dialog: MdDialog
   ) {
@@ -53,12 +51,11 @@ export class StoryProgressScheduleComponent implements OnInit, OnChanges {
   private edit(progress: StoryProgress) {
     console.log(progress);
 
-    const dialogRef = this.dialog.open(ProgressEditComponent, { width: '600px' });
+    const dialogRef = this.dialog.open(ProgressEditComponent, { width: '800px' });
     dialogRef.componentInstance.story = this.story;
     dialogRef.componentInstance.progress = progress;
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('after close');
     });
 
   }

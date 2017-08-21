@@ -2,7 +2,7 @@
 <h2 md-dialog-title *ngIf="!story?.$key">Create new Story</h2>
 
 <md-dialog-content>
-    <form [formGroup]="storyForm" (ngSubmit)="submit()" autocomplete="off" novalidate >
+    <form [formGroup]="storyForm" autocomplete="off" novalidate >
         <p>
         <md-input-container class="input-full-width">
             <input mdInput placeholder="Title" formControlName="name">

@@ -16,7 +16,7 @@ import { Story, StoryProgress, Sprint, SprintProgress, User } from '../../models
 export class ProgressViewComponent implements OnInit, OnChanges {
 
   @Input() story: Story;
-  private progress: StoryProgress;
+  progress: StoryProgress;
 
   // Doughnut
   public doughnutChartLabels: string[] = ['previous', 'daily', 'remaining'];

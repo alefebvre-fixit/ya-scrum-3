@@ -15,7 +15,7 @@ export class SprintStoryCardComponent implements OnInit, OnChanges, AfterViewIni
 
   @Input() story: Story;
 
-  private progress: StoryProgress;
+  progress: StoryProgress;
   private chart;
 
   constructor(
