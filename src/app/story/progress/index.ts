@@ -11,7 +11,6 @@ import { ProgressEditComponent} from './progress-edit.component';
 import { ProgressViewComponent} from './progress-view.component';
 
 import { SharedModule } from '../../shared';
-//import { StoryService } from './../services';
 
 @NgModule({
   imports: [
@@ -37,7 +36,6 @@ import { SharedModule } from '../../shared';
     ProgressEditComponent,
   ],
   providers: [
-    //StoryService
   ]
 })
 
