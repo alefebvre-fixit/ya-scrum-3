@@ -3,7 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ProductBacklogComponent, StoryViewComponent } from './story';
 import { SprintDashboardComponent, SprintViewComponent } from './sprint';
+
 import { UserListComponent } from './user';
+
+//import { LoginPageComponent } from './login';
+
+
 
 // Route Configuration
 export const ROUTES: Routes = [
@@ -13,6 +18,10 @@ export const ROUTES: Routes = [
     redirectTo: 'stories',
     pathMatch: 'full'
   },
+  // {
+  //   path: 'login',
+  //   component: LoginPageComponent
+  // },
   {
     path: 'users',
     component: UserListComponent
