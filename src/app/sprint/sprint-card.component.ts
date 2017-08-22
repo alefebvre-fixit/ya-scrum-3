@@ -20,4 +20,8 @@ export class SprintCardComponent {
     this.router.navigate([`/sprints/${id}`]);
   }
 
+  public progressAsPercentage(): number {
+    return Sprint.progressAsPercentage(this.sprint);
+  }
+
 }

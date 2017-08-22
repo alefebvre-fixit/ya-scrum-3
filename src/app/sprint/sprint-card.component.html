@@ -1,15 +1,33 @@
 <md-card class="sprint-card">
-  <md-card-header>
-    <div md-card-avatar class="example-header-image"></div>
-    <md-card-title>{{(sprint)?.name}}</md-card-title>
-    <md-card-subtitle>Dog Breed</md-card-subtitle>
-  </md-card-header>
+  <div class="sprint-title"><h3>{{sprint?.name}}</h3></div>
+
   <img md-card-image src="assets/img/themes/blueprint-large.jpg">
+  <md-list>
+    <md-list-item>
+      <ngu-letter-avatar md-list-avatar avatar-data='{{sprint?.name}}' avatar-shape='round' avatarborder='true' avatar-height="40"
+        avatar-width="40" avatar-font-size="20">
+      </ngu-letter-avatar>
+      <h3 md-line> {{sprint?.name}} </h3>
+      <p md-line>
+        <span> {{sprint?.name}} </span>
+        <span> -- {{sprint?.name}} </span>
+      </p>
+    </md-list-item>
+  </md-list>  
   <md-card-content>
-    <p>
-      {{(sprint)?.description}}
-    </p>
+    <section>
+      <md-progress-bar [mode]="'determinate'" [value]="progressAsPercentage()"></md-progress-bar>
+    </section>
+
+    <br>
+    5 stories
+    <br>
+    3 days to go
+    <br>
+    90% completed
+
   </md-card-content>
+
   <md-card-actions>
     <button md-button (click)="navigateToDetails(sprint?.$key)">LEARN MORE</button>
   </md-card-actions>

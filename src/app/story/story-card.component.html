@@ -5,9 +5,8 @@
     <property-tag>{{(story)?.priority}} priority</property-tag>
     <property-tag>{{(story)?.estimate}} points</property-tag>
   </md-card-subtitle>
-  <section class="example-section">
-    <md-progress-bar class="example-margin" [mode]="'determinate'" [value]="progressAsPercentage()">
-    </md-progress-bar>
+  <section>
+    <md-progress-bar [mode]="'determinate'" [value]="progressAsPercentage()"></md-progress-bar>
   </section>
   <div class="story-card-content">
     <md-card-content>
