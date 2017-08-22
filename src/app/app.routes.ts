@@ -7,8 +7,7 @@ import { SprintDashboardComponent, SprintViewComponent } from './sprint';
 import { UserListComponent } from './user';
 
 import { LoginPageComponent } from './login';
-
-
+import { AuthGuard } from './auth.service';
 
 // Route Configuration
 export const ROUTES: Routes = [
@@ -24,22 +23,28 @@ export const ROUTES: Routes = [
   },
   {
     path: 'users',
-    component: UserListComponent
+    component: UserListComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'sprints',
-    component: SprintDashboardComponent
+    component: SprintDashboardComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'sprints/:id',
-    component: SprintViewComponent
+    component: SprintViewComponent,
+    canActivate: [AuthGuard]
   },
-  { path: 'stories',
-    component: ProductBacklogComponent
+  {
+    path: 'stories',
+    component: ProductBacklogComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'stories/:id',
-    component: StoryViewComponent
+    component: StoryViewComponent,
+    canActivate: [AuthGuard]
   },
 
 ];

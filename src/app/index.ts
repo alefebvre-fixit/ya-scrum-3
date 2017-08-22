@@ -35,6 +35,7 @@ import { LoginModule } from './login';
 import { UserModule } from './user';
 import { StoryModule } from './story';
 import { SprintModule } from './sprint';
+import { AuthGuard } from './auth.service';
 
 import { StoryService, SprintService, UserService } from './services';
 
@@ -75,7 +76,7 @@ import { environment } from '../environments/environment';
     RouterModule.forRoot(ROUTES),
 
   ],
-  providers: [UserService, StoryService, SprintService],
+  providers: [UserService, StoryService, SprintService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
