@@ -6,7 +6,7 @@ import { SprintDashboardComponent, SprintViewComponent } from './sprint';
 
 import { UserListComponent } from './user';
 
-//import { LoginPageComponent } from './login';
+import { LoginPageComponent } from './login';
 
 
 
@@ -18,10 +18,10 @@ export const ROUTES: Routes = [
     redirectTo: 'stories',
     pathMatch: 'full'
   },
-  // {
-  //   path: 'login',
-  //   component: LoginPageComponent
-  // },
+  {
+    path: 'login',
+    component: LoginPageComponent
+  },
   {
     path: 'users',
     component: UserListComponent

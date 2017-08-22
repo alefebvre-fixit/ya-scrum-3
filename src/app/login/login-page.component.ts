@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'login-page',
@@ -7,11 +8,20 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class LoginPageComponent implements OnInit {
 
-  constructor(
-  ) {
-  }
+  username: string;
+  password: string;
+
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
   }
+
+
+
+  login(): void {
+    alert('Mock log in as ' + this.username);
+    this.router.navigate(['/']);
+  }
+
 
 }

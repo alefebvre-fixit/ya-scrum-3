@@ -30,6 +30,7 @@ import {CovalentMediaModule} from '@covalent/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
+import { LoginModule } from './login';
 import { UserModule } from './user';
 import { StoryModule } from './story';
 import { SprintModule } from './sprint';
@@ -68,6 +69,7 @@ import { environment } from '../environments/environment';
     SprintModule,
     StoryModule,
     UserModule,
+    LoginModule,
     RouterModule.forRoot(ROUTES),
 
   ],

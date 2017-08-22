@@ -9,6 +9,8 @@ import { CovalentPagingModule } from '@covalent/core';
 import { CovalentDialogsModule } from '@covalent/core';
 import { CovalentMessageModule } from '@covalent/core';
 
+import { NguUtilityModule } from 'ngu-utility/ngu-utility.module'; // <-- import the module
+
 import { SprintCardComponent } from './sprint-card.component';
 import { SprintGridComponent } from './sprint-grid.component';
 import { SprintDashboardComponent } from './sprint-dashboard.component';
@@ -40,6 +42,7 @@ import { SharedModule } from '../shared';
     CovalentPagingModule,
     CovalentDialogsModule,
     CovalentMessageModule,
+    NguUtilityModule,
     SharedModule,
     StoryModule,
     SprintStoryModule
