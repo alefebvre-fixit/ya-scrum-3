@@ -5,7 +5,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { LoginPageComponent } from './login-page.component';
 
 @NgModule({
   imports: [
@@ -16,10 +15,8 @@ import { LoginPageComponent } from './login-page.component';
     ReactiveFormsModule,
   ],
   declarations: [
-    LoginPageComponent
   ],
   exports: [
-    LoginPageComponent
   ],
   entryComponents: [],
   providers: [
@@ -27,5 +24,3 @@ import { LoginPageComponent } from './login-page.component';
 })
 
 export class LoginModule { }
-
-export { LoginPageComponent } from './login-page.component';

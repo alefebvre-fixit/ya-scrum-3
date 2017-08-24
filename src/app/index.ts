@@ -72,7 +72,6 @@ import { environment } from '../environments/environment';
     SprintModule,
     StoryModule,
     UserModule,
-    LoginModule,
     RouterModule.forRoot(ROUTES),
 
   ],

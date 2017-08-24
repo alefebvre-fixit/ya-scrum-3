@@ -21,3 +21,15 @@ export class User {
     }
 
 }
+
+export class SignIn {
+    email: string;
+    password: string;
+}
+
+export class SignUp {
+    name: string;
+    email: string;
+    password: string;
+}
+

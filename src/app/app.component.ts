@@ -24,7 +24,7 @@ export class AppComponent {
   signOut() {
     this.afAuth.auth.signOut().then(
       () => {
-        this.router.navigate([`/login`]);
+        this.router.navigate([`/sign-in`]);
       }
     );
   }

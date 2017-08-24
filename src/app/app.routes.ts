@@ -5,8 +5,9 @@ import { ProductBacklogComponent, StoryViewComponent } from './story';
 import { SprintDashboardComponent, SprintViewComponent } from './sprint';
 
 import { UserListComponent } from './user';
+import { UserAccountComponent } from './user';
 
-import { LoginPageComponent } from './login';
+import { SignInPageComponent, SignUpPageComponent } from './user';
 import { AuthGuard } from './auth.service';
 
 // Route Configuration
@@ -18,8 +19,16 @@ export const ROUTES: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'login',
-    component: LoginPageComponent
+    path: 'sign-in',
+    component: SignInPageComponent
+  },
+  {
+    path: 'sign-up',
+    component: SignUpPageComponent
+  },
+  {
+    path: 'account',
+    component: UserAccountComponent
   },
   {
     path: 'users',
