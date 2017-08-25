@@ -132,7 +132,6 @@ export class SprintService {
       }
 
       this.database.object('/sprints/' + sprint.$key).update({ meetingNumber: sprint.meetingNumber });
-
     }
   }
 

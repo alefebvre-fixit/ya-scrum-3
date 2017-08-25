@@ -81,8 +81,6 @@ export class UserService {
     return (!str || /^\s*$/.test(str));
   }
 
-
-
   public emailSignIn(signin: SignIn): Observable<any> {
     return Observable.fromPromise(<Promise<any>>this.afAuth.auth.signInWithEmailAndPassword(signin.email, signin.password));
   }
@@ -91,33 +89,24 @@ export class UserService {
     return Observable.fromPromise(<Promise<any>>this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()));
   }
 
-
   public signUp(signup: SignUp): Observable<any> {
-
     return Observable.fromPromise(<Promise<any>>this.afAuth.auth.createUserWithEmailAndPassword(signup.email, signup.password))
-      .map(result => {
-        console.log(result);
-        const user = this.afAuth.auth.currentUser;
-        user.updateProfile({
+      .map(result =>
+        this.afAuth.auth.currentUser.updateProfile({
           displayName: signup.name,
           photoURL: undefined,
-        });
-        return user;
-      })
-      .map(user => {
-        console.log(user);
+        }).then(() => {
+          const account = new User();
+          account.$key = this.afAuth.auth.currentUser.uid;
+          account.email = this.afAuth.auth.currentUser.email;
+          account.name = this.afAuth.auth.currentUser.displayName;
+          this.save(account);
+        })
+      );
+  }
 
-        const account = new User();
-        account.$key = user.uid;
-        account.email = user.email;
-        account.name = user.displayName;
-
-        console.log(account);
-
-        return this.save(account);
-      });
-
-
+  public findCurrent(): Observable<User> {
+    return this.findOne(this.afAuth.auth.currentUser.uid);
   }
 
 
