@@ -1,13 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { User } from '../models';
+
+import { User, SignIn, SignUp } from '../models';
+
 import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
+
+
 
 @Injectable()
 export class UserService {
 
   constructor(
-    private database: AngularFireDatabase
+    private database: AngularFireDatabase,
+    private afAuth: AngularFireAuth,
   ) { }
 
   private roles = [
@@ -73,5 +80,45 @@ export class UserService {
   private isBlank(str: string) {
     return (!str || /^\s*$/.test(str));
   }
+
+
+
+  public emailSignIn(signin: SignIn): Observable<any> {
+    return Observable.fromPromise(<Promise<any>>this.afAuth.auth.signInWithEmailAndPassword(signin.email, signin.password));
+  }
+
+  public googleSignIn(): Observable<any> {
+    return Observable.fromPromise(<Promise<any>>this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()));
+  }
+
+
+  public signUp(signup: SignUp): Observable<any> {
+
+    return Observable.fromPromise(<Promise<any>>this.afAuth.auth.createUserWithEmailAndPassword(signup.email, signup.password))
+      .map(result => {
+        console.log(result);
+        const user = this.afAuth.auth.currentUser;
+        user.updateProfile({
+          displayName: signup.name,
+          photoURL: undefined,
+        });
+        return user;
+      })
+      .map(user => {
+        console.log(user);
+
+        const account = new User();
+        account.$key = user.uid;
+        account.email = user.email;
+        account.name = user.displayName;
+
+        console.log(account);
+
+        return this.save(account);
+      });
+
+
+  }
+
 
 }

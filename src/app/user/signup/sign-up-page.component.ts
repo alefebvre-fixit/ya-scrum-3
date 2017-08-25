@@ -8,6 +8,8 @@ import { SignUp } from '../../models';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
+import { UserService } from '../../services';
+
 @Component({
   selector: 'sign-up-page',
   templateUrl: './sign-up-page.component.html',
@@ -18,7 +20,8 @@ export class SignUpPageComponent implements OnInit {
   signup: SignUp = new SignUp();
   isStandBy = false;
 
-  constructor(public afAuth: AngularFireAuth,
+  constructor(
+    private userService: UserService,
     private router: Router
   ) {
   }
@@ -28,26 +31,11 @@ export class SignUpPageComponent implements OnInit {
 
   signUp(signup: SignUp) {
     this.standBy();
-    firebase.auth().createUserWithEmailAndPassword(signup.email, signup.password).catch((error: any) => {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(error);
-      this.ready();
-    }).then((success: any) => {
-
-      const user = firebase.auth().currentUser;
-
-      user.updateProfile({
-        displayName: signup.name,
-        photoURL: undefined,
-      }).then(() => {
-        this.router.navigate([`/sprints`]);
-      });
-
-
+    this.userService.signUp(signup).subscribe(() => {
+      this.router.navigate([`/sprints`]);
+    }, error => {
+      console.log(error); this.ready();
     });
-
   }
 
   signIn() {

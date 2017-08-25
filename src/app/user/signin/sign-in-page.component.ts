@@ -6,6 +6,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 import { SignIn } from '../../models';
+import { UserService } from '../../services';
 
 @Component({
   selector: 'sign-in-page',
@@ -14,45 +15,31 @@ import { SignIn } from '../../models';
 })
 export class SignInPageComponent implements OnInit {
 
-
   signin: SignIn = new SignIn();
   isStandBy = false;
 
-  user: Observable<firebase.User>;
-
-
   invalidError = false;
 
-  constructor(public afAuth: AngularFireAuth,
+  constructor(
+    private userService: UserService,
     private router: Router
   ) {
-    this.user = afAuth.authState;
   }
 
   ngOnInit(): void {
   }
 
   googleSignIn() {
-    this.standBy();
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(
-      () => {
-        this.router.navigate([`/sprints`]);
-      }
-    );
+    this.userService.googleSignIn().subscribe(() => {
+      this.router.navigate([`/sprints`]);
+    }, error => { this.invalidError = true; this.ready(); });
   }
 
   emailSignIn(signin: SignIn) {
     this.standBy();
-    this.afAuth.auth.signInWithEmailAndPassword(signin.email, signin.password).catch(
-      (error) => {
-        this.invalidError = true;
-        this.ready();
-      }
-      ).then(
-      () => {
-        this.router.navigate([`/sprints`]);
-      }
-      );
+    this.userService.emailSignIn(signin).subscribe(() => {
+      this.router.navigate([`/sprints`]);
+    }, error => { this.invalidError = true; this.ready(); });
   }
 
   signUp() {
