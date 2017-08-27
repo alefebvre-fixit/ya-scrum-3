@@ -5,14 +5,14 @@
 </md-toolbar>
 
 <md-card>
-  <form [formGroup]="account" novalidate>
+  <form [formGroup]="account" (ngSubmit)="onSubmit()" novalidate>
     <md-card-content>
       <md-input-container>
         <input mdInput placeholder="Role" type="text" maxlength="30" name="role" formControlName="role">
       </md-input-container>
     </md-card-content>
     <md-card-actions>
-      <button md-button color="primary" type="submit">Sign up</button>
+      <button md-button color="primary" type="submit">SAVE</button>
     </md-card-actions>
   </form>
 </md-card>

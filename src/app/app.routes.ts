@@ -6,6 +6,7 @@ import { SprintDashboardComponent, SprintViewComponent } from './sprint';
 
 import { UserListComponent } from './user';
 import { UserAccountComponent } from './user';
+import { HomePageComponent } from './home';
 
 import { SignInPageComponent, SignUpPageComponent } from './user';
 import { AuthGuard } from './auth.service';
@@ -33,6 +34,11 @@ export const ROUTES: Routes = [
   {
     path: 'users',
     component: UserListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'home',
+    component: HomePageComponent,
     canActivate: [AuthGuard]
   },
   {

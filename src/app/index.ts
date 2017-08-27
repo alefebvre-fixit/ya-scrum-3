@@ -31,7 +31,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
-import { LoginModule } from './login';
+import { HomeModule } from './home';
 import { UserModule } from './user';
 import { StoryModule } from './story';
 import { SprintModule } from './sprint';
@@ -67,8 +67,9 @@ import { environment } from '../environments/environment';
     CovalentLayoutModule,
     CovalentMediaModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireDatabaseModule, 
+    AngularFireDatabaseModule,
     AngularFireAuthModule,
+    HomeModule,
     SprintModule,
     StoryModule,
     UserModule,

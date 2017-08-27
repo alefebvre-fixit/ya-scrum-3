@@ -6,6 +6,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 
+import { HomePageComponent } from './home-page.component';
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,12 +18,16 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
   ],
   declarations: [
+    HomePageComponent,
   ],
   exports: [
+    HomePageComponent,
   ],
   entryComponents: [],
   providers: [
   ]
 })
 
-export class LoginModule { }
+export class HomeModule { }
+
+export { HomePageComponent } from './home-page.component';

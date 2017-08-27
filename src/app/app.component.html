@@ -5,6 +5,12 @@
     </button>
     <md-icon class="md-icon-logo" svgIcon="assets:covalent"></md-icon>
     <span>Ya Scrum</span>
+    <button md-button [routerLink]="['/home']">
+      <span>Ya Scrum</span>
+    </button>  
+    <button md-button [routerLink]="['/home']">
+      Home
+    </button>  
     <span flex></span>
 
     <span class="user-name">{{ (user | async)?.displayName }}</span>
@@ -46,3 +52,6 @@
     </div>
   </md-sidenav-container>
 </td-layout-nav>
+
+
+<!-- <router-outlet></router-outlet> -->
