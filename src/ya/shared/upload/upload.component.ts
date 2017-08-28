@@ -5,7 +5,7 @@ import { Upload } from '../../models/upload';
 import * as _ from 'lodash';
 
 @Component({
-  selector: 'upload',
+  selector: 'ya-upload',
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.scss']
 })

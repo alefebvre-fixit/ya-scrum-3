@@ -1,9 +1,9 @@
 <md-card>
   <md-card-title>{{(story)?.name}}</md-card-title>
   <md-card-subtitle>
-    <property-tag>#{{(story)?.type}}</property-tag>
-    <property-tag>{{(story)?.priority}} priority</property-tag>
-    <property-tag>{{(story)?.estimate}} points</property-tag>
+    <ya-property-tag>#{{(story)?.type}}</ya-property-tag>
+    <ya-property-tag>{{(story)?.priority}} priority</ya-property-tag>
+    <ya-property-tag>{{(story)?.estimate}} points</ya-property-tag>
   </md-card-subtitle>
   <section>
     <md-progress-bar [mode]="'determinate'" [value]="progressAsPercentage()"></md-progress-bar>

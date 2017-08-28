@@ -15,9 +15,9 @@
       "main": "main.ts",
       "polyfills": "polyfills.ts",
       "test": "test.ts",
-      "tsconfig": "tsconfig.app.json",
+      "tsconfig": "tsconfig.ya.json",
       "testTsconfig": "tsconfig.spec.json",
-      "prefix": "app",
+      "prefix": "ya",
       "styles": [
         "ya-theme.scss",
         "styles.scss",
@@ -40,7 +40,7 @@
   },
   "lint": [
     {
-      "project": "src/tsconfig.app.json"
+      "project": "src/tsconfig.ya.json"
     },
     {
       "project": "src/tsconfig.spec.json"

@@ -6,12 +6,11 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'ya-root',
+  templateUrl: './ya.component.html',
+  styleUrls: ['./ya.component.scss']
 })
-export class AppComponent {
-  title = 'app works!';
+export class YaComponent {
 
   user: Observable<firebase.User>;
 

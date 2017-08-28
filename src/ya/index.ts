@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import { ROUTES } from './app.routes';
+import { ROUTES } from './ya.routes';
 
-import { AppComponent } from './app.component';
+import { YaComponent } from './ya.component';
 
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -44,7 +44,7 @@ import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
-    AppComponent
+    YaComponent
   ],
   imports: [
     BrowserModule,
@@ -77,6 +77,6 @@ import { environment } from '../environments/environment';
 
   ],
   providers: [UserService, StoryService, SprintService, AuthGuard],
-  bootstrap: [AppComponent]
+  bootstrap: [YaComponent]
 })
-export class AppModule { }
+export class YaModule { }
