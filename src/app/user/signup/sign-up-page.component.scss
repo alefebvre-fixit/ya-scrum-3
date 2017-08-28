@@ -1,14 +1,15 @@
+@import '../../../ya-theme';
 
-.login-container{
-    display: flex; 
-    justify-content: center;
-    height: 70%;
-    align-items: center;    
+.positioner{
+    padding-top: 60px;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-.login-card {
-    flex: 1;
-    max-width: 400px;
-    min-width: 300px;
-    height: 400px;
+.ya-title{
+    color: $blue-light;
+}
+
+.ya-sub-title{
+    color: $title-grey;
 }

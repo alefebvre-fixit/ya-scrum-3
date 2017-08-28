@@ -106,7 +106,7 @@ export class UserService {
   }
 
   public findCurrent(): Observable<User> {
-    return this.findOne(this.afAuth.auth.currentUser.uid);
+    return this.afAuth.authState.flatMap( fbUser => this.findOne(fbUser ? fbUser.uid : undefined));
   }
 
 

@@ -1,8 +1,9 @@
-<div class="login-container">
-        <md-card class="login-card">
+<div class="positioner">
+        <md-card>
                 <md-card-title layout="row" layout-align="start center">
-                    <md-icon class="md-icon-logo" svgIcon="assets:teradata"></md-icon> <span class="md-title">Login</span></md-card-title>
-                <md-card-subtitle>sign in with your credentials</md-card-subtitle>
+                        <span class="md-title ya-title">Ya-Scrum</span> <span class="md-title ya-sub-title">Login</span>
+                </md-card-title>
+                <md-card-subtitle>Sign In with your credentials</md-card-subtitle>
                 <md-divider></md-divider>
                 <md-progress-bar mode="indeterminate" *ngIf="isStandBy"></md-progress-bar>                                
                 <md-card-content class="push-bottom-none">
@@ -14,7 +15,6 @@
                                 <md-hint align="start">
                                     <span [hidden]="!userControl.errors?.required || userControl.pristine" class="tc-red-600">Required</span>
                                 </md-hint>
-                                <md-hint align="end">{{userElement.value.length}} / 30</md-hint>
                             </md-input-container>
                         </div>
                         <div layout="row" class="push-top-sm">
@@ -24,7 +24,6 @@
                                 <md-hint align="start">
                                     <span [hidden]="!passControl.errors?.required || passControl.pristine" class="tc-red-600">Required</span>
                                 </md-hint>
-                                <md-hint align="end">Something hard to guess</md-hint>
                             </md-input-container>
                         </div>
                     </form>

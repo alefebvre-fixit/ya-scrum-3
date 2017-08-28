@@ -4,15 +4,22 @@
   <md-icon>verified_user</md-icon>
 </md-toolbar>
 
-<md-card>
-  <form [formGroup]="account" (ngSubmit)="onSubmit()" novalidate>
-    <md-card-content>
-      <md-input-container>
-        <input mdInput placeholder="Role" type="text" maxlength="30" name="role" formControlName="role">
-      </md-input-container>
-    </md-card-content>
-    <md-card-actions>
-      <button md-button color="primary" type="submit">SAVE</button>
-    </md-card-actions>
-  </form>
-</md-card>
+<div class="positioner">
+  <md-card>
+    <form [formGroup]="account" (ngSubmit)="onSubmit()" novalidate>
+      <md-card-header>
+        <ngu-letter-avatar *ngIf="user" md-card-avatar avatar-data='{{user?.name}}' avatar-shape='round' avatarborder='true'></ngu-letter-avatar>
+        <md-card-title>{{user?.name}}</md-card-title>
+        <md-card-subtitle>{{user?.role}}</md-card-subtitle>
+      </md-card-header>
+      <md-card-content>
+        <md-input-container>
+          <input mdInput placeholder="Role" type="text" maxlength="30" name="role" formControlName="role">
+        </md-input-container>
+      </md-card-content>
+      <md-card-actions>
+        <button md-button color="primary" type="submit">SAVE</button>
+      </md-card-actions>
+    </form>
+  </md-card>
+</div>

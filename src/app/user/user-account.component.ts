@@ -17,15 +17,15 @@ export class UserAccountComponent implements OnInit {
   constructor(
     private userService: UserService,
   ) {
+    this.account = new FormGroup({
+      role: new FormControl('Some Role'),
+    });
   }
 
   ngOnInit(): void {
 
     this.userService.findCurrent().subscribe(user => { this.user = user; });
 
-    this.account = new FormGroup({
-      role: new FormControl('Some Role'),
-    });
   }
 
   onSubmit() {
