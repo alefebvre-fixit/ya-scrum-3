@@ -12,7 +12,7 @@ import { CovalentMessageModule } from '@covalent/core';
 import { NguUtilityModule } from 'ngu-utility/ngu-utility.module'; // <-- import the module
 
 import { SprintCardComponent } from './sprint-card.component';
-import { SprintGridComponent } from './sprint-grid.component';
+import { SprintGridComponent, SprintGridTitleDirective } from './sprint-grid.component';
 import { SprintDashboardComponent } from './sprint-dashboard.component';
 import { SprintViewComponent } from './sprint-view.component';
 import { SprintEditComponent } from './sprint-edit.component';
@@ -50,6 +50,7 @@ import { SharedModule } from '../shared';
   declarations: [
     SprintCardComponent,
     SprintGridComponent,
+    SprintGridTitleDirective,
     SprintDashboardComponent,
     SprintViewComponent,
     SprintStatusComponent,
@@ -60,6 +61,7 @@ import { SharedModule } from '../shared';
   exports: [
     SprintCardComponent,
     SprintGridComponent,
+    SprintGridTitleDirective,
     SprintDashboardComponent,
     SprintViewComponent,
     SprintEditComponent

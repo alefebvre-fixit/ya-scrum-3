@@ -4,18 +4,28 @@
   <button md-button (click)="addSprint()">ADD</button>
 </md-toolbar>
 
-
 <div class="page-container">
 
-  <section-title> <section-title-highlight>{{ sprintsProgress?.length }}</section-title-highlight> sprints in progress</section-title>
-  <sprint-grid [sprints]="sprintsProgress"></sprint-grid>
+  <sprint-grid [sprints]="sprintsProgress">
+    <sprint-grid-title>
+      <section-title>
+        <section-title-highlight>{{ sprintsProgress?.length }}</section-title-highlight> sprints in progress</section-title>
+    </sprint-grid-title>
+  </sprint-grid>
 
-  <section-title> <section-title-highlight>{{ sprintsPending?.length }}</section-title-highlight> upcoming sprints</section-title>
-  <sprint-grid [sprints]="sprintsPending"></sprint-grid>
+  <sprint-grid [sprints]="sprintsPending">
+    <sprint-grid-title>
+      <section-title>
+        <section-title-highlight>{{ sprintsPending?.length }}</section-title-highlight> upcoming sprints</section-title>
+    </sprint-grid-title>
+  </sprint-grid>
 
-  <section-title> <section-title-highlight>{{ sprintsPending?.length }}</section-title-highlight> sprints completed</section-title>
-  <sprint-grid [sprints]="sprintsClosed"></sprint-grid>
+  <sprint-grid [sprints]="sprintsClosed">
+    <sprint-grid-title>
+      <section-title>
+        <section-title-highlight>{{ sprintsPending?.length }}</section-title-highlight> sprints completed</section-title>
+    </sprint-grid-title>
+  </sprint-grid>
 
 
-</div>  
-
+</div>

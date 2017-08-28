@@ -1,20 +1,6 @@
-    <div class="flex-container" 
-        fxLayout
-        fxLayoutWrap
-        fxLayout.xs="column"
-        fxLayoutAlign="start start"
-        fxLayoutAlign.xs="start">
-
-        <div class="flex-item" fxFlex="33%" *ngFor="let story of stories;">
-            <story-card [story]="story"></story-card>
-        </div>
-
-    </div> 
-
-<!-- <md-grid-list cols="4" rowHeight="100px">
-  <md-grid-tile
-      *ngFor="let tile of tiles"
-      [style.background]="tile.color">
-    {{tile.text}}
-  </md-grid-tile>
-</md-grid-list> -->
+<div class="positioner">
+    <ng-content select="story-grid-title"></ng-content>
+    <div class="cards">
+        <story-card [story]="story" *ngFor="let story of stories;" class="card"></story-card>
+    </div>
+</div>

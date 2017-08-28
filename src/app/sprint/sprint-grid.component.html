@@ -1,12 +1,6 @@
-    <div class="flex-container" 
-        fxLayout
-        fxLayoutWrap="wrap"
-        fxLayout.xs="column"
-        fxLayoutAlign="start start"
-        fxLayoutAlign.xs="start">
-
-        <div class="flex-item" fxFlex="33%" *ngFor="let sprint of sprints;">
-            <sprint-card [sprint]="sprint"></sprint-card>
-        </div>
-
-    </div> 
+<div class="positioner">
+    <ng-content select="sprint-grid-title"></ng-content>
+    <div class="cards">
+        <sprint-card [sprint]="sprint" *ngFor="let sprint of sprints;" class="card"></sprint-card>
+    </div>
+</div>

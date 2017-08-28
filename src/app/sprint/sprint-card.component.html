@@ -1,6 +1,7 @@
 <md-card class="sprint-card">
-  <div class="sprint-title"><h3>{{sprint?.name}}</h3></div>
-
+  <div class="sprint-title">
+    <h3>{{sprint?.name}}</h3>
+  </div>
   <img md-card-image src="assets/img/themes/blueprint-large.jpg">
   <md-list>
     <md-list-item>
@@ -13,18 +14,15 @@
         <span> -- {{sprint?.name}} </span>
       </p>
     </md-list-item>
-  </md-list>  
+  </md-list>
   <md-card-content>
     <section>
       <md-progress-bar [mode]="'determinate'" [value]="progressAsPercentage()"></md-progress-bar>
     </section>
 
-    <br>
-    5 stories
-    <br>
-    3 days to go
-    <br>
-    90% completed
+    <br> 5 stories
+    <br> 3 days to go
+    <br> 90% completed
 
   </md-card-content>
 

@@ -3,15 +3,22 @@
     <button md-icon-button class="td-menu-button" (click)="sidenav.toggle()" mdTooltip="Main menu">
       <md-icon>menu</md-icon>
     </button>
-    <md-icon class="md-icon-logo" svgIcon="assets:covalent"></md-icon>
     <span>Ya Scrum</span>
-    <button md-button [routerLink]="['/home']">
-      <span>Ya Scrum</span>
-    </button>  
+
     <button md-button [routerLink]="['/home']">
       Home
     </button>  
+    <button md-button [routerLink]="['/sprints']">
+      Sprints
+    </button>  
+    <button md-button [routerLink]="['/stories']">
+      Stories
+    </button>  
+
+
+
     <span flex></span>
+
 
     <span class="user-name">{{ (user | async)?.displayName }}</span>
     <button md-icon-button [mdMenuTriggerFor]="menu">
@@ -32,7 +39,7 @@
 
   </div>
   <md-sidenav-container fullscreen>
-    <md-sidenav #sidenav mode="side" opened="true" style="width:257px;border-right:1px solid #ccc">
+    <md-sidenav #sidenav mode="side" opened="false" style="width:257px;border-right:1px solid #ccc">
       <div flex class="md-content bgc-grey-50">
         <md-nav-list>
           <a md-list-item [routerLink]="['/sprints']">
@@ -52,6 +59,3 @@
     </div>
   </md-sidenav-container>
 </td-layout-nav>
-
-
-<!-- <router-outlet></router-outlet> -->

@@ -15,7 +15,7 @@ import { CovalentMessageModule } from '@covalent/core';
 import { NguUtilityModule } from 'ngu-utility/ngu-utility.module'; // <-- import the module
 
 import { StoryCardComponent} from './story-card.component';
-import { StoryGridComponent} from './story-grid.component';
+import { StoryGridComponent, StoryGridTitleDirective} from './story-grid.component';
 import { StoryListComponent} from './story-list.component';
 import { StoryViewComponent} from './story-view.component';
 import { StoryEditComponent} from './story-edit.component';
@@ -48,6 +48,7 @@ import { StoryService } from '../services';
   declarations: [
     StoryCardComponent,
     StoryGridComponent,
+    StoryGridTitleDirective,
     ProductBacklogComponent,
     StoryViewComponent,
     StoryEditComponent,
@@ -57,6 +58,7 @@ import { StoryService } from '../services';
   exports: [
     StoryCardComponent,
     StoryGridComponent,
+    StoryGridTitleDirective,
     ProductBacklogComponent,
     StoryViewComponent,
     StoryEditComponent,

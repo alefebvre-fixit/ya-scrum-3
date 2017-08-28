@@ -6,13 +6,25 @@
 
 <div class="page-container">
 
-  <section-title> <section-title-highlight>{{ storiesInProgress?.length }}</section-title-highlight> story in progress</section-title>
-  <story-grid [stories]="storiesInProgress"></story-grid>
+  <story-grid [stories]="storiesInProgress">
+    <story-grid-title>
+      <section-title>
+        <section-title-highlight>{{ storiesInProgress?.length }}</section-title-highlight> story in progress</section-title>
+    </story-grid-title>
+  </story-grid>
 
-  <section-title> <section-title-highlight>{{ storiesPending?.length }}</section-title-highlight> new story</section-title>
-  <story-grid [stories]="storiesPending"></story-grid>
+  <story-grid [stories]="storiesPending">
+    <story-grid-title>
+      <section-title>
+        <section-title-highlight>{{ storiesPending?.length }}</section-title-highlight> new story</section-title>
+    </story-grid-title>
+  </story-grid>
 
-  <section-title> <section-title-highlight>{{ storiesClosed?.length }}</section-title-highlight> story closed</section-title>
-  <story-grid [stories]="storiesClosed"></story-grid>
+  <story-grid [stories]="storiesClosed">
+    <story-grid-title>
+      <section-title>
+        <section-title-highlight>{{ storiesClosed?.length }}</section-title-highlight> story closed</section-title>
+    </story-grid-title>
+  </story-grid>
 
 </div>

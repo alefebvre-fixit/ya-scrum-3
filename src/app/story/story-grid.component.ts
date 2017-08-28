@@ -1,6 +1,12 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, Directive} from '@angular/core';
 
 import { Story } from '../models';
+
+
+@Directive({
+  selector: 'story-grid-title',
+})
+export class StoryGridTitleDirective {}
 
 @Component({
   selector: 'story-grid',

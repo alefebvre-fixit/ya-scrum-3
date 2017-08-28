@@ -1,6 +1,12 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, Directive} from '@angular/core';
 
 import { Sprint } from '../models';
+
+
+@Directive({
+  selector: 'sprint-grid-title',
+})
+export class SprintGridTitleDirective {}
 
 @Component({
   selector: 'sprint-grid',
