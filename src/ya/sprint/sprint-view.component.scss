@@ -1,10 +1,13 @@
 @import '../../ya-theme';
 
+
+.global-container{
+    background-color: $background-grey;
+}
+
 .positioner{
     max-width: 1240px;
     margin: 0 auto;
-    background-color: $background-grey;
-    
 }
 
 .burndown-container{

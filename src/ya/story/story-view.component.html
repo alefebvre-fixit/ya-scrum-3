@@ -22,40 +22,49 @@
 
 </md-toolbar>
 
-<div class="story-view-container">
-      <div class="flex-container" 
-        fxLayout
-        fxLayoutWrap="wrap"
-        fxLayout.xs="column"
-        fxLayoutAlign="start start"
-        fxLayoutAlign.xs="start">
 
-        <div class="flex-item" fxFlex="70%">
-          <md-card>
-            <md-card-header>
-              <md-card-title>{{(story)?.name}}</md-card-title>
-              <md-card-subtitle *ngIf="sprint"> <a [routerLink]="['/sprints', sprint.$key]" md-button> @{{(sprint)?.name}}</a></md-card-subtitle>
-            </md-card-header>
-            <md-card-content>
-              <h3 md-subheader>Description</h3>
-              <p>
-                {{(story)?.description}}
-              </p>
-              <h3 md-subheader>Acceptance Criterias</h3>
-              <p>
-                {{(story)?.acceptanceCriterias}}
-              </p>
-            </md-card-content>
-          </md-card>
-        </div>
-        <div class="flex-item" fxFlex="30%">
-          <story-status [story]="story"></story-status>
-        </div>
-        <div class="flex-item" fxFlex="50%">
-          <story-progress-view [story]="story"></story-progress-view>
-        </div>
-        <div class="flex-item" fxFlex="50%">
-          <story-progress-schedule [story]="story"></story-progress-schedule>
-        </div>
+<div class="global-container">
+  <div class="positioner">
+
+
+    <div
+      fxLayout
+      fxLayoutWrap="wrap"
+      fxLayout.xs="column"
+      fxLayoutAlign="start start"
+      fxLayoutAlign.xs="start">
+    
+      <div fxFlex="70%">
+        <md-card>
+          <md-card-header>
+            <md-card-title>{{(story)?.name}}</md-card-title>
+            <md-card-subtitle *ngIf="sprint"> <a [routerLink]="['/sprints', sprint.$key]" md-button> @{{(sprint)?.name}}</a></md-card-subtitle>
+          </md-card-header>
+          <md-card-content>
+            <h3 md-subheader>Description</h3>
+            <p>
+              {{(story)?.description}}
+            </p>
+            <h3 md-subheader>Acceptance Criterias</h3>
+            <p>
+              {{(story)?.acceptanceCriterias}}
+            </p>
+          </md-card-content>
+        </md-card>
+      </div>
+      <div class="flex-item" fxFlex="30%">
+        <story-status [story]="story"></story-status>
+      </div>
+      <div class="flex-item" fxFlex="50%">
+        <story-progress-view [story]="story"></story-progress-view>
+      </div>
+      <div class="flex-item" fxFlex="50%">
+        <story-progress-schedule [story]="story"></story-progress-schedule>
+      </div>
     </div> 
+
+
+  </div>
 </div>
+
+

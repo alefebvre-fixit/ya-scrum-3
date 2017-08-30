@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Story } from '../../models';
 
@@ -11,6 +11,9 @@ export class SprintStoryGridComponent {
 
   @Input() stories: Story[];
 
+  @Output()
+  onAdd = new EventEmitter();
+
   constructor(
   ) {
   }
@@ -19,5 +22,8 @@ export class SprintStoryGridComponent {
     return story ? story.$key : undefined;
   }
 
+  public add() {
+    this.onAdd.emit();
+  }
 
 }

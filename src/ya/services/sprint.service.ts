@@ -49,6 +49,33 @@ export class SprintService {
       .map(storiesPerSprint => storiesPerSprint.map(storyKey => this.database.object('stories/' + storyKey))).flatMap(fbos => Observable.combineLatest(fbos));
   }
 
+  public updateProgress(sprint: Sprint, stories: Story[]) {
+
+    let sprintProgress = 0;
+
+    stories.forEach(story => {
+      sprintProgress = story.progress;
+    });
+
+
+    if (sprintProgress !== sprint.progress) {
+      sprint.progress = sprintProgress;
+
+      if (sprint.progress > 0) {
+        if (sprint.progress >= sprint.estimate) {
+          sprint.status = 'closed';
+        } else {
+          sprint.status = 'started';
+        }
+      } else {
+        sprint.status = 'new';
+      }
+
+      this.database.object('/sprints/' + sprint.$key).update({ status: sprint.status, progress: sprint.progress });
+    }
+
+  }
+
   public findOneStory(storyKey: string): Observable<Story> {
     return this.database.object('/stories/' + storyKey);
   }
@@ -187,27 +214,7 @@ export class SprintService {
   }
 
 
-  public calculateProgress(sprint: Sprint, stories: Story[]) {
 
-    let sprintProgress = 0;
-
-    for (let day = 1; day <= sprint.duration; day++) {
-      stories.forEach(story => {
-        sprintProgress = story.progress;
-      });
-    }
-
-    if (sprint.progress > 0) {
-      if (sprint.progress >= sprint.estimate) {
-        sprint.status = 'closed';
-      } else {
-        sprint.status = 'started';
-      }
-    } else {
-      sprint.status = 'new';
-    }
-
-  }
 
 
   public generateBurndowData(sprint: Sprint, stories: Story[]): any {

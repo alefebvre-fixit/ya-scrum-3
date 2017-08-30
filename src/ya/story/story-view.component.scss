@@ -1,3 +1,16 @@
+@import '../../ya-theme';
+
+
+.global-container{
+    background-color: $background-grey;
+}
+
+.positioner{
+    max-width: 1240px;
+    margin: 0 auto;
+}
+
+
 .story-view-container{
   padding: 50px;
   background-color: #f6f6f6;

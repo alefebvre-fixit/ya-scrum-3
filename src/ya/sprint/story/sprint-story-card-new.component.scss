@@ -1,0 +1,23 @@
+@import '../../../ya-theme';
+
+
+.container:hover{
+    .story-card{
+        visibility: visible;        
+    }
+}    
+
+.story-card{
+    margin: 16px;
+    min-width:300px;
+    max-width:400px;
+    height: 445px;
+    background-color: $background-grey !important;
+    visibility: hidden;
+}
+    
+.button-container{
+    padding-top: 200px;
+    text-align: center;
+    margin: 0 auto;
+}
