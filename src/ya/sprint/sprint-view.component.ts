@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { MdDialog, MdDialogRef } from '@angular/material';
 
-import { StoryService, SprintService, UserService } from '../services';
+import { StoryService, SprintService, UserService, UploadService } from '../services';
 import { Story, StoryProgress, Sprint, SprintProgress, User } from '../models';
 import { SprintEditComponent } from './sprint-edit.component';
 import { SprintStorySelectorComponent } from './story/sprint-story-selector.component';
@@ -12,6 +12,7 @@ import { SprintStorySelectorComponent } from './story/sprint-story-selector.comp
 @Component({
   templateUrl: './sprint-view.component.html',
   styleUrls: ['./sprint-view.component.scss'],
+  providers: [UploadService],
 })
 export class SprintViewComponent implements OnInit {
 
@@ -48,6 +49,9 @@ export class SprintViewComponent implements OnInit {
       });
   }
 
+  public progressAsPercentage(): number {
+    return Sprint.progressAsPercentage(this.sprint);
+  }
 
   startNewDailyMeeting() {
     this.sprintService.startNewDailyMeeting(this.sprint, this.stories);

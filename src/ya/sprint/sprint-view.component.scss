@@ -1,4 +1,29 @@
+@import '../../ya-theme';
+
+.positioner{
+    max-width: 1240px;
+    margin: 0 auto;
+    background-color: $background-grey;
+    
+}
+
 .burndown-container{
     display: flex;
     justify-content: center;
 }
+
+
+.sprint-title {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    text-align: left;
+    color: white; 
+    background: $blue-gray;
+    padding: 10px; 
+  }
+  .sprint-title > h3  {
+    margin: 0;
+    text-shadow: 0 1px 0 black;
+    font-size: 150%;
+  }

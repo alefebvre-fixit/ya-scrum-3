@@ -16,36 +16,44 @@
   </md-menu>
 </md-toolbar>
 
+<div class="positioner">
 
+  <md-card class="sprint-card">
+    <div class="sprint-title">
+      <h3>{{sprint?.name}}</h3>
+    </div>
+    <img md-card-image src="assets/img/story-background.png">
+    <md-progress-bar [mode]="'determinate'" [value]="progressAsPercentage()"></md-progress-bar>
+    <md-card-actions>
+      <button md-button (click)="startNewDailyMeeting()" [disabled]="!(stories?.length > 0)"><md-icon>today</md-icon> START DAILY MEETING</button>
+      <button md-button (click)="addStory()"> ADD STORY</button>
+    </md-card-actions>
+  </md-card>
+
+  <section-title>Burndown Chart:
+    <section-title-highlight>{{(sprint)?.meetingNumber}} days</section-title-highlight>
+  </section-title>
+
+  <!-- <sprint-burndown [stories]="stories" [sprint]="sprint"></sprint-burndown> -->
+
+  <section-title>Sprint Backlog:
+    <section-title-highlight>{{ stories?.length }} stories</section-title-highlight>
+  </section-title>
+
+  <sprint-story-grid [stories]="stories"></sprint-story-grid>
+
+  <section-title><section-title-highlight>{{ progressHistory?.length }}</section-title-highlight> Days Schedule</section-title>
+  <sprint-progress-schedule [progressHistory]="progressHistory"></sprint-progress-schedule>
+  
+  <sprint-status [sprint]="sprint"></sprint-status>
+
+</div>
 
 <div class="page-container">
 
-  <div class="flex-container" fxLayout fxLayoutWrap="wrap" fxLayout.xs="column" fxLayoutAlign="start start" fxLayoutAlign.xs="start">
 
-    <div class="flex-item" fxFlex="70%">
-      <md-card class="sprint-card">
-        <md-card-header>
-          <md-card-title>{{(sprint)?.name}}</md-card-title>
-          <md-card-subtitle>Day {{(sprint)?.meetingNumber}}</md-card-subtitle>
-        </md-card-header>
-        <md-card-content>
-          <h3 md-subheader>Description</h3>
-          <p>
-            {{(sprint)?.description}}
-          </p>
-        </md-card-content>
-        <md-card-actions>
-          <button md-button (click)="startNewDailyMeeting()" [disabled]="!(stories?.length > 0)"><md-icon>today</md-icon> START DAILY MEETING</button>
-          <button md-button (click)="addStory()"> ADD STORY</button>
-        </md-card-actions>
-      </md-card>
-    </div>
-    <div class="flex-item" fxFlex="30%">
-      <sprint-status [sprint]="sprint"></sprint-status>
-    </div>
-    <div class="flex-item" fxFlex="100%">
-      <section-title>Burndown Chart: <section-title-highlight>{{(sprint)?.meetingNumber}} days</section-title-highlight> </section-title>
-    </div>
+
+  <div class="flex-container" fxLayout fxLayoutWrap="wrap" fxLayoutAlign="start start" >
     <div class="flex-item" fxFlex="10%">
     </div>
     <div class="flex-item" fxFlex="80%">
@@ -57,12 +65,10 @@
 
   </div>
 
-      <section-title>Sprint Backlog: <section-title-highlight>{{ stories?.length }} stories</section-title-highlight> </section-title>
-      <sprint-story-grid [stories]="stories"></sprint-story-grid>
 
-      <section-title> <section-title-highlight>{{ progressHistory?.length }}</section-title-highlight> Days Schedule</section-title>
-      <sprint-progress-schedule [progressHistory]="progressHistory"></sprint-progress-schedule>
 
+
+  <ya-upload></ya-upload>
 
 
 </div>

@@ -1,5 +1,3 @@
-<div class="flex-container" fxLayout fxLayoutWrap="wrap" fxLayout.xs="column" fxLayoutAlign="start start" fxLayoutAlign.xs="start">
-    <div class="flex-item" fxFlex="33%" *ngFor="let story of stories;trackBy: trackStory">
-        <sprint-story-card [story]="story"></sprint-story-card>
-    </div>
+<div class="cards">
+    <sprint-story-card [story]="story" *ngFor="let story of stories;trackBy: trackStory" class="card"></sprint-story-card>
 </div>

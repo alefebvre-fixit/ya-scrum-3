@@ -8,11 +8,5 @@
     <input type="file" (change)="detectFiles($event)">
 </label>
 <button [disabled]="!selectedFiles" (click)="uploadSingle()">
-Upload Single
-</button>
-<label>
-    <input type="file" (change)="detectFiles($event)" multiple>
-</label>
-<button [disabled]="!selectedFiles" (click)="uploadMulti()">
-    Upload Multiple
+Upload
 </button>

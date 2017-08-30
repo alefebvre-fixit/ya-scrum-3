@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
-import * as firebase from 'firebase/app';
+import { FirebaseApp } from 'angularfire2';
+import * as firebase from 'firebase';
 
 import { Upload } from '../models';
 
@@ -12,10 +13,21 @@ export class UploadService {
     private basePath = '/uploads';
     uploads: FirebaseListObservable<Upload[]>;
 
-    constructor(private db: AngularFireDatabase) { }
+    constructor(private firebaseApp: FirebaseApp, private db: AngularFireDatabase) { }
 
     pushUpload(upload: Upload) {
-        const storageRef = firebase.storage().ref();
+        
+        // Get a reference to the storage service, which is used to create references in your storage bucket
+        var storage = this.firebaseApp.storage();
+
+        console.log(storage);
+
+        // Create a storage reference from our storage service
+        var storageRef = storage.ref();
+
+        console.log(storageRef);
+        
+
         const uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
         uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
             (snapshot) => {
@@ -56,7 +68,7 @@ export class UploadService {
     // Firebase files must have unique names in their respective storage dir
     // So the name serves as a unique key
     private deleteFileStorage(name: string) {
-        let storageRef = firebase.storage().ref();
+        let storageRef = this.firebaseApp.storage().ref();
         storageRef.child(`${this.basePath}/${name}`).delete()
     }
 
