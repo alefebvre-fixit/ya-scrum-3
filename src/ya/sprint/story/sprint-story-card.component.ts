@@ -36,8 +36,7 @@ export class SprintStoryCardComponent implements OnInit, OnChanges, AfterViewIni
     this.progress = Story.getLatestProgress(this.story);
     this.updateChart(this.progress);
   }
-
-
+  
   public add() {
     this.updateProgress(+1);
   }

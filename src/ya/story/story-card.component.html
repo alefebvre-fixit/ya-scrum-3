@@ -14,7 +14,6 @@
         {{(story)?.description}}
       </p>
     </md-card-content>
-    <md-divider></md-divider>
   </div>
   <md-list>
     <md-list-item>
@@ -28,7 +27,8 @@
       </p>
     </md-list-item>
   </md-list>
+  <md-divider></md-divider>
   <md-card-actions>
-    <button md-button (click)="navigateToDetails(story?.$key)">LEARN MORE</button>
+    <button md-button color="primary" (click)="navigateToDetails(story?.$key)">LEARN MORE</button>
   </md-card-actions>
 </md-card>

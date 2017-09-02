@@ -1,30 +1,35 @@
 <md-card>
     <md-card-content>
-        <div style="display: block">
-            <!-- <canvas height="180" baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"
-                [legend]="false" [colors]="colors" [options]="options"></canvas> -->
+
+
+
+        <div class="story-card-content">
+            <div class="chart-container">
+                <div id="chart"></div>
+            </div>
         </div>
+        
         <md-chip-list>
             <table class="key-value-table">
-                <tbody>                    
-                <tr>
-                    <td>Previous</td>
-                    <td>
-                    <md-chip class="value-chip previous">{{progress?.previous || "-"}}</md-chip>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Daily</td>
-                    <td>
-                    <md-chip class="value-chip daily">{{progress?.daily || "-"}}</md-chip>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Remaining</td>
-                    <td>
-                    <md-chip class="value-chip remaining">{{progress?.remaining || "-"}}</md-chip>
-                    </td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <td>Previous</td>
+                        <td>
+                            <md-chip class="value-chip previous">{{progress?.previous || "-"}}</md-chip>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Daily</td>
+                        <td>
+                            <md-chip class="value-chip daily">{{progress?.daily || "-"}}</md-chip>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Remaining</td>
+                        <td>
+                            <md-chip class="value-chip remaining">{{progress?.remaining || "-"}}</md-chip>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </md-chip-list>

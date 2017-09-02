@@ -2,7 +2,8 @@
   <div class="sprint-title">
     <h3>{{sprint?.name}}</h3>
   </div>
-  <img md-card-image src="assets/img/themes/blueprint-large.jpg">
+  <img md-card-image src="assets/img/story-background.png">
+  <md-progress-bar [mode]="'determinate'" [value]="progressAsPercentage()"></md-progress-bar>
   <md-list>
     <md-list-item>
       <ngu-letter-avatar md-list-avatar avatar-data='{{sprint?.name}}' avatar-shape='round' avatarborder='true' avatar-height="40"
@@ -10,23 +11,16 @@
       </ngu-letter-avatar>
       <h3 md-line> {{sprint?.name}} </h3>
       <p md-line>
-        <span> {{sprint?.name}} </span>
-        <span> -- {{sprint?.name}} </span>
+        <span> scrum master </span>
       </p>
     </md-list-item>
   </md-list>
   <md-card-content>
-    <section>
-      <md-progress-bar [mode]="'determinate'" [value]="progressAsPercentage()"></md-progress-bar>
-    </section>
-
     <br> 5 stories
     <br> 3 days to go
     <br> 90% completed
-
   </md-card-content>
-
   <md-card-actions>
-    <button md-button (click)="navigateToDetails(sprint?.$key)">LEARN MORE</button>
+    <button md-button (click)="navigateToDetails(sprint?.$key)" color="primary">LEARN MORE</button>
   </md-card-actions>
 </md-card>

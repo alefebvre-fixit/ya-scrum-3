@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ViewChild, SimpleChanges, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { TdDataTableService, TdDataTableSortingOrder, ITdDataTableSortChangeEvent, ITdDataTableColumn } from '@covalent/core';
@@ -6,6 +6,8 @@ import { TdDataTableService, TdDataTableSortingOrder, ITdDataTableSortChangeEven
 import { StoryService, SprintService, UserService } from '../../services';
 import { Story, StoryProgress, Sprint, SprintProgress, User } from '../../models';
 
+import * as d3 from 'd3';
+import * as c3 from 'c3';
 
 @Component({
   selector: 'story-progress-view',
@@ -17,20 +19,10 @@ export class ProgressViewComponent implements OnInit, OnChanges {
 
   @Input() story: Story;
   progress: StoryProgress;
+  chart;
 
-  // Doughnut
-  public doughnutChartLabels: string[] = ['previous', 'daily', 'remaining'];
-  public doughnutChartData: number[] = [0, 0, 1];
-  public doughnutChartType = 'doughnut';
-  public colors: any = [{ backgroundColor: ['#15B7B9', '#10DDC2', '#F5F5F5'] }];
-  public options = {
-    tooltips: {
-      enabled: false
-    }
-  };
 
-  data: any[] = [
-  ];
+
   columns: ITdDataTableColumn[] = [
     { name: 'day', label: 'Day #', tooltip: 'Sprint Day', numeric: false },
     { name: 'remaining', label: 'Remaining', numeric: true },
@@ -43,14 +35,20 @@ export class ProgressViewComponent implements OnInit, OnChanges {
     public sprintService: SprintService,
     public storyService: StoryService,
   ) {
+
   }
 
   ngOnInit() {
-    this.displayLatestProgress();
+    this.progress = Story.getLatestProgress(this.story);
   }
 
-  ngOnChanges() {
-    this.displayLatestProgress();
+  ngAfterViewInit() {
+    this.createChart(this.progress);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.progress = Story.getLatestProgress(this.story);
+    this.updateChart(this.progress);
   }
 
   public progressAsPercentage(): number {
@@ -58,16 +56,71 @@ export class ProgressViewComponent implements OnInit, OnChanges {
   }
 
 
-  public displayLatestProgress() {
-    this.progress = Story.getLatestProgress(this.story);
+  private updateChart(progress: StoryProgress) {
 
-    this.updateChart(this.progress);
+    if (this.chart === undefined) {
+      return;
+    }
+
+    this.chart.load({
+      columns: [
+        ['previous', progress.previous],
+        ['daily', progress.daily],
+        ['remaining', progress.remaining]]
+    });
+
+    d3.select('#chart text.c3-chart-arcs-title').node().innerHTML
+      = StoryProgress.progressAsPercentage(this.progress) + '%';
+
   }
 
-  public updateChart(progress: StoryProgress) {
-    if (progress){
-      this.doughnutChartData = [progress.previous, progress.daily, progress.remaining];
-    }
+  createChart(progress: StoryProgress) {
+
+    this.chart = c3.generate({
+      bindto: '#chart',
+      size: {
+        width: 350,
+        height: 350
+      },
+      data: {
+        columns: [
+          ['previous', progress.previous],
+          ['daily', progress.daily],
+          ['remaining', progress.remaining],
+        ],
+        order: null,
+        type: 'donut',
+        legend: {
+          show: false
+        },
+      },
+      donut: {
+        title: StoryProgress.progressAsPercentage(this.progress) + '%',
+        label: {
+          show: false
+        }
+      },
+      legend: {
+        show: false
+      },
+      padding: {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+      },
+      color: {
+        pattern: [
+          '#1565c0',
+          '#03a9f4',
+          '#ededed',
+        ]
+      },
+      transition: {
+        duration: 200
+      }
+    });
+
   }
 
 

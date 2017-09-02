@@ -1,18 +1,42 @@
+@import '../../../ya-theme';
+
+
 .daily{
-    color:white;
-    background-color: #03a9f4;
+    color:white !important;
+    background-color: $blue-light !important;
 }
 
 .previous{
-    color:white;
-    background-color: #1565c0;
+    color:white !important;
+    background-color: $blue-dark !important;
 }
 
 .remaining{
-    color:black;
-    background-color: #F5F5F5;
+    color:black !important;
+    background-color: $grey-light !important;
 }
 
 .value-cell{
     text-align: right;
+}
+
+.story-card-content{
+    height:350px;
+}
+
+.chart-container{
+    display: flex;
+    justify-content: center;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+
+.icon-card{
+    color: $icon-grey  
+}
+
+/deep/ .c3-chart-arcs-title{
+    font-size: 250%;
+    fill: $blue-light;
 }
