@@ -19,6 +19,7 @@ export class SignUpPageComponent implements OnInit {
 
   signup: SignUp = new SignUp();
   isStandBy = false;
+  invalidError = false;
 
   constructor(
     private userService: UserService,
