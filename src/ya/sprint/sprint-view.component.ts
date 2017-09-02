@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-
 import { ActivatedRoute } from '@angular/router';
 
 import { MdDialog, MdDialogRef } from '@angular/material';
 
-import { StoryService, SprintService, UserService, UploadService } from '../services';
-import { Story, StoryProgress, Sprint, SprintProgress, User } from '../models';
+import { StoryService, SprintService, UserService } from '../services';
+import { Story, StoryProgress, Sprint, SprintProgress, User, Upload } from '../models';
 import { SprintEditComponent } from './sprint-edit.component';
 import { SprintStorySelectorComponent } from './story/sprint-story-selector.component';
 
 @Component({
   templateUrl: './sprint-view.component.html',
   styleUrls: ['./sprint-view.component.scss'],
-  providers: [UploadService],
+  providers: [],
 })
 export class SprintViewComponent implements OnInit {
 
@@ -25,7 +24,7 @@ export class SprintViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private sprintService: SprintService,
-    public storyService: StoryService,
+    private storyService: StoryService,
     private userService: UserService,
     private dialog: MdDialog
   ) {
@@ -84,6 +83,14 @@ export class SprintViewComponent implements OnInit {
         this.sprintService.assigStoriesToSprint(this.sprint, stories);
       }
     });
+  }
+
+  uploadBackground(event) {
+    if (event.target.files) {
+      const file = event.target.files.item(0);
+      const currentUpload = new Upload(file);
+      this.sprintService.uploadSprintBackground(this.sprint, currentUpload);
+    }
   }
 
 

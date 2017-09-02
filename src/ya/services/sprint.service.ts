@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { Sprint, Story, StoryProgress, SprintProgress } from '../models';
+import { Sprint, Story, StoryProgress, SprintProgress, Upload } from '../models';
+
 import { AngularFireDatabase } from 'angularfire2/database';
+import { FirebaseApp } from 'angularfire2';
+import * as firebase from 'firebase';
 
 const SPRINTS = '/sprints';
 
@@ -9,7 +12,8 @@ const SPRINTS = '/sprints';
 export class SprintService {
 
   constructor(
-    private database: AngularFireDatabase
+    private database: AngularFireDatabase,
+    private firebaseApp: FirebaseApp,
   ) {
   }
 
@@ -272,5 +276,44 @@ export class SprintService {
     return result;
   }
 
+
+  private basePath = '/sprints';
+
+  uploadSprintBackground(sprint: Sprint, upload: Upload) {
+
+    // Get a reference to the storage service, which is used to create references in your storage bucket
+    var storage = this.firebaseApp.storage();
+
+    console.log(storage);
+
+    // Create a storage reference from our storage service
+    var storageRef = storage.ref();
+
+    console.log(storageRef);
+
+    const extension = upload.file.name.split('.').pop();
+
+    console.log(upload.file.type);
+    console.log(upload);
+    
+    
+    const uploadTask = storageRef.child(`${this.basePath}/${sprint.$key}/background.${extension}`).put(upload.file);
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+      (snapshot) => {
+        // upload in progress
+        upload.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      },
+      (error) => {
+        // upload failed
+        console.log(error);
+      },
+      () => {
+        // upload success
+        upload.url = uploadTask.snapshot.downloadURL;
+        upload.name = upload.file.name;
+        this.database.object('/sprints/' + sprint.$key).update({ backgroundUrl: upload.url });
+      }
+    );
+  }
 
 }

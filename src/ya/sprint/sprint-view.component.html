@@ -9,6 +9,10 @@
       <md-icon>edit</md-icon>
       <span>Edit</span>
     </button>
+    <button md-menu-item (click)="uploadBackground(sprint)">
+        <md-icon>image</md-icon>
+        <span>Upload background</span>
+    </button>    
     <button md-menu-item disabled>
       <md-icon>delete</md-icon>
       <span>Delete</span>
@@ -42,6 +46,8 @@
               <md-card-actions>
                 <button md-button (click)="startNewDailyMeeting()" [disabled]="!(stories?.length > 0)"><md-icon>today</md-icon> START DAILY MEETING</button>
                 <button md-button (click)="addStory()"> ADD STORY</button>
+
+                <input type="file" (change)="uploadBackground($event)">
               </md-card-actions>
             </md-card>
 
@@ -51,7 +57,7 @@
           </div>
         </div>
 
-
+    <img *ngIf="sprint?.backgroundUrl" [src]="sprint?.backgroundUrl" /> 
 
     <section-title>Burndown Chart:
       <section-title-highlight>{{(sprint)?.meetingNumber}} days</section-title-highlight>
@@ -78,9 +84,6 @@
     <section-title>
       <section-title-highlight>{{ progressHistory?.length }}</section-title-highlight> Days Schedule</section-title>
     <sprint-progress-schedule [progressHistory]="progressHistory"></sprint-progress-schedule>
-
-
-    <ya-upload></ya-upload>
   </div>
 
 </div>
