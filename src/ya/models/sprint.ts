@@ -23,6 +23,9 @@ export class Sprint {
 
     meetingNumber = 0;
 
+    background: string;
+    thumbnail: string;
+
     impediment: Story;
 
     //Index for query
