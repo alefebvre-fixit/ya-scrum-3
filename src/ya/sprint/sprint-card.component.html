@@ -2,7 +2,11 @@
   <div class="sprint-title">
     <h3>{{sprint?.name}}</h3>
   </div>
-  <img md-card-image src="assets/img/story-background.png">
+
+
+  <img *ngIf="sprint.background" md-card-image [src]="sprint.background">  
+  <img *ngIf="!sprint.background" md-card-image src="assets/img/story-background.png">
+  
   <md-progress-bar [mode]="'determinate'" [value]="progressAsPercentage()"></md-progress-bar>
   <md-list>
     <md-list-item>

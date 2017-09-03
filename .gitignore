@@ -9,6 +9,11 @@
 /node_modules
 **/node_modules/*
 
+## ignore generated JavaScript files
+functions/**/*.js
+functions/**/*.js.map
+
+
 # IDEs and editors
 /.idea
 .project

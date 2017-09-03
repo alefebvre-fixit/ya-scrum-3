@@ -28,7 +28,7 @@
               <div class="sprint-title">
                 <h3>{{sprint?.name}}</h3>
               </div>
-              <img md-card-image src="assets/img/story-background.png">
+              <img *ngIf="sprint" md-card-image [src]="sprint?.background">
               <md-progress-bar [mode]="'determinate'" [value]="progressAsPercentage()"></md-progress-bar>
               <md-card-content>
                   <md-list>
@@ -56,8 +56,6 @@
               <sprint-status [sprint]="sprint"></sprint-status>              
           </div>
         </div>
-
-    <img *ngIf="sprint?.backgroundUrl" [src]="sprint?.backgroundUrl" /> 
 
     <section-title>Burndown Chart:
       <section-title-highlight>{{(sprint)?.meetingNumber}} days</section-title-highlight>
