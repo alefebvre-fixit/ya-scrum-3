@@ -88,13 +88,10 @@ export class SprintViewComponent implements OnInit {
       const dialogRef = this.dialog.open(SprintBackgroundDialogComponent, {
         data: {
           image: file,
+          sprint: this.sprint,
         }
       });
-      //      const currentUpload = new Upload(file);
-      //    this.sprintService.uploadSprintBackground(this.sprint, currentUpload);
     }
-
-
   }
 
 

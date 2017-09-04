@@ -4,7 +4,7 @@ import { MdDialog, MdDialogRef } from '@angular/material';
 import { MD_DIALOG_DATA } from '@angular/material';
 
 import { NgxCroppieComponent } from 'ngx-croppie';
-import { CroppieOptions } from 'croppie';
+import { CroppieOptions, ResultOptions, Format } from 'croppie';
 
 import { StoryService, SprintService, UserService } from '../services';
 import { Story, StoryProgress, Sprint, SprintProgress, User } from '../models';
@@ -18,8 +18,11 @@ export class SprintBackgroundDialogComponent implements OnInit {
 
   @ViewChild('ngxCroppie') ngxCroppie: NgxCroppieComponent;
 
-  public sprint: Sprint;
+  private sprint: Sprint;
   private image: File;
+  private widthPx = '1024';
+  private heightPx = '400';
+  private croppieImage: string;
 
   constructor(
     @Inject(MD_DIALOG_DATA) public data: any,
@@ -28,19 +31,13 @@ export class SprintBackgroundDialogComponent implements OnInit {
   ) {
     if (data) {
       this.image = data.image;
+      this.sprint = data.sprint;
     }
   }
 
   cancel() {
     this.dialogRef.close(true);
   }
-
-  widthPx = '1024';
-  heightPx = '300';
-
-  croppieImage: string;
-  imageBase64: string;
-
 
   public get croppieOptions(): CroppieOptions {
     const opts: CroppieOptions = {};
@@ -69,7 +66,8 @@ export class SprintBackgroundDialogComponent implements OnInit {
   }
 
   public apply() {
-    this.imageBase64 = this.croppieImage.replace('data:image/png;base64,', '');
+      this.sprintService.uploadSprintBackgroundAsBase64(this.sprint, this.croppieImage);
+      this.dialogRef.close(true);
   }
 
 

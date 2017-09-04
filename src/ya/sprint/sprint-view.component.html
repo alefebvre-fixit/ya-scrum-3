@@ -49,11 +49,6 @@
               <md-card-actions>
                 <button md-button (click)="startNewDailyMeeting()" [disabled]="!(stories?.length > 0)"><md-icon>today</md-icon> START DAILY MEETING</button>
                 <button md-button (click)="addStory()"> ADD STORY</button>
-
-                <input type="file" name="file" id="file" class="inputfile" (change)="uploadBackground($event)" />
-                <label for="file">Choose a file</label>
-                
-
               </md-card-actions>
             </md-card>
 

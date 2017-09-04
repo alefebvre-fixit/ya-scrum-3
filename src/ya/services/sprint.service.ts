@@ -295,11 +295,11 @@ export class SprintService {
 
     console.log(upload.file.type);
     console.log(upload);
-    
-    
+
+
     const uploadTask = storageRef.child(`${this.basePath}/${sprint.$key}/background.${extension}`).put(upload.file);
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-      (snapshot) => {
+      (snapshot: any) => {
         // upload in progress
         upload.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       },
@@ -312,6 +312,34 @@ export class SprintService {
         upload.url = uploadTask.snapshot.downloadURL;
         upload.name = upload.file.name;
         this.database.object('/sprints/' + sprint.$key).update({ backgroundUrl: upload.url });
+      }
+    );
+  }
+
+  uploadSprintBackgroundAsBase64(sprint: Sprint, image: string) {
+
+
+    const imageBase64 = image.replace('data:image/png;base64,', '');
+    // Get a reference to the storage service, which is used to create references in your storage bucket
+    var storage = this.firebaseApp.storage();
+
+    // Create a storage reference from our storage service
+    var storageRef = storage.ref();
+    const uploadTask = storageRef.child(`${this.basePath}/${sprint.$key}/test.jpg`).putString(imageBase64, 'base64', { contentType: 'image/jpeg' });
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+      (snapshot: any) => {
+        // upload in progress
+        //upload.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        console.log('upload success');
+        // upload success
+        //upload.url = uploadTask.snapshot.downloadURL;
+        //upload.name = upload.file.name;
+        //this.database.object('/sprints/' + sprint.$key).update({ backgroundUrl: upload.url });
       }
     );
   }
