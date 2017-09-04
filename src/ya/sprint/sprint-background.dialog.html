@@ -1,0 +1,10 @@
+<h2 md-dialog-title>Select sprint background</h2>
+
+<md-dialog-content>
+    <ngx-croppie *ngIf="croppieImage" #ngxCroppie [croppieOptions]="croppieOptions" [imageUrl]="croppieImage" (result)="newImageResultFromCroppie($event)"></ngx-croppie>
+</md-dialog-content>
+
+<md-dialog-actions>
+    <button md-button color="primary" (click)="apply()">Apply</button>
+    <button md-button color="secondary" md-dialog-close>Close</button>
+</md-dialog-actions>

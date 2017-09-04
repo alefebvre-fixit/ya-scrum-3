@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
 import { MdDialog, MdDialogRef } from '@angular/material';
 
 import { StoryService, SprintService, UserService } from '../services';
 import { Story, StoryProgress, Sprint, SprintProgress, User, Upload } from '../models';
 import { SprintEditComponent } from './sprint-edit.component';
 import { SprintStorySelectorComponent } from './story/sprint-story-selector.component';
+import { SprintBackgroundDialogComponent } from './sprint-background.dialog';
 
 @Component({
   templateUrl: './sprint-view.component.html',
@@ -42,9 +42,6 @@ export class SprintViewComponent implements OnInit {
             this.progressHistory = this.sprintService.getSprintProgressHistory(this.sprint, this.stories);
             this.sprintService.updateProgress(this.sprint, this.stories);
           });
-
-
-
         });
       });
   }
@@ -88,10 +85,19 @@ export class SprintViewComponent implements OnInit {
   uploadBackground(event) {
     if (event.target.files) {
       const file = event.target.files.item(0);
-      const currentUpload = new Upload(file);
-      this.sprintService.uploadSprintBackground(this.sprint, currentUpload);
+      const dialogRef = this.dialog.open(SprintBackgroundDialogComponent, {
+        data: {
+          image: file,
+        }
+      });
+      //      const currentUpload = new Upload(file);
+      //    this.sprintService.uploadSprintBackground(this.sprint, currentUpload);
     }
+
+
   }
+
+
 
 
 

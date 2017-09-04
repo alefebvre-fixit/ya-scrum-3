@@ -9,9 +9,9 @@
       <md-icon>edit</md-icon>
       <span>Edit</span>
     </button>
-    <button md-menu-item (click)="uploadBackground(sprint)">
+    <button md-menu-item (click)="file.click()">
         <md-icon>image</md-icon>
-        <span>Upload background</span>
+        <span>Change Background</span>
     </button>    
     <button md-menu-item disabled>
       <md-icon>delete</md-icon>
@@ -20,7 +20,10 @@
   </md-menu>
 </md-toolbar>
 <div class=global-container>
+
+
   <div class="positioner">
+      <input type="file" accept="image/*" #file style="display:none" (change)="uploadBackground($event)">
 
       <div fxLayout="row"  fxLayoutAlign="space-around stretch">
           <div class="flex-item" fxFlex="70%">
@@ -47,7 +50,10 @@
                 <button md-button (click)="startNewDailyMeeting()" [disabled]="!(stories?.length > 0)"><md-icon>today</md-icon> START DAILY MEETING</button>
                 <button md-button (click)="addStory()"> ADD STORY</button>
 
-                <input type="file" (change)="uploadBackground($event)">
+                <input type="file" name="file" id="file" class="inputfile" (change)="uploadBackground($event)" />
+                <label for="file">Choose a file</label>
+                
+
               </md-card-actions>
             </md-card>
 

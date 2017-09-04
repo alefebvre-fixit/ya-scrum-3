@@ -5,6 +5,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import { NgxCroppieModule } from 'ngx-croppie';
 
 import { HomePageComponent } from './home-page.component';
 
@@ -16,6 +17,7 @@ import { HomePageComponent } from './home-page.component';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxCroppieModule
   ],
   declarations: [
     HomePageComponent,
