@@ -1,40 +1,66 @@
-<md-toolbar color="primary" class="section-nav-bar">
-  <span>Sprint</span>
-  <span class="toolbar-spacer"></span>
-  <button md-icon-button [mdMenuTriggerFor]="menu">
-    <md-icon>more_vert</md-icon>
-  </button>
-  <md-menu #menu="mdMenu">
-    <button md-menu-item (click)="editSprint(sprint)">
-      <md-icon>edit</md-icon>
-      <span>Edit</span>
-    </button>
-    <button md-menu-item (click)="file.click()">
-        <md-icon>image</md-icon>
-        <span>Change Background</span>
-    </button>    
-    <button md-menu-item disabled>
-      <md-icon>delete</md-icon>
-      <span>Delete</span>
-    </button>
-  </md-menu>
-</md-toolbar>
 <div class=global-container>
 
-
   <div class="positioner">
-      <input type="file" accept="image/*" #file style="display:none" (change)="uploadBackground($event)">
+    <input type="file" accept="image/*" #file style="display:none" (change)="uploadBackground($event)">
 
-      <div fxLayout="row"  fxLayoutAlign="space-around stretch">
-          <div class="flex-item" fxFlex="70%">
-            <md-card class="sprint-card">
-              <div class="sprint-title">
-                <h3>{{sprint?.name}}</h3>
-              </div>
-              <img *ngIf="sprint" md-card-image [src]="sprint?.background">
-              <md-progress-bar [mode]="'determinate'" [value]="progressAsPercentage()"></md-progress-bar>
-              <md-card-content>
-                  <md-list>
+    <md-card class="sprint-card">
+      <div class="sprint-title">
+        <h3>{{sprint?.name}}</h3>
+      </div>
+
+      <button md-icon-button [mdMenuTriggerFor]="menu" class="sprint-menu">
+          <md-icon>more_vert</md-icon>
+        </button>
+      <md-menu #menu="mdMenu">
+        <button md-menu-item (click)="editSprint(sprint)">
+            <md-icon>edit</md-icon>
+            <span>Edit</span>
+          </button>
+        <button md-menu-item (click)="file.click()">
+              <md-icon>image</md-icon>
+              <span>Change Background</span>
+          </button>
+        <button md-menu-item disabled>
+            <md-icon>delete</md-icon>
+            <span>Delete</span>
+          </button>
+      </md-menu>
+
+      <div class="image-container">
+      <div class="image-overlay">
+      </div>
+      <img *ngIf="sprint?.background" md-card-image [src]="sprint?.background">
+      </div>
+      <md-progress-bar [mode]="'determinate'" [value]="progressAsPercentage()"></md-progress-bar>
+      <md-card-content>
+        <md-list>
+          <md-list-item>
+            <ngu-letter-avatar md-list-avatar avatar-data="sprint?.name" avatar-shape='round' avatarborder='true' avatar-height="40"
+              avatar-width="40" avatar-font-size="20">
+            </ngu-letter-avatar>
+            <h3 md-line> {{sprint?.name}} </h3>
+            <p md-line>
+              <span> scrum master </span>
+            </p>
+          </md-list-item>
+        </md-list>
+      </md-card-content>
+      <md-card-actions>
+        <button md-button (click)="startNewDailyMeeting()" [disabled]="!(stories?.length > 0)"><md-icon>today</md-icon> START DAILY MEETING</button>
+        <button md-button (click)="addStory()"> ADD STORY</button>
+      </md-card-actions>
+    </md-card>
+
+    <div fxLayout="row" fxLayoutAlign="space-around stretch">
+      <div class="flex-item" fxFlex="70%">
+        <md-card class="sprint-card">
+          <div class="sprint-title">
+            <h3>{{sprint?.name}}</h3>
+          </div>
+          <img *ngIf="sprint?.background" md-card-image [src]="sprint?.background">
+          <md-progress-bar [mode]="'determinate'" [value]="progressAsPercentage()"></md-progress-bar>
+          <md-card-content>
+            <md-list>
               <md-list-item>
                 <ngu-letter-avatar md-list-avatar avatar-data="sprint?.name" avatar-shape='round' avatarborder='true' avatar-height="40"
                   avatar-width="40" avatar-font-size="20">
@@ -45,18 +71,18 @@
                 </p>
               </md-list-item>
             </md-list>
-              </md-card-content>  
-              <md-card-actions>
-                <button md-button (click)="startNewDailyMeeting()" [disabled]="!(stories?.length > 0)"><md-icon>today</md-icon> START DAILY MEETING</button>
-                <button md-button (click)="addStory()"> ADD STORY</button>
-              </md-card-actions>
-            </md-card>
+          </md-card-content>
+          <md-card-actions>
+            <button md-button (click)="startNewDailyMeeting()" [disabled]="!(stories?.length > 0)"><md-icon>today</md-icon> START DAILY MEETING</button>
+            <button md-button (click)="addStory()"> ADD STORY</button>
+          </md-card-actions>
+        </md-card>
 
-          </div>
-          <div class="flex-item" fxFlex="30%">
-              <sprint-status [sprint]="sprint"></sprint-status>              
-          </div>
-        </div>
+      </div>
+      <div class="flex-item" fxFlex="30%">
+        <sprint-status [sprint]="sprint"></sprint-status>
+      </div>
+    </div>
 
     <section-title>Burndown Chart:
       <section-title-highlight>{{(sprint)?.meetingNumber}} days</section-title-highlight>

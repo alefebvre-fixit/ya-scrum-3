@@ -1,24 +1,182 @@
-
-
-    <h1>
-        {{title}}
-    </h1>
-    <div>
-        <img [src]="imageToDisplay" alt="" />
-    </div>
-
-    <div>
-        <ngx-croppie *ngIf="croppieImage" #ngxCroppie [croppieOptions]="croppieOptions" [imageUrl]="croppieImage" (result)="newImageResultFromCroppie($event)"></ngx-croppie>
-    </div>
-    <div>
-        <input type="file" id="fileupload" #imageUpload (change)="imageUploadEvent($event)" accept="image/gif, image/jpeg, image/png"
-        />
-        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="cancelCroppieEdit()">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="saveImageFromCroppie()">Save</button>
-    </div>
-
-
-
-
-
-
+<div class="positioner">
+        
+        
+            <h1>
+                {{title}}
+            </h1>
+            <div>
+                <img [src]="imageToDisplay" alt="" />
+            </div>
+        
+            <div>
+                <ngx-croppie *ngIf="croppieImage" #ngxCroppie [croppieOptions]="croppieOptions" [imageUrl]="croppieImage" (result)="newImageResultFromCroppie($event)"></ngx-croppie>
+            </div>
+            <div>
+                <input type="file" id="fileupload" #imageUpload (change)="imageUploadEvent($event)" accept="image/gif, image/jpeg, image/png"
+                />
+                <button type="button" class="btn btn-default" data-dismiss="modal" (click)="cancelCroppieEdit()">Cancel</button>
+                <button type="button" class="btn btn-primary" (click)="saveImageFromCroppie()">Save</button>
+            </div>
+        
+        
+        
+        
+        
+            <div class="cards">
+        
+        
+        
+                <md-card class="card">
+                    <md-card-header>
+                        <md-card-title>Shiba Inu</md-card-title>
+                        <md-card-subtitle>Dog Breed</md-card-subtitle>
+                    </md-card-header>
+                    <md-card-content>
+                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
+                        ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                    </md-card-content>
+                    <md-card-actions>
+                        <button md-button>LIKE</button>
+                        <button md-button>SHARE</button>
+                    </md-card-actions>
+                </md-card>
+        
+        
+        
+                <md-card class="card">
+                    <md-card-header>
+                        <md-card-title>Shiba Inu</md-card-title>
+                        <md-card-subtitle>Dog Breed</md-card-subtitle>
+                    </md-card-header>
+                    <md-card-content>
+                        Accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae
+                        vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed
+                        quia consequuntur magni dolores eos
+                    </md-card-content>
+                    <md-card-actions>
+                        <button md-button>LIKE</button>
+                        <button md-button>SHARE</button>
+                    </md-card-actions>
+                </md-card>
+        
+        
+        
+                <md-card class="card">
+                    <md-card-header>
+                        <md-card-title>Shiba Inu</md-card-title>
+                        <md-card-subtitle>Dog Breed</md-card-subtitle>
+                    </md-card-header>
+                    <md-card-content>
+                        quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
+                    </md-card-content>
+                    <md-card-actions>
+                        <button md-button>LIKE</button>
+                        <button md-button>SHARE</button>
+                    </md-card-actions>
+                </md-card>
+        
+        
+        
+                <md-card class="card">
+                    <md-card-header>
+                        <md-card-title>Shiba Inu</md-card-title>
+                        <md-card-subtitle>Dog Breed</md-card-subtitle>
+                    </md-card-header>
+                    <md-card-content>
+                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
+                        ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
+                        voluptatem
+                    </md-card-content>
+                    <md-card-actions>
+                        <button md-button>LIKE</button>
+                        <button md-button>SHARE</button>
+                    </md-card-actions>
+                </md-card>
+        
+        
+        
+                <md-card class="card">
+                    <md-card-header>
+                        <md-card-title>Shiba Inu</md-card-title>
+                        <md-card-subtitle>Dog Breed</md-card-subtitle>
+                    </md-card-header>
+                    <md-card-content>
+                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
+                        quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
+                    </md-card-content>
+                    <md-card-actions>
+                        <button md-button>LIKE</button>
+                        <button md-button>SHARE</button>
+                    </md-card-actions>
+                </md-card>
+        
+            </div>
+        
+        </div>
+        
+        <br>
+        <br>
+        
+        
+        <div class="positioner">
+            <div class="cards">
+        
+                <md-card class="card">
+                    <md-card-header>
+                        <md-card-title>Shiba Inu</md-card-title>
+                        <md-card-subtitle>Dog Breed</md-card-subtitle>
+                    </md-card-header>
+                    <md-card-content>
+                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
+                        ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                    </md-card-content>
+                    <md-card-actions>
+                        <button md-button>LIKE</button>
+                        <button md-button>SHARE</button>
+                    </md-card-actions>
+                </md-card>
+        
+            </div>
+        
+        </div>
+        
+        <br>
+        <br>
+        
+        <div class="positioner">
+            <div class="cards">
+        
+                <md-card class="card">
+                    <md-card-header>
+                        <md-card-title>Shiba Inu</md-card-title>
+                        <md-card-subtitle>Dog Breed</md-card-subtitle>
+                    </md-card-header>
+                    <md-card-content>
+                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
+                        ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                    </md-card-content>
+                    <md-card-actions>
+                        <button md-button>LIKE</button>
+                        <button md-button>SHARE</button>
+                    </md-card-actions>
+                </md-card>
+        
+                <md-card class="card">
+                    <md-card-header>
+                        <md-card-title>Shiba Inu</md-card-title>
+                        <md-card-subtitle>Dog Breed</md-card-subtitle>
+                    </md-card-header>
+                    <md-card-content>
+                        Accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae
+                        vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed
+                        quia consequuntur magni dolores eos
+                    </md-card-content>
+                    <md-card-actions>
+                        <button md-button>LIKE</button>
+                        <button md-button>SHARE</button>
+                    </md-card-actions>
+                </md-card>
+        
+            </div>
+        
+        </div>

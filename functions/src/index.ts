@@ -27,7 +27,7 @@ export let helloWorld = functions.https.onRequest((request, response) => {
 
 
 // Max height and width of the thumbnail in pixels.
-const THUMB_MAX_HEIGHT = 200;
+const THUMB_MAX_HEIGHT = 512;
 const THUMB_MAX_WIDTH = 200;
 // Thumbnail prefix added to file names.
 const THUMB_PREFIX = 'thumb_';
@@ -85,6 +85,7 @@ export let generateThumbnail = functions.storage.object().onChange(event => {
         console.log('The file has been downloaded to', tempLocalFile);
         // Generate a thumbnail using ImageMagick.
         return process.spawn('convert', [tempLocalFile, '-thumbnail', `${THUMB_MAX_WIDTH}x${THUMB_MAX_HEIGHT}>`, tempLocalThumbFile]);
+
     }).then(() => {
         console.log('Thumbnail created at', tempLocalThumbFile);
         // Uploading the Thumbnail.
