@@ -223,7 +223,7 @@ export class SprintService {
 
   public generateBurndowData(sprint: Sprint, stories: Story[]): any {
     const result = { labels: [], datas: [] };
-    console.log('SprintService::generateBurndowData(sprint: Sprint)');
+
     result.labels = this.generateLabels(sprint);
     result.datas[0] = this.generateIdealCurve(sprint);
     result.datas[1] = this.generateActualCurve(sprint, stories);
@@ -276,56 +276,15 @@ export class SprintService {
     return result;
   }
 
-
-  private basePath = '/sprints';
-
-  uploadSprintBackground(sprint: Sprint, upload: Upload) {
-
-    // Get a reference to the storage service, which is used to create references in your storage bucket
-    var storage = this.firebaseApp.storage();
-
-    console.log(storage);
-
-    // Create a storage reference from our storage service
-    var storageRef = storage.ref();
-
-    console.log(storageRef);
-
-    const extension = upload.file.name.split('.').pop();
-
-    console.log(upload.file.type);
-    console.log(upload);
-
-
-    const uploadTask = storageRef.child(`${this.basePath}/${sprint.$key}/background.${extension}`).put(upload.file);
-    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-      (snapshot: any) => {
-        // upload in progress
-        upload.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      },
-      (error) => {
-        // upload failed
-        console.log(error);
-      },
-      () => {
-        // upload success
-        upload.url = uploadTask.snapshot.downloadURL;
-        upload.name = upload.file.name;
-        this.database.object('/sprints/' + sprint.$key).update({ backgroundUrl: upload.url });
-      }
-    );
-  }
-
   uploadSprintBackgroundAsBase64(sprint: Sprint, image: string) {
 
 
     const imageBase64 = image.replace('data:image/png;base64,', '');
-    // Get a reference to the storage service, which is used to create references in your storage bucket
-    var storage = this.firebaseApp.storage();
 
     // Create a storage reference from our storage service
-    var storageRef = storage.ref();
-    const uploadTask = storageRef.child(`${this.basePath}/${sprint.$key}/test.jpg`).putString(imageBase64, 'base64', { contentType: 'image/jpeg' });
+    const storageRef = this.firebaseApp.storage().ref();
+
+    const uploadTask = storageRef.child(`sprints/${sprint.$key}/background.jpg`).putString(imageBase64, 'base64', { contentType: 'image/jpeg' });
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       (snapshot: any) => {
         // upload in progress
@@ -336,10 +295,6 @@ export class SprintService {
       },
       () => {
         console.log('upload success');
-        // upload success
-        //upload.url = uploadTask.snapshot.downloadURL;
-        //upload.name = upload.file.name;
-        //this.database.object('/sprints/' + sprint.$key).update({ backgroundUrl: upload.url });
       }
     );
   }

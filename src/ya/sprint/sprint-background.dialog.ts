@@ -18,11 +18,11 @@ export class SprintBackgroundDialogComponent implements OnInit {
 
   @ViewChild('ngxCroppie') ngxCroppie: NgxCroppieComponent;
 
-  private sprint: Sprint;
-  private image: File;
-  private widthPx = '1024';
-  private heightPx = '400';
-  private croppieImage: string;
+  sprint: Sprint;
+  image: File;
+  widthPx = '1024';
+  heightPx = '400';
+  croppieImage: string;
 
   constructor(
     @Inject(MD_DIALOG_DATA) public data: any,

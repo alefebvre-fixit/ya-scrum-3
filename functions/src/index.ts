@@ -10,25 +10,9 @@ import * as firebase from 'firebase';
 
 admin.initializeApp(functions.config().firebase);
 
-// if you need to use the Firebase Admin SDK, uncomment the following:
-// import * as admin from 'firebase-admin'
-
-// Create and Deploy Cloud Function with TypeScript using script that is
-// defined in functions/package.json:
-//    cd functions
-//    npm run deploy
-
-export let helloWorld = functions.https.onRequest((request, response) => {
-    response.send("Hello from Firebase!\n\n");
-});
-
-
-// Include a Service Account Key to use a Signed URL
-
-
 // Max height and width of the thumbnail in pixels.
-const THUMB_MAX_HEIGHT = 512;
-const THUMB_MAX_WIDTH = 200;
+const THUMB_MAX_HEIGHT = 200;
+const THUMB_MAX_WIDTH = 512;
 // Thumbnail prefix added to file names.
 const THUMB_PREFIX = 'thumb_';
 
@@ -48,11 +32,6 @@ export let generateThumbnail = functions.storage.object().onChange(event => {
     const tempLocalDir = path.dirname(tempLocalFile);
     const tempLocalThumbFile = path.join(os.tmpdir(), thumbFilePath);
     const sprintId = fileDir.split('/').pop();
-
-    console.log(filePath);
-    console.log(fileDir);
-    console.log(fileName);
-    console.log(sprintId);
 
     // Exit if this is triggered on a file that is not an image.
     if (!event.data.contentType.startsWith('image/')) {
@@ -84,7 +63,7 @@ export let generateThumbnail = functions.storage.object().onChange(event => {
     }).then(() => {
         console.log('The file has been downloaded to', tempLocalFile);
         // Generate a thumbnail using ImageMagick.
-        return process.spawn('convert', [tempLocalFile, '-thumbnail', `${THUMB_MAX_WIDTH}x${THUMB_MAX_HEIGHT}>`, tempLocalThumbFile]);
+        return process.spawn('convert', [tempLocalFile, '-resize', `${THUMB_MAX_WIDTH}x${THUMB_MAX_HEIGHT}>`, tempLocalThumbFile]);
 
     }).then(() => {
         console.log('Thumbnail created at', tempLocalThumbFile);
@@ -117,3 +96,11 @@ export let generateThumbnail = functions.storage.object().onChange(event => {
 
     }).then(() => console.log('Thumbnail URLs saved to database.'));
 });
+
+
+function uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
