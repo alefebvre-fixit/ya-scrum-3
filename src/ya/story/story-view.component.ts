@@ -73,9 +73,7 @@ export class StoryViewComponent implements OnInit {
   editStory(story: Story) {
 
     const dialogRef = this.dialog.open(StoryEditDialogComponent, {
-      width: '800px',
-      height: '600px',
-      //panelClass: 'app-full-bleed-dialog',
+      panelClass: 'app-full-bleed-dialog',
       data: {
         story: this.story,
       }

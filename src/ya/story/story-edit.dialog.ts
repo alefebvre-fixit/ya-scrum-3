@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { MD_DIALOG_DATA } from '@angular/material';
+import { Observable } from 'rxjs/Rx';
+
 
 import { StoryService, SprintService, UserService } from '../services';
 import { Story, StoryProgress, Sprint, SprintProgress, User } from '../models';
@@ -18,6 +20,9 @@ export class StoryEditDialogComponent implements OnInit {
   storyForm: FormGroup;
   typeList: any;
   priorityList: any;
+  users: Observable<User[]>;
+  productOwner: User;
+
 
   constructor(
     @Inject(MD_DIALOG_DATA) public data: any,
@@ -35,27 +40,21 @@ export class StoryEditDialogComponent implements OnInit {
     this.typeList = this.storyService.getStoryTypes();
     this.priorityList = this.storyService.getStoryPriorities();
 
+    this.users = this.userService.findAll();
+
+    if (this.story.productOwnerId) {
+      this.userService.findOne(this.story.productOwnerId).subscribe(user => this.productOwner = user);
+    }
+
     this.storyForm = this._fb.group({
       name: [this.story.name, [<any>Validators.required]],
       description: [this.story.description, [<any>Validators.required]],
       criterias: [this.story.acceptanceCriterias, [<any>Validators.required]],
-      comment: [this.story.comment, [<any>Validators.required]],
       type: [this.story.type, [<any>Validators.required]],
       priority: [this.story.priority, [<any>Validators.required]],
-      estimate: [this.story.estimate],
-
+      estimate: [this.story.estimate, [<any>Validators.required]],
+      productOwner: [this.productOwner],
     });
-  }
-
-  assignProductOwner() {
-    /*
-    let selectorModal = this.modalCtrl.create(ProductOwnerSelectorPage, { storyId: this.story.$key });
-    selectorModal.present();
-    */
-  }
-
-  navigateToProductOwner(user: User) {
-
   }
 
   apply() {
@@ -63,10 +62,13 @@ export class StoryEditDialogComponent implements OnInit {
     this.story.name = this.storyForm.value.name;
     this.story.description = this.storyForm.value.description;
     this.story.acceptanceCriterias = this.storyForm.value.criterias;
-    this.story.comment = this.storyForm.value.comment;
     this.story.priority = this.storyForm.value.priority;
     this.story.estimate = this.storyForm.value.estimate;
     this.story.type = this.storyForm.value.type;
+
+    if (this.storyForm.value.productOwner) {
+      this.story.productOwnerId = this.storyForm.value.productOwner.$key;
+    }
 
     this.dialogRef.close(this.storyService.save(this.story));
 
@@ -74,6 +76,10 @@ export class StoryEditDialogComponent implements OnInit {
 
   cancel() {
     this.dialogRef.close();
+  }
+
+  displayFn(user: User): string {
+    return user ? user.name : '';
   }
 
 

@@ -40,8 +40,12 @@ export class ProductBacklogComponent implements OnInit {
   }
 
   addStory(): void {
-    const dialogRef = this.dialog.open(StoryEditDialogComponent, {width: '800px'});
-    dialogRef.componentInstance.story = Story.create();
+    const dialogRef = this.dialog.open(StoryEditDialogComponent, {
+      panelClass: 'app-full-bleed-dialog',
+      data: {
+        story: Story.create(),
+      }
+    });
     dialogRef.afterClosed().subscribe(key => {
       if (key) {
         this.router.navigate([`/stories/${key}`]);

@@ -1,7 +1,6 @@
 <div class="dialog-header">
     <h2 *ngIf="sprint.$key">Update Sprint</h2>
     <h2 *ngIf="!sprint.$key">Create new Sprint</h2>
-    
 </div>
 <div class="dialog-content">
     <md-dialog-content>
@@ -42,6 +41,6 @@
 <div class="dialog-action">
     <md-dialog-actions align="end">
         <button md-button color="secondary" md-dialog-close>CANCEL</button>
-        <button md-button color="primary" (click)="apply()">APPLY</button>
+        <button md-button color="primary" (click)="apply()" [disabled]="!sprintForm.valid">APPLY</button>
     </md-dialog-actions>
 </div>
