@@ -1,31 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
+import { MD_DIALOG_DATA } from '@angular/material';
 
 import { StoryService, SprintService, UserService } from '../services';
 import { Story, StoryProgress, Sprint, SprintProgress, User } from '../models';
 
 @Component({
   selector: 'sprint-edit',
-  templateUrl: './sprint-edit.component.html',
-  styleUrls: ['./sprint-edit.component.scss'],
+  templateUrl: './sprint-edit.dialog.html',
+  styleUrls: ['./sprint-edit.dialog.scss'],
 })
-export class SprintEditComponent implements OnInit {
+export class SprintEditDialogComponent implements OnInit {
 
-  public sprint: Sprint;
-  public sprintForm: FormGroup; // our model driven form
-
-  public users: Observable<User[]>;
-  public scrummaster: User;
+  sprint: Sprint;
+  users: Observable<User[]>;
+  scrummaster: User;
+  sprintForm: FormGroup;
 
   constructor(
-    public dialogRef: MdDialogRef<SprintEditComponent>,
+    @Inject(MD_DIALOG_DATA) public data: any,
+    public dialogRef: MdDialogRef<SprintEditDialogComponent>,
     public sprintService: SprintService,
     public userService: UserService,
     private _fb: FormBuilder
   ) {
+    this.sprint = data.sprint;
   }
 
   ngOnInit() {
@@ -39,8 +41,8 @@ export class SprintEditComponent implements OnInit {
     this.sprintForm = this._fb.group({
       name: [this.sprint.name, [<any>Validators.required]],
       description: [this.sprint.description, [<any>Validators.required]],
-      velocity: [this.sprint.velocity],
-      duration: [this.sprint.duration],
+      velocity: [this.sprint.velocity, [<any>Validators.required] ],
+      duration: [this.sprint.duration, [<any>Validators.required]],
       startDate: [this.sprint.startDate],
       scrummaster: [this.scrummaster],
     });

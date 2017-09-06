@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { StoryService } from '../services';
 import { Story } from '../models';
-import { StoryEditComponent } from './story-edit.component';
+import { StoryEditDialogComponent } from './story-edit.dialog';
 
 @Component({
   selector: 'product-backlog',
@@ -40,7 +40,7 @@ export class ProductBacklogComponent implements OnInit {
   }
 
   addStory(): void {
-    const dialogRef = this.dialog.open(StoryEditComponent, {width: '800px'});
+    const dialogRef = this.dialog.open(StoryEditDialogComponent, {width: '800px'});
     dialogRef.componentInstance.story = Story.create();
     dialogRef.afterClosed().subscribe(key => {
       if (key) {

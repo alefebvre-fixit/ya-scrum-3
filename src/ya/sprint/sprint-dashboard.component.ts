@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { SprintService } from '../services';
 import { Sprint } from '../models';
 
-import { SprintEditComponent } from './sprint-edit.component';
+import { SprintEditDialogComponent } from './sprint-edit.dialog';
 
 @Component({
   selector: 'sprint-dashboard',
@@ -45,8 +45,12 @@ export class SprintDashboardComponent implements OnInit {
 
 
   addSprint(): void {
-    const dialogRef = this.dialog.open(SprintEditComponent, { width: '800px' });
-    dialogRef.componentInstance.sprint = Sprint.create();
+    const dialogRef = this.dialog.open(SprintEditDialogComponent, {
+      panelClass: 'app-full-bleed-dialog',
+      data: {
+        sprint: Sprint.create(),
+      }
+    });
     dialogRef.afterClosed().subscribe(key => {
       if (key) {
         this.router.navigate([`/sprints/${key}`]);

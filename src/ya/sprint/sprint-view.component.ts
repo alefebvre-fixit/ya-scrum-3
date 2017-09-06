@@ -4,7 +4,7 @@ import { MdDialog, MdDialogRef } from '@angular/material';
 
 import { StoryService, SprintService, UserService } from '../services';
 import { Story, StoryProgress, Sprint, SprintProgress, User, Upload } from '../models';
-import { SprintEditComponent } from './sprint-edit.component';
+import { SprintEditDialogComponent } from './sprint-edit.dialog';
 import { SprintStorySelectorComponent } from './story/sprint-story-selector.component';
 import { SprintBackgroundDialogComponent } from './sprint-background.dialog';
 
@@ -67,11 +67,13 @@ export class SprintViewComponent implements OnInit {
   }
 
   editSprint(sprint: Sprint) {
-    const dialogRef = this.dialog.open(SprintEditComponent, {
-      panelClass: 'app-full-bleed-dialog'
+    const dialogRef = this.dialog.open(SprintEditDialogComponent, {
+      panelClass: 'app-full-bleed-dialog',
+      data: {
+        sprint: this.sprint,
+      }
     });
 
-    dialogRef.componentInstance.sprint = this.sprint;
     dialogRef.afterClosed().subscribe(result => {
       console.log('after close');
     });

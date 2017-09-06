@@ -7,7 +7,7 @@ import { MdDialog, MdDialogRef } from '@angular/material';
 import { StoryService, SprintService, UserService } from '../services';
 import { Story, StoryProgress, Sprint, SprintProgress, User } from '../models';
 
-import { StoryEditComponent } from './story-edit.component';
+import { StoryEditDialogComponent } from './story-edit.dialog';
 import { StoryCardComponent } from './story-card.component';
 
 @Component({
@@ -71,8 +71,16 @@ export class StoryViewComponent implements OnInit {
   }
 
   editStory(story: Story) {
-    const dialogRef = this.dialog.open(StoryEditComponent, { width: '800px' , height: '600px'});
-    dialogRef.componentInstance.story = this.story;
+
+    const dialogRef = this.dialog.open(StoryEditDialogComponent, {
+      width: '800px',
+      height: '600px',
+      //panelClass: 'app-full-bleed-dialog',
+      data: {
+        story: this.story,
+      }
+    });
+
     dialogRef.afterClosed().subscribe(result => {
       console.log('after close');
     });

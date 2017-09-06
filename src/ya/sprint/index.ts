@@ -17,7 +17,7 @@ import { SprintCardComponent } from './sprint-card.component';
 import { SprintGridComponent, SprintGridTitleDirective } from './sprint-grid.component';
 import { SprintDashboardComponent } from './sprint-dashboard.component';
 import { SprintViewComponent } from './sprint-view.component';
-import { SprintEditComponent } from './sprint-edit.component';
+import { SprintEditDialogComponent } from './sprint-edit.dialog';
 import { SprintStatusComponent } from './sprint-status.component';
 import { SprintProgressScheduleComponent } from './progress-schedule.component';
 import { SprintBurndownComponent } from './sprint-burndown.component';
@@ -59,7 +59,7 @@ import { SharedModule } from '../shared';
     SprintDashboardComponent,
     SprintViewComponent,
     SprintStatusComponent,
-    SprintEditComponent,
+    SprintEditDialogComponent,
     SprintProgressScheduleComponent,
     SprintBurndownComponent,
     SprintBackgroundDialogComponent
@@ -70,13 +70,13 @@ import { SharedModule } from '../shared';
     SprintGridTitleDirective,
     SprintDashboardComponent,
     SprintViewComponent,
-    SprintEditComponent,
+    SprintEditDialogComponent,
     SprintBackgroundDialogComponent
   ],
   providers: [
   ],
   entryComponents: [
-    SprintEditComponent, SprintBackgroundDialogComponent
+    SprintEditDialogComponent, SprintBackgroundDialogComponent
   ],
 })
 
