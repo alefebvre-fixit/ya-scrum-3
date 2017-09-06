@@ -61,7 +61,12 @@ export class SprintViewComponent implements OnInit {
   }
 
   editSprint(sprint: Sprint) {
-    const dialogRef = this.dialog.open(SprintEditComponent, { width: '800px' });
+    // const dialogRef = this.dialog.open(SprintEditComponent, {
+    //   panelClass: 'app-full-bleed-dialog'
+    // });
+
+    const dialogRef = this.dialog.open(SprintEditComponent, {
+    });
     dialogRef.componentInstance.sprint = this.sprint;
     dialogRef.afterClosed().subscribe(result => {
       console.log('after close');

@@ -1,6 +1,9 @@
-.sprint-detail-container{
-  padding: 50px;
-}
+@import '../../ya-theme';
+
+
+// .sprint-detail-container{
+//   padding: 50px;
+// }
 
 .input-full-width {
   width: 100%;
@@ -8,4 +11,11 @@
 
 .select-input{
     margin-top: 50px;
+}
+
+
+.dialog-header{
+  background-color: $blue-light;
+  color: white;
+  height: 100px;
 }

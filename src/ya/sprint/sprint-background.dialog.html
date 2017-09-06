@@ -1,5 +1,6 @@
+<div class="dialog-header">
 <h2 md-dialog-title>Select sprint background</h2>
-
+<div>
 <md-dialog-content>
     <ngx-croppie *ngIf="croppieImage" #ngxCroppie [croppieOptions]="croppieOptions" [imageUrl]="croppieImage" (result)="newImageResultFromCroppie($event)"></ngx-croppie>
 </md-dialog-content>

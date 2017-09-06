@@ -1,5 +1,8 @@
-.sprint-detail-container{
-  padding: 50px;
+@import '../../ya-theme';
+
+.dialog-header{
+  background-color: $blue-light;
+  color: red;
 }
 
 .input-full-width {

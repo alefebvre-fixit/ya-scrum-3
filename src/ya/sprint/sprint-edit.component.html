@@ -1,5 +1,11 @@
-<h2 md-dialog-title>Create new Sprint</h2>
 
+
+
+
+<div class="dialog-header">
+    <h2 md-dialog-title>Create new Sprint</h2>
+</div>
+        
 <md-dialog-content>
     <form [formGroup]="sprintForm" autocomplete="off" novalidate >
         
@@ -8,10 +14,6 @@
             <input mdInput placeholder="Title" formControlName="name">
         </md-input-container>
         </p>
-
-        <md-input-container class="input-full-width">
-            <textarea mdInput placeholder="Description" rows="8" formControlName="description"></textarea>
-        </md-input-container>
 
         <md-input-container class="input-full-width">
             <input type="number" mdInput placeholder="Team Velocity" formControlName="velocity">
@@ -31,9 +33,9 @@
     </form>
 </md-dialog-content>
 
-<md-dialog-actions>
+<md-dialog-actions align="end">
 
-    <button md-button color="primary" (click)="apply()">Apply</button>
-    <button md-button color="secondary" md-dialog-close>Close</button>
+    <button md-button color="primary" (click)="apply()">APPLY</button>
+    <button md-button color="secondary" md-dialog-close>CLOSE</button>
 
 </md-dialog-actions>

@@ -48,3 +48,7 @@
   padding-bottom: 20px;
   background-color: $background-grey;
 }
+
+.app-full-bleed-dialog .mat-dialog-container {
+  padding: 0;
+}

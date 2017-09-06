@@ -6,7 +6,6 @@ import * as os from 'os';
 import * as fs from 'fs';
 import * as admin from 'firebase-admin';
 import * as process from 'child-process-promise';
-import * as firebase from 'firebase';
 
 admin.initializeApp(functions.config().firebase);
 
@@ -96,11 +95,3 @@ export let generateThumbnail = functions.storage.object().onChange(event => {
 
     }).then(() => console.log('Thumbnail URLs saved to database.'));
 });
-
-
-function uuidv4() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-      return v.toString(16);
-    });
-  }
