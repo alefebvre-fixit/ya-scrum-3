@@ -1,21 +1,29 @@
 @import '../../ya-theme';
 
 
-// .sprint-detail-container{
-//   padding: 50px;
-// }
-
 .input-full-width {
   width: 100%;
+}
+
+.input-small-width{
+  width: 120px;
 }
 
 .select-input{
     margin-top: 50px;
 }
 
-
 .dialog-header{
   background-color: $blue-light;
   color: white;
-  height: 100px;
+  height: 65px;
+  padding: 20px;  
+}
+
+.dialog-content{
+  padding: 20px;
+}
+
+.dialog-action{
+  padding: 20px;
 }

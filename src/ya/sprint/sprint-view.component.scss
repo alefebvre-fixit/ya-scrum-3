@@ -44,13 +44,27 @@
     text-align: left;
     color: white; 
     background: $blue-gray;
-    padding: 10px;
+    padding: 5px;
     z-index: 11;    
 }
 .sprint-title > h3  {
     margin: 0;
     font-size: 200%;
 }
+
+
+.scrum-master{
+    position: absolute;
+    top: 80px;
+    left: 20px;
+    text-align: left;
+    color: white; 
+    background: $blue-gray;
+    padding: 2px;
+    z-index: 11;    
+}
+
+
 
 .metric-border{
     border-right-color: $blue-gray;

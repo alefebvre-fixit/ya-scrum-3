@@ -17,6 +17,7 @@ export class SprintViewComponent implements OnInit {
 
   public sprint: Sprint;
   public stories: Story[];
+  public scrummaster: User;
 
   public progress: SprintProgress;
   public progressHistory: SprintProgress[];
@@ -42,6 +43,11 @@ export class SprintViewComponent implements OnInit {
             this.progressHistory = this.sprintService.getSprintProgressHistory(this.sprint, this.stories);
             this.sprintService.updateProgress(this.sprint, this.stories);
           });
+
+          if (this.sprint.scrumMasterId) {
+            this.userService.findOne(this.sprint.scrumMasterId).subscribe(user => this.scrummaster = user);
+          }
+
         });
       });
   }
@@ -61,12 +67,10 @@ export class SprintViewComponent implements OnInit {
   }
 
   editSprint(sprint: Sprint) {
-    // const dialogRef = this.dialog.open(SprintEditComponent, {
-    //   panelClass: 'app-full-bleed-dialog'
-    // });
-
     const dialogRef = this.dialog.open(SprintEditComponent, {
+      panelClass: 'app-full-bleed-dialog'
     });
+
     dialogRef.componentInstance.sprint = this.sprint;
     dialogRef.afterClosed().subscribe(result => {
       console.log('after close');

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Observable } from 'rxjs/Rx';
 
 import { StoryService, SprintService, UserService } from '../services';
 import { Story, StoryProgress, Sprint, SprintProgress, User } from '../models';
@@ -16,21 +17,24 @@ export class SprintEditComponent implements OnInit {
   public sprint: Sprint;
   public sprintForm: FormGroup; // our model driven form
 
-  public typeList: any;
-  public priorityList: any;
+  public users: Observable<User[]>;
+  public scrummaster: User;
 
   constructor(
     public dialogRef: MdDialogRef<SprintEditComponent>,
     public sprintService: SprintService,
-    public storyService: StoryService,
     public userService: UserService,
     private _fb: FormBuilder
   ) {
   }
 
   ngOnInit() {
-    this.typeList = this.storyService.getStoryTypes();
-    this.priorityList = this.storyService.getStoryPriorities();
+
+    this.users = this.userService.findAll();
+
+    if (this.sprint.scrumMasterId) {
+      this.userService.findOne(this.sprint.scrumMasterId).subscribe(user => this.scrummaster = user);
+    }
 
     this.sprintForm = this._fb.group({
       name: [this.sprint.name, [<any>Validators.required]],
@@ -38,8 +42,9 @@ export class SprintEditComponent implements OnInit {
       velocity: [this.sprint.velocity],
       duration: [this.sprint.duration],
       startDate: [this.sprint.startDate],
-
+      scrummaster: [this.scrummaster],
     });
+
   }
 
   apply() {
@@ -49,6 +54,9 @@ export class SprintEditComponent implements OnInit {
     this.sprint.velocity = this.sprintForm.value.velocity;
     this.sprint.duration = this.sprintForm.value.duration;
     this.sprint.startDate = this.sprintForm.value.startDate;
+    if (this.sprintForm.value.scrummaster) {
+      this.sprint.scrumMasterId = this.sprintForm.value.scrummaster.$key;
+    }
 
     this.sprintService.save(this.sprint);
 
@@ -58,6 +66,10 @@ export class SprintEditComponent implements OnInit {
 
   cancel() {
     this.dialogRef.close(true);
+  }
+
+  displayFn(user: User): string {
+    return user ? user.name : '';
   }
 
 
