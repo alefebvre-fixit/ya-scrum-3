@@ -51,7 +51,6 @@
             </md-menu>
           </div>
 
-
           <md-card-title>{{(story)?.name}} <span><a *ngIf="sprint" [routerLink]="['/sprints', sprint.$key]" class="sprint-name">@{{(sprint)?.name}}</a></span></md-card-title>
           <md-card-subtitle>
             <ya-property-tag>#{{(story)?.type}}</ya-property-tag>
@@ -79,7 +78,7 @@
               <h3 md-line> {{productOwner?.name}} </h3>
               <p md-line>
                 <span> {{productOwner?.role}} </span>
-                <span> -- {{story?.team}} </span>
+                <span> - {{productOwner?.team}} </span>
               </p>
             </md-list-item>
           </md-list>

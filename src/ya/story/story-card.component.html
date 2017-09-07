@@ -1,9 +1,10 @@
 <md-card>
-  <md-card-title>{{(story)?.name}}</md-card-title>
+  <md-card-title>{{story?.name}}</md-card-title>
+  <md-card-subtitle><a *ngIf="sprint" [routerLink]="['/sprints', sprint.$key]" class="sprint-name">@{{(sprint)?.name}}</a></md-card-subtitle>
   <md-card-subtitle>
-    <ya-property-tag>#{{(story)?.type}}</ya-property-tag>
-    <ya-property-tag>{{(story)?.priority}} priority</ya-property-tag>
-    <ya-property-tag>{{(story)?.estimate}} points</ya-property-tag>
+    <ya-property-tag>#{{story?.type}}</ya-property-tag>
+    <ya-property-tag>{{story?.priority}} priority</ya-property-tag>
+    <ya-property-tag>{{story?.estimate}} points</ya-property-tag>
   </md-card-subtitle>
   <section>
     <md-progress-bar [mode]="'determinate'" [value]="progressAsPercentage()"></md-progress-bar>
@@ -16,17 +17,17 @@
     </md-card-content>
   </div>
   <md-list>
-    <md-list-item>
-      <ngu-letter-avatar md-list-avatar avatar-data='{{story?.name}}' avatar-shape='round' avatarborder='true' avatar-height="40"
-        avatar-width="40" avatar-font-size="20">
-      </ngu-letter-avatar>
-      <h3 md-line> {{story?.name}} </h3>
-      <p md-line>
-        <span> {{story?.name}} </span>
-        <span> -- {{story?.name}} </span>
-      </p>
-    </md-list-item>
-  </md-list>
+      <md-list-item *ngIf="productOwner !== undefined">
+        <ngu-letter-avatar md-list-avatar avatar-data='{{productOwner?.name}}' avatar-shape='round' avatarborder='true' avatar-height="40"
+          avatar-width="40" avatar-font-size="20">
+        </ngu-letter-avatar>
+        <h3 md-line> {{productOwner?.name}} </h3>
+        <p md-line>
+          <span> {{productOwner?.role}} </span>
+          <span> - {{productOwner?.team}} </span>
+        </p>
+      </md-list-item>
+    </md-list>
   <md-divider></md-divider>
   <md-card-actions>
     <button md-button color="primary" (click)="navigateToDetails(story?.$key)">LEARN MORE</button>

@@ -5,20 +5,31 @@
 </md-toolbar>
 
 <div class="positioner">
-  <md-card>
-    <form [formGroup]="account" (ngSubmit)="onSubmit()" novalidate>
-      <md-card-header>
-        <ngu-letter-avatar *ngIf="user" md-card-avatar avatar-data='{{user?.name}}' avatar-shape='round' avatarborder='true'></ngu-letter-avatar>
-        <md-card-title>{{user?.name}}</md-card-title>
-        <md-card-subtitle>{{user?.role}}</md-card-subtitle>
-      </md-card-header>
+  <md-card *ngIf="user !== undefined">
+    <form [formGroup]="accountForm" (ngSubmit)="onSubmit()" novalidate>
+      <md-list>
+        <md-list-item>
+          <ngu-letter-avatar md-list-avatar avatar-data='{{user?.name}}' avatar-shape='round' avatarborder='true' avatar-height="40"
+            avatar-width="40" avatar-font-size="20">
+          </ngu-letter-avatar>
+          <h3 md-line> {{user?.name}} </h3>
+          <p md-line>
+            <span> {{user?.role}} </span>
+            <span> - {{user?.team}} </span>
+          </p>
+        </md-list-item>
+      </md-list>
       <md-card-content>
         <md-input-container>
           <input mdInput placeholder="Role" type="text" maxlength="30" name="role" formControlName="role">
         </md-input-container>
+        <br>
+        <md-input-container>
+            <input mdInput placeholder="Team" type="text" maxlength="30" name="team" formControlName="team">
+        </md-input-container>          
       </md-card-content>
       <md-card-actions>
-        <button md-button color="primary" type="submit">SAVE</button>
+        <button md-button color="primary" type="submit" [disabled]="!accountForm.valid">SAVE</button>
       </md-card-actions>
     </form>
   </md-card>

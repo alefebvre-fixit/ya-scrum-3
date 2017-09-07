@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 import { User } from '../models';
 import { UserService } from '../services';
@@ -11,25 +11,31 @@ import { UserService } from '../services';
 })
 export class UserAccountComponent implements OnInit {
 
-  account: FormGroup;
+  accountForm: FormGroup;
   user: User;
 
   constructor(
     private userService: UserService,
+    private _fb: FormBuilder,
   ) {
-    this.account = new FormGroup({
-      role: new FormControl('Some Role'),
-    });
   }
 
   ngOnInit(): void {
-
-    this.userService.findCurrent().subscribe(user => { this.user = user; });
+    this.userService.findCurrent().subscribe(user => { this.user = user; 
+      this.accountForm = this._fb.group({
+        role: [this.user.role, [<any>Validators.required]],
+        team: [this.user.team, [<any>Validators.required]],
+      });
+    });
 
   }
 
   onSubmit() {
-    console.log(this.account);
+
+    this.user.role = this.accountForm.value.role;
+    this.user.team = this.accountForm.value.team;
+
+    this.userService.save(this.user);
   }
 
 

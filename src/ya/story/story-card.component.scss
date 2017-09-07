@@ -1,3 +1,15 @@
+@import '../../ya-theme';
+
 .story-card-content{
     height:250px;
+}
+
+.sprint-name{
+    text-decoration: none;
+    color: $grey-dark;
+    font-size: 120%;
+}
+
+md-card-title{
+    margin-bottom: 5px;
 }
