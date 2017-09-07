@@ -10,6 +10,11 @@
     margin: 0 auto;
 }
 
+.sprint-name{
+  text-decoration: none;
+  color: $grey-dark;
+  font-size: 80%;
+}
 
 .story-view-container{
   padding: 50px;
@@ -18,4 +23,13 @@
 
 .toolbar-spacer {
   flex: 1 1 auto;
+}
+
+.story-menu {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  text-align: left;
+  color: $grey-dark; 
+  z-index: 11;
 }

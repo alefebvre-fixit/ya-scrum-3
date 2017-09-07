@@ -30,7 +30,7 @@
     top: 0px;
     left: 0px;
     z-index: 10;    
-    background: linear-gradient( rgba(255,0,0,0), rgba(55, 71, 79, 0.5));
+    background: linear-gradient( rgba(0,0,0,0), rgba(0,0,0,0), rgba(255, 255, 255, 1));
 }
 
 .image-container{
@@ -43,7 +43,7 @@
     left: 20px;
     text-align: left;
     color: white; 
-    background: $blue-gray;
+    background: $blue-light;
     padding: 5px;
     z-index: 11;    
 }
@@ -59,7 +59,7 @@
     left: 20px;
     text-align: left;
     color: white; 
-    background: $blue-gray;
+    background: $blue-light;
     padding: 2px;
     z-index: 11;    
 }
@@ -67,9 +67,9 @@
 
 
 .metric-border{
-    border-right-color: $blue-gray;
-    border-right-width: 1px;
-    border-right-style: solid;
+    // border-right-color: $blue-grey;
+    // border-right-width: 1px;
+    // border-right-style: solid;
 }
 
 .metric{
@@ -79,7 +79,7 @@
     .value {
         text-align: center;
         font-size: 220%;
-        color: $grey-light;        
+        color: $blue-light;        
     }
  
     .legend {
@@ -94,7 +94,7 @@
     display: flex;
     justify-content: center;
     position: absolute;
-    background: rgba(55, 71, 79, 0.5);
+    //background: rgba(55, 71, 79, 0.5);
     
     bottom: 10px;
     left: 0px;

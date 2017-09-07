@@ -17,12 +17,11 @@ import { StoryCardComponent } from './story-card.component';
 })
 export class StoryViewComponent implements OnInit {
 
-  public story: Story;
-  public progress: StoryProgress;
-
-  public sprint: Sprint;
-  public productOwner: User;
-
+  story: Story;
+  progress: StoryProgress;
+  sprint: Sprint;
+  productOwner: User;
+  
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -49,27 +48,18 @@ export class StoryViewComponent implements OnInit {
           } else {
             this.sprint = undefined;
           }
-          if (story.productOwnerId) {
+          if (story.productOwnerId ) {
             this.userService.findOne(story.productOwnerId).subscribe(user => {
-              this.productOwner = user;
-              console.log(this.productOwner);
+              if (user.name){
+                this.productOwner = user;
+              }
             });
           } else {
             this.productOwner = undefined;
           }
-
-
-
         });
       });
   }
-
-  assignProductOwner() {
-  }
-
-  navigateToProductOwner(user: User) {
-  }
-
   editStory(story: Story) {
 
     const dialogRef = this.dialog.open(StoryEditDialogComponent, {
