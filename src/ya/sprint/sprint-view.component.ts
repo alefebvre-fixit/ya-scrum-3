@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MdDialog, MdDialogRef } from '@angular/material';
 
-import { StoryService, SprintService, UserService } from '../services';
-import { Story, StoryProgress, Sprint, SprintProgress, User, Upload } from '../models';
+import { StoryService, SprintService, UserService } from '@ya-scrum/services';
+import { Story, StoryProgress, Sprint, SprintProgress, User, Upload } from '@ya-scrum/models';
 import { SprintEditDialogComponent } from './sprint-edit.dialog';
 import { SprintStorySelectorComponent } from './story/sprint-story-selector.component';
 import { SprintBackgroundDialogComponent } from './sprint-background.dialog';

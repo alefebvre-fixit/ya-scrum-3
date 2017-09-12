@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { TdDataTableService, TdDataTableSortingOrder, ITdDataTableSortChangeEvent, ITdDataTableColumn } from '@covalent/core';
 
-import { StoryService, SprintService, UserService } from '../../services';
-import { Story, StoryProgress, Sprint, SprintProgress, User } from '../../models';
+import { StoryService, SprintService, UserService } from '@ya-scrum/services';
+import { Story, StoryProgress, Sprint, SprintProgress, User } from '@ya-scrum/models';
 
 import * as d3 from 'd3';
 import * as c3 from 'c3';

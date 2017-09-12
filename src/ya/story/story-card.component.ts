@@ -2,8 +2,8 @@ import { Component, OnInit, Input, } from '@angular/core';
 
 import { Router } from '@angular/router';
 
-import { Sprint, Story, User } from '../models';
-import { UserService, SprintService } from '../services';
+import { Sprint, Story, User } from "@ya-scrum/models";
+import { UserService, SprintService } from '@ya-scrum/services';
 
 @Component({
   selector: 'story-card',

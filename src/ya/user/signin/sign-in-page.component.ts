@@ -5,8 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
-import { SignIn } from '../../models';
-import { UserService } from '../../services';
+import { SignIn } from '@ya-scrum/models';
+import { UserService } from '@ya-scrum/services';
 
 @Component({
   selector: 'sign-in-page',

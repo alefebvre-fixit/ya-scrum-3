@@ -3,8 +3,8 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { TdDataTableService, TdDataTableSortingOrder, ITdDataTableSortChangeEvent, ITdDataTableColumn } from '@covalent/core';
 
-import { StoryService, SprintService, UserService } from '../services';
-import { Story, StoryProgress, Sprint, SprintProgress, User } from '../models';
+import { StoryService, SprintService, UserService } from '@ya-scrum/services';
+import { Story, StoryProgress, Sprint, SprintProgress, User } from '@ya-scrum/models';
 
 
 @Component({

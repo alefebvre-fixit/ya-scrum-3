@@ -37,7 +37,7 @@ import { StoryModule } from './story';
 import { SprintModule } from './sprint';
 import { AuthGuard } from './auth.service';
 
-import { StoryService, SprintService, UserService } from './services';
+import { StoryService, SprintService, UserService } from '@ya-scrum/services';
 
 import { environment } from '../environments/environment';
 

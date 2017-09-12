@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, OnChanges, ViewChild, SimpleChanges, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Story, StoryProgress } from '../../models';
-import { StoryService } from '../../services';
+import { Story, StoryProgress } from '@ya-scrum/models';
+import { StoryService } from '@ya-scrum/services';
 import * as c3 from 'c3';
 import * as d3 from 'd3';
 

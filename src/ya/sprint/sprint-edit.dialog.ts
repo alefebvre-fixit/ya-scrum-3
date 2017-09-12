@@ -5,8 +5,8 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { Observable } from 'rxjs/Rx';
 import { MD_DIALOG_DATA } from '@angular/material';
 
-import { StoryService, SprintService, UserService } from '../services';
-import { Story, StoryProgress, Sprint, SprintProgress, User } from '../models';
+import { StoryService, SprintService, UserService } from '@ya-scrum/services';
+import { Story, StoryProgress, Sprint, SprintProgress, User } from '@ya-scrum/models';
 
 @Component({
   selector: 'sprint-edit',

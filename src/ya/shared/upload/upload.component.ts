@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UploadService } from '../../services/upload.service';
-import { Upload } from '../../models/upload';
+import { UploadService } from '@ya-scrum/services';
+import { Upload } from '@ya-scrum/models';
 
 import * as _ from 'lodash';
 

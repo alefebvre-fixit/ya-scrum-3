@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Story, StoryProgress } from '../../models';
-import { StoryService } from '../../services';
+import { Story, StoryProgress } from '@ya-scrum/models';
+import { StoryService } from '@ya-scrum/services';
 
 @Component({
   selector: 'sprint-story-card-new',

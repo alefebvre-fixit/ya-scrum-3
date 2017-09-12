@@ -6,8 +6,8 @@ import { MD_DIALOG_DATA } from '@angular/material';
 import { NgxCroppieComponent } from 'ngx-croppie';
 import { CroppieOptions, ResultOptions, Format } from 'croppie';
 
-import { StoryService, SprintService, UserService } from '../services';
-import { Story, StoryProgress, Sprint, SprintProgress, User } from '../models';
+import { StoryService, SprintService, UserService } from '@ya-scrum/services';
+import { Story, StoryProgress, Sprint, SprintProgress, User } from '@ya-scrum/models';
 
 @Component({
   selector: 'sprint-background-dialog',

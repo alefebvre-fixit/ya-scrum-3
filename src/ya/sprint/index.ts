@@ -30,7 +30,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { StoryModule } from '../story';
 import { SprintStoryModule } from './story';
 
-import { SprintService } from '../services';
 import { SharedModule } from '../shared';
 
 @NgModule({

@@ -18,8 +18,6 @@ import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { StoryModule } from '../../story';
-
-import { SprintService } from '../../services';
 import { SharedModule } from '../../shared';
 
 

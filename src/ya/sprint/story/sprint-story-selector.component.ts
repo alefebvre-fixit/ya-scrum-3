@@ -4,8 +4,8 @@ import { MdDialog, MdDialogRef } from '@angular/material';
 import { TdDataTableService, TdDataTableSortingOrder, ITdDataTableSortChangeEvent, ITdDataTableColumn } from '@covalent/core';
 import { IPageChangeEvent } from '@covalent/core';
 
-import { Story, Sprint } from '../../models';
-import { StoryService, SprintService, UserService } from '../../services';
+import { Story, Sprint } from '@ya-scrum/models';
+import { StoryService, SprintService, UserService } from '@ya-scrum/services';
 
 
 @Component({

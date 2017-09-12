@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
-import { User } from '../models';
-import { UserService } from '../services';
+import { User } from '@ya-scrum/models';
+import { UserService } from '@ya-scrum/services';
 
 @Component({
   selector: 'user-account',

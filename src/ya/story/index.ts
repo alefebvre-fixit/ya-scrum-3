@@ -25,8 +25,6 @@ import { ProductBacklogComponent} from './product-backlog.component';
 import { SharedModule } from '../shared';
 import { StoryProgressModule } from './progress';
 
-import { StoryService } from '../services';
-
 @NgModule({
   imports: [
     CommonModule,

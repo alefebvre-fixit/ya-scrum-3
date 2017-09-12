@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Story } from '../models';
+import { Story } from '@ya-scrum/models';
 
 @Component({
   selector: 'story-status',

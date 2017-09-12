@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Directive} from '@angular/core';
 
-import { Sprint } from '../models';
+import { Sprint } from '@ya-scrum/models';
 
 
 @Directive({

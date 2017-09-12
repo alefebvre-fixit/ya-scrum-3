@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { Story } from '../../models';
+import { Story } from '@ya-scrum/models';
 
 @Component({
   selector: 'sprint-story-grid',

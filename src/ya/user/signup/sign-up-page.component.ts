@@ -2,13 +2,13 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
-import { SignUp } from '../../models';
+import { SignUp } from '@ya-scrum/models';
 
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
-import { UserService } from '../../services';
+import { UserService } from '@ya-scrum/services';
 
 @Component({
   selector: 'sign-up-page',
