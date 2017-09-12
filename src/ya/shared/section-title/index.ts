@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SectionTitleComponent, SectionTitleHighlight } from './section-title.component';
+import { SectionTitleComponent, SectionTitleHighlight, SectionButtonBar } from './section-title.component';
 import { MdIconModule } from '@angular/material';
 
 @NgModule({
@@ -10,11 +10,13 @@ import { MdIconModule } from '@angular/material';
   ],
   declarations: [
     SectionTitleComponent,
-     SectionTitleHighlight
+     SectionTitleHighlight,
+     SectionButtonBar
     ],
   exports: [
     SectionTitleComponent,
-     SectionTitleHighlight
+     SectionTitleHighlight,
+     SectionButtonBar
     ],
   entryComponents: [],
   providers: []

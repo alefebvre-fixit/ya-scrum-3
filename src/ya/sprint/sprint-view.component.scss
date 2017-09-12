@@ -44,60 +44,27 @@
     text-align: left;
     color: white; 
     background: $blue-light;
-    padding: 5px;
+    padding: 8px;
     z-index: 11;    
-}
-.sprint-title > h3  {
-    margin: 0;
     font-size: 200%;
 }
-
 
 .scrum-master{
     position: absolute;
     top: 80px;
     left: 20px;
     text-align: left;
-    color: white; 
+    color: $grey-light; 
     background: $blue-light;
-    padding: 2px;
-    z-index: 11;    
-}
-
-
-
-.metric-border{
-    // border-right-color: $blue-grey;
-    // border-right-width: 1px;
-    // border-right-style: solid;
-}
-
-.metric{
-    width: 130px;
-    text-align: center;
-    box-sizing: border-box; 
-    .value {
-        text-align: center;
-        font-size: 220%;
-        color: $blue-light;        
-    }
- 
-    .legend {
-        text-align: center;
-        font-size: 100%;
-        color: $grey-medium;
-        text-transform: uppercase;        
-    }
+    padding: 8px;
+    z-index: 11;  
+    font-size: 140%    
 }
 
 .metrics{
-    display: flex;
-    justify-content: center;
+    display: block;
     position: absolute;
-    //background: rgba(55, 71, 79, 0.5);
-    
-    bottom: 10px;
-    left: 0px;
-    right: 0px;
-
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
 }

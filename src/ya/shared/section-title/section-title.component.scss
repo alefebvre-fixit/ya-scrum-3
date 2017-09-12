@@ -2,6 +2,7 @@
 
 
   h1, h2 {
+    margin-bottom: 5px;
     color: $title-grey;
     span{
       color: $blue-light;
@@ -17,3 +18,16 @@
   }
 
   
+.container{
+  display: flex;
+  width:100%;
+  margin-bottom: 20px;  
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: $grey-medium-low;
+}
+
+.menu {
+  vertical-align: middle;
+  align-self: center;
+}

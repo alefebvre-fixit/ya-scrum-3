@@ -5,11 +5,11 @@
 
     <md-card class="sprint-card">
       <div class="sprint-title">
-        <h3>{{sprint?.name}}</h3>
+        {{sprint?.name}}
       </div>
 
       <div class="scrum-master">
-          <h4>@{{scrummaster?.name}}</h4>
+          @{{scrummaster?.name}}
       </div>
 
       <div class="sprint-menu">
@@ -36,57 +36,27 @@
 
       <div class="image-container">
         <div class="image-overlay">
-
           <div class="metrics">
-
-            <div class="metric metric-border">
-              <span class="value">3</span>
-              <br>
-              <span class="legend">Day</span>
-            </div>
-
-            <div class="metric metric-border">
-              <span class="value">{{progressAsPercentage() | number:'1.0-0' }}%</span>
-              <br>
-              <span class="legend">Progress</span>
-            </div>
-
-            <div class="metric metric-border">
-              <span class="value">{{stories?.length}}</span>
-              <br>
-              <span class="legend">story</span>
-            </div>
-
-            <div class="metric metric-border">
-              <span class="value">{{sprint?.estimate}}</span>
-              <br>
-              <span class="legend">estimate</span>
-            </div>
-
-            <div class="metric">
-              <span class="value">{{sprint?.velocity}}</span>
-              <br>
-              <span class="legend">velocity</span>
-            </div>
-
+              <ya-property-tag>day :: {{(sprint)?.meetingNumber}}</ya-property-tag>
+              <ya-property-tag>progress :: {{progressAsPercentage() | number:'1.0-0' }}%</ya-property-tag>
+              <ya-property-tag>stories :: {{stories?.length}} stories</ya-property-tag>
+              <ya-property-tag>estimate :: {{sprint?.estimate}}</ya-property-tag>
+              <ya-property-tag>velocity :: {{sprint?.velocity}}</ya-property-tag>
           </div>
-
-
-
         </div>
         <img *ngIf="sprint?.background" md-card-image [src]="sprint?.background">
       </div>
       <md-progress-bar [mode]="'determinate'" [value]="progressAsPercentage()"></md-progress-bar>
-      <md-card-actions>
-        <button md-button (click)="startNewDailyMeeting()" [disabled]="!(stories?.length > 0)" color="accent"><md-icon>today</md-icon> START DAILY MEETING</button>
-        <button md-button (click)="addStory()" color="accent"> ADD STORY</button>
+      <md-card-actions align="end">
+        <button md-button (click)="startNewDailyMeeting()" [disabled]="!(stories?.length > 0)" color="primary"><md-icon>today</md-icon> START DAILY MEETING</button>
       </md-card-actions>
     </md-card>
 
     <section-title>Burndown Chart:
       <section-title-highlight>{{(sprint)?.meetingNumber}} days</section-title-highlight>
+      <section-button-bar><button md-icon-button (click)="addStory()"><md-icon>fullscreen</md-icon></button></section-button-bar>
     </section-title>
-
+    
     <div fxLayout fxLayoutWrap="wrap" fxLayoutAlign="start start">
       <div class="flex-item" fxFlex="5%">
       </div>
@@ -96,10 +66,10 @@
       <div class="flex-item" fxFlex="5%">
       </div>
     </div>
-
-
+    
     <section-title>Sprint Backlog:
       <section-title-highlight>{{ stories?.length }} stories</section-title-highlight>
+      <section-button-bar><button md-icon-button (click)="addStory()"><md-icon>add</md-icon></button></section-button-bar>      
     </section-title>
 
     <sprint-story-grid [stories]="stories" (onAdd)="addStory()"></sprint-story-grid>

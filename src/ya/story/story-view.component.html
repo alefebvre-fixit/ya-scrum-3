@@ -1,28 +1,3 @@
-<md-toolbar color="primary" class="section-nav-bar">
-  <span>Story</span>
-  <span class="toolbar-spacer"></span>
-
-  <button md-icon-button [mdMenuTriggerFor]="menu">
-    <md-icon>more_vert</md-icon>
-  </button>
-  <md-menu #menu="mdMenu">
-    <button md-menu-item (click)="editStory(story)">
-      <md-icon>edit</md-icon>
-      <span>Edit</span>
-    </button>
-    <button md-menu-item [disabled]="!story?.$key && story?.status==='new'" (click)="deleteStory(story)">
-      <md-icon>delete</md-icon>
-      <span>Delete</span>
-    </button>
-    <button md-menu-item [disabled]="!story" (click)="unassignStory(story)">
-      <md-icon>close</md-icon>
-      <span>Unassign</span>
-    </button>
-  </md-menu>
-
-</md-toolbar>
-
-
 <div class="global-container">
   <div class="positioner">
     <div fxLayout fxLayoutWrap="wrap" fxLayout.xs="column" fxLayoutAlign="start start" fxLayoutAlign.xs="start">
