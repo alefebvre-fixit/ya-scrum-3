@@ -11,7 +11,7 @@ import { ProgressEditComponent } from './progress-edit.component';
 
 
 @Component({
-  selector: 'story-progress-schedule',
+  selector: 'ya-story-progress-schedule',
   templateUrl: './progress-schedule.component.html',
   styleUrls: ['./progress-schedule.component.scss'],
 })

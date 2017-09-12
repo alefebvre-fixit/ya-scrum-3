@@ -3,7 +3,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Story } from '@ya-scrum/models';
 
 @Component({
-  selector: 'sprint-story-grid',
+  selector: 'ya-sprint-story-grid',
   templateUrl: './sprint-story-grid.component.html',
   styleUrls: ['./sprint-story-grid.component.scss']
 })

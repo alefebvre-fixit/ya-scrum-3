@@ -10,7 +10,7 @@ import { Story, StoryProgress, Sprint, SprintProgress, User } from '@ya-scrum/mo
 import * as c3 from 'c3';
 
 @Component({
-  selector: 'sprint-burndown',
+  selector: 'ya-sprint-burndown',
   templateUrl: './sprint-burndown.component.html',
   styleUrls: ['./sprint-burndown.component.scss'],
 })

@@ -6,26 +6,26 @@
 
 <div class="page-container">
 
-  <sprint-grid [sprints]="sprintsProgress">
-    <sprint-grid-title>
-      <section-title>
-        <section-title-highlight>{{ sprintsProgress?.length }}</section-title-highlight> sprints in progress</section-title>
-    </sprint-grid-title>
-  </sprint-grid>
+  <ya-sprint-grid [sprints]="sprintsProgress">
+    <ya-sprint-grid-title>
+      <ya-section-title>
+        <ya-section-title-highlight>{{ sprintsProgress?.length }}</ya-section-title-highlight> sprints in progress</ya-section-title>
+    </ya-sprint-grid-title>
+  </ya-sprint-grid>
 
-  <sprint-grid [sprints]="sprintsPending">
-    <sprint-grid-title>
-      <section-title>
-        <section-title-highlight>{{ sprintsPending?.length }}</section-title-highlight> upcoming sprints</section-title>
-    </sprint-grid-title>
-  </sprint-grid>
+  <ya-sprint-grid [sprints]="sprintsPending">
+    <ya-sprint-grid-title>
+      <ya-section-title>
+        <ya-section-title-highlight>{{ sprintsPending?.length }}</ya-section-title-highlight> upcoming sprints</ya-section-title>
+    </ya-sprint-grid-title>
+  </ya-sprint-grid>
 
-  <sprint-grid [sprints]="sprintsClosed">
-    <sprint-grid-title>
-      <section-title>
-        <section-title-highlight>{{ sprintsPending?.length }}</section-title-highlight> sprints completed</section-title>
-    </sprint-grid-title>
-  </sprint-grid>
+  <ya-sprint-grid [sprints]="sprintsClosed">
+    <ya-sprint-grid-title>
+      <ya-section-title>
+        <ya-section-title-highlight>{{ sprintsPending?.length }}</ya-section-title-highlight> sprints completed</ya-section-title>
+    </ya-sprint-grid-title>
+  </ya-sprint-grid>
 
 
 </div>

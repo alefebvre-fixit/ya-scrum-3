@@ -8,7 +8,7 @@ import { Story, StoryProgress, Sprint, SprintProgress, User } from '@ya-scrum/mo
 
 
 @Component({
-  selector: 'sprint-progress-schedule',
+  selector: 'ya-sprint-progress-schedule',
   templateUrl: './progress-schedule.component.html',
   styleUrls: ['./progress-schedule.component.scss'],
 })

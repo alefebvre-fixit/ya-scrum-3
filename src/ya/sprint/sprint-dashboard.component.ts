@@ -8,7 +8,6 @@ import { Sprint } from '@ya-scrum/models';
 import { SprintEditDialogComponent } from './sprint-edit.dialog';
 
 @Component({
-  selector: 'sprint-dashboard',
   templateUrl: './sprint-dashboard.component.html',
   styleUrls: ['./sprint-dashboard.component.scss']
 })

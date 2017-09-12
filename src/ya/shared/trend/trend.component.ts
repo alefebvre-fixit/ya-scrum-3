@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
 @Component({
-  selector: 'trend',
+  selector: 'ya-trend',
   templateUrl: './trend.component.html',
   styleUrls: ['./trend.component.scss'],
 })

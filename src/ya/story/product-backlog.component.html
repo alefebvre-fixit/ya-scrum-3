@@ -6,25 +6,25 @@
 
 <div class="page-container">
 
-  <story-grid [stories]="storiesInProgress">
-    <story-grid-title>
-      <section-title>
-        <section-title-highlight>{{ storiesInProgress?.length }}</section-title-highlight> story in progress</section-title>
-    </story-grid-title>
-  </story-grid>
+  <ya-story-grid [stories]="storiesInProgress">
+    <ya-story-grid-title>
+      <ya-section-title>
+        <ya-section-title-highlight>{{ storiesInProgress?.length }}</ya-section-title-highlight> story in progress</ya-section-title>
+    </ya-story-grid-title>
+  </ya-story-grid>
 
-  <story-grid [stories]="storiesPending">
-    <story-grid-title>
-      <section-title>
-        <section-title-highlight>{{ storiesPending?.length }}</section-title-highlight> new story</section-title>
-    </story-grid-title>
-  </story-grid>
+  <ya-story-grid [stories]="storiesPending">
+    <ya-story-grid-title>
+      <ya-section-title>
+        <ya-section-title-highlight>{{ storiesPending?.length }}</ya-section-title-highlight> new story</ya-section-title>
+    </ya-story-grid-title>
+  </ya-story-grid>
 
-  <story-grid [stories]="storiesClosed">
-    <story-grid-title>
-      <section-title>
-        <section-title-highlight>{{ storiesClosed?.length }}</section-title-highlight> story closed</section-title>
-    </story-grid-title>
-  </story-grid>
+  <ya-story-grid [stories]="storiesClosed">
+    <ya-story-grid-title>
+      <ya-section-title>
+        <ya-section-title-highlight>{{ storiesClosed?.length }}</ya-section-title-highlight> story closed</ya-section-title>
+    </ya-story-grid-title>
+  </ya-story-grid>
 
 </div>

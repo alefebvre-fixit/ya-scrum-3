@@ -6,7 +6,7 @@ import { StoryService, SprintService, UserService } from '@ya-scrum/services';
 import { Story, StoryProgress, Sprint, SprintProgress, User } from '@ya-scrum/models';
 
 @Component({
-  selector: 'sprint-status',
+  selector: 'ya-sprint-status',
   templateUrl: './sprint-status.component.html',
   styleUrls: ['./sprint-status.component.scss'],
 })

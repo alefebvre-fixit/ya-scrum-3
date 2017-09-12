@@ -10,7 +10,6 @@ import { StoryService, SprintService, UserService } from '@ya-scrum/services';
 import { Story, StoryProgress, Sprint, SprintProgress, User } from '@ya-scrum/models';
 
 @Component({
-  selector: 'sprint-background-dialog',
   templateUrl: './sprint-background.dialog.html',
   styleUrls: ['./sprint-background.dialog.scss'],
 })

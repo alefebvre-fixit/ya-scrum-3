@@ -4,7 +4,7 @@ import { Sprint } from '@ya-scrum/models';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'sprint-card',
+  selector: 'ya-sprint-card',
   templateUrl: './sprint-card.component.html',
   styleUrls: ['./sprint-card.component.scss']
 })

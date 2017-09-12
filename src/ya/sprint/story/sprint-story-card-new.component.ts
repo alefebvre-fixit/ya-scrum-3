@@ -5,7 +5,7 @@ import { Story, StoryProgress } from '@ya-scrum/models';
 import { StoryService } from '@ya-scrum/services';
 
 @Component({
-  selector: 'sprint-story-card-new',
+  selector: 'ya-sprint-story-card-new',
   templateUrl: './sprint-story-card-new.component.html',
   styleUrls: ['./sprint-story-card-new.component.scss']
 })

@@ -7,18 +7,15 @@ import { StoryService, SprintService, UserService } from '@ya-scrum/services';
 import { Story, StoryProgress, Sprint, SprintProgress, User } from '@ya-scrum/models';
 
 @Component({
-  selector: 'story-progress-edit',
   templateUrl: './progress-edit.component.html',
   styleUrls: ['./progress-edit.component.scss'],
-  providers: [ UserService ]
+  providers: [UserService]
 })
 export class ProgressEditComponent implements OnInit {
 
   public story: Story;
   public progress: StoryProgress;
-
-  public storyForm: FormGroup; // our model driven form
-
+  public storyForm: FormGroup;
 
   constructor(
     public dialogRef: MdDialogRef<ProgressEditComponent>,
@@ -29,20 +26,16 @@ export class ProgressEditComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.storyForm = this._fb.group({
       daily: [this.progress.daily, [<any>Validators.required]],
     });
   }
 
   apply() {
-
     this.progress = this.storyService.setDailyProgress(this.story, this.progress, this.storyForm.value.daily);
     this.storyService.assignDailyProgress(this.story, this.progress);
     this.storyService.save(this.story);
-
     this.dialogRef.close(true);
-
   }
 
   cancel() {

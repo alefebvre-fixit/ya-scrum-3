@@ -7,7 +7,7 @@ import * as c3 from 'c3';
 import * as d3 from 'd3';
 
 @Component({
-  selector: 'sprint-story-card',
+  selector: 'ya-sprint-story-card',
   templateUrl: './sprint-story-card.component.html',
   styleUrls: ['./sprint-story-card.component.scss']
 })

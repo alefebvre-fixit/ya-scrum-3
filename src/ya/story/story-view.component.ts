@@ -11,7 +11,6 @@ import { StoryEditDialogComponent } from './story-edit.dialog';
 import { StoryCardComponent } from './story-card.component';
 
 @Component({
-  selector: 'story-view',
   templateUrl: './story-view.component.html',
   styleUrls: ['./story-view.component.scss'],
 })

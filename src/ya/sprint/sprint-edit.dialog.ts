@@ -9,7 +9,6 @@ import { StoryService, SprintService, UserService } from '@ya-scrum/services';
 import { Story, StoryProgress, Sprint, SprintProgress, User } from '@ya-scrum/models';
 
 @Component({
-  selector: 'sprint-edit',
   templateUrl: './sprint-edit.dialog.html',
   styleUrls: ['./sprint-edit.dialog.scss'],
 })

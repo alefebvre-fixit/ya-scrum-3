@@ -52,31 +52,36 @@
       </md-card-actions>
     </md-card>
 
-    <section-title>Burndown Chart:
-      <section-title-highlight>{{(sprint)?.meetingNumber}} days</section-title-highlight>
-      <section-button-bar><button md-icon-button (click)="addStory()"><md-icon>fullscreen</md-icon></button></section-button-bar>
-    </section-title>
+    <ya-section-title>Burndown Chart:
+      <ya-section-title-highlight>{{(sprint)?.meetingNumber}} days</ya-section-title-highlight>
+      <ya-section-button-bar><button md-icon-button (click)="addStory()"><md-icon>fullscreen</md-icon></button></ya-section-button-bar>
+    </ya-section-title>
     
     <div fxLayout fxLayoutWrap="wrap" fxLayoutAlign="start start">
       <div class="flex-item" fxFlex="5%">
       </div>
       <div class="flex-item" fxFlex="90%">
-        <sprint-burndown [stories]="stories" [sprint]="sprint"></sprint-burndown>
+        <ya-sprint-burndown [stories]="stories" [sprint]="sprint"></ya-sprint-burndown>
       </div>
       <div class="flex-item" fxFlex="5%">
       </div>
     </div>
     
-    <section-title>Sprint Backlog:
-      <section-title-highlight>{{ stories?.length }} stories</section-title-highlight>
-      <section-button-bar><button md-icon-button (click)="addStory()"><md-icon>add</md-icon></button></section-button-bar>      
-    </section-title>
+    <ya-section-title>
+      Sprint Backlog:
+      <ya-section-title-highlight>{{ stories?.length }} stories</ya-section-title-highlight>
+      <ya-section-button-bar><button md-icon-button (click)="addStory()"><md-icon>add</md-icon></button></ya-section-button-bar>      
+    </ya-section-title>
 
-    <sprint-story-grid [stories]="stories" (onAdd)="addStory()"></sprint-story-grid>
+    <ya-sprint-story-grid [stories]="stories" (onAdd)="addStory()"></ya-sprint-story-grid>
 
-    <section-title>
-      <section-title-highlight>{{ progressHistory?.length }}</section-title-highlight> Days Schedule</section-title>
-    <sprint-progress-schedule [progressHistory]="progressHistory"></sprint-progress-schedule>
+    <ya-section-title>
+      <ya-section-title-highlight>{{ progressHistory?.length }}</ya-section-title-highlight>
+      Days Schedule
+    </ya-section-title>
+
+    <ya-sprint-progress-schedule [progressHistory]="progressHistory"></ya-sprint-progress-schedule>
+  
   </div>
 
 </div>

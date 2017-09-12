@@ -2,11 +2,11 @@ import { Component, OnInit, Input, } from '@angular/core';
 
 import { Router } from '@angular/router';
 
-import { Sprint, Story, User } from "@ya-scrum/models";
+import { Sprint, Story, User } from '@ya-scrum/models';
 import { UserService, SprintService } from '@ya-scrum/services';
 
 @Component({
-  selector: 'story-card',
+  selector: 'ya-story-card',
   templateUrl: './story-card.component.html',
   styleUrls: ['./story-card.component.scss']
 })

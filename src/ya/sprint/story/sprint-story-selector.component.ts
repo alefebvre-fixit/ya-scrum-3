@@ -9,7 +9,6 @@ import { StoryService, SprintService, UserService } from '@ya-scrum/services';
 
 
 @Component({
-  selector: 'sprint-story-selector',
   templateUrl: './sprint-story-selector.component.html',
   styleUrls: ['./sprint-story-selector.component.scss']
 })
@@ -27,8 +26,6 @@ export class SprintStorySelectorComponent implements OnInit {
   ];
 
   filteredData: any[] = this.stories;
-  //filteredTotal: number = this.stories?.length;
-
   searchTerm = '';
   fromRow = 1;
   sortBy = 'priority';

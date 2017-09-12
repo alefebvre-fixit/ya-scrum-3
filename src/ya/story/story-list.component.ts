@@ -5,7 +5,7 @@ import { TdDataTableService, TdDataTableSortingOrder, ITdDataTableSortChangeEven
 import { IPageChangeEvent } from '@covalent/core';
 
 @Component({
-  selector: 'story-list',
+  selector: 'ya-story-list',
   templateUrl: './story-list.component.html',
   styleUrls: ['./story-list.component.scss']
 })
@@ -23,8 +23,6 @@ export class StoryListComponent implements OnChanges, OnInit {
   ];
 
   filteredData: any[] = this.stories;
-  //filteredTotal: number = this.stories?.length;
-
   searchTerm: string = '';
   fromRow: number = 1;
   sortBy: string = 'priority';

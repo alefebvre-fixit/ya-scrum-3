@@ -4,12 +4,12 @@ import { Story } from '@ya-scrum/models';
 
 
 @Directive({
-  selector: 'story-grid-title',
+  selector: 'ya-story-grid-title',
 })
 export class StoryGridTitleDirective {}
 
 @Component({
-  selector: 'story-grid',
+  selector: 'ya-story-grid',
   templateUrl: './story-grid.component.html',
   styleUrls: ['./story-grid.component.scss']
 })

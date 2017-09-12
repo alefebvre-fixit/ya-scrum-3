@@ -10,7 +10,7 @@ import * as d3 from 'd3';
 import * as c3 from 'c3';
 
 @Component({
-  selector: 'story-progress-view',
+  selector: 'ya-story-progress-view',
   templateUrl: './progress-view.component.html',
   styleUrls: ['./progress-view.component.scss'],
   providers: []

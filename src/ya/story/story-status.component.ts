@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Story } from '@ya-scrum/models';
 
 @Component({
-  selector: 'story-status',
+  selector: 'ya-story-status',
   templateUrl: './story-status.component.html',
   styleUrls: ['./story-status.component.scss'],
 })
