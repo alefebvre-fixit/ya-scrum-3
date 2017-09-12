@@ -3,6 +3,10 @@
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
     "baseUrl": "src",
+    "paths": {
+      "@ya-scrum/models": ["ya/core/models"],
+      "@ya-scrum/services": ["ya/core/services"]
+    },
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
