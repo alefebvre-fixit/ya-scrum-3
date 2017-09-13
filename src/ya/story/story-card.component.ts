@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { Router } from '@angular/router';
 
@@ -8,7 +8,7 @@ import { UserService, SprintService } from '@ya-scrum/services';
 @Component({
   selector: 'ya-story-card',
   templateUrl: './story-card.component.html',
-  styleUrls: ['./story-card.component.scss']
+  styleUrls: ['./story-card.component.scss'],
 })
 export class StoryCardComponent implements OnInit {
 

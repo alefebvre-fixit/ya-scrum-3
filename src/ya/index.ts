@@ -37,7 +37,7 @@ import { StoryModule } from './story';
 import { SprintModule } from './sprint';
 import { AuthGuard } from './auth.service';
 
-import { StoryService, SprintService, UserService } from '@ya-scrum/services';
+import { StoryService, SprintService, UserService, ThemeService } from '@ya-scrum/services';
 
 import { environment } from '../environments/environment';
 
@@ -76,7 +76,7 @@ import { environment } from '../environments/environment';
     RouterModule.forRoot(ROUTES),
 
   ],
-  providers: [UserService, StoryService, SprintService, AuthGuard],
+  providers: [UserService, StoryService, SprintService, AuthGuard, ThemeService],
   bootstrap: [YaComponent]
 })
 export class YaModule { }

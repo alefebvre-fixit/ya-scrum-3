@@ -1,18 +1,16 @@
 @import '../../ya-theme';
 
+.ya-properties{
+    padding-left: 16px;
+}
 
+.card-header{
+    background-color: $blue-grey;
+    height: 120px;
+}
 
-md-card{
-    border-color: #CDDC39;
-    border-top-width: 2px;
-    border-top-style: solid;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-
-    border-bottom-width: 5px;
-    border-bottom-style: solid;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;    
+md-card-title{
+    color: $blue-grey-text;
 }
 
 .story-card-content{
@@ -21,8 +19,8 @@ md-card{
 
 .sprint-name{
     text-decoration: none;
-    color: $grey-dark;
-    font-size: 120%;
+    color: $blue-grey-light;
+    font-size: 130%;
 }
 
 md-card-title{

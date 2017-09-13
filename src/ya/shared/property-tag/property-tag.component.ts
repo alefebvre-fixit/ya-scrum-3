@@ -1,4 +1,6 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, } from '@angular/core';
+import { ThemeService } from '@ya-scrum/services';
+import { Theme } from '@ya-scrum/models';
 
 @Component({
   selector: 'ya-property-tag',
@@ -7,8 +9,14 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 })
 export class PropertyTagComponent {
 
-  constructor(
-  ) {
+  @Input() color: string;
+
+  get textColor(): string {
+    if (this.color) {
+      return this.color;
+    } else {
+      return '#03a9f4';
+    }
   }
 
 }

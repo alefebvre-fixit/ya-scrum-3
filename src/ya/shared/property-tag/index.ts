@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PropertyTagComponent } from './property-tag.component';
+import { HighlightTagComponent } from './highlight-tag.component';
 import { MdIconModule } from '@angular/material';
 
 @NgModule({
@@ -8,8 +9,8 @@ import { MdIconModule } from '@angular/material';
     CommonModule,
     MdIconModule
   ],
-  declarations: [PropertyTagComponent],
-  exports: [PropertyTagComponent],
+  declarations: [PropertyTagComponent, HighlightTagComponent],
+  exports: [PropertyTagComponent, HighlightTagComponent],
   entryComponents: [],
   providers: []
 })
