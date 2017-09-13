@@ -1,7 +1,31 @@
+@import '../../../ya-theme';
+
+
 .story-card{
     margin: 16px;
     min-width:300px;
     max-width:400px;
+}
+
+.ya-properties{
+    padding-left: 16px;
+}
+
+.card-header{
+    background-color: $blue-grey;
+    height: 95px;
+}
+
+md-card-title{
+    color: $blue-grey-text;
+    margin-bottom: 10px;
+
+}
+
+.sprint-name{
+    text-decoration: none;
+    color: $blue-grey-light;
+    font-size: 130%;
 }
 
 .story-card-content{

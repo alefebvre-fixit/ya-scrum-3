@@ -12,8 +12,8 @@
 
 .sprint-name{
   text-decoration: none;
-  color: $grey-dark;
-  font-size: 80%;
+  color: $blue-grey-light;
+  font-size: 130%;
 }
 
 .story-view-container{
@@ -30,6 +30,21 @@
   top: 20px;
   right: 20px;
   text-align: left;
-  color: $grey-dark; 
+  color: $blue-grey-light; 
   z-index: 11;
 }
+
+.ya-properties{
+  padding-left: 16px;
+}
+
+.card-header{
+  background-color: $blue-grey;
+  height: 120px;
+}
+
+md-card-title{
+  color: $blue-grey-text;
+  margin-bottom: 5px;
+}
+

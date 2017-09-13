@@ -1,18 +1,20 @@
 <md-card class="story-card">
-    <md-card-title>{{(story)?.name}}</md-card-title>
-    <md-card-subtitle>
-      <ya-property-tag>#{{(story)?.type}}</ya-property-tag>
-      <ya-property-tag>{{(story)?.priority}} priority</ya-property-tag>
-      <ya-property-tag>{{(story)?.estimate}} points</ya-property-tag>
-    </md-card-subtitle>
-    <!-- <md-divider></md-divider>-->
-  <div class="story-card-content">  
+  <div class="card-header">
+    <md-card-title>{{story?.name}}</md-card-title>
+    <span class="ya-properties">
+      <ya-highlight-tag theme="cyan">#{{story?.type}}</ya-highlight-tag>
+      <ya-property-tag color="#ffffff">{{story?.priority}} priority</ya-property-tag>
+      <ya-property-tag color="#ffffff">{{story?.estimate}} points</ya-property-tag>
+    </span>
+  </div>
+  <!-- <md-divider></md-divider>-->
+  <div class="story-card-content">
     <div class="chart-container">
-      <div id="{{story?.$key}}"></div> 
+      <div id="{{story?.$key}}"></div>
     </div>
     <div class="points-container">
       <span class="point-value">{{ progress?.daily }} points</span><br><span class="point-label"> completed today</span>
-    </div> 
+    </div>
   </div>
   <md-card-actions>
     <button md-button (click)="navigateToDetails(story?.$key)" class="detail-button">DETAILS</button>

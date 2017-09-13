@@ -11,10 +11,7 @@
 
 md-card-title{
     color: $blue-grey-text;
-}
-
-.story-card-content{
-    height:250px;
+    margin-bottom: 5px;
 }
 
 .sprint-name{
@@ -23,6 +20,6 @@ md-card-title{
     font-size: 130%;
 }
 
-md-card-title{
-    margin-bottom: 5px;
+.story-card-content{
+    height:250px;
 }
