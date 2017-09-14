@@ -20,7 +20,7 @@ export class StoryViewComponent implements OnInit {
   progress: StoryProgress;
   sprint: Sprint;
   productOwner: User;
-  
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -47,9 +47,9 @@ export class StoryViewComponent implements OnInit {
           } else {
             this.sprint = undefined;
           }
-          if (story.productOwnerId ) {
+          if (story.productOwnerId) {
             this.userService.findOne(story.productOwnerId).subscribe(user => {
-              if (user.name){
+              if (user.name) {
                 this.productOwner = user;
               }
             });
@@ -59,6 +59,7 @@ export class StoryViewComponent implements OnInit {
         });
       });
   }
+
   editStory(story: Story) {
 
     const dialogRef = this.dialog.open(StoryEditDialogComponent, {
@@ -93,9 +94,7 @@ export class StoryViewComponent implements OnInit {
         }
       });
     }
-
   }
-
 
   unassignStory(story: Story) {
 

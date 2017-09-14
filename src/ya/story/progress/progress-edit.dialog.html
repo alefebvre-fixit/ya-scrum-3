@@ -1,0 +1,51 @@
+<div class="dialog-header">
+    <h2>Edit Progress - Day {{progress?.day}}</h2>
+</div>
+
+<div class="dialog-content">
+
+    <md-dialog-content>
+        <form [formGroup]="storyForm" autocomplete="off" novalidate>
+
+            <p>
+                <md-input-container class="input-width" color="accent">
+                    <input type="number" mdInput placeholder="Daily Progress" formControlName="daily">
+                </md-input-container>
+            </p>
+
+            <md-chip-list>
+                <table class="key-value-table">
+                    <tbody>
+                        <tr>
+                            <td>Previous</td>
+                            <td>
+                                <md-chip class="value-chip previous">{{progress?.previous}}</md-chip>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Daily</td>
+                            <td>
+                                <md-chip class="value-chip daily">{{progress?.daily}}</md-chip>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Remaining</td>
+                            <td>
+                                <md-chip class="value-chip remaining">{{progress?.remaining}}</md-chip>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </md-chip-list>
+
+        </form>
+    </md-dialog-content>
+</div>
+
+
+<div class="dialog-action">
+    <md-dialog-actions align="end">
+        <button md-button color="secondary" md-dialog-close>CANCEL</button>
+        <button md-button color="accent" (click)="apply()">APPLY</button>
+    </md-dialog-actions>
+</div>

@@ -1,28 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { MD_DIALOG_DATA } from '@angular/material';
 
 import { StoryService, SprintService, UserService } from '@ya-scrum/services';
 import { Story, StoryProgress, Sprint, SprintProgress, User } from '@ya-scrum/models';
 
+
 @Component({
-  templateUrl: './progress-edit.component.html',
-  styleUrls: ['./progress-edit.component.scss'],
+  templateUrl: './progress-edit.dialog.html',
+  styleUrls: ['./progress-edit.dialog.scss'],
   providers: [UserService]
 })
-export class ProgressEditComponent implements OnInit {
+export class ProgressEditDialogComponent implements OnInit {
 
   public story: Story;
   public progress: StoryProgress;
   public storyForm: FormGroup;
 
   constructor(
-    public dialogRef: MdDialogRef<ProgressEditComponent>,
-    public sprintService: SprintService,
-    public storyService: StoryService,
+    @Inject(MD_DIALOG_DATA) public data: any,
+    private dialogRef: MdDialogRef<ProgressEditDialogComponent>,
+    private sprintService: SprintService,
+    private storyService: StoryService,
     private _fb: FormBuilder
   ) {
+    this.story = data.story;
+    this.progress = data.progress;
   }
 
   ngOnInit() {

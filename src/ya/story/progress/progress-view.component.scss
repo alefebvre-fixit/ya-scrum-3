@@ -1,5 +1,17 @@
 @import '../../../ya-theme';
 
+@import '../../../ya-theme';
+
+
+.card-header{
+    background-color: $blue-grey;
+}
+
+md-card-title{
+    color: $blue-grey-text;
+    padding-bottom: 16px;
+}
+
 
 .daily{
     color:white !important;

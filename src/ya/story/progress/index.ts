@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CovalentDataTableModule } from '@covalent/core';
 
 import { StoryProgressScheduleComponent} from './progress-schedule.component';
-import { ProgressEditComponent} from './progress-edit.component';
+import { ProgressEditDialogComponent} from './progress-edit.dialog';
 import { ProgressViewComponent} from './progress-view.component';
 
 import { SharedModule } from '../../shared';
@@ -24,16 +24,16 @@ import { SharedModule } from '../../shared';
   ],
   declarations: [
     StoryProgressScheduleComponent,
-    ProgressEditComponent,
+    ProgressEditDialogComponent,
     ProgressViewComponent,
   ],
   exports: [
     StoryProgressScheduleComponent,
-    ProgressEditComponent,
+    ProgressEditDialogComponent,
     ProgressViewComponent,
   ],
   entryComponents: [
-    ProgressEditComponent,
+    ProgressEditDialogComponent,
   ],
   providers: [
   ]
@@ -42,5 +42,5 @@ import { SharedModule } from '../../shared';
 export class StoryProgressModule { }
 
 export { StoryProgressScheduleComponent } from './progress-schedule.component';
-export { ProgressEditComponent } from './progress-edit.component';
+export { ProgressEditDialogComponent } from './progress-edit.dialog';
 export { ProgressViewComponent } from './progress-view.component';

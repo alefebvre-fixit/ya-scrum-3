@@ -1,13 +1,11 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-
 import { MdDialog, MdDialogRef } from '@angular/material';
+
 import { TdDataTableService, TdDataTableSortingOrder, ITdDataTableSortChangeEvent, ITdDataTableColumn } from '@covalent/core';
 
 import { StoryService, SprintService, UserService } from '@ya-scrum/services';
 import { Story, StoryProgress, Sprint, SprintProgress, User } from '@ya-scrum/models';
-
-
-import { ProgressEditComponent } from './progress-edit.component';
+import { ProgressEditDialogComponent } from './progress-edit.dialog';
 
 
 @Component({
@@ -21,6 +19,7 @@ export class StoryProgressScheduleComponent implements OnInit, OnChanges {
 
   data: any[] = [
   ];
+
   columns: ITdDataTableColumn[] = [
     { name: 'day', label: 'Day #', tooltip: 'Sprint Day', numeric: false },
     { name: 'remaining', label: 'Remaining', numeric: true },
@@ -49,13 +48,17 @@ export class StoryProgressScheduleComponent implements OnInit, OnChanges {
   }
 
   private edit(progress: StoryProgress) {
-    console.log(progress);
 
-    const dialogRef = this.dialog.open(ProgressEditComponent, { width: '800px' });
-    dialogRef.componentInstance.story = this.story;
-    dialogRef.componentInstance.progress = progress;
+    const dialogRef = this.dialog.open(ProgressEditDialogComponent, {
+      panelClass: 'app-full-bleed-dialog',
+      data: {
+        story: this.story,
+        progress: progress,
+      }
+    });
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log('after close');
     });
 
   }
