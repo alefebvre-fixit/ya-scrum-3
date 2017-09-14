@@ -6,6 +6,7 @@ export class Story {
     name: string;
     status: string;
     type: string;
+    theme: string;
 
     description: string;
     acceptanceCriterias: string;

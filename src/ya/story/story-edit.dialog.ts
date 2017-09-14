@@ -6,7 +6,7 @@ import { MD_DIALOG_DATA } from '@angular/material';
 import { Observable } from 'rxjs/Rx';
 
 
-import { StoryService, SprintService, UserService } from '@ya-scrum/services';
+import { StoryService, SprintService, UserService, ThemeService } from '@ya-scrum/services';
 import { Story, StoryProgress, Sprint, SprintProgress, User } from '@ya-scrum/models';
 
 @Component({
@@ -21,7 +21,7 @@ export class StoryEditDialogComponent implements OnInit {
   priorityList: any;
   users: Observable<User[]>;
   productOwner: User;
-
+  themeList: any;
 
   constructor(
     @Inject(MD_DIALOG_DATA) public data: any,
@@ -29,6 +29,7 @@ export class StoryEditDialogComponent implements OnInit {
     public sprintService: SprintService,
     public storyService: StoryService,
     public userService: UserService,
+    private themeService: ThemeService,
     private _fb: FormBuilder
   ) {
     this.story = data.story;
@@ -38,6 +39,7 @@ export class StoryEditDialogComponent implements OnInit {
 
     this.typeList = this.storyService.getStoryTypes();
     this.priorityList = this.storyService.getStoryPriorities();
+    this.themeList = this.themeService.findAllThemeNames();
 
     this.users = this.userService.findAll();
 
@@ -52,6 +54,7 @@ export class StoryEditDialogComponent implements OnInit {
       type: [this.story.type, [<any>Validators.required]],
       priority: [this.story.priority, [<any>Validators.required]],
       estimate: [this.story.estimate, [<any>Validators.required]],
+      theme: [this.story.theme, [<any>Validators.required]],
       productOwner: [this.productOwner],
     });
   }
@@ -64,7 +67,8 @@ export class StoryEditDialogComponent implements OnInit {
     this.story.priority = this.storyForm.value.priority;
     this.story.estimate = this.storyForm.value.estimate;
     this.story.type = this.storyForm.value.type;
-
+    this.story.theme = this.storyForm.value.theme;
+    
     if (this.storyForm.value.productOwner) {
       this.story.productOwnerId = this.storyForm.value.productOwner.$key;
     }

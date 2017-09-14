@@ -28,10 +28,35 @@ export class ThemeService {
     '#BDBDBD',
   );
 
+  private pink = new Theme(
+    '#C2185B',
+    '#E91E63',
+    '#F8BBD0',
+    '#FFFFFF',
+    '#607D8B',
+    '#212121',
+    '#757575',
+    '#BDBDBD',
+  );
+
+  private purple = new Theme(
+    '#7B1FA2',
+    '#9C27B0',
+    '#E1BEE7',
+    '#FFFFFF',
+    '#607D8B',
+    '#212121',
+    '#757575',
+    '#BDBDBD',
+  );
+
+
 
   private themes = {
     'cyan': this.cyan,
     'teal': this.teal,
+    'pink': this.pink,
+    'purple': this.purple,
     'default': this.teal,
   };
 
@@ -45,6 +70,10 @@ export class ThemeService {
       return this.themes['default'];
     }
 
+  }
+
+  public findAllThemeNames(): string[] {
+    return ['cyan', 'teal', 'pink', 'purple'];
   }
 
 }

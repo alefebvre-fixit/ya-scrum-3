@@ -8,12 +8,22 @@
     <md-dialog-content>
         <form [formGroup]="storyForm" autocomplete="off" novalidate>
             <p>
-                <md-input-container class="input-full-width">
+                <md-input-container style="width:60%">
                     <input mdInput placeholder="Title" formControlName="name">
                 </md-input-container>
+                <md-select placeholder="Type" formControlName="type" style="width:15%">
+                    <md-option *ngFor="let type of typeList" [value]="type.key">
+                        {{type.value}}
+                    </md-option>
+                </md-select>
+                <md-select placeholder="Theme" formControlName="theme"  style="width:15%">
+                    <md-option *ngFor="let theme of themeList" [value]="theme">
+                        {{theme}}
+                    </md-option>
+                </md-select>
             </p>
-            <p>
-                <md-input-container>
+            <p>                
+                <md-input-container style="width:40%">
                     <input type="text" mdInput placeholder="Product Owner" formControlName="productOwner" [mdAutocomplete]="auto">
                 </md-input-container>
                 <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
@@ -21,19 +31,12 @@
                         {{ user.name }}
                     </md-option>
                 </md-autocomplete>
-            </p>
-            <p>
-                <md-select placeholder="Type" formControlName="type">
-                    <md-option *ngFor="let type of typeList" [value]="type.key">
-                        {{type.value}}
-                    </md-option>
-                </md-select>
-                <md-select placeholder="Priority" formControlName="priority">
+                <md-select placeholder="Priority" formControlName="priority" style="width:20%">
                     <md-option *ngFor="let priority of priorityList" [value]="priority.key">
                         {{priority.value}}
                     </md-option>
                 </md-select>
-                <md-input-container>
+                <md-input-container style="width:20%">
                     <input type="number" mdInput placeholder="estimate" formControlName="estimate">
                 </md-input-container>
             </p>

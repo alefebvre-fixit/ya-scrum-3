@@ -20,7 +20,8 @@ export class StoryCardComponent implements OnInit {
   constructor(
     private router: Router,
     private sprintService: SprintService,
-    private userService: UserService) {
+    private userService: UserService
+  ) {
   }
 
   ngOnInit() {
