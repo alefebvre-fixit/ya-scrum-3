@@ -8,9 +8,6 @@
       <ya-property-tag color="#ffffff">{{story?.estimate}} points</ya-property-tag>
     </span>
   </div>
-  <section>
-    <md-progress-bar [mode]="'determinate'" [value]="progressAsPercentage()"></md-progress-bar>
-  </section>
   <div class="story-card-content">
     <md-card-content>
       <p>
@@ -18,20 +15,24 @@
       </p>
     </md-card-content>
   </div>
-  <md-list>
-      <md-list-item *ngIf="productOwner !== undefined">
-        <ngu-letter-avatar md-list-avatar avatar-data='{{productOwner?.name}}' avatar-shape='round' avatarborder='true' avatar-height="40"
-          avatar-width="40" avatar-font-size="20">
-        </ngu-letter-avatar>
-        <h3 md-line> {{productOwner?.name}} </h3>
-        <p md-line>
-          <span> {{productOwner?.role}} </span>
-          <span> - {{productOwner?.team}} </span>
-        </p>
-      </md-list-item>
-    </md-list>
-  <md-divider></md-divider>
+  <md-card-content>
+    <md-progress-bar [mode]="'determinate'" [value]="progressAsPercentage()" color="accent"></md-progress-bar>
+  </md-card-content>
   <md-card-actions>
     <button md-button color="accent" (click)="navigateToDetails(story?.$key)">LEARN MORE</button>
   </md-card-actions>
 </md-card>
+
+
+<!-- <md-list>
+  <md-list-item *ngIf="productOwner !== undefined">
+    <ngu-letter-avatar md-list-avatar avatar-data='{{productOwner?.name}}' avatar-shape='round' avatarborder='true' avatar-height="40"
+      avatar-width="40" avatar-font-size="20">
+    </ngu-letter-avatar>
+    <h3 md-line> {{productOwner?.name}} </h3>
+    <p md-line>
+      <span> {{productOwner?.role}} </span>
+      <span> - {{productOwner?.team}} </span>
+    </p>
+  </md-list-item>
+</md-list> -->
