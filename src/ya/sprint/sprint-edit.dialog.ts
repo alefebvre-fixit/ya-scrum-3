@@ -40,9 +40,10 @@ export class SprintEditDialogComponent implements OnInit {
     this.sprintForm = this._fb.group({
       name: [this.sprint.name, [<any>Validators.required]],
       description: [this.sprint.description, [<any>Validators.required]],
-      velocity: [this.sprint.velocity, [<any>Validators.required] ],
+      velocity: [this.sprint.velocity, [<any>Validators.required]],
       duration: [this.sprint.duration, [<any>Validators.required]],
       startDate: [this.sprint.startDate],
+      endDate: [this.sprint.endDate],
       scrummaster: [this.scrummaster],
     });
 
@@ -55,12 +56,13 @@ export class SprintEditDialogComponent implements OnInit {
     this.sprint.velocity = this.sprintForm.value.velocity;
     this.sprint.duration = this.sprintForm.value.duration;
     this.sprint.startDate = this.sprintForm.value.startDate;
+    this.sprint.endDate = this.sprintForm.value.endDate;
+
     if (this.sprintForm.value.scrummaster) {
       this.sprint.scrumMasterId = this.sprintForm.value.scrummaster.$key;
     }
 
     this.sprintService.save(this.sprint);
-
     this.dialogRef.close(true);
 
   }

@@ -8,8 +8,12 @@
         {{sprint?.name}}
       </div>
 
-      <div class="scrum-master">
+      <!-- <div class="scrum-master">
           @{{scrummaster?.name}}
+      </div> -->
+
+      <div class="sprint-date">
+          {{sprint?.startDate | date}} - {{sprint?.endDate | date}}
       </div>
 
       <div class="sprint-menu">
@@ -37,11 +41,11 @@
       <div class="image-container">
         <div class="image-overlay">
           <div class="metrics">
-              <ya-property-tag>day :: {{(sprint)?.meetingNumber}}</ya-property-tag>
-              <ya-property-tag>progress :: {{progressAsPercentage() | number:'1.0-0' }}%</ya-property-tag>
-              <ya-property-tag>stories :: {{stories?.length}} stories</ya-property-tag>
-              <ya-property-tag>estimate :: {{sprint?.estimate}}</ya-property-tag>
-              <ya-property-tag>velocity :: {{sprint?.velocity}}</ya-property-tag>
+              <ya-highlight-tag theme="light-blue" class="highlight">day: {{(sprint)?.meetingNumber}}</ya-highlight-tag>
+              <ya-highlight-tag theme="light-blue"  class="highlight">progress: {{progressAsPercentage() | number:'1.0-0' }}%</ya-highlight-tag>
+              <ya-highlight-tag theme="light-blue">stories: {{stories?.length}} </ya-highlight-tag>
+              <ya-highlight-tag theme="light-blue">estimate: {{sprint?.estimate}}</ya-highlight-tag>
+              <ya-highlight-tag theme="light-blue">velocity: {{sprint?.velocity}}</ya-highlight-tag>
           </div>
         </div>
         <img *ngIf="sprint?.background" md-card-image [src]="sprint?.background">

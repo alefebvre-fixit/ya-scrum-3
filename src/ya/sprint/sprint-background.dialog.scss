@@ -2,6 +2,9 @@
 
 .dialog-header{
   background-color: $blue-light;
+  color: white;
+  height: 65px;
+  padding: 20px;  
 }
 
 .input-full-width {
@@ -10,4 +13,12 @@
 
 .select-input{
     margin-top: 50px;
+}
+
+.dialog-content{
+  padding: 20px;
+}
+
+.dialog-action{
+  padding: 20px;
 }

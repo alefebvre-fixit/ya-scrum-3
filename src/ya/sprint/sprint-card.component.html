@@ -1,8 +1,10 @@
 <md-card class="sprint-card">
-  <md-card-header (click)="navigateToDetails(sprint?.$key)">
-    <md-card-title>{{sprint?.name}}</md-card-title>
-    <md-card-subtitle>{{sprint?.startDate | date}} - {{sprint?.endDate | date}}</md-card-subtitle>
-  </md-card-header>
+  <div class="card-header">
+    <md-card-header (click)="navigateToDetails(sprint?.$key)">
+      <md-card-title>{{sprint?.name}}</md-card-title>
+      <md-card-subtitle>{{sprint?.startDate | date}} - {{sprint?.endDate | date}}</md-card-subtitle>
+    </md-card-header>
+  </div>
   <img *ngIf="sprint.thumbnail" md-card-image [src]="sprint.thumbnail">
   <img *ngIf="!sprint.thumbnail" md-card-image src="assets/img/story-background.png">
   <md-card-content>

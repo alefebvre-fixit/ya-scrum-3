@@ -18,7 +18,6 @@ export class SprintViewComponent implements OnInit {
   public sprint: Sprint;
   public stories: Story[];
   public scrummaster: User;
-
   public progress: SprintProgress;
   public progressHistory: SprintProgress[];
 
@@ -60,12 +59,6 @@ export class SprintViewComponent implements OnInit {
     this.sprintService.startNewDailyMeeting(this.sprint, this.stories);
   }
 
-  assignProductOwner() {
-  }
-
-  navigateToProductOwner(user: User) {
-  }
-
   editSprint(sprint: Sprint) {
     const dialogRef = this.dialog.open(SprintEditDialogComponent, {
       panelClass: 'app-full-bleed-dialog',
@@ -97,6 +90,7 @@ export class SprintViewComponent implements OnInit {
     if (event.target.files) {
       const file = event.target.files.item(0);
       const dialogRef = this.dialog.open(SprintBackgroundDialogComponent, {
+        panelClass: 'sprint-background-dialog',
         data: {
           image: file,
           sprint: this.sprint,
