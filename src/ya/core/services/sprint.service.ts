@@ -122,6 +122,15 @@ export class SprintService {
           sprint.estimate += story.estimate;
         }
 
+        sprint.storyNumber = sprint.storyNumber + 1;
+        
+
+        // if (existingJoin) {
+        //   sprint.storyNumber = sprint.storyNumber +
+        // } else {
+        //   sprint.storyNumber = 1;
+        // }
+
         this.database.object('/storyPerSprint/' + sprint.$key).update(join);
         this.database.object('/stories/' + story.$key).update({
           sprintId: sprint.$key,
@@ -129,7 +138,8 @@ export class SprintService {
           filter_status: Sprint.getFilterStatus('assigned'),
           progress: 0,
           duration: sprint.duration,
-          history: story.history
+          history: story.history,
+          storyNumber: sprint.storyNumber
         });
 
         this.database.object('/sprints/' + sprint.$key).update({ estimate: sprint.estimate });

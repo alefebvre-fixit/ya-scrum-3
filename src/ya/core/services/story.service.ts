@@ -138,7 +138,7 @@ export class StoryService {
   }
 
 
-  public delete(story: Story)  {
+  public delete(story: Story) {
     return this.database.object('/stories/' + story.$key).remove();
   }
 
@@ -172,10 +172,17 @@ export class StoryService {
         sprint.remaining = 0;
       };
 
+      if (sprint.storyNumber !== undefined && sprint.storyNumber > 0) {
+        sprint.storyNumber = --sprint.storyNumber;
+      } else {
+        sprint.storyNumber = 0;
+      }
+
       this.database.object(`/sprints/${sprintId}`).update({
         estimate: sprint.estimate,
         progress: sprint.progress,
         remaining: sprint.remaining,
+        storyNumber: sprint.storyNumber
       });
     });
 

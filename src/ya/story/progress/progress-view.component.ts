@@ -96,6 +96,7 @@ export class ProgressViewComponent implements OnInit, OnChanges {
       },
       donut: {
         title: StoryProgress.progressAsPercentage(this.progress) + '%',
+        width: 15,
         label: {
           show: false
         }
@@ -111,8 +112,8 @@ export class ProgressViewComponent implements OnInit, OnChanges {
       },
       color: {
         pattern: [
-          '#1565c0',
-          '#03a9f4',
+          '#455A64',
+          '#546e7a',
           '#ededed',
         ]
       },

@@ -24,4 +24,8 @@ export class SprintCardComponent {
     return Sprint.progressAsPercentage(this.sprint);
   }
 
+  public dayToGo(): number {
+    return this.sprint.duration  - this.sprint.meetingNumber;
+  }
+
 }

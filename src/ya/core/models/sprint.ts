@@ -25,8 +25,10 @@ export class Sprint {
 
     background: string;
     thumbnail: string;
+    storyNumber = 0;
 
     impediment: Story;
+
 
     //Index for query
     //http://stackoverflow.com/questions/26700924/query-based-on-multiple-where-clauses-in-firebase
@@ -78,7 +80,7 @@ export class Sprint {
             progress = sprint.progress;
         }
 
-        return (progress / sprint.estimate) * 100;
+        return Math.round((progress / sprint.estimate) * 100);
 
     }
 

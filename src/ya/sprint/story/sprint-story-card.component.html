@@ -2,12 +2,11 @@
   <div class="card-header">
     <md-card-title>{{story?.name}}</md-card-title>
     <span class="ya-properties">
-      <ya-highlight-tag theme="cyan">#{{story?.type}}</ya-highlight-tag>
+      <ya-highlight-tag [theme]="story.theme">#{{story?.type}}</ya-highlight-tag>
       <ya-property-tag color="#ffffff">{{story?.priority}} priority</ya-property-tag>
       <ya-property-tag color="#ffffff">{{story?.estimate}} points</ya-property-tag>
     </span>
   </div>
-  <!-- <md-divider></md-divider>-->
   <div class="story-card-content">
     <div class="chart-container">
       <div id="{{story?.$key}}"></div>

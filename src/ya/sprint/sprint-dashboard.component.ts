@@ -28,6 +28,7 @@ export class SprintDashboardComponent implements OnInit {
 
 
   ngOnInit(): void {
+    
     this.sprintService.findByStatus('pending').subscribe((sprints: Sprint[]) => {
       this.sprintsPending = sprints;
     });

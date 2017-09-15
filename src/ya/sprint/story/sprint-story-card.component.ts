@@ -82,8 +82,8 @@ export class SprintStoryCardComponent implements OnInit, OnChanges, AfterViewIni
     this.chart = c3.generate({
       bindto: '#' + this.story.$key,
       size: {
-        width: 250,
-        height: 250
+        width: 240,
+        height: 240
       },
       data: {
         columns: [
@@ -99,6 +99,7 @@ export class SprintStoryCardComponent implements OnInit, OnChanges, AfterViewIni
       },
       donut: {
         title: StoryProgress.progressAsPercentage(this.progress) + '%',
+        width: 15,
         label: {
           show: false
         }
@@ -114,8 +115,8 @@ export class SprintStoryCardComponent implements OnInit, OnChanges, AfterViewIni
       },
       color: {
         pattern: [
-          '#1565c0',
-          '#03a9f4',
+          '#455A64',
+          '#546e7a',
           '#ededed',
         ]
       },
@@ -125,4 +126,11 @@ export class SprintStoryCardComponent implements OnInit, OnChanges, AfterViewIni
     });
 
   }
+
+
+
+  // $blue-grey: #546e7a;
+  // $blue-grey-text: #FFFFFF;
+  // $blue-grey-light:  #CFD8DC;
+  // $blue-grey-dark: #455A64;
 }

@@ -38,6 +38,7 @@ export class StoryViewComponent implements OnInit {
       .map(params => params['id'])
       .subscribe((id) => {
         this.storyService.findOne(id).subscribe(story => {
+
           this.story = story;
 
           if (story.sprintId) {

@@ -1,20 +1,23 @@
 @import '../../ya-theme';
 
-.sprint-card{
-    margin: 16px;
+
+md-card-header {
+  background-color: $blue-light;
+  cursor:pointer;
 }
 
-.sprint-title {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  text-align: left;
-  color: white; 
-  background: $blue-grey;
-  padding: 10px; 
+img{
+  cursor:pointer;  
 }
-.sprint-title > h3  {
-  margin: 0;
-  color: white;
-  font-size: 100%;
+
+md-card-title {
+  color: $blue-light-text !important;
+  margin-bottom: 10px;
+  font-size: 130% !important;
 }
+
+md-card-subtitle {
+  color: $blue-light-light !important;
+  font-size: 100% !important;
+}
+
