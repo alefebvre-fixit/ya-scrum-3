@@ -7,36 +7,38 @@
         <md-dialog-content>
 
             <p>
-                <md-input-container class="input-full-width">
+                <md-form-field class="input-full-width">
                     <input mdInput placeholder="Title" formControlName="name">
-                </md-input-container>
+                </md-form-field>
             </p>
             <p>
-                <md-input-container style="width:200px">
+                <md-form-field style="width:200px">
                     <input type="number" mdInput placeholder="Team Velocity" formControlName="velocity">
-                </md-input-container>
+                </md-form-field>
 
-                <md-input-container style="width:200px">
+                <md-form-field style="width:200px">
                     <input type="number" mdInput placeholder="Duration" formControlName="duration">
-                </md-input-container>
+                </md-form-field>
             </p>
             <p>
-                <md-input-container style="width:200px">
-                    <input mdInput [mdDatepicker]="pickerStartDate" placeholder="Start Date" formControlName="startDate">
-                    <button mdSuffix [mdDatepickerToggle]="pickerStartDate"></button>
-                </md-input-container>
-                <md-datepicker #pickerStartDate></md-datepicker>
 
-                <md-input-container style="width:200px">
+                <md-form-field style="width:200px">
+                    <input mdInput [mdDatepicker]="pickerStartDate" placeholder="Start Date" formControlName="startDate">
+                    <md-datepicker-toggle mdSuffix [for]="pickerStartDate"></md-datepicker-toggle>
+                    <md-datepicker #pickerStartDate></md-datepicker>
+                </md-form-field>
+
+                <md-form-field style="width:200px">
                     <input mdInput [mdDatepicker]="pickerEndDate" placeholder="End Date" formControlName="endDate">
-                    <button mdSuffix [mdDatepickerToggle]="pickerEndDate"></button>
-                </md-input-container>
-                <md-datepicker #pickerEndDate></md-datepicker>
+                    <md-datepicker-toggle mdSuffix [for]="pickerEndDate"></md-datepicker-toggle>
+                    <md-datepicker #pickerEndDate></md-datepicker>
+                </md-form-field>
+
             </p>
             <p>
-                <md-input-container style="width:200px">
+                <md-form-field style="width:200px">
                     <input type="text" mdInput placeholder="Scrum Master" formControlName="scrummaster" [mdAutocomplete]="auto">
-                </md-input-container>
+                </md-form-field>
             </p>
             <p>
                 <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">

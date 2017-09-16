@@ -20,13 +20,13 @@
         </md-list-item>
       </md-list>
       <md-card-content>
-        <md-input-container>
+        <md-form-field>
           <input mdInput placeholder="Role" type="text" maxlength="30" name="role" formControlName="role">
-        </md-input-container>
+        </md-form-field>
         <br>
-        <md-input-container>
+        <md-form-field>
             <input mdInput placeholder="Team" type="text" maxlength="30" name="team" formControlName="team">
-        </md-input-container>          
+        </md-form-field>          
       </md-card-content>
       <md-card-actions>
         <button md-button color="primary" type="submit" [disabled]="!accountForm.valid">SAVE</button>

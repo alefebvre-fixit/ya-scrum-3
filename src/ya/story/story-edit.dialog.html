@@ -7,9 +7,9 @@
     <div class="dialog-content">
         <md-dialog-content>
             <p>
-                <md-input-container style="width:60%">
+                <md-form-field style="width:60%">
                     <input mdInput placeholder="Title" formControlName="name">
-                </md-input-container>
+                </md-form-field>
                 <md-select placeholder="Type" formControlName="type" style="width:15%">
                     <md-option *ngFor="let type of typeList" [value]="type.key">
                         {{type.value}}
@@ -22,29 +22,29 @@
                 </md-select>
             </p>
             <p>
-                <md-input-container style="width:40%">
+                <md-form-field style="width:40%">
                     <input type="text" mdInput placeholder="Product Owner" formControlName="productOwner" [mdAutocomplete]="auto">
-                </md-input-container>
+                </md-form-field>
                 <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
                     <md-option *ngFor="let user of users | async" [value]="user">
                         {{ user.name }}
                     </md-option>
                 </md-autocomplete>
-                <md-input-container style="width:20%">
+                <md-form-field style="width:20%">
                     <input type="number" mdInput placeholder="priority" formControlName="priority">
-                </md-input-container>
-                <md-input-container style="width:20%">
+                </md-form-field>
+                <md-form-field style="width:20%">
                     <input type="number" mdInput placeholder="estimate" formControlName="estimate">
-                </md-input-container>
+                </md-form-field>
             </p>
 
-            <md-input-container class="input-full-width">
+            <md-form-field class="input-full-width">
                 <textarea mdInput placeholder="Description" rows="6" formControlName="description"></textarea>
-            </md-input-container>
+            </md-form-field>
 
-            <md-input-container class="input-full-width">
+            <md-form-field class="input-full-width">
                 <textarea mdInput placeholder="Acceptance Criterias" rows="6" formControlName="criterias"></textarea>
-            </md-input-container>
+            </md-form-field>
 
         </md-dialog-content>
     </div>
