@@ -63,7 +63,7 @@ export class Story {
     public static getProgress(story: Story, day: number): StoryProgress {
         if (story.history) {
             for (const progress of story.history) {
-                if (progress.day === day) {
+                if (progress && progress.day === day) {
                     return progress;
                 }
             }
@@ -82,8 +82,11 @@ export class Story {
         if (story && story.history && story.history.length > 0) {
             story.history.splice(-1, 1);
         }
+        if (story.history === undefined) {
+            story.history = [];
+        }
     }
-        
+
 
     public static createProgress(story: Story, day: number): StoryProgress {
 
