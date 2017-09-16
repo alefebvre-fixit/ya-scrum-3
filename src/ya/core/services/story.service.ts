@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { Story, StoryProgress } from '../models';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { UserService } from './user.service';
 
 const STORIES = 'stories';
 
@@ -23,13 +24,6 @@ export class StoryService {
     { key: 'closed', value: 'Closed' },
   ];
 
-  private storyPriorities = [
-    { key: '1', value: '1' },
-    { key: '2', value: '2' },
-    { key: '3', value: '3' },
-    { key: '4', value: '4' },
-    { key: '5', value: '5' },
-  ];
 
   public static filterPositive(value: number): number {
     if (value > 0) {
@@ -40,7 +34,8 @@ export class StoryService {
   }
 
   constructor(
-    private database: AngularFireDatabase
+    private database: AngularFireDatabase,
+    private userService: UserService,
   ) { }
 
   public getStoryTypes(): any {
@@ -51,8 +46,12 @@ export class StoryService {
     return this.storyStatus;
   }
 
-  public getStoryPriorities(): any {
-    return this.storyPriorities;
+  public instanciate(): Story {
+    const result = Story.create();
+
+    result.productOwnerId = this.userService.currentFirebaseUser().uid;
+
+    return result;
   }
 
   public index() {
@@ -160,14 +159,16 @@ export class StoryService {
         sprint.estimate = 0;
       };
 
-      if (sprint.progress !== undefined && sprint.progress >= story.progress) {
-        sprint.progress -= story.progress;
+      const progress = Story.getLatestProgress(story);
+
+      if (sprint.progress !== undefined && sprint.progress >= progress.total) {
+        sprint.progress -= progress.total;
       } else {
         sprint.progress = 0;
       };
 
-      if (sprint.remaining !== undefined && sprint.remaining >= story.remaining) {
-        sprint.remaining -= story.remaining;
+      if (sprint.remaining !== undefined && sprint.remaining >= progress.remaining) {
+        sprint.remaining -= progress.remaining;
       } else {
         sprint.remaining = 0;
       };
@@ -217,23 +218,34 @@ export class StoryService {
   public assignDailyProgress(story: Story, progress: StoryProgress): Story {
 
     story.history[progress.day - 1] = progress;
-
-    if (story.history) {
-      story.progress = story.history.reduce(function (sum: any, p: StoryProgress) {
-        p.previous = sum;
-        p.remaining = StoryService.filterPositive(story.estimate - p.previous - p.daily);
-        return p.previous + p.daily;
-      }, 0);
-      if (story.progress > 0) {
-        if (story.progress >= story.estimate) {
-          story.status = 'closed';
-        } else {
-          story.status = 'started';
-        }
+    const latest = Story.getLatestProgress(story);
+    if (latest.total > 0) {
+      if (latest.remaining === 0) {
+        story.status = 'closed';
       } else {
-        story.status = 'assigned';
+        story.status = 'started';
       }
+    } else {
+      story.status = 'assigned';
     }
+
+
+    // if (story.history) {
+    //   story.progress = story.history.reduce(function (sum: any, p: StoryProgress) {
+    //     p.previous = sum;
+    //     p.remaining = StoryService.filterPositive(story.estimate - p.previous - p.daily);
+    //     return p.previous + p.daily;
+    //   }, 0);
+    //   if (story.progress > 0) {
+    //     if (story.progress >= story.estimate) {
+    //       story.status = 'closed';
+    //     } else {
+    //       story.status = 'started';
+    //     }
+    //   } else {
+    //     story.status = 'assigned';
+    //   }
+    // }
 
     return story;
 
@@ -242,28 +254,28 @@ export class StoryService {
 
 
 
-  public calculateProgress(story: Story) {
-    console.log('calculateProgress=');
-    if (story.history) {
-      story.progress = story.history.reduce(function (sum: number, progress: StoryProgress) {
-        progress.previous = sum;
-        progress.remaining = StoryService.filterPositive(story.estimate - progress.previous - progress.daily);
+  // public calculateProgress(story: Story) {
+  //   console.log('calculateProgress=');
+  //   if (story.history) {
+  //     story.progress = story.history.reduce(function (sum: number, progress: StoryProgress) {
+  //       progress.previous = sum;
+  //       progress.remaining = StoryService.filterPositive(story.estimate - progress.previous - progress.daily);
 
-        return progress.previous + progress.daily;
-      }, 0);
+  //       return progress.previous + progress.daily;
+  //     }, 0);
 
-      if (story.progress > 0) {
-        if (story.progress >= story.estimate) {
-          story.status = 'closed';
-        } else {
-          story.status = 'started';
-        }
-      } else {
-        story.status = 'assigned';
-      }
-    }
-    console.log(story);
-  }
+  //     if (story.progress > 0) {
+  //       if (story.progress >= story.estimate) {
+  //         story.status = 'closed';
+  //       } else {
+  //         story.status = 'started';
+  //       }
+  //     } else {
+  //       story.status = 'assigned';
+  //     }
+  //   }
+  //   console.log(story);
+  // }
 
   public saveProgress(story: Story) {
     this.save(story);

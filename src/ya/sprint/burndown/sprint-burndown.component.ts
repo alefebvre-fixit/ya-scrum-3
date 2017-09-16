@@ -52,7 +52,7 @@ export class SprintBurndownComponent implements OnInit, OnChanges, AfterViewInit
 
   createChart() {
 
-    if (this.sprint && this.stories) {
+    if (this.sprint && this.stories && this.stories.length > 0) {
 
       this.chart = c3.generate({
         bindto: '#burndownChart',
@@ -66,8 +66,8 @@ export class SprintBurndownComponent implements OnInit, OnChanges, AfterViewInit
             ideal: '#cdcdcd',
           },
           types: {
-              ideal: 'area-spline',
-              actual: 'area-spline',
+            ideal: 'area-spline',
+            actual: 'area-spline',
           },
           columns: this.generateChartColumns(),
         },

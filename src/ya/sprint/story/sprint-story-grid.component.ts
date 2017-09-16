@@ -11,19 +11,12 @@ export class SprintStoryGridComponent {
 
   @Input() stories: Story[];
 
-  @Output()
-  onAdd = new EventEmitter();
-
   constructor(
   ) {
   }
 
   trackStory(index, story: Story) {
     return story ? story.$key : undefined;
-  }
-
-  public add() {
-    this.onAdd.emit();
   }
 
 }

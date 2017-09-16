@@ -28,7 +28,7 @@ export class SprintDashboardComponent implements OnInit {
 
 
   ngOnInit(): void {
-    
+
     this.sprintService.findByStatus('pending').subscribe((sprints: Sprint[]) => {
       this.sprintsPending = sprints;
     });
@@ -48,7 +48,7 @@ export class SprintDashboardComponent implements OnInit {
     const dialogRef = this.dialog.open(SprintEditDialogComponent, {
       panelClass: 'app-full-bleed-dialog',
       data: {
-        sprint: Sprint.create(),
+        sprint: this.sprintService.instanciate(),
       }
     });
     dialogRef.afterClosed().subscribe(key => {

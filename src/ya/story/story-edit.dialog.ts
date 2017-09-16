@@ -18,7 +18,6 @@ export class StoryEditDialogComponent implements OnInit {
   story: Story;
   storyForm: FormGroup;
   typeList: any;
-  priorityList: any;
   users: Observable<User[]>;
   productOwner: User;
   themeList: any;
@@ -38,25 +37,29 @@ export class StoryEditDialogComponent implements OnInit {
   ngOnInit() {
 
     this.typeList = this.storyService.getStoryTypes();
-    this.priorityList = this.storyService.getStoryPriorities();
     this.themeList = this.themeService.findAllThemeNames();
 
     this.users = this.userService.findAll();
 
     if (this.story.productOwnerId) {
-      this.userService.findOne(this.story.productOwnerId).subscribe(user => this.productOwner = user);
+      this.userService.findOne(this.story.productOwnerId).subscribe(user => {
+        this.productOwner = user;
+
+        this.storyForm = this._fb.group({
+          name: [this.story.name, [<any>Validators.required]],
+          description: [this.story.description, [<any>Validators.required]],
+          criterias: [this.story.acceptanceCriterias, [<any>Validators.required]],
+          type: [this.story.type, [<any>Validators.required]],
+          priority: [this.story.priority, [<any>Validators.required]],
+          estimate: [this.story.estimate, [<any>Validators.required]],
+          theme: [this.story.theme, [<any>Validators.required]],
+          productOwner: [this.productOwner],
+        });
+
+      });
+
     }
 
-    this.storyForm = this._fb.group({
-      name: [this.story.name, [<any>Validators.required]],
-      description: [this.story.description, [<any>Validators.required]],
-      criterias: [this.story.acceptanceCriterias, [<any>Validators.required]],
-      type: [this.story.type, [<any>Validators.required]],
-      priority: [this.story.priority, [<any>Validators.required]],
-      estimate: [this.story.estimate, [<any>Validators.required]],
-      theme: [this.story.theme, [<any>Validators.required]],
-      productOwner: [this.productOwner],
-    });
   }
 
   apply() {
@@ -68,7 +71,7 @@ export class StoryEditDialogComponent implements OnInit {
     this.story.estimate = this.storyForm.value.estimate;
     this.story.type = this.storyForm.value.type;
     this.story.theme = this.storyForm.value.theme;
-    
+
     if (this.storyForm.value.productOwner) {
       this.story.productOwnerId = this.storyForm.value.productOwner.$key;
     }

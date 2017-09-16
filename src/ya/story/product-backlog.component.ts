@@ -7,7 +7,6 @@ import { Story } from '@ya-scrum/models';
 import { StoryEditDialogComponent } from './story-edit.dialog';
 
 @Component({
-  selector: 'product-backlog',
   templateUrl: './product-backlog.component.html',
   styleUrls: ['./product-backlog.component.scss']
 })
@@ -43,7 +42,7 @@ export class ProductBacklogComponent implements OnInit {
     const dialogRef = this.dialog.open(StoryEditDialogComponent, {
       panelClass: 'app-full-bleed-dialog',
       data: {
-        story: Story.create(),
+        story: this.storyService.instanciate(),
       }
     });
     dialogRef.afterClosed().subscribe(key => {

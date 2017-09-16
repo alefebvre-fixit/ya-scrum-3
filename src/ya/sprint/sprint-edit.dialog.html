@@ -2,52 +2,56 @@
     <h2 *ngIf="sprint.$key">Update Sprint</h2>
     <h2 *ngIf="!sprint.$key">Create new Sprint</h2>
 </div>
-<div class="dialog-content">
-    <md-dialog-content>
-        <form [formGroup]="sprintForm" autocomplete="off" novalidate>
+<form [formGroup]="sprintForm" *ngIf="sprintForm" autocomplete="off" novalidate>
+    <div class="dialog-content">
+        <md-dialog-content>
 
             <p>
                 <md-input-container class="input-full-width">
                     <input mdInput placeholder="Title" formControlName="name">
                 </md-input-container>
             </p>
+            <p>
+                <md-input-container style="width:200px">
+                    <input type="number" mdInput placeholder="Team Velocity" formControlName="velocity">
+                </md-input-container>
 
-            <md-input-container class="input-full-width">
-                <input type="number" mdInput placeholder="Team Velocity" formControlName="velocity">
-            </md-input-container>
+                <md-input-container style="width:200px">
+                    <input type="number" mdInput placeholder="Duration" formControlName="duration">
+                </md-input-container>
+            </p>
+            <p>
+                <md-input-container style="width:200px">
+                    <input mdInput [mdDatepicker]="pickerStartDate" placeholder="Start Date" formControlName="startDate">
+                    <button mdSuffix [mdDatepickerToggle]="pickerStartDate"></button>
+                </md-input-container>
+                <md-datepicker #pickerStartDate></md-datepicker>
 
-            <md-input-container class="input-full-width">
-                <input type="number" mdInput placeholder="Duration" formControlName="duration">
-            </md-input-container>
+                <md-input-container style="width:200px">
+                    <input mdInput [mdDatepicker]="pickerEndDate" placeholder="End Date" formControlName="endDate">
+                    <button mdSuffix [mdDatepickerToggle]="pickerEndDate"></button>
+                </md-input-container>
+                <md-datepicker #pickerEndDate></md-datepicker>
+            </p>
+            <p>
+                <md-input-container style="width:200px">
+                    <input type="text" mdInput placeholder="Scrum Master" formControlName="scrummaster" [mdAutocomplete]="auto">
+                </md-input-container>
+            </p>
+            <p>
+                <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
+                    <md-option *ngFor="let user of users | async" [value]="user">
+                        {{ user.name }}
+                    </md-option>
+                </md-autocomplete>
+            </p>
+        </md-dialog-content>
 
-            <md-input-container>
-                <input mdInput [mdDatepicker]="pickerStartDate" placeholder="Start Date" formControlName="startDate">
-                <button mdSuffix [mdDatepickerToggle]="pickerStartDate"></button>
-            </md-input-container>
-            <md-datepicker #pickerStartDate></md-datepicker>
-
-            <md-input-container>
-                <input mdInput [mdDatepicker]="pickerEndDate" placeholder="End Date" formControlName="endDate">
-                <button mdSuffix [mdDatepickerToggle]="pickerEndDate"></button>
-            </md-input-container>
-            <md-datepicker #pickerEndDate></md-datepicker>
-
-            <br>
-            <md-input-container>
-                <input type="text" mdInput placeholder="Scrum Master" formControlName="scrummaster" [mdAutocomplete]="auto">
-            </md-input-container>
-            <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
-                <md-option *ngFor="let user of users | async" [value]="user">
-                    {{ user.name }}
-                </md-option>
-            </md-autocomplete>
-        </form>
-    </md-dialog-content>
-
-</div>
-<div class="dialog-action">
-    <md-dialog-actions align="end">
-        <button md-button color="secondary" md-dialog-close>CANCEL</button>
-        <button md-button color="primary" (click)="apply()" [disabled]="!sprintForm.valid">APPLY</button>
-    </md-dialog-actions>
-</div>
+    </div>
+    <div class="dialog-action">
+        <md-dialog-actions align="end">
+            <button md-button color="secondary" md-dialog-close>CANCEL</button>
+            <button md-button color="primary" (click)="apply()" [disabled]="!sprintForm.valid">APPLY</button>
+        </md-dialog-actions>
+    </div>
+</form>

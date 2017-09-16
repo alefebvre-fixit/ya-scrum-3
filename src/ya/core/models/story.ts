@@ -17,12 +17,6 @@ export class Story {
 
     estimate: number;
 
-    previous: number;
-    daily: number;
-    remaining: number;
-
-    progress: number;
-
     sprintId: string;
 
     productOwnerId: string;
@@ -49,7 +43,7 @@ export class Story {
         result.status = 'new';
         result.type = 'feature';
         result.estimate = 1;
-        result.progress = 0;
+        result.theme = 'pink';
 
         return result;
     }
@@ -84,6 +78,13 @@ export class Story {
         return new StoryProgress();
     }
 
+    public static cancelLatestProgress(story: Story) {
+        if (story && story.history && story.history.length > 0) {
+            story.history.splice(-1, 1);
+        }
+    }
+        
+
     public static createProgress(story: Story, day: number): StoryProgress {
 
         const result = new StoryProgress();
@@ -109,6 +110,23 @@ export class Story {
 
     }
 
+    /*
+    public static cancelProgress(story: Story, day: number): StoryProgress {
+
+
+        const progress = Story.getProgress(story, day);
+        if (progress) {
+            progress.previous = progress.previous + progress.daily;
+            progress.total = previous.previous + previous.daily;
+            progress.daily = 0;
+            progress.remaining = story.estimate - (previous.previous + previous.daily);
+        } 
+
+
+    }
+    */
+
+
     public static setProgress(story: Story, progress: StoryProgress) {
 
         if (story.history === undefined) {
@@ -133,8 +151,9 @@ export class Story {
     }
 
     public static progressAsPercentage(story: Story): number {
-        if (story && story.estimate > 0) {
-            return (story.progress / story.estimate) * 100;
+        const latest = Story.getLatestProgress(story);
+        if (latest && story.estimate > 0) {
+            return (latest.total / story.estimate) * 100;
         } else {
             return 0;
         }

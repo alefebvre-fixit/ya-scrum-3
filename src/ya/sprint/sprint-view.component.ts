@@ -59,6 +59,10 @@ export class SprintViewComponent implements OnInit {
     this.sprintService.startNewDailyMeeting(this.sprint, this.stories);
   }
 
+  public cancelLastDailyMeeting() {
+    this.sprintService.cancelLastDailyMeeting(this.sprint, this.stories);
+  }
+
   editSprint(sprint: Sprint) {
     const dialogRef = this.dialog.open(SprintEditDialogComponent, {
       panelClass: 'app-full-bleed-dialog',

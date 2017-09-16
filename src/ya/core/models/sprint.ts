@@ -1,16 +1,28 @@
 import { Story } from './story';
 
+export class Meeting {
+
+    day = 0;
+    status = Sprint.STATUS_CLOSED;
+
+}
+
+
+
 export class Sprint {
+
+    public static STATUS_CLOSED = 'closed';
+    public static STATUS_OPEN = 'open';
 
     $key: string;
     code: string;
     name: string;
     status: string;
-    description: string;
 
     startDate: Date;
     endDate: Date;
     duration = 15;
+    meeting: Meeting = new Meeting();
 
     estimate = 0;
     progress = 0;
@@ -20,8 +32,6 @@ export class Sprint {
 
     conversationId: string;
     scrumMasterId: string;
-
-    meetingNumber = 0;
 
     background: string;
     thumbnail: string;
@@ -83,5 +93,24 @@ export class Sprint {
         return Math.round((progress / sprint.estimate) * 100);
 
     }
+
+    public static updateProgress(sprint: Sprint, stories: Story[]) {
+        if (sprint) {
+            sprint.progress = 0;
+            sprint.estimate = 0;
+            sprint.progress = 0;
+            if (stories && stories.length > 0) {
+                stories.forEach(story => {
+                    sprint.estimate += story.estimate;
+                    const progress = Story.getLatestProgress(story);
+                    if (progress) {
+                        sprint.progress += progress.total;
+                        sprint.remaining += progress.remaining;
+                    }
+                });
+            }
+        }
+    }
+
 
 }

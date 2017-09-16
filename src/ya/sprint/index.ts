@@ -20,7 +20,6 @@ import { SprintViewComponent } from './sprint-view.component';
 import { SprintEditDialogComponent } from './sprint-edit.dialog';
 import { SprintStatusComponent } from './sprint-status.component';
 import { SprintProgressScheduleComponent } from './progress-schedule.component';
-import { SprintBurndownComponent } from './sprint-burndown.component';
 
 import { SprintBackgroundDialogComponent } from './sprint-background.dialog';
 
@@ -28,6 +27,7 @@ import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { StoryModule } from '../story';
+import { BurnDownModule } from './burndown';
 import { SprintStoryModule } from './story';
 
 import { SharedModule } from '../shared';
@@ -49,7 +49,8 @@ import { SharedModule } from '../shared';
     NgxCroppieModule,
     SharedModule,
     StoryModule,
-    SprintStoryModule
+    SprintStoryModule,
+    BurnDownModule
   ],
   declarations: [
     SprintCardComponent,
@@ -60,7 +61,6 @@ import { SharedModule } from '../shared';
     SprintStatusComponent,
     SprintEditDialogComponent,
     SprintProgressScheduleComponent,
-    SprintBurndownComponent,
     SprintBackgroundDialogComponent
   ],
   exports: [

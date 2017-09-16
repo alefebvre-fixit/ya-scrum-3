@@ -7,25 +7,22 @@ import { ROUTES } from './ya.routes';
 
 import { YaComponent } from './ya.component';
 
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {CommonModule} from '@angular/common';
-import {MdCardModule} from '@angular/material';
-import {MdMenuModule} from '@angular/material';
-import {MdInputModule} from '@angular/material';
-import {MdButtonModule} from '@angular/material';
-import {MdListModule} from '@angular/material';
-import {MdIconModule} from '@angular/material';
-import {MdSidenavModule} from '@angular/material';
-import {MdToolbarModule} from '@angular/material';
-import {MdTooltipModule} from '@angular/material';
-import {MdDialogModule} from '@angular/material';
-import {MdNativeDateModule} from '@angular/material';
-import {CovalentLayoutModule} from '@covalent/core';
-import {CovalentMediaModule} from '@covalent/core';
-
-
-
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
+import { MdCardModule } from '@angular/material';
+import { MdMenuModule } from '@angular/material';
+import { MdInputModule } from '@angular/material';
+import { MdButtonModule } from '@angular/material';
+import { MdListModule } from '@angular/material';
+import { MdIconModule } from '@angular/material';
+import { MdSidenavModule } from '@angular/material';
+import { MdToolbarModule } from '@angular/material';
+import { MdTooltipModule } from '@angular/material';
+import { MdDialogModule } from '@angular/material';
+import { MdNativeDateModule } from '@angular/material';
+import { CovalentLayoutModule } from '@covalent/core';
+import { CovalentMediaModule } from '@covalent/core';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -35,9 +32,10 @@ import { HomeModule } from './home';
 import { UserModule } from './user';
 import { StoryModule } from './story';
 import { SprintModule } from './sprint';
+
 import { AuthGuard } from './auth.service';
 
-import { StoryService, SprintService, UserService, ThemeService } from '@ya-scrum/services';
+import { StoryService, SprintService, UserService, ThemeService, DateService } from '@ya-scrum/services';
 
 import { environment } from '../environments/environment';
 
@@ -76,7 +74,14 @@ import { environment } from '../environments/environment';
     RouterModule.forRoot(ROUTES),
 
   ],
-  providers: [UserService, StoryService, SprintService, AuthGuard, ThemeService],
+  providers: [
+    UserService,
+    StoryService,
+    SprintService,
+    AuthGuard,
+    ThemeService,
+    DateService
+  ],
   bootstrap: [YaComponent]
 })
 export class YaModule { }

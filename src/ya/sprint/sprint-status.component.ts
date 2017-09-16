@@ -10,16 +10,9 @@ import { Story, StoryProgress, Sprint, SprintProgress, User } from '@ya-scrum/mo
   templateUrl: './sprint-status.component.html',
   styleUrls: ['./sprint-status.component.scss'],
 })
-export class SprintStatusComponent implements OnInit {
+export class SprintStatusComponent {
 
   @Input() sprint: Sprint;
-
-  constructor(
-  ) {
-  }
-
-  ngOnInit() {
-  }
 
   public progressAsPercentage(): number {
     return Sprint.progressAsPercentage(this.sprint);

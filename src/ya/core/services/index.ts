@@ -3,3 +3,4 @@ export { SprintService } from './sprint.service';
 export { UserService } from './user.service';
 export { UploadService } from './upload.service';
 export { ThemeService } from './theme.service';
+export { DateService } from './date.service';

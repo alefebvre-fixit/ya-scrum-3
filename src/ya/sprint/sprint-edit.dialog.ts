@@ -34,25 +34,29 @@ export class SprintEditDialogComponent implements OnInit {
     this.users = this.userService.findAll();
 
     if (this.sprint.scrumMasterId) {
-      this.userService.findOne(this.sprint.scrumMasterId).subscribe(user => this.scrummaster = user);
+      this.userService.findOne(this.sprint.scrumMasterId).subscribe(
+        user => {
+
+          this.scrummaster = user;
+
+          this.sprintForm = this._fb.group({
+            name: [this.sprint.name, [<any>Validators.required]],
+            velocity: [this.sprint.velocity, [<any>Validators.required]],
+            duration: [this.sprint.duration, [<any>Validators.required]],
+            startDate: [this.sprint.startDate],
+            endDate: [this.sprint.endDate],
+            scrummaster: [this.scrummaster],
+          });
+        }
+      );
     }
 
-    this.sprintForm = this._fb.group({
-      name: [this.sprint.name, [<any>Validators.required]],
-      description: [this.sprint.description, [<any>Validators.required]],
-      velocity: [this.sprint.velocity, [<any>Validators.required]],
-      duration: [this.sprint.duration, [<any>Validators.required]],
-      startDate: [this.sprint.startDate],
-      endDate: [this.sprint.endDate],
-      scrummaster: [this.scrummaster],
-    });
 
   }
 
   apply() {
 
     this.sprint.name = this.sprintForm.value.name;
-    this.sprint.description = this.sprintForm.value.description;
     this.sprint.velocity = this.sprintForm.value.velocity;
     this.sprint.duration = this.sprintForm.value.duration;
     this.sprint.startDate = this.sprintForm.value.startDate;
@@ -62,8 +66,8 @@ export class SprintEditDialogComponent implements OnInit {
       this.sprint.scrumMasterId = this.sprintForm.value.scrummaster.$key;
     }
 
-    this.sprintService.save(this.sprint);
-    this.dialogRef.close(true);
+    const sprintId = this.sprintService.save(this.sprint);
+    this.dialogRef.close(sprintId);
 
   }
 

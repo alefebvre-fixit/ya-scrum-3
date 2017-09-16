@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { Sprint, Story, StoryProgress, SprintProgress, Upload } from '../models';
+import { Sprint, Story, StoryProgress, SprintProgress, Upload, User } from '../models';
+import { UserService } from './user.service';
+import { DateService } from './date.service';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 import { FirebaseApp } from 'angularfire2';
@@ -14,8 +16,21 @@ export class SprintService {
   constructor(
     private database: AngularFireDatabase,
     private firebaseApp: FirebaseApp,
+    private userService: UserService,
+    private dateService: DateService,
   ) {
   }
+
+  public instanciate(): Sprint {
+    const result = Sprint.create();
+
+    result.scrumMasterId = this.userService.currentFirebaseUser().uid;
+    result.startDate = new Date();
+    result.endDate = this.dateService.businessDaysFromDate(result.startDate, result.duration);
+
+    return result;
+  }
+
 
   public index() {
     this.findAll().take(1).subscribe((sprints: Sprint[]) => {
@@ -58,9 +73,9 @@ export class SprintService {
     let sprintProgress = 0;
 
     stories.forEach(story => {
-      sprintProgress = story.progress;
+      const latest = Story.getLatestProgress(story);
+      sprintProgress += latest.total;
     });
-
 
     if (sprintProgress !== sprint.progress) {
       sprint.progress = sprintProgress;
@@ -109,8 +124,8 @@ export class SprintService {
         join[story.$key] = true;
 
         story.history = [];
-        if (sprint.meetingNumber > 0) {
-          for (let index = 1; index <= sprint.meetingNumber; index++) {
+        if (sprint.meeting.day > 0) {
+          for (let index = 1; index <= sprint.meeting.day; index++) {
             const progress: StoryProgress = Story.createProgress(story, index);
             Story.setProgress(story, progress);
           }
@@ -123,7 +138,7 @@ export class SprintService {
         }
 
         sprint.storyNumber = sprint.storyNumber + 1;
-        
+
 
         // if (existingJoin) {
         //   sprint.storyNumber = sprint.storyNumber +
@@ -150,20 +165,49 @@ export class SprintService {
     });
   }
 
+  public cancelLastDailyMeeting(sprint: Sprint, stories: Story[]) {
+    if (stories) {
+
+      for (const story of stories) {
+        Story.cancelLatestProgress(story);
+        this.database.object('/stories/' + story.$key).update({
+          history: story.history
+        });
+      }
+
+      if (sprint.meeting.day > 0) {
+        sprint.meeting.day--;
+      } else {
+        sprint.meeting.day = 0;
+      }
+      sprint.meeting.status = Sprint.STATUS_CLOSED;
+
+      Sprint.updateProgress(sprint, stories);
+      this.database.object('/sprints/' + sprint.$key).update({
+        meeting: sprint.meeting,
+        progress: sprint.progress,
+        remaining: sprint.remaining,
+        estimate: sprint.estimate
+      });
+    }
+  }
+
+
   public startNewDailyMeeting(sprint: Sprint, stories: Story[]) {
 
-    if (!sprint.meetingNumber) {
-      sprint.meetingNumber = 1;
+    if (!sprint.meeting.day) {
+      sprint.meeting.day = 1;
     } else {
-      sprint.meetingNumber++;
+      sprint.meeting.day++;
     }
+    sprint.meeting.status = Sprint.STATUS_OPEN;
 
     if (stories) {
       for (const story of stories) {
 
-        let progress = Story.getProgress(story, sprint.meetingNumber);
+        let progress = Story.getProgress(story, sprint.meeting.day);
         if (!progress) {
-          progress = Story.createProgress(story, sprint.meetingNumber);
+          progress = Story.createProgress(story, sprint.meeting.day);
           Story.setProgress(story, progress);
           this.database.object('/stories/' + story.$key).update({
             history: story.history
@@ -172,7 +216,7 @@ export class SprintService {
 
       }
 
-      this.database.object('/sprints/' + sprint.$key).update({ meetingNumber: sprint.meetingNumber });
+      this.database.object('/sprints/' + sprint.$key).update({ meeting: sprint.meeting });
     }
   }
 
@@ -210,7 +254,7 @@ export class SprintService {
     const result: SprintProgress[] = [];
 
     if (stories !== undefined && stories.length > 0) {
-      for (let day = 1; day <= sprint.meetingNumber; day++) {
+      for (let day = 1; day <= sprint.meeting.day; day++) {
 
         const sprintProgress = new SprintProgress();
         sprintProgress.day = day;
@@ -308,5 +352,19 @@ export class SprintService {
       }
     );
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

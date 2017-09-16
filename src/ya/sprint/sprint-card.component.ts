@@ -25,7 +25,7 @@ export class SprintCardComponent {
   }
 
   public dayToGo(): number {
-    return this.sprint.duration  - this.sprint.meetingNumber;
+    return this.sprint.duration  - this.sprint.meeting.day;
   }
 
 }

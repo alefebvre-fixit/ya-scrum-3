@@ -3,10 +3,9 @@
     <h2 *ngIf="!story.$key">Create new Story</h2>
 </div>
 
-<div class="dialog-content">
-
-    <md-dialog-content>
-        <form [formGroup]="storyForm" autocomplete="off" novalidate>
+<form [formGroup]="storyForm" *ngIf="storyForm" autocomplete="off" novalidate>
+    <div class="dialog-content">
+        <md-dialog-content>
             <p>
                 <md-input-container style="width:60%">
                     <input mdInput placeholder="Title" formControlName="name">
@@ -16,13 +15,13 @@
                         {{type.value}}
                     </md-option>
                 </md-select>
-                <md-select placeholder="Theme" formControlName="theme"  style="width:15%">
+                <md-select placeholder="Theme" formControlName="theme" style="width:15%">
                     <md-option *ngFor="let theme of themeList" [value]="theme">
                         {{theme}}
                     </md-option>
                 </md-select>
             </p>
-            <p>                
+            <p>
                 <md-input-container style="width:40%">
                     <input type="text" mdInput placeholder="Product Owner" formControlName="productOwner" [mdAutocomplete]="auto">
                 </md-input-container>
@@ -31,11 +30,9 @@
                         {{ user.name }}
                     </md-option>
                 </md-autocomplete>
-                <md-select placeholder="Priority" formControlName="priority" style="width:20%">
-                    <md-option *ngFor="let priority of priorityList" [value]="priority.key">
-                        {{priority.value}}
-                    </md-option>
-                </md-select>
+                <md-input-container style="width:20%">
+                    <input type="number" mdInput placeholder="priority" formControlName="priority">
+                </md-input-container>
                 <md-input-container style="width:20%">
                     <input type="number" mdInput placeholder="estimate" formControlName="estimate">
                 </md-input-container>
@@ -49,14 +46,14 @@
                 <textarea mdInput placeholder="Acceptance Criterias" rows="6" formControlName="criterias"></textarea>
             </md-input-container>
 
-        </form>
-    </md-dialog-content>
-</div>
+        </md-dialog-content>
+    </div>
 
 
-<div class="dialog-action">
-    <md-dialog-actions align="end">
-        <button md-button color="secondary" md-dialog-close>CANCEL</button>
-        <button md-button color="primary" (click)="apply()" [disabled]="!storyForm.valid">APPLY</button>
-    </md-dialog-actions>
-</div>
+    <div class="dialog-action">
+        <md-dialog-actions align="end">
+            <button md-button color="secondary" md-dialog-close>CANCEL</button>
+            <button md-button color="primary" (click)="apply()" [disabled]="!storyForm.valid">APPLY</button>
+        </md-dialog-actions>
+    </div>
+</form>
