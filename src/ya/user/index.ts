@@ -11,6 +11,7 @@ import { UserAccountComponent } from './user-account.component';
 
 import { SignInPageComponent } from './signin/sign-in-page.component';
 import { SignUpPageComponent } from './signup/sign-up-page.component';
+import { CreateGroupPageComponent } from './group/create-group-page.component';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { SignUpPageComponent } from './signup/sign-up-page.component';
     UserAccountComponent,
     SignInPageComponent,
     SignUpPageComponent,
+    CreateGroupPageComponent,
   ],
   exports: [
     UserListComponent,
@@ -42,3 +44,6 @@ export { UserListComponent } from './user-list.component';
 export { UserAccountComponent } from './user-account.component';
 export { SignInPageComponent } from './signin/sign-in-page.component';
 export { SignUpPageComponent } from './signup/sign-up-page.component';
+export { CreateGroupPageComponent } from './group/create-group-page.component';
+
+

@@ -1,60 +1,60 @@
 <div class="positioner">
 
+    <form [formGroup]="signUpForm" autocomplete="off" novalidate>
 
-    <md-card>
-        <md-card-title layout="row" layout-align="start center">
-            <span class="md-title ya-title">Ya-Scrum</span> <span class="md-title ya-sub-title">Sign-Up</span>
-        </md-card-title>
-        <md-card-subtitle>Create a new Account</md-card-subtitle>
-        <md-progress-bar mode="indeterminate" *ngIf="isStandBy"></md-progress-bar>
-        <md-divider></md-divider>
-        <md-card-content class="push-bottom-none">
-            <form #loginForm="ngForm">
-                <div layout="row">
-                    <md-form-field flex>
-                        <input mdInput #userElement #userControl="ngModel" placeholder="Name" type="text" maxlength="30" name="name" [(ngModel)]="signup.name"
-                            required>
+        <md-card>
+            <md-card-title layout="row" layout-align="start center">
+                <span class="md-title ya-title">Ya-Scrum</span> <span class="md-title ya-sub-title">Sign-Up</span>
+            </md-card-title>
+            <md-card-subtitle>Create a new Account</md-card-subtitle>
+            <md-progress-bar mode="indeterminate" *ngIf="isStandBy"></md-progress-bar>
+
+            <md-divider></md-divider>
+
+            <md-card-content class="push-bottom-none">
+
+                <p>
+                    <md-form-field class="input-full-width">
+                        <input mdInput type="text" placeholder="Name" formControlName="name">
                         <md-hint align="start">
-                            <span [hidden]="!userControl.errors?.required || userControl.pristine" class="tc-red-600">Required</span>
+                            <span [hidden]="!signUpForm.controls.name.errors?.required || signUpForm.controls.name.pristine" class="tc-red-600">Required</span>
                         </md-hint>
-                        <md-hint align="end">{{userElement.value.length}} / 30</md-hint>
+                        <md-hint align="end">{{signUpForm.controls.name.value.length}} / 30</md-hint>
                     </md-form-field>
-                </div>
-                <div layout="row">
-                    <md-form-field flex>
-                        <input mdInput #userElement #userControl="ngModel" placeholder="Email" type="email" name="email" [(ngModel)]="signup.email"
-                            required>
+                </p>
+                <p>
+                    <md-form-field class="input-full-width">
+                        <input mdInput type="email" placeholder="Email" formControlName="email">
                         <md-hint align="start">
-                            <span [hidden]="!userControl.errors?.required || userControl.pristine" class="tc-red-600">Required</span>
+                            <span [hidden]="!signUpForm.controls.email.errors?.required || signUpForm.controls.email.pristine" class="tc-red-600">Required</span>
                         </md-hint>
-                        <md-hint align="end">{{userElement.value.length}} / 30</md-hint>
+                        <md-hint align="end">{{signUpForm.controls.email.value.length}} / 30</md-hint>
                     </md-form-field>
-                </div>
-                <div layout="row" class="push-top-sm">
-                    <md-form-field flex>
-                        <input mdInput #passElement #passControl="ngModel" placeholder="Password" type="password" name="password" [(ngModel)]="signup.password"
-                            required>
+                </p>
+                <p>
+                    <md-form-field class="input-full-width">
+                        <input mdInput type="password" placeholder="Password" formControlName="password">
                         <md-hint align="start">
-                            <span [hidden]="!passControl.errors?.required || passControl.pristine" class="tc-red-600">Required</span>
+                            <span [hidden]="!signUpForm.controls.password.errors?.required || signUpForm.controls.password.pristine" class="tc-red-600">Required</span>
                         </md-hint>
                         <md-hint align="end">Something hard to guess</md-hint>
                     </md-form-field>
+                </p>
+
+                <div id="invalid-auth-msg" *ngIf="invalidError" class="tc-red-600 text-center" flex>The username or password is incorrect. Please try again.</div>
+            </md-card-content>
+            <md-card-actions>
+                <div layout="row">
+                    <button flex md-raised-button color="primary" [disabled]="!signUpForm.valid || isStandBy" (click)="signUp()" class="text-upper">Sign Up</button>
                 </div>
+            </md-card-actions>
+            <md-divider></md-divider>
+            <md-card-actions>
+                Already an account? <a md-button color="primary" style="text-decoration: underline;" (click)="signIn()">Sign In</a>
+            </md-card-actions>
 
-            </form>
-            <div id="invalid-auth-msg" *ngIf="invalidError" class="tc-red-600 text-center" flex>The username or password is incorrect. Please try again.</div>
-        </md-card-content>
-        <md-card-actions>
-            <div layout="row">
-                <button flex md-raised-button color="accent" [disabled]="!loginForm.form.valid || isStandBy" (click)="signUp(signup)" class="text-upper">Sign Up</button>
-            </div>
-        </md-card-actions>
-        <md-divider></md-divider>
-        <md-card-actions>
-            Already an account? <a md-button color="primary" style="text-decoration: underline;" (click)="signIn()">Sign In</a>
-        </md-card-actions>
-
-    </md-card>
+        </md-card>
+    </form>
 
 
 </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
@@ -9,34 +10,38 @@ import { SignIn } from '@ya-scrum/models';
 import { UserService } from '@ya-scrum/services';
 
 @Component({
-  selector: 'sign-in-page',
   templateUrl: './sign-in-page.component.html',
   styleUrls: ['./sign-in-page.component.scss']
 })
 export class SignInPageComponent implements OnInit {
 
-  signin: SignIn = new SignIn();
   isStandBy = false;
-
+  signInForm: FormGroup;
   invalidError = false;
 
   constructor(
     private userService: UserService,
+    private _fb: FormBuilder,
     private router: Router
   ) {
   }
 
   ngOnInit(): void {
+    this.signInForm = this._fb.group({
+      email: ['', [<any>Validators.required]],
+      group: ['', [<any>Validators.required]],
+      password: ['', [<any>Validators.required]],
+    });
   }
 
-  googleSignIn() {
-    this.userService.googleSignIn().subscribe(() => {
-      this.router.navigate([`/sprints`]);
-    }, error => { this.invalidError = true; this.ready(); });
-  }
-
-  emailSignIn(signin: SignIn) {
+  emailSignIn() {
     this.standBy();
+    const signin: SignIn = new SignIn();
+
+    signin.email = this.signInForm.value.email;
+    signin.group = this.signInForm.value.group;
+    signin.password = this.signInForm.value.password;
+
     this.userService.emailSignIn(signin).subscribe(() => {
       this.router.navigate([`/sprints`]);
     }, error => { this.invalidError = true; this.ready(); });
@@ -45,7 +50,6 @@ export class SignInPageComponent implements OnInit {
   signUp() {
     this.router.navigate([`/sign-up`]);
   }
-
 
   ready() {
     this.isStandBy = false;

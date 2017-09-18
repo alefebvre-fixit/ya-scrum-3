@@ -8,7 +8,7 @@ import { UserListComponent } from './user';
 import { UserAccountComponent } from './user';
 import { HomePageComponent } from './home';
 
-import { SignInPageComponent, SignUpPageComponent } from './user';
+import { SignInPageComponent, SignUpPageComponent, CreateGroupPageComponent } from './user';
 import { AuthGuard } from './auth.service';
 
 // Route Configuration
@@ -27,6 +27,10 @@ export const ROUTES: Routes = [
     path: 'sign-up',
     component: SignUpPageComponent
   },
+  {
+    path: 'group-create',
+    component: CreateGroupPageComponent
+  },  
   {
     path: 'account',
     component: UserAccountComponent

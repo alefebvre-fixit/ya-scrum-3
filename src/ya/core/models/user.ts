@@ -25,6 +25,7 @@ export class User {
 export class SignIn {
     email: string;
     password: string;
+    group: string;
 }
 
 export class SignUp {

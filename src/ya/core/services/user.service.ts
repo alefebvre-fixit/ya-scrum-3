@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
 import { User, SignIn, SignUp } from '../models';
+import { AuthenticationService } from './authentication.service';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -13,6 +14,7 @@ import * as firebase from 'firebase/app';
 export class UserService {
 
   constructor(
+    private authentication: AuthenticationService,
     private database: AngularFireDatabase,
     private afAuth: AngularFireAuth,
   ) { }

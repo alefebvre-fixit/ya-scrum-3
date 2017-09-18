@@ -4,3 +4,5 @@ export { UserService } from './user.service';
 export { UploadService } from './upload.service';
 export { ThemeService } from './theme.service';
 export { DateService } from './date.service';
+export { GroupService } from './group.service';
+export { AuthenticationService } from './authentication.service';
