@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
-import { User, SignIn, SignUp } from '../models';
+import { User, Account, SignIn, SignUp } from '../models';
 import { AuthenticationService } from './authentication.service';
 
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -40,11 +40,11 @@ export class UserService {
   }
 
   public findAll(): Observable<User[]> {
-    return this.database.list('users');
+    return this.database.list(this.baseUrl());
   }
 
   public findOne(key: string): Observable<User> {
-    return this.database.object('/users/' + key);
+    return this.database.object(this.baseUrl() + '/' + key);
   }
 
   public save(user: User) {
@@ -56,11 +56,15 @@ export class UserService {
   }
 
   public create(user: User) {
-    this.database.list('users').push(user);
+    this.database.list(this.baseUrl()).push(user);
   }
 
   public update(user: User) {
-    this.database.object('/users/' + user.$key).update(User.getUpdate(user));
+    this.database.object(this.baseUrl() + '/' + user.$key).update(User.getUpdate(user));
+  }
+
+  private baseUrl(): string {
+    return 'groups/' + this.authentication.account.group.groupId + '/users';
   }
 
 
@@ -84,36 +88,49 @@ export class UserService {
   }
 
   public emailSignIn(signin: SignIn): Observable<any> {
-    return Observable.fromPromise(<Promise<any>>this.afAuth.auth.signInWithEmailAndPassword(signin.email, signin.password));
+    return Observable.fromPromise(<Promise<any>>this.afAuth.auth.signInWithEmailAndPassword(signin.email, signin.password))
+    .flatMap((fbUser: any) => this.findOneAccount(fbUser ? fbUser.uid : undefined))
+    .flatMap((account: Account) => this.authentication.storeAccount(account));
+    ;
   }
 
   public googleSignIn(): Observable<any> {
     return Observable.fromPromise(<Promise<any>>this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()));
   }
 
-  public signUp(signup: SignUp): Observable<any> {
-    return Observable.fromPromise(<Promise<any>>this.afAuth.auth.createUserWithEmailAndPassword(signup.email, signup.password))
-      .map(result =>
-        this.afAuth.auth.currentUser.updateProfile({
-          displayName: signup.name,
-          photoURL: undefined,
-        }).then(() => {
-          const account = new User();
-          account.$key = this.afAuth.auth.currentUser.uid;
-          account.email = this.afAuth.auth.currentUser.email;
-          account.name = this.afAuth.auth.currentUser.displayName;
-          this.save(account);
-        })
-      );
-  }
 
-  public findCurrent(): Observable<User> {
-    return this.afAuth.authState.flatMap(fbUser => this.findOne(fbUser ? fbUser.uid : undefined));
-  }
 
   public currentFirebaseUser(): firebase.User {
     return this.afAuth.auth.currentUser;
   }
+
+
+  public findCurrentAccount(): Observable<Account> {
+    return this.afAuth.authState.flatMap(fbUser => this.findOne(fbUser ? fbUser.uid : undefined));
+  }
+
+  public findOneAccount(key: string): Observable<Account> {
+    return this.database.object('accounts/' + key);
+  }
+
+  public saveAccount(account: Account) {
+    if (account.$key) {
+      this.updateAccount(account);
+    } else {
+      this.createAccount(account);
+    }
+  }
+
+  public createAccount(account: Account) {
+    this.database.list('accounts/').push(account);
+  }
+
+  public updateAccount(acccount: Account) {
+    this.database.object('accounts/' + acccount.$key).update(Account.getUpdate(acccount));
+  }
+
+
+
 
 
 }

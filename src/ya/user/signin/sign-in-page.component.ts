@@ -29,7 +29,6 @@ export class SignInPageComponent implements OnInit {
   ngOnInit(): void {
     this.signInForm = this._fb.group({
       email: ['', [<any>Validators.required]],
-      group: ['', [<any>Validators.required]],
       password: ['', [<any>Validators.required]],
     });
   }
@@ -39,12 +38,15 @@ export class SignInPageComponent implements OnInit {
     const signin: SignIn = new SignIn();
 
     signin.email = this.signInForm.value.email;
-    signin.group = this.signInForm.value.group;
     signin.password = this.signInForm.value.password;
 
-    this.userService.emailSignIn(signin).subscribe(() => {
+    this.userService.emailSignIn(signin).subscribe((u) => {
+      console.log(u)
       this.router.navigate([`/sprints`]);
     }, error => { this.invalidError = true; this.ready(); });
+
+
+
   }
 
   signUp() {

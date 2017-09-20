@@ -5,6 +5,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 
 import { Group } from '@ya-scrum/models';
 import { UserService } from '@ya-scrum/services';
+import { GroupService } from '@ya-scrum/services';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
@@ -20,11 +21,15 @@ export class CreateGroupPageComponent implements OnInit {
   groupForm: FormGroup;
   invalidError = false;
 
+  user: any;
+
   constructor(
-    private userService: UserService,
+    private groupService: GroupService,
+
     private _fb: FormBuilder,
     private router: Router
   ) {
+    this.user = groupService._signup;
   }
 
   ngOnInit(): void {
@@ -40,6 +45,12 @@ export class CreateGroupPageComponent implements OnInit {
     const group: Group = new Group();
 
     group.name = this.groupForm.value.name;
+    this.groupService.createGroupAndSignUp(group, this.user).subscribe(() => {
+      this.router.navigate([`/sprints`]);
+    }, error => {
+      console.log(error);
+      this.ready();
+    });
 
     // this.userService.signUp(signup).subscribe(() => {
     //   this.router.navigate([`/sprints`]);

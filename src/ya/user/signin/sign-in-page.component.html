@@ -14,14 +14,6 @@
             <md-card-content>
                 <p>
                     <md-form-field class="input-full-width">
-                        <input mdInput type="text" placeholder="Group" formControlName="group">
-                        <md-hint align="start">
-                            <span [hidden]="!signInForm.controls.group.errors?.required || signInForm.controls.group.pristine" class="tc-red-600">Required</span>
-                        </md-hint>
-                    </md-form-field>
-                </p>
-                <p>
-                    <md-form-field class="input-full-width">
                         <input mdInput type="email" placeholder="Email" formControlName="email">
                         <md-hint align="start">
                             <span [hidden]="!signInForm.controls.email.errors?.required || signInForm.controls.email.pristine" class="tc-red-600">Required</span>

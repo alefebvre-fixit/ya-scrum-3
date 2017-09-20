@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable, } from 'rxjs/Rx';
+import { Subject } from 'rxjs/Subject';
 
-import { Group, SignUp, User } from '../models';
+import { Group, SignUp, User, Account } from '../models';
 import { UserService } from './user.service';
 
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -11,19 +12,40 @@ import * as firebase from 'firebase/app';
 @Injectable()
 export class AuthenticationService {
 
-  private _groupName: string;
+  private _account: Account;
+  private user: Observable<firebase.User>;
 
-  constructor(
-  ) { }
-
-  get groupName(): string {
-    return this._groupName;
+  constructor(private afAuth: AngularFireAuth) {
+    this.user = afAuth.authState;
+    this.extractAccount();
   }
 
-  set groupName(groupName: string) {
-    this._groupName = groupName;
+  get account(): Account {
+    return this._account;
   }
 
-  
+  set account(account: Account) {
+
+    localStorage.setItem('ya-scrum:account', JSON.stringify(account));
+    this._account = account;
+  }
+
+  private extractAccount() {
+    const serializedAccount = localStorage.getItem('ya-scrum:account');
+    if (serializedAccount) {
+      this._account = JSON.parse(serializedAccount);
+    }
+  }
+
+  storeAccount(account: Account): Observable<Account> {
+    return Observable.create(observer => {
+      this.account = account;
+
+      observer.next(account);
+      observer.complete();
+    });
+  }
+
+
 
 }

@@ -46,7 +46,7 @@ export class SignUpPageComponent implements OnInit {
     signup.email = this.signUpForm.value.email;
     signup.password = this.signUpForm.value.password;
 
-    this.groupService.signUp(signup);
+    this.groupService.registerSignUp(signup);
     this.router.navigate([`/group-create`]);
     
     // this.userService.signUp(signup).subscribe(() => {

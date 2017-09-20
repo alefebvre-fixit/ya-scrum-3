@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
-import { Group, SignUp, User } from '../models';
+import { Group, SignUp, User, Account } from '../models';
 import { UserService } from './user.service';
 import { AuthenticationService } from './authentication.service';
 
@@ -12,7 +12,7 @@ import * as firebase from 'firebase/app';
 @Injectable()
 export class GroupService {
 
-  private _signup: SignUp;
+  public _signup: SignUp;
 
   constructor(
     private authentication: AuthenticationService,
@@ -47,14 +47,34 @@ export class GroupService {
   }
 
 
-  public signUp(signup: SignUp) {
+  public registerSignUp(signup: SignUp) {
     this._signup = signup;
   }
 
-  public createGroupAndSignUp(group: Group) {
-    this.create(group);
-    this.authentication.groupName = group.name;
-    
+  public createGroupAndSignUp(group: Group, signUp: SignUp): Observable<any> {
+
+    return Observable.fromPromise(<Promise<any>>this.afAuth.auth.createUserWithEmailAndPassword(signUp.email, signUp.password))
+      .map(result =>
+        this.afAuth.auth.currentUser.updateProfile({
+          displayName: signUp.name,
+          photoURL: undefined,
+        }).then(() => {
+
+          group.$key = this.create(group);
+
+          const user = new User();
+          user.$key = this.afAuth.auth.currentUser.uid;
+          user.email = this.afAuth.auth.currentUser.email;
+          user.name = this.afAuth.auth.currentUser.displayName;
+
+          const account = Account.createFromUser(user, group);
+
+          this.authentication.storeAccount(account).subscribe(() => {
+            this.userService.saveAccount(account);
+            this.userService.save(user);
+          });
+        })
+      );
   }
 
 }

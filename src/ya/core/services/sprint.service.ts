@@ -3,12 +3,12 @@ import { Observable } from 'rxjs/Rx';
 import { Sprint, Story, StoryProgress, SprintProgress, Upload, User } from '../models';
 import { UserService } from './user.service';
 import { DateService } from './date.service';
+import { AuthenticationService } from './authentication.service';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 import { FirebaseApp } from 'angularfire2';
 import * as firebase from 'firebase';
 
-const SPRINTS = '/sprints';
 
 @Injectable()
 export class SprintService {
@@ -18,7 +18,13 @@ export class SprintService {
     private firebaseApp: FirebaseApp,
     private userService: UserService,
     private dateService: DateService,
+    private authentication: AuthenticationService,
   ) {
+  }
+
+
+  private baseUrl(ressource: string): string {
+    return 'groups/' + this.authentication.account.group.groupId + '/' + ressource;
   }
 
   public instanciate(): Sprint {
@@ -47,7 +53,7 @@ export class SprintService {
           sprint.estimate = stories.reduce(function (sum: number, story: Story) {
             return story.estimate;
           }, 0);
-          this.database.object('/sprints/' + sprint.$key).update({ estimate: sprint.estimate });
+          this.database.object(this.baseUrl('sprints/') + sprint.$key).update({ estimate: sprint.estimate });
         });
 
       }
@@ -55,17 +61,17 @@ export class SprintService {
   }
 
   public findAll(): Observable<Sprint[]> {
-    return this.database.list(SPRINTS);
+    return this.database.list(this.baseUrl('sprints/'));
   }
 
   public findStoryKeysPerSprint(sprintKey: string): Observable<string[]> {
-    return this.database.list('storyPerSprint/' + sprintKey).map(storiesPerSprint => storiesPerSprint
+    return this.database.list(this.baseUrl('storyPerSprint/') + sprintKey).map(storiesPerSprint => storiesPerSprint
       .map(storyPerSprint => storyPerSprint.$key));
   }
 
   public findStoryBySprint(sprintId: string): Observable<Story[]> {
     return this.findStoryKeysPerSprint(sprintId)
-      .map(storiesPerSprint => storiesPerSprint.map(storyKey => this.database.object('stories/' + storyKey))).flatMap(fbos => Observable.combineLatest(fbos));
+      .map(storiesPerSprint => storiesPerSprint.map(storyKey => this.database.object(this.baseUrl('stories/') + storyKey))).flatMap(fbos => Observable.combineLatest(fbos));
   }
 
   public updateProgress(sprint: Sprint, stories: Story[]) {
@@ -90,17 +96,17 @@ export class SprintService {
         sprint.status = 'new';
       }
 
-      this.database.object('/sprints/' + sprint.$key).update({ status: sprint.status, progress: sprint.progress });
+      this.database.object(this.baseUrl('sprints/') + sprint.$key).update({ status: sprint.status, progress: sprint.progress });
     }
 
   }
 
   public findOneStory(storyKey: string): Observable<Story> {
-    return this.database.object('/stories/' + storyKey);
+    return this.database.object(this.baseUrl('stories/') + storyKey);
   }
 
   public findByStatus(status: string): Observable<Sprint[]> {
-    return this.database.list(SPRINTS, {
+    return this.database.list(this.baseUrl('sprints/'), {
       query: {
         orderByChild: 'filter_status',
         equalTo: status
@@ -117,7 +123,7 @@ export class SprintService {
   public assignStoryToToSprint(sprint: Sprint, story: Story) {
 
 
-    this.database.object('/storyPerSprint/' + sprint.$key).take(1).subscribe(existingJoin => {
+    this.database.object(this.baseUrl('storyPerSprint/') + sprint.$key).take(1).subscribe(existingJoin => {
       if (!existingJoin[story.$key]) {
 
         const join = new Object();
@@ -139,15 +145,8 @@ export class SprintService {
 
         sprint.storyNumber = sprint.storyNumber + 1;
 
-
-        // if (existingJoin) {
-        //   sprint.storyNumber = sprint.storyNumber +
-        // } else {
-        //   sprint.storyNumber = 1;
-        // }
-
-        this.database.object('/storyPerSprint/' + sprint.$key).update(join);
-        this.database.object('/stories/' + story.$key).update({
+        this.database.object(this.baseUrl('storyPerSprint/') + sprint.$key).update(join);
+        this.database.object(this.baseUrl('stories/') + story.$key).update({
           sprintId: sprint.$key,
           status: 'assigned',
           filter_status: Sprint.getFilterStatus('assigned'),
@@ -157,7 +156,7 @@ export class SprintService {
           storyNumber: sprint.storyNumber
         });
 
-        this.database.object('/sprints/' + sprint.$key).update({ estimate: sprint.estimate });
+        this.database.object(this.baseUrl('sprints/') + sprint.$key).update({ estimate: sprint.estimate });
 
       } else {
         console.log('The story is already assigned!');
@@ -170,7 +169,7 @@ export class SprintService {
 
       for (const story of stories) {
         Story.cancelLatestProgress(story);
-        this.database.object('/stories/' + story.$key).update({
+        this.database.object(this.baseUrl('stories/') + story.$key).update({
           history: story.history
         });
       }
@@ -183,7 +182,7 @@ export class SprintService {
       sprint.meeting.status = Sprint.STATUS_CLOSED;
 
       Sprint.updateProgress(sprint, stories);
-      this.database.object('/sprints/' + sprint.$key).update({
+      this.database.object(this.baseUrl('sprints/') + sprint.$key).update({
         meeting: sprint.meeting,
         progress: sprint.progress,
         remaining: sprint.remaining,
@@ -209,25 +208,25 @@ export class SprintService {
         if (!progress) {
           progress = Story.createProgress(story, sprint.meeting.day);
           Story.setProgress(story, progress);
-          this.database.object('/stories/' + story.$key).update({
+          this.database.object(this.baseUrl('stories/') + story.$key).update({
             history: story.history
           });
         }
 
       }
 
-      this.database.object('/sprints/' + sprint.$key).update({ meeting: sprint.meeting });
+      this.database.object(this.baseUrl('sprints/') + sprint.$key).update({ meeting: sprint.meeting });
     }
   }
 
 
 
   public assignScrumMaster(sprintId: string, userId: string) {
-    this.database.object('/sprints/' + sprintId).update({ scrumMasterId: userId });
+    this.database.object(this.baseUrl('sprints/') + sprintId).update({ scrumMasterId: userId });
   }
 
   public findOne(sprintKey: string): Observable<Sprint> {
-    return this.database.object('/sprints/' + sprintKey);
+    return this.database.object(this.baseUrl('sprints/') + sprintKey);
   }
 
   public save(sprint: Sprint): string {
@@ -240,12 +239,12 @@ export class SprintService {
 
   public create(sprint: Sprint): string {
     sprint.filter_status = Sprint.getFilterStatus(sprint.status);
-    return this.database.list(SPRINTS).push(sprint).key;
+    return this.database.list(this.baseUrl('sprints/')).push(sprint).key;
   }
 
   public update(sprint: Sprint): string {
     sprint.filter_status = Sprint.getFilterStatus(sprint.status);
-    this.database.object('/sprints/' + sprint.$key).update(Sprint.getUpdate(sprint));
+    this.database.object(this.baseUrl('sprints/') + sprint.$key).update(Sprint.getUpdate(sprint));
     return sprint.$key;
   }
 
@@ -270,10 +269,6 @@ export class SprintService {
     }
     return result;
   }
-
-
-
-
 
   public generateBurndowData(sprint: Sprint, stories: Story[]): any {
     const result = { labels: [], datas: [] };
@@ -338,7 +333,7 @@ export class SprintService {
     // Create a storage reference from our storage service
     const storageRef = this.firebaseApp.storage().ref();
 
-    const uploadTask = storageRef.child(`sprints/${sprint.$key}/background.jpg`).putString(imageBase64, 'base64', { contentType: 'image/jpeg' });
+    const uploadTask = storageRef.child(this.baseUrl('sprints/') + `${sprint.$key}/background.jpg`).putString(imageBase64, 'base64', { contentType: 'image/jpeg' });
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       (snapshot: any) => {
         // upload in progress

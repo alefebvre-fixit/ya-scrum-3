@@ -5,17 +5,17 @@
 </md-toolbar>
 
 <div class="positioner">
-  <md-card *ngIf="user !== undefined">
+  <md-card *ngIf="account !== undefined">
     <form [formGroup]="accountForm" (ngSubmit)="onSubmit()" novalidate>
       <md-list>
         <md-list-item>
-          <ngu-letter-avatar md-list-avatar avatar-data='{{user?.name}}' avatar-shape='round' avatarborder='true' avatar-height="40"
+          <ngu-letter-avatar md-list-avatar avatar-data='{{account?.name}}' avatar-shape='round' avatarborder='true' avatar-height="40"
             avatar-width="40" avatar-font-size="20">
           </ngu-letter-avatar>
-          <h3 md-line> {{user?.name}} </h3>
+          <h3 md-line> {{account?.name}} </h3>
           <p md-line>
-            <span> {{user?.role}} </span>
-            <span> - {{user?.team}} </span>
+            <span> {{account?.role}} </span>
+            <span> - {{account?.team}} </span>
           </p>
         </md-list-item>
       </md-list>

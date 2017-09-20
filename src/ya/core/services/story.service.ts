@@ -3,8 +3,7 @@ import { Observable } from 'rxjs/Rx';
 import { Story, StoryProgress } from '../models';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { UserService } from './user.service';
-
-const STORIES = 'stories';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable()
 export class StoryService {
@@ -34,9 +33,15 @@ export class StoryService {
   }
 
   constructor(
+    private authentication: AuthenticationService,
     private database: AngularFireDatabase,
     private userService: UserService,
   ) { }
+
+  private baseUrl(ressource: string): string {
+    return 'groups/' + this.authentication.account.group.groupId + '/' + ressource;
+  }
+
 
   public getStoryTypes(): any {
     return this.storyTypes;
@@ -70,7 +75,7 @@ export class StoryService {
 
 
   public findAll(): Observable<Story[]> {
-    return this.database.list(STORIES, {
+    return this.database.list(this.baseUrl('stories'), {
       query: {
         orderByChild: 'priority'
       }
@@ -78,7 +83,7 @@ export class StoryService {
   }
 
   public findBySprintId(sprintId: string): Observable<Story[]> {
-    return this.database.list(STORIES, {
+    return this.database.list(this.baseUrl('stories'), {
       query: {
         orderByChild: 'sprintId',
         equalTo: sprintId
@@ -91,7 +96,7 @@ export class StoryService {
   }
 
   public findByStatus(status: string): Observable<Story[]> {
-    return this.database.list(STORIES, {
+    return this.database.list(this.baseUrl('stories/'), {
       query: {
         orderByChild: 'filter_status',
         equalTo: status
@@ -114,7 +119,7 @@ export class StoryService {
   }
 
   public findOne(storyKey: string): Observable<Story> {
-    return this.database.object('/stories/' + storyKey);
+    return this.database.object(this.baseUrl('stories/') + storyKey);
   }
 
   public save(story: Story): string {
@@ -127,18 +132,18 @@ export class StoryService {
 
   public create(story: Story): string {
     story.filter_status = Story.getFilterStatus(story.status);
-    return this.database.list(STORIES).push(story).key;
+    return this.database.list(this.baseUrl('stories/')).push(story).key;
   }
 
   public update(story: Story): string {
     story.filter_status = Story.getFilterStatus(story.status);
-    this.database.object('/stories/' + story.$key).update(Story.getUpdate(story));
+    this.database.object(this.baseUrl('stories/') + story.$key).update(Story.getUpdate(story));
     return story.$key;
   }
 
 
   public delete(story: Story) {
-    return this.database.object('/stories/' + story.$key).remove();
+    return this.database.object(this.baseUrl('stories/') + '/' + story.$key).remove();
   }
 
   public unassignStory(story: Story) {
@@ -147,11 +152,11 @@ export class StoryService {
     const join = new Object();
     join[story.$key] = false;
 
-    this.database.object(`/storyPerSprint/${story.sprintId}/${story.$key}`).remove();
-    this.database.object(`/stories/${story.$key}/sprintId`).remove();
-    this.database.object(`/stories/${story.$key}`).update({ status: 'new', filter_status: Story.getFilterStatus('new'), history: [] });
+    this.database.object(this.baseUrl('storyPerSprint/') + `${story.sprintId}/${story.$key}`).remove();
+    this.database.object(this.baseUrl('stories/') + `${story.$key}/sprintId`).remove();
+    this.database.object(this.baseUrl('stories/') + `${story.$key}`).update({ status: 'new', filter_status: Story.getFilterStatus('new'), history: [] });
 
-    return this.database.object('/sprints/' + sprintId).take(1).subscribe(sprint => {
+    return this.database.object(this.baseUrl('sprints/') + sprintId).take(1).subscribe(sprint => {
 
       if (sprint.estimate !== undefined && sprint.estimate >= story.estimate) {
         sprint.estimate -= story.estimate;
@@ -179,7 +184,7 @@ export class StoryService {
         sprint.storyNumber = 0;
       }
 
-      this.database.object(`/sprints/${sprintId}`).update({
+      this.database.object(this.baseUrl('sprints/') + `${sprintId}`).update({
         estimate: sprint.estimate,
         progress: sprint.progress,
         remaining: sprint.remaining,
@@ -217,6 +222,10 @@ export class StoryService {
 
   public assignDailyProgress(story: Story, progress: StoryProgress): Story {
 
+    if (!story.history) {
+      return story;
+    }
+
     story.history[progress.day - 1] = progress;
     const latest = Story.getLatestProgress(story);
     if (latest.total > 0) {
@@ -229,60 +238,16 @@ export class StoryService {
       story.status = 'assigned';
     }
 
-
-    // if (story.history) {
-    //   story.progress = story.history.reduce(function (sum: any, p: StoryProgress) {
-    //     p.previous = sum;
-    //     p.remaining = StoryService.filterPositive(story.estimate - p.previous - p.daily);
-    //     return p.previous + p.daily;
-    //   }, 0);
-    //   if (story.progress > 0) {
-    //     if (story.progress >= story.estimate) {
-    //       story.status = 'closed';
-    //     } else {
-    //       story.status = 'started';
-    //     }
-    //   } else {
-    //     story.status = 'assigned';
-    //   }
-    // }
-
     return story;
 
   }
-
-
-
-
-  // public calculateProgress(story: Story) {
-  //   console.log('calculateProgress=');
-  //   if (story.history) {
-  //     story.progress = story.history.reduce(function (sum: number, progress: StoryProgress) {
-  //       progress.previous = sum;
-  //       progress.remaining = StoryService.filterPositive(story.estimate - progress.previous - progress.daily);
-
-  //       return progress.previous + progress.daily;
-  //     }, 0);
-
-  //     if (story.progress > 0) {
-  //       if (story.progress >= story.estimate) {
-  //         story.status = 'closed';
-  //       } else {
-  //         story.status = 'started';
-  //       }
-  //     } else {
-  //       story.status = 'assigned';
-  //     }
-  //   }
-  //   console.log(story);
-  // }
 
   public saveProgress(story: Story) {
     this.save(story);
   }
 
   public assignProductOwner(storyId: string, userId: string) {
-    this.database.object(`/stories/${storyId}`).update({ productOwnerId: userId });
+    this.database.object(this.baseUrl('stories/') + `${storyId}`).update({ productOwnerId: userId });
   }
 
 }
