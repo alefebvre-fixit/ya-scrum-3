@@ -43,8 +43,8 @@ export class SprintEditDialogComponent implements OnInit {
             name: [this.sprint.name, [<any>Validators.required]],
             velocity: [this.sprint.velocity, [<any>Validators.required]],
             duration: [this.sprint.duration, [<any>Validators.required]],
-            startDate: [this.sprint.startDate],
-            endDate: [this.sprint.endDate],
+            startDate: [new Date(this.sprint.startDate)],
+            endDate: [new Date(this.sprint.endDate)],
             scrummaster: [this.scrummaster],
           });
         }
