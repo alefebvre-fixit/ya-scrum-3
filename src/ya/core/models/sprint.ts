@@ -13,6 +13,12 @@ export class Sprint {
 
     public static STATUS_CLOSED = 'closed';
     public static STATUS_OPEN = 'open';
+    public static STATUS_NEW = 'new';
+    public static STATUS_STARTED = 'started';
+
+    public static FILTER_PROGRESS = 'progress';
+    public static FILTER_PENDING = 'pending';
+
 
     $key: string;
     code: string;
@@ -66,11 +72,11 @@ export class Sprint {
     }
 
     public static getFilterStatus(status: string): string {
-        if ('started' === status) {
-            return 'progress';
+        if (Sprint.STATUS_NEW === status) {
+            return Sprint.FILTER_PROGRESS;
         }
-        if ('new' === status || undefined === status) {
-            return 'pending';
+        if (Sprint.STATUS_NEW === status || undefined === status) {
+            return Sprint.FILTER_PENDING;
         }
         return status;
     }

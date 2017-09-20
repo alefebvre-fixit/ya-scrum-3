@@ -2,6 +2,13 @@ import { StoryProgress } from './story-progress';
 
 export class Story {
 
+    public static STATUS_NEW = 'new';
+    public static STATUS_STARTED = 'started';
+    public static STATUS_ASSIGNED = 'assigned';
+
+    public static FILTER_PROGRESS = 'progress';
+    public static FILTER_PENDING = 'pending';
+
     $key: string;
     name: string;
     status: string;
@@ -40,7 +47,7 @@ export class Story {
         const result: Story = new Story();
 
         result.priority = 1;
-        result.status = 'new';
+        result.status = Story.STATUS_NEW;
         result.type = 'feature';
         result.estimate = 1;
         result.theme = 'pink';
@@ -144,11 +151,11 @@ export class Story {
     }
 
     public static getFilterStatus(status: string): string {
-        if ('started' === status || 'assigned' === status) {
-            return 'progress';
+        if (Story.STATUS_STARTED === status || Story.STATUS_ASSIGNED === status) {
+            return Story.FILTER_PROGRESS;
         }
-        if ('new' === status || undefined === status) {
-            return 'pending';
+        if (Story.STATUS_NEW === status || undefined === status) {
+            return Story.FILTER_PENDING;
         }
         return status;
     }

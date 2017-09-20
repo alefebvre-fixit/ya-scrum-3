@@ -37,7 +37,7 @@ export class AuthenticationService {
     }
   }
 
-  storeAccount(account: Account): Observable<Account> {
+  public storeAccount(account: Account): Observable<Account> {
     return Observable.create(observer => {
       this.account = account;
 
@@ -46,6 +46,9 @@ export class AuthenticationService {
     });
   }
 
+  public baseUrl(ressource: string): string {
+    return 'groups/' + this.account.group.groupId + '/' + ressource;
+  }
 
 
 }

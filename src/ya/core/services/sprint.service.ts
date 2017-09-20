@@ -22,10 +22,22 @@ export class SprintService {
   ) {
   }
 
-
   private baseUrl(ressource: string): string {
-    return 'groups/' + this.authentication.account.group.groupId + '/' + ressource;
+    return this.authentication.baseUrl(ressource);
   }
+
+  private sprintsUrl() {
+    return this.authentication.baseUrl('sprints/');
+  }
+
+  private storiesUrl() {
+    return this.authentication.baseUrl('stories/');
+  }
+
+  private storiesPerSprintUrl() {
+    return this.authentication.baseUrl('storyPerSprint/');
+  }
+
 
   public instanciate(): Sprint {
     const result = Sprint.create();
@@ -43,7 +55,7 @@ export class SprintService {
       for (const sprint of sprints) {
 
         if (sprint.status === undefined) {
-          sprint.status = 'new';
+          sprint.status = Sprint.STATUS_NEW;
         }
 
         sprint.filter_status = Sprint.getFilterStatus(sprint.status);
@@ -53,7 +65,7 @@ export class SprintService {
           sprint.estimate = stories.reduce(function (sum: number, story: Story) {
             return story.estimate;
           }, 0);
-          this.database.object(this.baseUrl('sprints/') + sprint.$key).update({ estimate: sprint.estimate });
+          this.database.object(this.sprintsUrl() + sprint.$key).update({ estimate: sprint.estimate });
         });
 
       }
@@ -61,17 +73,17 @@ export class SprintService {
   }
 
   public findAll(): Observable<Sprint[]> {
-    return this.database.list(this.baseUrl('sprints/'));
+    return this.database.list(this.sprintsUrl());
   }
 
   public findStoryKeysPerSprint(sprintKey: string): Observable<string[]> {
-    return this.database.list(this.baseUrl('storyPerSprint/') + sprintKey).map(storiesPerSprint => storiesPerSprint
+    return this.database.list(this.storiesPerSprintUrl() + sprintKey).map(storiesPerSprint => storiesPerSprint
       .map(storyPerSprint => storyPerSprint.$key));
   }
 
   public findStoryBySprint(sprintId: string): Observable<Story[]> {
     return this.findStoryKeysPerSprint(sprintId)
-      .map(storiesPerSprint => storiesPerSprint.map(storyKey => this.database.object(this.baseUrl('stories/') + storyKey))).flatMap(fbos => Observable.combineLatest(fbos));
+      .map(storiesPerSprint => storiesPerSprint.map(storyKey => this.database.object(this.storiesUrl() + storyKey))).flatMap(fbos => Observable.combineLatest(fbos));
   }
 
   public updateProgress(sprint: Sprint, stories: Story[]) {
@@ -88,25 +100,26 @@ export class SprintService {
 
       if (sprint.progress > 0) {
         if (sprint.progress >= sprint.estimate) {
-          sprint.status = 'closed';
+          sprint.status = Sprint.STATUS_CLOSED;
         } else {
-          sprint.status = 'started';
+          sprint.status = Sprint.STATUS_STARTED;
         }
       } else {
-        sprint.status = 'new';
+        sprint.status = Sprint.STATUS_NEW;
       }
 
-      this.database.object(this.baseUrl('sprints/') + sprint.$key).update({ status: sprint.status, progress: sprint.progress });
+      //TODO Update filter
+      this.database.object(this.sprintsUrl() + sprint.$key).update({ status: sprint.status, progress: sprint.progress });
     }
 
   }
 
   public findOneStory(storyKey: string): Observable<Story> {
-    return this.database.object(this.baseUrl('stories/') + storyKey);
+    return this.database.object(this.storiesUrl() + storyKey);
   }
 
   public findByStatus(status: string): Observable<Sprint[]> {
-    return this.database.list(this.baseUrl('sprints/'), {
+    return this.database.list(this.sprintsUrl(), {
       query: {
         orderByChild: 'filter_status',
         equalTo: status
@@ -123,7 +136,7 @@ export class SprintService {
   public assignStoryToToSprint(sprint: Sprint, story: Story) {
 
 
-    this.database.object(this.baseUrl('storyPerSprint/') + sprint.$key).take(1).subscribe(existingJoin => {
+    this.database.object(this.storiesPerSprintUrl() + sprint.$key).take(1).subscribe(existingJoin => {
       if (!existingJoin[story.$key]) {
 
         const join = new Object();
@@ -145,18 +158,18 @@ export class SprintService {
 
         sprint.storyNumber = sprint.storyNumber + 1;
 
-        this.database.object(this.baseUrl('storyPerSprint/') + sprint.$key).update(join);
-        this.database.object(this.baseUrl('stories/') + story.$key).update({
+        this.database.object(this.storiesPerSprintUrl() + sprint.$key).update(join);
+        this.database.object(this.storiesUrl() + story.$key).update({
           sprintId: sprint.$key,
-          status: 'assigned',
-          filter_status: Sprint.getFilterStatus('assigned'),
+          status: Story.STATUS_ASSIGNED,
+          filter_status: Sprint.getFilterStatus(Story.STATUS_ASSIGNED),
           progress: 0,
           duration: sprint.duration,
           history: story.history,
           storyNumber: sprint.storyNumber
         });
 
-        this.database.object(this.baseUrl('sprints/') + sprint.$key).update({ estimate: sprint.estimate });
+        this.database.object(this.sprintsUrl() + sprint.$key).update({ estimate: sprint.estimate });
 
       } else {
         console.log('The story is already assigned!');
@@ -169,7 +182,7 @@ export class SprintService {
 
       for (const story of stories) {
         Story.cancelLatestProgress(story);
-        this.database.object(this.baseUrl('stories/') + story.$key).update({
+        this.database.object(this.storiesUrl() + story.$key).update({
           history: story.history
         });
       }
@@ -182,7 +195,7 @@ export class SprintService {
       sprint.meeting.status = Sprint.STATUS_CLOSED;
 
       Sprint.updateProgress(sprint, stories);
-      this.database.object(this.baseUrl('sprints/') + sprint.$key).update({
+      this.database.object(this.sprintsUrl() + sprint.$key).update({
         meeting: sprint.meeting,
         progress: sprint.progress,
         remaining: sprint.remaining,
@@ -208,25 +221,25 @@ export class SprintService {
         if (!progress) {
           progress = Story.createProgress(story, sprint.meeting.day);
           Story.setProgress(story, progress);
-          this.database.object(this.baseUrl('stories/') + story.$key).update({
+          this.database.object(this.storiesUrl() + story.$key).update({
             history: story.history
           });
         }
 
       }
 
-      this.database.object(this.baseUrl('sprints/') + sprint.$key).update({ meeting: sprint.meeting });
+      this.database.object(this.sprintsUrl() + sprint.$key).update({ meeting: sprint.meeting });
     }
   }
 
 
 
   public assignScrumMaster(sprintId: string, userId: string) {
-    this.database.object(this.baseUrl('sprints/') + sprintId).update({ scrumMasterId: userId });
+    this.database.object(this.sprintsUrl() + sprintId).update({ scrumMasterId: userId });
   }
 
   public findOne(sprintKey: string): Observable<Sprint> {
-    return this.database.object(this.baseUrl('sprints/') + sprintKey);
+    return this.database.object(this.sprintsUrl() + sprintKey);
   }
 
   public save(sprint: Sprint): string {
@@ -239,12 +252,12 @@ export class SprintService {
 
   public create(sprint: Sprint): string {
     sprint.filter_status = Sprint.getFilterStatus(sprint.status);
-    return this.database.list(this.baseUrl('sprints/')).push(sprint).key;
+    return this.database.list(this.sprintsUrl()).push(sprint).key;
   }
 
   public update(sprint: Sprint): string {
     sprint.filter_status = Sprint.getFilterStatus(sprint.status);
-    this.database.object(this.baseUrl('sprints/') + sprint.$key).update(Sprint.getUpdate(sprint));
+    this.database.object(this.sprintsUrl() + sprint.$key).update(Sprint.getUpdate(sprint));
     return sprint.$key;
   }
 
@@ -333,7 +346,7 @@ export class SprintService {
     // Create a storage reference from our storage service
     const storageRef = this.firebaseApp.storage().ref();
 
-    const uploadTask = storageRef.child(this.baseUrl('sprints/') + `${sprint.$key}/background.jpg`).putString(imageBase64, 'base64', { contentType: 'image/jpeg' });
+    const uploadTask = storageRef.child(this.sprintsUrl() + `${sprint.$key}/background.jpg`).putString(imageBase64, 'base64', { contentType: 'image/jpeg' });
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       (snapshot: any) => {
         // upload in progress
