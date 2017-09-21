@@ -166,10 +166,9 @@ export class SprintService {
           progress: 0,
           duration: sprint.duration,
           history: story.history,
-          storyNumber: sprint.storyNumber
         });
 
-        this.database.object(this.sprintsUrl() + sprint.$key).update({ estimate: sprint.estimate });
+        this.database.object(this.sprintsUrl() + sprint.$key).update({ estimate: sprint.estimate, storyNumber: sprint.storyNumber });
 
       } else {
         console.log('The story is already assigned!');
