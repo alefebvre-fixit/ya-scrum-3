@@ -39,7 +39,19 @@ export class StoryService {
   ) { }
 
   private baseUrl(ressource: string): string {
-    return 'groups/' + this.authentication.account.group.groupId + '/' + ressource;
+    return this.authentication.baseUrl(ressource);
+  }
+
+  private sprintsUrl() {
+    return this.authentication.baseUrl('sprints/');
+  }
+
+  private storiesUrl() {
+    return this.authentication.baseUrl('stories/');
+  }
+
+  private storiesPerSprintUrl() {
+    return this.authentication.baseUrl('storyPerSprint/');
   }
 
 
@@ -64,7 +76,7 @@ export class StoryService {
       for (const story of stories) {
 
         if (story.status === undefined) {
-          story.status = 'new';
+          story.status = Story.STATUS_NEW;
         }
 
         story.filter_status = Story.getFilterStatus(story.status);
@@ -75,7 +87,7 @@ export class StoryService {
 
 
   public findAll(): Observable<Story[]> {
-    return this.database.list(this.baseUrl('stories'), {
+    return this.database.list(this.storiesUrl(), {
       query: {
         orderByChild: 'priority'
       }
@@ -83,7 +95,7 @@ export class StoryService {
   }
 
   public findBySprintId(sprintId: string): Observable<Story[]> {
-    return this.database.list(this.baseUrl('stories'), {
+    return this.database.list(this.storiesUrl(), {
       query: {
         orderByChild: 'sprintId',
         equalTo: sprintId
@@ -96,7 +108,7 @@ export class StoryService {
   }
 
   public findByStatus(status: string): Observable<Story[]> {
-    return this.database.list(this.baseUrl('stories/'), {
+    return this.database.list(this.storiesUrl(), {
       query: {
         orderByChild: 'filter_status',
         equalTo: status
@@ -119,7 +131,7 @@ export class StoryService {
   }
 
   public findOne(storyKey: string): Observable<Story> {
-    return this.database.object(this.baseUrl('stories/') + storyKey);
+    return this.database.object(this.storiesUrl() + storyKey);
   }
 
   public save(story: Story): string {
@@ -132,18 +144,18 @@ export class StoryService {
 
   public create(story: Story): string {
     story.filter_status = Story.getFilterStatus(story.status);
-    return this.database.list(this.baseUrl('stories/')).push(story).key;
+    return this.database.list(this.storiesUrl()).push(story).key;
   }
 
   public update(story: Story): string {
     story.filter_status = Story.getFilterStatus(story.status);
-    this.database.object(this.baseUrl('stories/') + story.$key).update(Story.getUpdate(story));
+    this.database.object(this.storiesUrl() + story.$key).update(Story.getUpdate(story));
     return story.$key;
   }
 
 
   public delete(story: Story) {
-    return this.database.object(this.baseUrl('stories/') + '/' + story.$key).remove();
+    return this.database.object(this.storiesUrl() + '/' + story.$key).remove();
   }
 
   public unassignStory(story: Story) {
@@ -152,11 +164,11 @@ export class StoryService {
     const join = new Object();
     join[story.$key] = false;
 
-    this.database.object(this.baseUrl('storyPerSprint/') + `${story.sprintId}/${story.$key}`).remove();
-    this.database.object(this.baseUrl('stories/') + `${story.$key}/sprintId`).remove();
-    this.database.object(this.baseUrl('stories/') + `${story.$key}`).update({ status: 'new', filter_status: Story.getFilterStatus('new'), history: [] });
+    this.database.object(this.baseUrl(this.storiesPerSprintUrl()) + `${story.sprintId}/${story.$key}`).remove();
+    this.database.object(this.storiesUrl() + `${story.$key}/sprintId`).remove();
+    this.database.object(this.storiesUrl() + `${story.$key}`).update({ status: Story.STATUS_NEW, filter_status: Story.getFilterStatus(Story.STATUS_NEW), history: [] });
 
-    return this.database.object(this.baseUrl('sprints/') + sprintId).take(1).subscribe(sprint => {
+    return this.database.object(this.sprintsUrl() + sprintId).take(1).subscribe(sprint => {
 
       if (sprint.estimate !== undefined && sprint.estimate >= story.estimate) {
         sprint.estimate -= story.estimate;
@@ -184,7 +196,7 @@ export class StoryService {
         sprint.storyNumber = 0;
       }
 
-      this.database.object(this.baseUrl('sprints/') + `${sprintId}`).update({
+      this.database.object(this.sprintsUrl() + `${sprintId}`).update({
         estimate: sprint.estimate,
         progress: sprint.progress,
         remaining: sprint.remaining,
@@ -230,12 +242,12 @@ export class StoryService {
     const latest = Story.getLatestProgress(story);
     if (latest.total > 0) {
       if (latest.remaining === 0) {
-        story.status = 'closed';
+        story.status = Story.STATUS_CLOSED;
       } else {
-        story.status = 'started';
+        story.status = Story.STATUS_STARTED;
       }
     } else {
-      story.status = 'assigned';
+      story.status = Story.STATUS_ASSIGNED;
     }
 
     return story;
@@ -247,7 +259,7 @@ export class StoryService {
   }
 
   public assignProductOwner(storyId: string, userId: string) {
-    this.database.object(this.baseUrl('stories/') + `${storyId}`).update({ productOwnerId: userId });
+    this.database.object(this.storiesUrl() + `${storyId}`).update({ productOwnerId: userId });
   }
 
 }

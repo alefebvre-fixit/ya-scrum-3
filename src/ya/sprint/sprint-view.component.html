@@ -71,15 +71,20 @@
         Not started
       </ya-section-title-highlight>
       <ya-section-button-bar>
-        <button md-button (click)="startNewDailyMeeting()" [disabled]="!(stories?.length > 0)" color="primary"><md-icon>today</md-icon> START DAILY MEETING</button>
+
+        <button *ngIf="sprint?.meeting?.status === 'closed'" md-button (click)="startNewDailyMeeting()" [disabled]="!(stories?.length > 0)"
+          color="primary"><md-icon>today</md-icon> START STAND-UP</button>
+        <button *ngIf="sprint?.meeting?.status === 'open'" md-button (click)="closeDailyMeeting()" [disabled]="!(stories?.length > 0)"
+          color="primary"><md-icon>today</md-icon> CLOSE STAND-UP</button>
+
         <button md-icon-button (click)="addStory()"><md-icon>fullscreen</md-icon></button>
         <button md-icon-button [mdMenuTriggerFor]="menuStory">
             <md-icon>more_vert</md-icon>
           </button>
         <md-menu #menuStory="mdMenu">
           <button md-menu-item (click)="cancelLastDailyMeeting()">
-              <md-icon>delete</md-icon>
-              <span>cancel</span>
+              <md-icon>cancel</md-icon>
+              <span>Cancel last meeting</span>
             </button>
         </md-menu>
       </ya-section-button-bar>
@@ -89,7 +94,7 @@
       <div class="flex-item" fxFlex="5%">
       </div>
       <div class="flex-item" fxFlex="90%">
-        <ya-sprint-burndown [stories]="stories" [sprint]="sprint"  *ngIf="sprint?.meeting?.day > 0"></ya-sprint-burndown>
+        <ya-sprint-burndown [stories]="stories" [sprint]="sprint" *ngIf="sprint?.meeting?.day > 0"></ya-sprint-burndown>
         <ya-sprint-burndown-new (onStart)="startNewDailyMeeting()" [stories]="stories" *ngIf="sprint?.meeting?.day <= 0"></ya-sprint-burndown-new>
       </div>
       <div class="flex-item" fxFlex="5%">
@@ -102,12 +107,12 @@
       <ya-section-button-bar><button md-icon-button (click)="addStory()"><md-icon>add</md-icon></button></ya-section-button-bar>
     </ya-section-title>
 
-    <ya-sprint-story-grid [stories]="stories" (onAdd)="addStory()" *ngIf="stories && stories?.length > 0"></ya-sprint-story-grid>
+    <ya-sprint-story-grid [stories]="stories" [status]="sprint?.meeting?.status" (onAdd)="addStory()" *ngIf="stories && stories?.length > 0"></ya-sprint-story-grid>
     <div fxLayout fxLayoutWrap="wrap" fxLayoutAlign="start start" *ngIf="!stories || stories?.length <= 0">
       <div class="flex-item" fxFlex="5%">
       </div>
       <div class="flex-item" fxFlex="90%">
-          <ya-sprint-story-card-new (onAdd)="addStory()"></ya-sprint-story-card-new>
+        <ya-sprint-story-card-new (onAdd)="addStory()"></ya-sprint-story-card-new>
       </div>
       <div class="flex-item" fxFlex="5%">
       </div>

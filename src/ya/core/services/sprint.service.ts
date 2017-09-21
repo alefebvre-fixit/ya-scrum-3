@@ -204,6 +204,11 @@ export class SprintService {
     }
   }
 
+  public closedDailyMeeting(sprint: Sprint, stories: Story[]) {
+    sprint.meeting.status = Sprint.STATUS_CLOSED;
+    this.database.object(this.sprintsUrl() + sprint.$key).update({ meeting: sprint.meeting });
+  }
+
 
   public startNewDailyMeeting(sprint: Sprint, stories: Story[]) {
 

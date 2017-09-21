@@ -5,7 +5,8 @@ export class Story {
     public static STATUS_NEW = 'new';
     public static STATUS_STARTED = 'started';
     public static STATUS_ASSIGNED = 'assigned';
-
+    public static STATUS_CLOSED = 'closed';
+    
     public static FILTER_PROGRESS = 'progress';
     public static FILTER_PENDING = 'pending';
 

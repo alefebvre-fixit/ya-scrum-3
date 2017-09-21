@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { Story } from '@ya-scrum/models';
+import { Story, Sprint } from '@ya-scrum/models';
 
 @Component({
   selector: 'ya-sprint-story-grid',
@@ -10,6 +10,7 @@ import { Story } from '@ya-scrum/models';
 export class SprintStoryGridComponent {
 
   @Input() stories: Story[];
+  @Input() status: string = Sprint.STATUS_CLOSED;
 
   constructor(
   ) {

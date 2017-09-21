@@ -12,12 +12,13 @@
       <div id="{{story?.$key}}"></div>
     </div>
     <div class="points-container">
-      <span class="point-value">{{ progress?.daily }} points</span><br><span class="point-label"> completed today</span>
-    </div>
+        <span *ngIf="isOpen()"><span  class="point-value">{{ progress?.daily }} points</span><br><span class="point-label"> completed today</span></span>
+        <span *ngIf="!isOpen()"><span class="point-label"> Stand-Up meeting is not open yet</span></span>
+      </div>
   </div>
   <md-card-actions>
     <button md-button (click)="navigateToDetails(story?.$key)" class="detail-button">DETAILS</button>
-    <span>
+    <span *ngIf="isOpen()">
     <button md-mini-fab (click)="remove()" color="accent"><md-icon>keyboard_arrow_down</md-icon></button>
     <button md-mini-fab (click)="add()" color="primary"><md-icon>keyboard_arrow_up</md-icon></button>
     </span>

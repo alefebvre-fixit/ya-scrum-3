@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnChanges, ViewChild, SimpleChanges, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Story, StoryProgress } from '@ya-scrum/models';
+import { Story, Sprint, StoryProgress } from '@ya-scrum/models';
 import { StoryService } from '@ya-scrum/services';
 import * as c3 from 'c3';
 import * as d3 from 'd3';
@@ -14,6 +14,7 @@ import * as d3 from 'd3';
 export class SprintStoryCardComponent implements OnInit, OnChanges, AfterViewInit {
 
   @Input() story: Story;
+  @Input() status: string = Sprint.STATUS_CLOSED;
 
   progress: StoryProgress;
   private chart;
@@ -36,7 +37,7 @@ export class SprintStoryCardComponent implements OnInit, OnChanges, AfterViewIni
     this.progress = Story.getLatestProgress(this.story);
     this.updateChart(this.progress);
   }
-  
+
   public add() {
     this.updateProgress(+1);
   }
@@ -65,7 +66,7 @@ export class SprintStoryCardComponent implements OnInit, OnChanges, AfterViewIni
     });
 
     d3.select('#' + this.story.$key + ' text.c3-chart-arcs-title').node().innerHTML
-          = StoryProgress.progressAsPercentage(this.progress) + '%';
+      = StoryProgress.progressAsPercentage(this.progress) + '%';
 
   }
 
@@ -127,6 +128,9 @@ export class SprintStoryCardComponent implements OnInit, OnChanges, AfterViewIni
 
   }
 
+  public isOpen(): boolean {
+    return Sprint.STATUS_OPEN === this.status;
+  }
 
 
   // $blue-grey: #546e7a;

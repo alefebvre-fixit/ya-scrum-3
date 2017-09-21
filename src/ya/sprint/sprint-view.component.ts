@@ -55,8 +55,12 @@ export class SprintViewComponent implements OnInit {
     return Sprint.progressAsPercentage(this.sprint);
   }
 
-  startNewDailyMeeting() {
+  public startNewDailyMeeting() {
     this.sprintService.startNewDailyMeeting(this.sprint, this.stories);
+  }
+
+  public closeDailyMeeting() {
+    this.sprintService.closedDailyMeeting(this.sprint, this.stories);
   }
 
   public cancelLastDailyMeeting() {
