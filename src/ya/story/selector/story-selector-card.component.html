@@ -1,0 +1,30 @@
+<md-card>
+  <div class="card-header">
+    <div class="card-icon" [hidden]="!story?.sprintId">
+      <md-icon>done</md-icon>
+    </div>
+    <md-card-title>{{story?.name}}</md-card-title>
+    <md-card-subtitle>
+        <a *ngIf="story?.sprintId" class="sprint-name">@{{sprint?.name}}</a>
+        <a *ngIf="!story?.sprintId" class="sprint-name">&nbsp;</a>
+      </md-card-subtitle>
+    <span class="ya-properties">
+      <ya-highlight-tag [theme]="story.theme">#{{story?.type}}</ya-highlight-tag>
+      <ya-property-tag color="#ffffff">{{story?.priority}} priority</ya-property-tag>
+      <ya-property-tag color="#ffffff">{{story?.estimate}} points</ya-property-tag>
+    </span>
+  </div>
+  <div class="story-card-content">
+    <md-card-content>
+      <p>
+        {{(story)?.description}}
+      </p>
+    </md-card-content>
+  </div>
+  <md-card-content>
+  </md-card-content>
+  <md-card-actions align="end">
+    <button md-button color="default" (click)="select()" *ngIf="story?.sprintId">REMOVE</button>
+    <button md-button color="primary" (click)="select()" *ngIf="!story?.sprintId">ADD</button>    
+  </md-card-actions>
+</md-card>

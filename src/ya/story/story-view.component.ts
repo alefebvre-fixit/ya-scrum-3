@@ -8,7 +8,6 @@ import { StoryService, SprintService, UserService } from '@ya-scrum/services';
 import { Story, StoryProgress, Sprint, SprintProgress, User } from '@ya-scrum/models';
 
 import { StoryEditDialogComponent } from './story-edit.dialog';
-import { StoryCardComponent } from './story-card.component';
 
 @Component({
   templateUrl: './story-view.component.html',

@@ -14,7 +14,6 @@ import { CovalentMessageModule } from '@covalent/core';
 
 import { NguUtilityModule } from 'ngu-utility/ngu-utility.module'; // <-- import the module
 
-import { StoryCardComponent} from './story-card.component';
 import { StoryGridComponent, StoryGridTitleDirective} from './story-grid.component';
 import { StoryListComponent} from './story-list.component';
 import { StoryViewComponent} from './story-view.component';
@@ -24,6 +23,8 @@ import { ProductBacklogComponent} from './product-backlog.component';
 
 import { SharedModule } from '../shared';
 import { StoryProgressModule } from './progress';
+import { StorySelectorModule } from './selector';
+import { StoryCardModule } from './card';
 
 @NgModule({
   imports: [
@@ -42,9 +43,11 @@ import { StoryProgressModule } from './progress';
     NguUtilityModule,
     SharedModule,
     StoryProgressModule,
+    StorySelectorModule,
+    StoryCardModule
+
   ],
   declarations: [
-    StoryCardComponent,
     StoryGridComponent,
     StoryGridTitleDirective,
     ProductBacklogComponent,
@@ -54,7 +57,6 @@ import { StoryProgressModule } from './progress';
     StoryListComponent,
   ],
   exports: [
-    StoryCardComponent,
     StoryGridComponent,
     StoryGridTitleDirective,
     ProductBacklogComponent,
@@ -72,3 +74,4 @@ export class StoryModule { }
 
 export { ProductBacklogComponent } from './product-backlog.component';
 export { StoryViewComponent } from './story-view.component';
+export { StorySelectorDialogComponent } from './selector';

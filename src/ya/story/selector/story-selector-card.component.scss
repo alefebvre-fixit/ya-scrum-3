@@ -1,4 +1,4 @@
-@import '../../ya-theme';
+@import '../../../ya-theme';
 
 .ya-properties{
     padding-left: 16px;
@@ -10,9 +10,9 @@
     box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 6px;
 }
 
-md-card-title{
+.mat-card-title{
     color: $blue-grey-text;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
 }
 
 .sprint-name{
@@ -24,3 +24,11 @@ md-card-title{
 .story-card-content{
     height:250px;
 }
+
+.card-icon {
+    position: absolute;
+    color: white;
+    top: 16px;
+    right: 16px;
+    z-index: 11;
+  }

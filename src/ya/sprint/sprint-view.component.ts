@@ -6,6 +6,10 @@ import { StoryService, SprintService, UserService } from '@ya-scrum/services';
 import { Story, StoryProgress, Sprint, SprintProgress, User, Upload } from '@ya-scrum/models';
 import { SprintEditDialogComponent } from './sprint-edit.dialog';
 import { SprintStorySelectorComponent } from './story/sprint-story-selector.component';
+import { StorySelectorDialogComponent } from '../story';
+
+
+
 import { SprintBackgroundDialogComponent } from './sprint-background.dialog';
 
 @Component({
@@ -84,9 +88,23 @@ export class SprintViewComponent implements OnInit {
     this.sprintService.assigStoriesToSprint(this.sprint, stories);
   }
 
-  addStory() {
+  addStoryOld() {
     const dialogRef = this.dialog.open(SprintStorySelectorComponent, { width: '1024px' });
     dialogRef.componentInstance.sprint = this.sprint;
+    dialogRef.afterClosed().subscribe((stories: Story[]) => {
+      if (stories && stories.length > 0) {
+        this.sprintService.assigStoriesToSprint(this.sprint, stories);
+      }
+    });
+  }
+
+  addStory() {
+    const dialogRef = this.dialog.open(StorySelectorDialogComponent, {
+      panelClass: 'story-selector-dialog',
+      data: {
+        sprint: this.sprint,
+      }
+    });
     dialogRef.afterClosed().subscribe((stories: Story[]) => {
       if (stories && stories.length > 0) {
         this.sprintService.assigStoriesToSprint(this.sprint, stories);

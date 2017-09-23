@@ -9,17 +9,15 @@ import { CovalentPagingModule } from '@covalent/core';
 import { CovalentDialogsModule } from '@covalent/core';
 import { CovalentMessageModule } from '@covalent/core';
 
-import { SprintStoryCardComponent } from './sprint-story-card.component';
-import { SprintStoryCardNewComponent } from './sprint-story-card-new.component';
-import { SprintStoryGridComponent } from './sprint-story-grid.component';
-import { SprintStorySelectorComponent } from './sprint-story-selector.component';
+import { StorySelectorGridComponent } from './story-selector-grid.component';
+import { StorySelectorDialogComponent } from './story-selector.dialog';
+import { StorySelectorCardComponent } from './story-selector-card.component';
 
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { StoryModule } from '../../story';
 import { SharedModule } from '../../shared';
-
+import { StoryCardModule } from '../card';
 
 @NgModule({
   imports: [
@@ -31,29 +29,27 @@ import { SharedModule } from '../../shared';
     CovalentCommonModule,
     CovalentDataTableModule,
     CovalentSearchModule,
-    CovalentPagingModule,
     CovalentDialogsModule,
     CovalentMessageModule,
     SharedModule,
-    StoryModule,
+    StoryCardModule,
   ],
   declarations: [
-    SprintStoryCardComponent,
-    SprintStoryGridComponent,
-    SprintStorySelectorComponent,
-    SprintStoryCardNewComponent,
+    StorySelectorGridComponent,
+    StorySelectorDialogComponent,
+    StorySelectorCardComponent,
   ],
   exports: [
-    SprintStoryCardComponent,
-    SprintStoryGridComponent,
-    SprintStorySelectorComponent,
-    SprintStoryCardNewComponent,
+    StorySelectorGridComponent,
+    StorySelectorDialogComponent,
   ],
   providers: [
   ],
   entryComponents: [
-    SprintStorySelectorComponent
+    StorySelectorDialogComponent
   ],
 })
 
-export class SprintStoryModule { }
+export class StorySelectorModule { }
+
+export { StorySelectorDialogComponent } from './story-selector.dialog';
