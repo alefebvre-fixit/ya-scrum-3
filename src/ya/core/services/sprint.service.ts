@@ -162,7 +162,7 @@ export class SprintService {
         this.database.object(this.storiesUrl() + story.$key).update({
           sprintId: sprint.$key,
           status: Story.STATUS_ASSIGNED,
-          filter_status: Sprint.getFilterStatus(Story.STATUS_ASSIGNED),
+          filter_status: Story.getFilterStatus(Story.STATUS_ASSIGNED),
           progress: 0,
           duration: sprint.duration,
           history: story.history,
