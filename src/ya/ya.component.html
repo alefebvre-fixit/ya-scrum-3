@@ -3,21 +3,25 @@
     <button md-icon-button class="td-menu-button" (click)="sidenav.toggle()" mdTooltip="Main menu">
       <md-icon>menu</md-icon>
     </button>
-    <span>Ya-Scrum</span>
+    <span flex>Ya-Scrum</span>
 
-    <button md-button [routerLink]="['/home']">
-      Home
-    </button>  
-    <button md-button [routerLink]="['/sprints']">
-      Sprints
-    </button>  
-    <button md-button [routerLink]="['/stories']">
-      Stories
-    </button>  
+    
+    
+    
+    <span flex>
+      
+      <button md-button [routerLink]="['/home']">
+        {{this.account.group?.name }}
+      </button>  
+      <button md-button [routerLink]="['/sprints']">
+        Sprints
+      </button>  
+      <button md-button [routerLink]="['/stories']">
+        Stories
+      </button>  
 
 
-
-    <span flex></span>
+    </span>
 
 
     <span class="user-name">{{ (user | async)?.displayName }}</span>

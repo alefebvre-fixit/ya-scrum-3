@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { ROUTES } from './ya.routes';
+import { TitleCasePipe } from '@angular/common';
 
 import { YaComponent } from './ya.component';
 
@@ -83,7 +84,8 @@ import { environment } from '../environments/environment';
     ThemeService,
     DateService,
     GroupService,
-    AuthenticationService
+    AuthenticationService,
+    TitleCasePipe
   ],
   bootstrap: [YaComponent]
 })
