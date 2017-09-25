@@ -1,74 +1,72 @@
-<div class="global-container">
-  <div class="positioner">
-    <div fxLayout fxLayoutWrap="wrap" fxLayout.xs="column" fxLayoutAlign="start start" fxLayoutAlign.xs="start">
-      <div fxFlex="100%">
-        <md-card>
+<ya-page>
+  <div fxLayout fxLayoutWrap="wrap" fxLayout.xs="column" fxLayoutAlign="start start" fxLayoutAlign.xs="start">
+    <div fxFlex="100%">
+      <md-card>
 
-          <div class="story-menu">
-            <button md-icon-button (click)="editStory(story)"><md-icon>edit</md-icon></button>
+        <div class="story-menu">
+          <button md-icon-button (click)="editStory(story)"><md-icon>edit</md-icon></button>
 
-            <button md-icon-button [mdMenuTriggerFor]="menu">
+          <button md-icon-button [mdMenuTriggerFor]="menu">
               <md-icon>more_vert</md-icon>
             </button>
-            <md-menu #menu="mdMenu">
-              <button md-menu-item (click)="editStory(story)">
+          <md-menu #menu="mdMenu">
+            <button md-menu-item (click)="editStory(story)">
                 <md-icon>edit</md-icon>
                 <span>Edit</span>
               </button>
-              <button md-menu-item [disabled]="!story?.$key && story?.status==='new'" (click)="deleteStory(story)">
+            <button md-menu-item [disabled]="!story?.$key && story?.status==='new'" (click)="deleteStory(story)">
                 <md-icon>delete</md-icon>
                 <span>Delete</span>
               </button>
-              <button md-menu-item [disabled]="!story" (click)="unassignStory(story)">
+            <button md-menu-item [disabled]="!story" (click)="unassignStory(story)">
                 <md-icon>close</md-icon>
                 <span>Unassign</span>
               </button>
-            </md-menu>
-          </div>
-          <div class="card-header">
-            <md-card-title>{{story?.name}}</md-card-title>
-            <md-card-subtitle><a *ngIf="sprint" [routerLink]="['/sprints', sprint.$key]" class="sprint-name">@{{sprint?.name}}</a></md-card-subtitle>
-            <span class="ya-properties">
+          </md-menu>
+        </div>
+        <div class="card-header">
+          <md-card-title>{{story?.name}}</md-card-title>
+          <md-card-subtitle><a *ngIf="sprint" [routerLink]="['/sprints', sprint.$key]" class="sprint-name">@{{sprint?.name}}</a></md-card-subtitle>
+          <span class="ya-properties">
               <ya-highlight-tag [theme]="story?.theme">#{{(story)?.type}}</ya-highlight-tag>
               <ya-property-tag color="#ffffff">{{(story)?.priority}} priority</ya-property-tag>
               <ya-property-tag color="#ffffff">{{(story)?.estimate}} points</ya-property-tag>
             </span>
-          </div>
-          <section>
-            <!-- <md-progress-bar [mode]="'determinate'" [value]="progressAsPercentage()" color="accent"></md-progress-bar> -->
-          </section>
-          <md-card-content>
-            <h3 md-subheader>Description</h3>
-            <p>
-              {{(story)?.description}}
+        </div>
+        <section>
+          <!-- <md-progress-bar [mode]="'determinate'" [value]="progressAsPercentage()" color="accent"></md-progress-bar> -->
+        </section>
+        <md-card-content>
+          <h3 md-subheader>Description</h3>
+          <p>
+            {{(story)?.description}}
+          </p>
+          <h3 md-subheader>Acceptance Criterias</h3>
+          <p>
+            {{(story)?.acceptanceCriterias}}
+          </p>
+        </md-card-content>
+        <md-list>
+          <md-list-item *ngIf="productOwner !== undefined">
+            <ngu-letter-avatar md-list-avatar avatar-data='{{productOwner?.name}}' avatar-shape='round' avatarborder='true' avatar-height="40"
+              avatar-width="40" avatar-font-size="20">
+            </ngu-letter-avatar>
+            <h3 md-line> {{productOwner?.name}} </h3>
+            <p md-line>
+              <span> {{productOwner?.role}} </span>
+              <span> - {{productOwner?.team}} </span>
             </p>
-            <h3 md-subheader>Acceptance Criterias</h3>
-            <p>
-              {{(story)?.acceptanceCriterias}}
-            </p>
-          </md-card-content>
-          <md-list>
-            <md-list-item *ngIf="productOwner !== undefined">
-              <ngu-letter-avatar md-list-avatar avatar-data='{{productOwner?.name}}' avatar-shape='round' avatarborder='true' avatar-height="40"
-                avatar-width="40" avatar-font-size="20">
-              </ngu-letter-avatar>
-              <h3 md-line> {{productOwner?.name}} </h3>
-              <p md-line>
-                <span> {{productOwner?.role}} </span>
-                <span> - {{productOwner?.team}} </span>
-              </p>
-            </md-list-item>
-          </md-list>
-        </md-card>
-      </div>
-      <div class="flex-item" fxFlex="50%">
-        <ya-story-progress-view [story]="story"></ya-story-progress-view>
-      </div>
-      <div class="flex-item" fxFlex="50%">
-        <ya-story-progress-schedule [story]="story"></ya-story-progress-schedule>
-      </div>
+          </md-list-item>
+        </md-list>
+      </md-card>
     </div>
-
-
+    <div class="flex-item" fxFlex="50%">
+      <ya-story-progress-view [story]="story"></ya-story-progress-view>
+    </div>
+    <div class="flex-item" fxFlex="50%">
+      <ya-story-progress-schedule [story]="story"></ya-story-progress-schedule>
+    </div>
   </div>
-</div>
+
+
+</ya-page>

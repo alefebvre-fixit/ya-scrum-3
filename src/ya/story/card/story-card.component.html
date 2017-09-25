@@ -1,7 +1,11 @@
 <md-card>
   <div class="card-header">
     <md-card-title>{{story?.name}}</md-card-title>
-    <md-card-subtitle><a *ngIf="sprint" [routerLink]="['/sprints', sprint.$key]" class="sprint-name">@{{(sprint)?.name}}</a></md-card-subtitle>
+    <md-card-subtitle>
+      <a *ngIf="sprint" [routerLink]="['/sprints', sprint.$key]" class="sprint-name">@{{(sprint)?.name}}</a>
+      <a *ngIf="!sprint" class="sprint-name">&nbsp;</a>
+    </md-card-subtitle>
+
     <span class="ya-properties">
       <ya-highlight-tag [theme]="story.theme">#{{story?.type}}</ya-highlight-tag>
       <ya-property-tag color="#ffffff">{{story?.priority}} priority</ya-property-tag>
@@ -11,7 +15,7 @@
   <div class="story-card-content">
     <md-card-content>
       <p>
-        {{(story)?.description}}
+        {{(story)?.description | truncate: 700}}
       </p>
     </md-card-content>
   </div>

@@ -5,7 +5,8 @@
     "baseUrl": "src",
     "paths": {
       "@ya-scrum/models": ["ya/core/models"],
-      "@ya-scrum/services": ["ya/core/services"]
+      "@ya-scrum/services": ["ya/core/services"],
+      "@ya-scrum/pipes": ["ya/core/pipes"]
     },
     "sourceMap": true,
     "declaration": false,

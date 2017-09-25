@@ -204,8 +204,19 @@ export class SprintService {
   }
 
   public closedDailyMeeting(sprint: Sprint, stories: Story[]) {
+    sprint.status = Sprint.STATUS_STARTED;
     sprint.meeting.status = Sprint.STATUS_CLOSED;
-    this.database.object(this.sprintsUrl() + sprint.$key).update({ meeting: sprint.meeting });
+
+    if (sprint.meeting.day === sprint.duration) {
+      sprint.status = Sprint.STATUS_CLOSED;
+    }
+    sprint.filter_status = Sprint.getFilterStatus(sprint.status);
+
+    this.database.object(this.sprintsUrl() + sprint.$key).update({
+      meeting: sprint.meeting,
+      status: sprint.status,
+      filter_status: sprint.filter_status
+    });
   }
 
 
@@ -216,7 +227,9 @@ export class SprintService {
     } else {
       sprint.meeting.day++;
     }
+    sprint.status = Sprint.STATUS_STARTED;
     sprint.meeting.status = Sprint.STATUS_OPEN;
+    sprint.filter_status = Sprint.getFilterStatus(sprint.status);
 
     if (stories) {
       for (const story of stories) {
@@ -232,7 +245,11 @@ export class SprintService {
 
       }
 
-      this.database.object(this.sprintsUrl() + sprint.$key).update({ meeting: sprint.meeting });
+      this.database.object(this.sprintsUrl() + sprint.$key).update({
+        meeting: sprint.meeting,
+        status: sprint.status,
+        filter_status: sprint.filter_status
+      });
     }
   }
 

@@ -18,6 +18,7 @@ export class Sprint {
 
     public static FILTER_PROGRESS = 'progress';
     public static FILTER_PENDING = 'pending';
+    public static FILTER_CLOSED = 'closed';
 
 
     $key: string;
@@ -72,11 +73,14 @@ export class Sprint {
     }
 
     public static getFilterStatus(status: string): string {
-        if (Sprint.STATUS_NEW === status) {
+        if (Sprint.STATUS_STARTED === status) {
             return Sprint.FILTER_PROGRESS;
         }
         if (Sprint.STATUS_NEW === status || undefined === status) {
             return Sprint.FILTER_PENDING;
+        }
+        if (Sprint.STATUS_CLOSED === status) {
+            return Sprint.FILTER_CLOSED;
         }
         return status;
     }

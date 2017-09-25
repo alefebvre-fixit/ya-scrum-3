@@ -65,7 +65,6 @@ export class UserService {
     return 'groups/' + this.authentication.account.group.groupId + '/users';
   }
 
-
   public filterUsers(searchTerm: string, users: User[]) {
     if (users) {
       if (this.isEmpty(searchTerm) || this.isBlank(searchTerm)) {
@@ -87,8 +86,8 @@ export class UserService {
 
   public emailSignIn(signin: SignIn): Observable<any> {
     return Observable.fromPromise(<Promise<any>>this.afAuth.auth.signInWithEmailAndPassword(signin.email, signin.password))
-    .flatMap((fbUser: any) => this.findOneAccount(fbUser ? fbUser.uid : undefined))
-    .flatMap((account: Account) => this.authentication.storeAccount(account));
+      .flatMap((fbUser: any) => this.findOneAccount(fbUser ? fbUser.uid : undefined))
+      .flatMap((account: Account) => this.authentication.storeAccount(account));
     ;
   }
 
@@ -96,12 +95,9 @@ export class UserService {
     return Observable.fromPromise(<Promise<any>>this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()));
   }
 
-
-
   public currentFirebaseUser(): firebase.User {
     return this.afAuth.auth.currentUser;
   }
-
 
   public findCurrentAccount(): Observable<Account> {
     return this.afAuth.authState.flatMap(fbUser => this.findOne(fbUser ? fbUser.uid : undefined));

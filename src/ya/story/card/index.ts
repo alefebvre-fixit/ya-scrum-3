@@ -7,6 +7,8 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../../shared';
 import { StoryCardComponent } from './story-card.component';
 
+import { PipeModule } from '@ya-scrum/pipes';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -14,6 +16,7 @@ import { StoryCardComponent } from './story-card.component';
     FlexLayoutModule,
     RouterModule,
     SharedModule,
+    PipeModule
   ],
   declarations: [
     StoryCardComponent,

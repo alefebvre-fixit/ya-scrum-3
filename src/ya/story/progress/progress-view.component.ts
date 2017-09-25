@@ -58,6 +58,10 @@ export class ProgressViewComponent implements OnInit, OnChanges {
 
   private updateChart(progress: StoryProgress) {
 
+    if (progress === undefined) {
+      return;
+    }
+
     if (this.chart === undefined) {
       return;
     }
@@ -75,6 +79,10 @@ export class ProgressViewComponent implements OnInit, OnChanges {
   }
 
   createChart(progress: StoryProgress) {
+
+    if (progress === undefined) {
+      return;
+    }
 
     this.chart = c3.generate({
       bindto: '#chart',

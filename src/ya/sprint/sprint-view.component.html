@@ -1,130 +1,128 @@
-<div class=global-container>
+<ya-page>
 
-  <div class="positioner">
-    <input type="file" accept="image/*" #file style="display:none" (change)="uploadBackground($event)">
 
-    <md-card class="sprint-card">
-      <div class="sprint-title">
-        {{sprint?.name}}
-      </div>
+  <input type="file" accept="image/*" #file style="display:none" (change)="uploadBackground($event)">
 
-      <div class="sprint-date">
-        {{sprint?.startDate | date}} - {{sprint?.endDate | date}}
-      </div>
+  <md-card class="sprint-card">
+    <div class="sprint-title">
+      {{sprint?.name}}
+    </div>
 
-      <div class="sprint-menu">
-        <button md-icon-button (click)="editSprint(sprint)"><md-icon>edit</md-icon></button>
+    <div class="sprint-date">
+      {{sprint?.startDate | date}} - {{sprint?.endDate | date}}
+    </div>
 
-        <button md-icon-button [mdMenuTriggerFor]="menu">
+    <div class="sprint-menu">
+      <button md-icon-button (click)="editSprint(sprint)"><md-icon>edit</md-icon></button>
+
+      <button md-icon-button [mdMenuTriggerFor]="menu">
           <md-icon>more_vert</md-icon>
         </button>
-        <md-menu #menu="mdMenu">
-          <button md-menu-item (click)="editSprint(sprint)">
+      <md-menu #menu="mdMenu">
+        <button md-menu-item (click)="editSprint(sprint)">
             <md-icon>edit</md-icon>
             <span>Edit</span>
           </button>
-          <button md-menu-item (click)="file.click()">
+        <button md-menu-item (click)="file.click()">
               <md-icon>image</md-icon>
               <span>Change Background</span>
           </button>
-          <button md-menu-item disabled>
+        <button md-menu-item disabled>
             <md-icon>delete</md-icon>
             <span>Delete</span>
           </button>
-        </md-menu>
-      </div>
+      </md-menu>
+    </div>
 
-      <div class="image-container">
-        <div class="image-overlay">
-          <div class="metrics">
-            <ya-highlight-tag theme="light-blue" class="highlight">Day: {{sprint?.meeting?.day}}</ya-highlight-tag>
-            <ya-highlight-tag theme="light-blue" class="highlight">Progress: {{progressAsPercentage() | number:'1.0-0' }}%</ya-highlight-tag>
-            <ya-highlight-tag theme="light-blue">Stories: {{stories?.length}} </ya-highlight-tag>
-            <ya-highlight-tag theme="light-blue">Estimate: {{sprint?.estimate}}</ya-highlight-tag>
-            <ya-highlight-tag theme="light-blue">Velocity: {{sprint?.velocity}}</ya-highlight-tag>
-          </div>
+    <div class="image-container">
+      <div class="image-overlay">
+        <div class="metrics">
+          <ya-highlight-tag theme="light-blue" class="highlight">Day: {{sprint?.meeting?.day}}</ya-highlight-tag>
+          <ya-highlight-tag theme="light-blue" class="highlight">Progress: {{progressAsPercentage() | number:'1.0-0' }}%</ya-highlight-tag>
+          <ya-highlight-tag theme="light-blue">Stories: {{stories?.length}} </ya-highlight-tag>
+          <ya-highlight-tag theme="light-blue">Estimate: {{sprint?.estimate}}</ya-highlight-tag>
+          <ya-highlight-tag theme="light-blue">Velocity: {{sprint?.velocity}}</ya-highlight-tag>
         </div>
-        <img *ngIf="sprint?.background" md-card-image [src]="sprint?.background">
-        <img *ngIf="!sprint?.background" md-card-image src="assets/img/story-background.png">
       </div>
-      <md-progress-bar [mode]="'determinate'" [value]="progressAsPercentage()"></md-progress-bar>
+      <img *ngIf="sprint?.background" md-card-image [src]="sprint?.background">
+      <img *ngIf="!sprint?.background" md-card-image src="assets/img/story-background.png">
+    </div>
+    <md-progress-bar [mode]="'determinate'" [value]="progressAsPercentage()"></md-progress-bar>
 
-      <md-list>
-        <md-list-item *ngIf="scrummaster !== undefined">
-          <ngu-letter-avatar md-list-avatar avatar-data='{{scrummaster?.name}}' avatar-shape='round' avatarborder='true' avatar-height="40"
-            avatar-width="40" avatar-font-size="20">
-          </ngu-letter-avatar>
-          <h3 md-line> {{scrummaster?.name}} </h3>
-          <p md-line>
-            <span> {{scrummaster?.role}} </span>
-            <span> - {{scrummaster?.team}} </span>
-          </p>
-        </md-list-item>
-      </md-list>
-    </md-card>
+    <md-list>
+      <md-list-item *ngIf="scrummaster !== undefined">
+        <ngu-letter-avatar md-list-avatar avatar-data='{{scrummaster?.name}}' avatar-shape='round' avatarborder='true' avatar-height="40"
+          avatar-width="40" avatar-font-size="20">
+        </ngu-letter-avatar>
+        <h3 md-line> {{scrummaster?.name}} </h3>
+        <p md-line>
+          <span> {{scrummaster?.role}} </span>
+          <span> - {{scrummaster?.team}} </span>
+        </p>
+      </md-list-item>
+    </md-list>
+  </md-card>
 
-    <ya-section-title>Burndown Chart:
-      <ya-section-title-highlight *ngIf="sprint?.meeting?.day > 0">
-        Day {{sprint?.meeting?.day}} - {{sprint?.meeting?.status}}
-      </ya-section-title-highlight>
-      <ya-section-title-highlight *ngIf="sprint?.meeting?.day <= 0">
-        Not started
-      </ya-section-title-highlight>
-      <ya-section-button-bar>
+  <ya-section-title>Burndown Chart:
+    <ya-section-title-highlight *ngIf="sprint?.meeting?.day > 0">
+      Day {{sprint?.meeting?.day}} - {{sprint?.meeting?.status}}
+    </ya-section-title-highlight>
+    <ya-section-title-highlight *ngIf="sprint?.meeting?.day <= 0">
+      Not started
+    </ya-section-title-highlight>
+    <ya-section-button-bar>
 
-        <button *ngIf="sprint?.meeting?.status === 'closed'" md-button (click)="startNewDailyMeeting()" [disabled]="!(stories?.length > 0)"
-          color="primary"><md-icon>today</md-icon> START STAND-UP</button>
-        <button *ngIf="sprint?.meeting?.status === 'open'" md-button (click)="closeDailyMeeting()" [disabled]="!(stories?.length > 0)"
-          color="primary"><md-icon>today</md-icon> CLOSE STAND-UP</button>
+      <button *ngIf="sprint?.meeting?.status === 'closed'" md-button (click)="startNewDailyMeeting()" [disabled]="!(stories?.length > 0)"
+        color="primary"><md-icon>today</md-icon> START STAND-UP</button>
+      <button *ngIf="sprint?.meeting?.status === 'open'" md-button (click)="closeDailyMeeting()" [disabled]="!(stories?.length > 0)"
+        color="primary"><md-icon>today</md-icon> CLOSE STAND-UP</button>
 
-        <button md-icon-button (click)="addStory()"><md-icon>fullscreen</md-icon></button>
-        <button md-icon-button [mdMenuTriggerFor]="menuStory">
+      <button md-icon-button (click)="addStory()"><md-icon>fullscreen</md-icon></button>
+      <button md-icon-button [mdMenuTriggerFor]="menuStory">
             <md-icon>more_vert</md-icon>
           </button>
-        <md-menu #menuStory="mdMenu">
-          <button md-menu-item (click)="cancelLastDailyMeeting()">
+      <md-menu #menuStory="mdMenu">
+        <button md-menu-item (click)="cancelLastDailyMeeting()">
               <md-icon>cancel</md-icon>
               <span>Cancel last meeting</span>
             </button>
-        </md-menu>
-      </ya-section-button-bar>
-    </ya-section-title>
+      </md-menu>
+    </ya-section-button-bar>
+  </ya-section-title>
 
-    <div fxLayout fxLayoutWrap="wrap" fxLayoutAlign="start start">
-      <div class="flex-item" fxFlex="5%">
-      </div>
-      <div class="flex-item" fxFlex="90%">
-        <ya-sprint-burndown [stories]="stories" [sprint]="sprint" *ngIf="sprint?.meeting?.day > 0"></ya-sprint-burndown>
-        <ya-sprint-burndown-new (onStart)="startNewDailyMeeting()" [stories]="stories" *ngIf="sprint?.meeting?.day <= 0"></ya-sprint-burndown-new>
-      </div>
-      <div class="flex-item" fxFlex="5%">
-      </div>
+  <div fxLayout fxLayoutWrap="wrap" fxLayoutAlign="start start">
+    <div class="flex-item" fxFlex="5%">
     </div>
-
-    <ya-section-title>
-      Sprint Backlog:
-      <ya-section-title-highlight>{{ stories?.length }} stories</ya-section-title-highlight>
-      <ya-section-button-bar><button md-icon-button (click)="addStory()"><md-icon>add</md-icon></button></ya-section-button-bar>
-    </ya-section-title>
-
-    <ya-sprint-story-grid [stories]="stories" [status]="sprint?.meeting?.status" (onAdd)="addStory()" *ngIf="stories && stories?.length > 0"></ya-sprint-story-grid>
-    <div fxLayout fxLayoutWrap="wrap" fxLayoutAlign="start start" *ngIf="!stories || stories?.length <= 0">
-      <div class="flex-item" fxFlex="5%">
-      </div>
-      <div class="flex-item" fxFlex="90%">
-        <ya-sprint-story-card-new (onAdd)="addStory()"></ya-sprint-story-card-new>
-      </div>
-      <div class="flex-item" fxFlex="5%">
-      </div>
+    <div class="flex-item" fxFlex="90%">
+      <ya-sprint-burndown [stories]="stories" [sprint]="sprint" *ngIf="sprint?.meeting?.day > 0"></ya-sprint-burndown>
+      <ya-sprint-burndown-new (onStart)="startNewDailyMeeting()" [stories]="stories" *ngIf="sprint?.meeting?.day <= 0"></ya-sprint-burndown-new>
     </div>
+    <div class="flex-item" fxFlex="5%">
+    </div>
+  </div>
 
-    <!-- <ya-section-title>
+  <ya-section-title>
+    Sprint Backlog:
+    <ya-section-title-highlight>{{ stories?.length }} stories</ya-section-title-highlight>
+    <ya-section-button-bar><button md-icon-button (click)="addStory()"><md-icon>add</md-icon></button></ya-section-button-bar>
+  </ya-section-title>
+
+  <ya-sprint-story-grid [stories]="stories" [status]="sprint?.meeting?.status" (onAdd)="addStory()" *ngIf="stories && stories?.length > 0"></ya-sprint-story-grid>
+  <div fxLayout fxLayoutWrap="wrap" fxLayoutAlign="start start" *ngIf="!stories || stories?.length <= 0">
+    <div class="flex-item" fxFlex="5%">
+    </div>
+    <div class="flex-item" fxFlex="90%">
+      <ya-sprint-story-card-new (onAdd)="addStory()"></ya-sprint-story-card-new>
+    </div>
+    <div class="flex-item" fxFlex="5%">
+    </div>
+  </div>
+
+  <!-- <ya-section-title>
       <ya-section-title-highlight>{{ progressHistory?.length }}</ya-section-title-highlight>
       Days Schedule
     </ya-section-title>
 
     <ya-sprint-progress-schedule [progressHistory]="progressHistory"></ya-sprint-progress-schedule> -->
 
-  </div>
-
-</div>
+</ya-page>

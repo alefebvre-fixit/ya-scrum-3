@@ -36,6 +36,7 @@ export class UserAccountComponent implements OnInit {
     this.account.team = this.accountForm.value.team;
 
     this.userService.saveAccount(this.account);
+    this.userService.save(this.account);
   }
 
 

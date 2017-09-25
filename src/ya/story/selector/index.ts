@@ -18,6 +18,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { SharedModule } from '../../shared';
 import { StoryCardModule } from '../card';
+import { PipeModule } from '@ya-scrum/pipes';
 
 @NgModule({
   imports: [
@@ -33,6 +34,7 @@ import { StoryCardModule } from '../card';
     CovalentMessageModule,
     SharedModule,
     StoryCardModule,
+    PipeModule
   ],
   declarations: [
     StorySelectorGridComponent,
