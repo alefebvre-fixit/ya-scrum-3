@@ -3,7 +3,7 @@
     <md-card-title>Progress History</md-card-title>
   </div>
   <md-card-content>
-    <td-data-table #dataTable [data]="data" [columns]="columns">
+    <td-data-table #dataTable [data]="data" [columns]="columns" *ngIf="data && data.length > 0">
 
       <ng-template tdDataTableTemplate="day" let-value="value" let-row="row" let-column="column">
         <div layout="row">
@@ -24,9 +24,10 @@
       </ng-template>
 
     </td-data-table>
-    <div class="md-padding" *ngIf="!dataTable.hasData" layout="row" layout-align="center center">
+
+    <div class="md-padding"  *ngIf="!data || data.length <= 0" layout="row" layout-align="center center">
       <h3>Story not started yet</h3>
     </div>
-
+    
   </md-card-content>
 </md-card>
