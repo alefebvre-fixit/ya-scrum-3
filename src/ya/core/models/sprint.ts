@@ -26,8 +26,8 @@ export class Sprint {
     name: string;
     status: string;
 
-    startDate: Date;
-    endDate: Date;
+    startDate: string;
+    endDate: string;
     duration = 15;
     meeting: Meeting = new Meeting();
 
@@ -63,10 +63,12 @@ export class Sprint {
     public static create(): Sprint {
         const result: Sprint = new Sprint();
 
+        const now = new Date();
+
         result.duration = 15;
-        result.startDate = new Date();
-        result.endDate = new Date(result.startDate);
-        result.startDate.setDate(result.startDate.getDate() + result.duration);
+        result.startDate = now.toISOString();
+        result.endDate = now.toISOString();
+        //result.startDate.setDate(result.startDate.getDate() + result.duration);
 
         return result;
 

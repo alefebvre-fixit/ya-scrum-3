@@ -59,8 +59,8 @@ export class SprintEditDialogComponent implements OnInit {
     this.sprint.name = this.sprintForm.value.name;
     this.sprint.velocity = this.sprintForm.value.velocity;
     this.sprint.duration = this.sprintForm.value.duration;
-    this.sprint.startDate = this.sprintForm.value.startDate;
-    this.sprint.endDate = this.sprintForm.value.endDate;
+    this.sprint.startDate = this.sprintForm.value.startDate.toISOString();
+    this.sprint.endDate = this.sprintForm.value.endDate.toISOString();
 
     if (this.sprintForm.value.scrummaster) {
       this.sprint.scrumMasterId = this.sprintForm.value.scrummaster.$key;

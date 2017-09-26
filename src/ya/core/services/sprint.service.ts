@@ -42,9 +42,10 @@ export class SprintService {
   public instanciate(): Sprint {
     const result = Sprint.create();
 
+    const now = new Date();
     result.scrumMasterId = this.userService.currentFirebaseUser().uid;
-    result.startDate = new Date();
-    result.endDate = this.dateService.businessDaysFromDate(result.startDate, result.duration);
+    result.startDate = now.toISOString();
+    result.endDate = this.dateService.businessDaysFromDate(now, result.duration).toISOString();
 
     return result;
   }
