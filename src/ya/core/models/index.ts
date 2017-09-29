@@ -5,5 +5,6 @@ export { Story } from './story';
 export { Upload } from './upload';
 export { Theme } from './theme';
 export { Group } from './group';
+export { Invite } from './invite';
 
 export *  from './user';

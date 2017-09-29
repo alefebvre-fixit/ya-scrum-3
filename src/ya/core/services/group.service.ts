@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
-import { Group, SignUp, User, Account } from '../models';
+import { Group, SignUp, User, Account, Invite } from '../models';
 import { UserService } from './user.service';
 import { AuthenticationService } from './authentication.service';
 
@@ -46,7 +46,6 @@ export class GroupService {
     return group.$key;
   }
 
-
   public registerSignUp(signup: SignUp) {
     this._signup = signup;
   }
@@ -76,5 +75,8 @@ export class GroupService {
         })
       );
   }
+
+
+
 
 }

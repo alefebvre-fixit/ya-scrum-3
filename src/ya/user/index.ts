@@ -13,6 +13,7 @@ import { SignInPageComponent } from './signin/sign-in-page.component';
 import { SignUpPageComponent } from './signup/sign-up-page.component';
 import { CreateGroupPageComponent } from './group/create-group-page.component';
 import { SharedModule } from '../shared';
+import { InviteModule } from './invite';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { SharedModule } from '../shared';
     NguUtilityModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    InviteModule
   ],
   declarations: [
     UserListComponent,

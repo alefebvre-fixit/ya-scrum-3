@@ -37,7 +37,7 @@ import { SprintModule } from './sprint';
 import { AuthGuard } from './auth.service';
 
 import { StoryService, SprintService, ThemeService, DateService } from '@ya-scrum/services';
-import { UserService, GroupService, AuthenticationService } from '@ya-scrum/services';
+import { UserService, GroupService, AuthenticationService, InviteService } from '@ya-scrum/services';
 
 import { environment } from '../environments/environment';
 
@@ -84,6 +84,8 @@ import { environment } from '../environments/environment';
     ThemeService,
     DateService,
     GroupService,
+    InviteService,
+    
     AuthenticationService,
     TitleCasePipe
   ],
