@@ -30,9 +30,8 @@ export class EditInviteDialogComponent implements OnInit {
   ngOnInit() {
 
     this.inviteForm = this._fb.group({
-
-      name: [this.invite.name, [<any>Validators.required]],
-      email: [this.invite.email, [<any>Validators.required]],
+      name: [{value: this.invite.name, disabled: this.isEdit()}, [<any>Validators.required]],
+      email: [{value: this.invite.email, disabled: this.isEdit()}, [<any>Validators.required]],
     });
 
   }
@@ -55,5 +54,8 @@ export class EditInviteDialogComponent implements OnInit {
   }
 
 
-
+  isEdit(): boolean {
+    console.log(this.invite.$key);
+    return this.invite.$key !== undefined;
+  }
 }
