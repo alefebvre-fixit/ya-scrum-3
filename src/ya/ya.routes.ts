@@ -4,11 +4,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProductBacklogComponent, StoryViewComponent } from './story';
 import { SprintDashboardComponent, SprintViewComponent } from './sprint';
 
-import { UserListComponent } from './user';
+import { UserPageComponent } from './user';
 import { UserAccountComponent } from './user';
 import { HomePageComponent } from './home';
 
-import { SignInPageComponent, SignUpPageComponent, CreateGroupPageComponent } from './user';
+import { SignInPageComponent, SignUpPageComponent, CreateGroupPageComponent, InvitePageComponent } from './user';
 import { AuthGuard } from './auth.service';
 
 // Route Configuration
@@ -28,16 +28,20 @@ export const ROUTES: Routes = [
     component: SignUpPageComponent
   },
   {
+    path: 'invites/:id',
+    component: InvitePageComponent
+  },
+  {
     path: 'group-create',
     component: CreateGroupPageComponent
-  },  
+  },
   {
     path: 'account',
     component: UserAccountComponent
   },
   {
     path: 'users',
-    component: UserListComponent,
+    component: UserPageComponent,
     canActivate: [AuthGuard]
   },
   {

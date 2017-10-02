@@ -1,32 +1,23 @@
 <md-card>
-
-
     <div class="menu">
         <button md-icon-button (click)="addInvite()"><md-icon>add</md-icon></button>
     </div>
-
-
     <md-card-title>
-        Pending Invite
+        Pending Invites
     </md-card-title>
-    <md-card-subtitle>something</md-card-subtitle>
-
+    <md-card-subtitle>{{(invites | async)?.length}} pending invites</md-card-subtitle>
     <md-divider></md-divider>
-
     <md-card-content>
-
         <md-list>
             <md-list-item *ngFor="let invite of invites | async">
                 <ngu-letter-avatar md-list-avatar avatar-data='{{invite.name}}' avatar-shape='round' avatarborder='true' *ngIf="invite"></ngu-letter-avatar>
-                <h3 md-line class="cursor-pointer" (click)='editInvite(invite)'> {{invite.name}} </h3>
+                <h3 md-line class="cursor-pointer" (click)='editInvite(invite)'> {{invite.email}}</h3>
                 <p md-line class="cursor-pointer" (click)='editInvite(invite)'>
                     <span class="text-wrap">
-                    {{ invite.date }} ago
+                    {{ invite.date | moment}}
                     </span>
                 </p>
             </md-list-item>
         </md-list>
-
-
     </md-card-content>
 </md-card>

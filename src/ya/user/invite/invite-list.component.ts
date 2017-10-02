@@ -8,11 +8,11 @@ import { InviteService } from '@ya-scrum/services';
 import { EditInviteDialogComponent } from './edit-invite-dialog';
 
 @Component({
-  selector: 'ya-pending-invite-list',
-  templateUrl: './pending-invite-list.component.html',
-  styleUrls: ['./pending-invite-list.component.scss']
+  selector: 'ya-invite-list',
+  templateUrl: './invite-list.component.html',
+  styleUrls: ['./invite-list.component.scss']
 })
-export class PendingInviteListComponent implements OnInit {
+export class InviteListComponent implements OnInit {
 
 
   invites: Observable<Invite[]>;

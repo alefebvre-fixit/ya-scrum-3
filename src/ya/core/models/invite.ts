@@ -7,6 +7,8 @@ export class Invite {
     date: string;
     groupId: string;
 
+    $exists?(): any;
+
     public static getUpdate(group: any): any {
 
         const result = Object.assign({}, group);

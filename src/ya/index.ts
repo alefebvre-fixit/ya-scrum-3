@@ -85,7 +85,6 @@ import { environment } from '../environments/environment';
     DateService,
     GroupService,
     InviteService,
-    
     AuthenticationService,
     TitleCasePipe
   ],

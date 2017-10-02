@@ -1,25 +1,20 @@
-<md-toolbar color="primary" class="section-nav-bar">
-    <span>Users</span>
-    <span class="toolbar-spacer"></span>
-</md-toolbar>
-
-<ya-page>
-    <md-card>
+<md-card>
+    <md-card-title>
+        users
+    </md-card-title>
+    <md-card-subtitle>{{(users | async)?.length}} users</md-card-subtitle>
+    <md-divider></md-divider>
+    <md-card-content>
         <md-list>
-            <md-list-item *ngFor="let user of users;">
+            <md-list-item *ngFor="let user of users | async;">
                 <ngu-letter-avatar md-list-avatar avatar-data='{{user.name}}' avatar-shape='round' avatarborder='true'></ngu-letter-avatar>
                 <h3 md-line class="cursor-pointer"> {{user.name}} @{{ user.team }}</h3>
                 <p md-line>
                     <span class="text-wrap">
-                               #{{ user.role }}
-                            </span>
+                        #{{ user.role }}
+                    </span>
                 </p>
             </md-list-item>
         </md-list>
-    </md-card>
-
-
-
-
-    <ya-pending-invite-list></ya-pending-invite-list>
-</ya-page>
+    </md-card-content>
+</md-card>

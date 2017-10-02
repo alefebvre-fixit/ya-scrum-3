@@ -25,7 +25,9 @@
         "../node_modules/c3/c3.min.css",
         "../node_modules/croppie/croppie.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/moment/min/moment.min.js"
+     ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

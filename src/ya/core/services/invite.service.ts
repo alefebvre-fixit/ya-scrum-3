@@ -29,11 +29,11 @@ export class InviteService {
     return this.authentication.baseUrl('invites/');
   }
 
-  public save(invite: Invite) {
+  public save(invite: Invite): string {
     if (invite.$key) {
-      this.update(invite);
+      return this.update(invite);
     } else {
-      this.create(invite);
+      return this.create(invite);
     }
   }
 
@@ -54,8 +54,21 @@ export class InviteService {
     return this.database.object(this.inviteUrl() + key);
   }
 
+  public findByEmail(email: string): Observable<Invite[]> {
+    return this.database.list(this.inviteUrl(), {
+      query: {
+        orderByChild: 'email',
+        equalTo: email
+      }
+    });
+  }
+
+  public delete(key: string): Observable<any> {
+    return Observable.fromPromise(this.database.object(this.inviteUrl() + key).remove());
+  }
+
   public buildUrl(invite: Invite) {
-    return 'http://localhost:4200/invite/' + invite.$key;
+    return 'http://localhost:4200/invites/' + invite.$key;
   }
 
   public instanciate(): Invite {

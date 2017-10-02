@@ -50,7 +50,40 @@ export class GroupService {
     this._signup = signup;
   }
 
-  public createGroupAndSignUp(group: Group, signUp: SignUp): Observable<any> {
+  // public createGroupAndSignUp(group: Group, signUp: SignUp): Observable<any> {
+
+  //   return Observable.fromPromise(<Promise<any>>this.afAuth.auth.createUserWithEmailAndPassword(signUp.email, signUp.password))
+  //     .map(result =>
+  //       this.afAuth.auth.currentUser.updateProfile({
+  //         displayName: signUp.name,
+  //         photoURL: undefined,
+  //       }).then(() => {
+
+  //         group.$key = this.create(group);
+
+  //         const user = new User();
+  //         user.$key = this.afAuth.auth.currentUser.uid;
+  //         user.email = this.afAuth.auth.currentUser.email;
+  //         user.name = this.afAuth.auth.currentUser.displayName;
+
+  //         const account = Account.createFromUser(user, group);
+
+  //         this.authentication.storeAccount(account).subscribe(() => {
+  //           this.userService.saveAccount(account);
+  //           this.userService.save(user);
+  //         });
+  //       })
+  //     );
+  // }
+
+  public signUp(signUp: SignUp): Observable<any> {
+
+
+    if (signUp.invite && !signUp.group) {
+      console.log();
+      return;
+    }
+
 
     return Observable.fromPromise(<Promise<any>>this.afAuth.auth.createUserWithEmailAndPassword(signUp.email, signUp.password))
       .map(result =>
@@ -59,14 +92,20 @@ export class GroupService {
           photoURL: undefined,
         }).then(() => {
 
-          group.$key = this.create(group);
+          if (signUp.group && !signUp.group.$key) {
+            signUp.group.$key = this.create(signUp.group);
+          }
+
+          if (signUp.invite && !signUp.invite.$key) {
+            this.database.object('/groups/' + signUp.invite.groupId + '/' + signUp.invite.$key).remove();
+          }
 
           const user = new User();
           user.$key = this.afAuth.auth.currentUser.uid;
           user.email = this.afAuth.auth.currentUser.email;
           user.name = this.afAuth.auth.currentUser.displayName;
 
-          const account = Account.createFromUser(user, group);
+          const account = Account.createFromUser(user, signUp.group);
 
           this.authentication.storeAccount(account).subscribe(() => {
             this.userService.saveAccount(account);
@@ -75,8 +114,6 @@ export class GroupService {
         })
       );
   }
-
-
 
 
 }

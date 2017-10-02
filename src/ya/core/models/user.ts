@@ -1,5 +1,6 @@
 
 import { Group } from './group';
+import { Invite } from './invite';
 
 export class User {
 
@@ -24,8 +25,6 @@ export class User {
     }
 
 }
-
-
 
 export class AccountGroup {
     name: string;
@@ -86,8 +85,13 @@ export class SignIn {
 }
 
 export class SignUp {
+
     name: string;
     email: string;
     password: string;
+
+    invite?: Invite;
+    group?: Group;
+
 }
 

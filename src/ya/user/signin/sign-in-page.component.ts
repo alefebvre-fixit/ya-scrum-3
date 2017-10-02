@@ -41,11 +41,8 @@ export class SignInPageComponent implements OnInit {
     signin.password = this.signInForm.value.password;
 
     this.userService.emailSignIn(signin).subscribe((u) => {
-      console.log(u)
       this.router.navigate([`/sprints`]);
     }, error => { this.invalidError = true; this.ready(); });
-
-
 
   }
 

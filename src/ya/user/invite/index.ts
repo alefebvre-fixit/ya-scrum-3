@@ -5,10 +5,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NguUtilityModule } from 'ngu-utility/ngu-utility.module';
+import { CovalentMessageModule } from '@covalent/core';
 
-import { PendingInviteListComponent } from './pending-invite-list.component';
+import { InvitePageComponent } from './invite-page.component';
+import { InviteListComponent } from './invite-list.component';
 import { SharedModule } from '../../shared';
 import { EditInviteDialogComponent } from './edit-invite-dialog';
+
+import { PipeModule } from '@ya-scrum/pipes';
 
 @NgModule({
   imports: [
@@ -18,14 +22,18 @@ import { EditInviteDialogComponent } from './edit-invite-dialog';
     NguUtilityModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    PipeModule,
+    CovalentMessageModule
   ],
   declarations: [
-    PendingInviteListComponent,
-    EditInviteDialogComponent
+    InviteListComponent,
+    EditInviteDialogComponent,
+    InvitePageComponent
   ],
   exports: [
-    PendingInviteListComponent,
+    InviteListComponent,
+    InvitePageComponent
   ],
   entryComponents: [
     EditInviteDialogComponent
@@ -36,5 +44,7 @@ import { EditInviteDialogComponent } from './edit-invite-dialog';
 })
 
 export class InviteModule { }
+
+export { InvitePageComponent } from './invite-page.component';
 
 

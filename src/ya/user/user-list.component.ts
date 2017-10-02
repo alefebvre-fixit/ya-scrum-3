@@ -2,15 +2,16 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { User } from '@ya-scrum/models';
 import { UserService } from '@ya-scrum/services';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
-  selector: 'user-list',
+  selector: 'ya-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
 
-  users: User[];
+  users: Observable<User[]>;
 
   constructor(
     private userService: UserService,
@@ -18,9 +19,7 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.findAll().subscribe((users: User[]) => {
-      this.users = users;
-    });
+    this.users = this.userService.findAll();
   }
 
 }

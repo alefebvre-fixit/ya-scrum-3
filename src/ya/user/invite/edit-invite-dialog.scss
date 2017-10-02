@@ -22,3 +22,16 @@
 .dialog-action{
   padding: 20px;
 }
+
+
+.dialog-title {
+  color: $blue-light-text !important;
+  margin-bottom: 5px;
+  font-size: 130% !important;
+}
+
+.dialog-subtitle {
+  color: $blue-light-light !important;
+  font-size: 100% !important;
+  margin-top: 0px;
+}

@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
-import { Group } from '@ya-scrum/models';
+import { Group, SignUp } from '@ya-scrum/models';
 import { UserService } from '@ya-scrum/services';
 import { GroupService } from '@ya-scrum/services';
 
@@ -21,7 +21,7 @@ export class CreateGroupPageComponent implements OnInit {
   groupForm: FormGroup;
   invalidError = false;
 
-  user: any;
+  user: SignUp;
 
   constructor(
     private groupService: GroupService,
@@ -41,23 +41,15 @@ export class CreateGroupPageComponent implements OnInit {
   onSubmit() {
     this.standBy();
 
+    this.user.group = new Group();
+    this.user.group.name = this.groupForm.value.name;
 
-    const group: Group = new Group();
-
-    group.name = this.groupForm.value.name;
-    this.groupService.createGroupAndSignUp(group, this.user).subscribe(() => {
+    this.groupService.signUp(this.user).subscribe(() => {
       this.router.navigate([`/sprints`]);
     }, error => {
       console.log(error);
       this.ready();
     });
-
-    // this.userService.signUp(signup).subscribe(() => {
-    //   this.router.navigate([`/sprints`]);
-    // }, error => {
-    //   console.log(error); this.ready();
-    // });
-
 
   }
 

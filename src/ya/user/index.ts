@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NguUtilityModule } from 'ngu-utility/ngu-utility.module';
 
 import { UserListComponent } from './user-list.component';
+import { UserPageComponent } from './user-page.component';
 import { UserAccountComponent } from './user-account.component';
 
 import { SignInPageComponent } from './signin/sign-in-page.component';
@@ -32,10 +33,12 @@ import { InviteModule } from './invite';
     SignInPageComponent,
     SignUpPageComponent,
     CreateGroupPageComponent,
+    UserPageComponent
   ],
   exports: [
     UserListComponent,
     UserAccountComponent,
+    UserPageComponent
   ],
   entryComponents: [],
   providers: [
@@ -44,10 +47,11 @@ import { InviteModule } from './invite';
 
 export class UserModule { }
 
-export { UserListComponent } from './user-list.component';
 export { UserAccountComponent } from './user-account.component';
 export { SignInPageComponent } from './signin/sign-in-page.component';
 export { SignUpPageComponent } from './signup/sign-up-page.component';
 export { CreateGroupPageComponent } from './group/create-group-page.component';
+export { InvitePageComponent } from './invite';
+export { UserPageComponent } from './user-page.component';
 
 

@@ -2,6 +2,7 @@ export class Group {
 
     $key: string;
     name: string;
+    info: GroupInfo;
 
     public static getUpdate(group: any): any {
 
@@ -18,4 +19,13 @@ export class Group {
     }
 
 }
+
+export class GroupInfo {
+
+    groupId: string;
+    name: string;
+
+}
+
+
 
