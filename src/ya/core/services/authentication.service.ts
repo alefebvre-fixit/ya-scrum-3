@@ -47,7 +47,7 @@ export class AuthenticationService {
   }
 
   public baseUrl(ressource: string): string {
-    return 'groups/' + this.account.group.groupId + '/' + ressource;
+    return 'workspaces/' + this.account.group.groupId + '/' + ressource;
   }
 
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
-import { Group, SignUp, User, Account, Invite } from '../models';
+import { Group, SignUp, User, Account, Invite, Workspace } from '@ya-scrum/models';
 import { UserService } from './user.service';
 import { AuthenticationService } from './authentication.service';
 
@@ -38,11 +38,16 @@ export class GroupService {
   }
 
   public create(group: Group): string {
-    return this.database.list('groups').push(group).key;
+
+    group.$key = this.database.list('groups').push(group).key;
+    this.database.object('/workspaces/' + group.$key).update(Workspace.create(group));
+
+    return group.$key;
   }
 
   public update(group: Group): string {
     this.database.object('/groups/' + group.$key).update(Group.getUpdate(group));
+    this.database.object('/workspaces/' + group.$key).update(Workspace.getUpdate(group));
     return group.$key;
   }
 

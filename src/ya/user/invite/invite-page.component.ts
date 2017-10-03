@@ -32,7 +32,6 @@ export class InvitePageComponent implements OnInit {
   ) {
   }
 
-
   ngOnInit() {
     this.route.params
       .map(params => params['id'])

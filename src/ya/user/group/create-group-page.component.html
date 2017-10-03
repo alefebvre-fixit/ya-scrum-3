@@ -1,18 +1,13 @@
 <div class="positioner">
-
     <form [formGroup]="groupForm" autocomplete="off" novalidate>
-
         <md-card>
             <md-card-title layout="row" layout-align="start center">
                 <span class="md-title ya-title">Ya-Scrum</span> <span class="md-title ya-sub-title">Sign-Up</span>
             </md-card-title>
             <md-card-subtitle>Create a new Group</md-card-subtitle>
             <md-progress-bar mode="indeterminate" *ngIf="isStandBy"></md-progress-bar>
-
             <md-divider></md-divider>
-
             <md-card-content class="push-bottom-none">
-
                 <p>
                     <md-form-field class="input-full-width">
                         <input mdInput type="text" placeholder="Group Name" formControlName="name">
@@ -23,19 +18,13 @@
                     </md-form-field>
                 </p>
                 <div id="invalid-auth-msg" *ngIf="invalidError" class="tc-red-600 text-center" flex>The username or password is incorrect. Please try again.</div>
-
-
-                {{user | json}}
-
             </md-card-content>
             <md-card-actions>
                 <div layout="row">
-                    <button type="button" flex md-raised-button color="primary" [disabled]="!groupForm.valid || isStandBy || user === undefined" (click)="onSubmit()" class="text-upper">Create</button>
+                    <button type="button" flex md-raised-button color="primary" [disabled]="!groupForm.valid || isStandBy || user === undefined"
+                        (click)="onSubmit()" class="text-upper">Create</button>
                 </div>
             </md-card-actions>
-
         </md-card>
     </form>
-
-
 </div>

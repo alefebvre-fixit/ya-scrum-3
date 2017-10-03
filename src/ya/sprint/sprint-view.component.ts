@@ -44,7 +44,7 @@ export class SprintViewComponent implements OnInit {
           this.storyService.findBySprintId(sprint.$key).subscribe(stories => {
             this.stories = stories;
             this.progressHistory = this.sprintService.getSprintProgressHistory(this.sprint, this.stories);
-            this.sprintService.updateProgress(this.sprint, this.stories);
+            //this.sprintService.updateProgress(this.sprint, this.stories);
           });
 
           if (this.sprint.scrumMasterId) {
