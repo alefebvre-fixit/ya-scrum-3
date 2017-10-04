@@ -43,7 +43,7 @@ export class EditInviteDialogComponent implements OnInit {
     this.loading = true;
     this.errors = undefined;
 
-    this.inviteService.findByEmail(this.invite.email).subscribe(
+    this.inviteService.findByEmail(this.invite.email).take(1).subscribe(
       invites => {
         if (invites && invites.length > 0) {
           this.errors = 'An Invite has already been sent to this address';
