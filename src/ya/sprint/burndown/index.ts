@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SprintBurndownComponent } from './sprint-burndown.component';
 import { SprintBurndownNewComponent } from './sprint-burndown-new.component';
 
-import { MaterialModule } from '@angular/material';
+import { MaterialModule } from '@ya-scrum/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { StoryModule } from '../../story';

@@ -13,7 +13,7 @@ import { StorySelectorGridComponent } from './story-selector-grid.component';
 import { StorySelectorDialogComponent } from './story-selector.dialog';
 import { StorySelectorCardComponent } from './story-selector-card.component';
 
-import { MaterialModule } from '@angular/material';
+import { MaterialModule } from '@ya-scrum/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { SharedModule } from '../../shared';

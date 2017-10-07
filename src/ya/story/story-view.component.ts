@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ViewContainerRef } from '@angular/core';
 import { TdDialogService } from '@covalent/core';
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 import { StoryService, SprintService, UserService } from '@ya-scrum/services';
 import { Story, StoryProgress, Sprint, SprintProgress, User } from '@ya-scrum/models';
@@ -26,7 +26,7 @@ export class StoryViewComponent implements OnInit {
     private sprintService: SprintService,
     private storyService: StoryService,
     private userService: UserService,
-    private dialog: MdDialog,
+    private dialog: MatDialog,
     private _dialogService: TdDialogService,
     private _viewContainerRef: ViewContainerRef
   ) {

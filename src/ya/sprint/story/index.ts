@@ -14,7 +14,7 @@ import { SprintStoryCardNewComponent } from './sprint-story-card-new.component';
 import { SprintStoryGridComponent } from './sprint-story-grid.component';
 import { SprintStorySelectorComponent } from './sprint-story-selector.component';
 
-import { MaterialModule } from '@angular/material';
+import { MaterialModule } from '@ya-scrum/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { StoryModule } from '../../story';

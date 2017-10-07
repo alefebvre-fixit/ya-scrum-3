@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { MD_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 import { StoryService, SprintService, UserService } from '@ya-scrum/services';
 import { Story, StoryProgress, Sprint, SprintProgress, User } from '@ya-scrum/models';
@@ -20,8 +20,8 @@ export class ProgressEditDialogComponent implements OnInit {
   public storyForm: FormGroup;
 
   constructor(
-    @Inject(MD_DIALOG_DATA) public data: any,
-    private dialogRef: MdDialogRef<ProgressEditDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogRef: MatDialogRef<ProgressEditDialogComponent>,
     private sprintService: SprintService,
     private storyService: StoryService,
     private _fb: FormBuilder

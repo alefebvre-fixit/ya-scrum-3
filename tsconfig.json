@@ -6,7 +6,9 @@
     "paths": {
       "@ya-scrum/models": ["ya/core/models"],
       "@ya-scrum/services": ["ya/core/services"],
-      "@ya-scrum/pipes": ["ya/core/pipes"]
+      "@ya-scrum/pipes": ["ya/core/pipes"],
+      "@ya-scrum/croppie": ["ya/shared/croppie"],
+      "@ya-scrum/material": ["ya/shared/material"]
     },
     "sourceMap": true,
     "declaration": false,

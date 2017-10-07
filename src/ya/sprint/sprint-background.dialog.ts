@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MdDialog, MdDialogRef } from '@angular/material';
-import { MD_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
-import { NgxCroppieComponent } from 'ngx-croppie';
+import { NgxCroppieComponent } from '@ya-scrum/croppie';
 import { CroppieOptions, ResultOptions, Format } from 'croppie';
 
 import { StoryService, SprintService, UserService } from '@ya-scrum/services';
@@ -24,8 +24,8 @@ export class SprintBackgroundDialogComponent implements OnInit {
   croppieImage: string;
 
   constructor(
-    @Inject(MD_DIALOG_DATA) public data: any,
-    private dialogRef: MdDialogRef<SprintBackgroundDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogRef: MatDialogRef<SprintBackgroundDialogComponent>,
     private sprintService: SprintService,
   ) {
     if (data) {

@@ -10,7 +10,7 @@ import { CovalentDialogsModule } from '@covalent/core';
 import { CovalentMessageModule } from '@covalent/core';
 
 import { NguUtilityModule } from 'ngu-utility/ngu-utility.module'; // <-- import the module
-import { NgxCroppieModule } from 'ngx-croppie';
+import { NgxCroppieModule } from '@ya-scrum/croppie';
 
 
 import { SprintCardComponent } from './sprint-card.component';
@@ -23,7 +23,7 @@ import { SprintProgressScheduleComponent } from './progress-schedule.component';
 
 import { SprintBackgroundDialogComponent } from './sprint-background.dialog';
 
-import { MaterialModule } from '@angular/material';
+import { MaterialModule } from '@ya-scrum/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { StoryModule } from '../story';

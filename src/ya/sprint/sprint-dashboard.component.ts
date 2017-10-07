@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
 
 import { SprintService } from '@ya-scrum/services';
@@ -22,7 +22,7 @@ export class SprintDashboardComponent implements OnInit {
   constructor(
     private router: Router,
     public sprintService: SprintService,
-    private dialog: MdDialog
+    private dialog: MatDialog
   ) {
   }
 

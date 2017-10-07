@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
 
 import { StoryService } from '@ya-scrum/services';
@@ -19,7 +19,7 @@ export class ProductBacklogComponent implements OnInit {
   constructor(
     private router: Router,
     private storyService: StoryService,
-    private dialog: MdDialog
+    private dialog: MatDialog
   ) {
   }
 

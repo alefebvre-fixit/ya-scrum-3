@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 import { TdDataTableService, TdDataTableSortingOrder, ITdDataTableSortChangeEvent, ITdDataTableColumn } from '@covalent/core';
 
@@ -29,7 +29,7 @@ export class StoryProgressScheduleComponent implements OnInit, OnChanges {
   ];
 
   constructor(
-    public dialog: MdDialog
+    public dialog: MatDialog
   ) {
   }
 

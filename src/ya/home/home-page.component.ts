@@ -1,6 +1,4 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { NgxCroppieComponent } from 'ngx-croppie';
-import { CroppieOptions } from 'croppie';
 
 @Component({
   selector: 'ya-home-page',
@@ -10,7 +8,6 @@ import { CroppieOptions } from 'croppie';
 export class HomePageComponent implements OnInit {
 
   title = 'app works!';
-  @ViewChild('ngxCroppie') ngxCroppie: NgxCroppieComponent;
 
   widthPx = '400';
   heightPx = '400';
@@ -22,20 +19,6 @@ export class HomePageComponent implements OnInit {
     if (this.currentImage) { return this.currentImage; }
     if (this.imageUrl) { return this.imageUrl; }
     return `http://placehold.it/${this.widthPx}x${this.heightPx}`;
-  }
-
-  public get croppieOptions(): CroppieOptions {
-    const opts: CroppieOptions = {};
-    opts.viewport = {
-      width: parseInt(this.widthPx, 10),
-      height: parseInt(this.heightPx, 10)
-    };
-    opts.boundary = {
-      width: parseInt(this.widthPx, 10),
-      height: parseInt(this.heightPx, 10)
-    };
-    opts.enforceBoundary = true;
-    return opts;
   }
 
   ngOnInit() {

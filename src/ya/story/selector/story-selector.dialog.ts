@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
-import { MdDialog, MdDialogRef } from '@angular/material';
-import { MD_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 import { TdDataTableService } from '@covalent/core';
 import { IPageChangeEvent } from '@covalent/core';
@@ -24,8 +24,8 @@ export class StorySelectorDialogComponent implements OnInit {
   constructor(
     private storyService: StoryService,
     private _dataTableService: TdDataTableService,
-    public dialogRef: MdDialogRef<StorySelectorDialogComponent>,
-    @Inject(MD_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<StorySelectorDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     if (data) {
       this.sprint = data.sprint;

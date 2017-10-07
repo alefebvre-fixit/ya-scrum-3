@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { NgxCroppieModule } from 'ngx-croppie';
+import { MaterialModule } from '@ya-scrum/material';
 
 import { HomePageComponent } from './home-page.component';
 
@@ -17,7 +16,6 @@ import { HomePageComponent } from './home-page.component';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxCroppieModule
   ],
   declarations: [
     HomePageComponent,

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 import { Invite } from '@ya-scrum/models';
 import { InviteService } from '@ya-scrum/services';
@@ -19,7 +19,7 @@ export class InviteListComponent implements OnInit {
 
   constructor(
     private InviteService: InviteService,
-    private dialog: MdDialog,
+    private dialog: MatDialog,
   ) {
   }
 

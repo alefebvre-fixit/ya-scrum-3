@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 import { TdDataTableService, TdDataTableSortingOrder, ITdDataTableSortChangeEvent, ITdDataTableColumn } from '@covalent/core';
 import { IPageChangeEvent } from '@covalent/core';
@@ -35,7 +35,7 @@ export class SprintStorySelectorComponent implements OnInit {
   constructor(
     private storyService: StoryService,
     private _dataTableService: TdDataTableService,
-    public dialogRef: MdDialogRef<SprintStorySelectorComponent>,
+    public dialogRef: MatDialogRef<SprintStorySelectorComponent>,
   ) {
 
   }
