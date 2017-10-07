@@ -1,19 +1,19 @@
-<md-card class="sprint-card">
+<mat-card class="sprint-card">
   <div class="card-header">
-    <md-card-header (click)="navigateToDetails(sprint?.$key)">
-      <md-card-title>{{sprint?.name}}</md-card-title>
-      <md-card-subtitle>{{sprint?.startDate | date}} - {{sprint?.endDate | date}}</md-card-subtitle>
-    </md-card-header>
+    <mat-card-header (click)="navigateToDetails(sprint?.$key)">
+      <mat-card-title>{{sprint?.name}}</mat-card-title>
+      <mat-card-subtitle>{{sprint?.startDate | date}} - {{sprint?.endDate | date}}</mat-card-subtitle>
+    </mat-card-header>
   </div>
-  <img *ngIf="sprint.thumbnail" md-card-image [src]="sprint.thumbnail">
-  <img *ngIf="!sprint.thumbnail" md-card-image src="assets/img/story-background.png">
-  <md-card-content>
-    <md-progress-bar [mode]="'determinate'" [value]="progressAsPercentage()"></md-progress-bar>
+  <img *ngIf="sprint.thumbnail" mat-card-image [src]="sprint.thumbnail">
+  <img *ngIf="!sprint.thumbnail" mat-card-image src="assets/img/story-background.png">
+  <mat-card-content>
+    <mat-progress-bar [mode]="'determinate'" [value]="progressAsPercentage()"></mat-progress-bar>
     <br> <b>{{sprint.storyNumber}}</b> stories
     <br> <b>{{dayToGo()}}</b> days to go
     <br> <b>{{progressAsPercentage()}}%</b> completed
-  </md-card-content>
-  <md-card-actions>
-    <button md-button (click)="navigateToDetails(sprint?.$key)" color="primary">LEARN MORE</button>
-  </md-card-actions>
-</md-card>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="navigateToDetails(sprint?.$key)" color="primary">LEARN MORE</button>
+  </mat-card-actions>
+</mat-card>

@@ -4,56 +4,58 @@
 </div>
 <form [formGroup]="sprintForm" *ngIf="sprintForm" autocomplete="off" novalidate>
     <div class="dialog-content">
-        <md-dialog-content>
+        <mat-dialog-content>
 
             <p>
-                <md-form-field class="input-full-width">
-                    <input mdInput placeholder="Title" formControlName="name">
-                </md-form-field>
+                <mat-form-field class="input-full-width">
+                    <input matInput placeholder="Title" formControlName="name">
+                </mat-form-field>
             </p>
             <p>
-                <md-form-field style="width:200px">
-                    <input type="number" mdInput placeholder="Team Velocity" formControlName="velocity">
-                </md-form-field>
+                <mat-form-field style="width:200px">
+                    <input type="number" matInput placeholder="Team Velocity" formControlName="velocity">
+                </mat-form-field>
 
-                <md-form-field style="width:200px">
-                    <input type="number" mdInput placeholder="Duration" formControlName="duration">
-                </md-form-field>
+                <mat-form-field style="width:200px">
+                    <input type="number" matInput placeholder="Duration" formControlName="duration">
+                </mat-form-field>
             </p>
             <p>
 
-                <md-form-field style="width:200px">
-                    <input mdInput [mdDatepicker]="pickerStartDate" placeholder="Start Date" formControlName="startDate">
-                    <md-datepicker-toggle mdSuffix [for]="pickerStartDate"></md-datepicker-toggle>
-                    <md-datepicker #pickerStartDate></md-datepicker>
-                </md-form-field>
+                <mat-form-field style="width:200px">
+                    <input matInput [matDatepicker]="pickerStartDate" placeholder="Start Date" formControlName="startDate">
+                    <mat-datepicker-toggle mdSuffix [for]="pickerStartDate"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerStartDate></mat-datepicker>
+                </mat-form-field>
 
-                <md-form-field style="width:200px">
-                    <input mdInput [mdDatepicker]="pickerEndDate" placeholder="End Date" formControlName="endDate">
-                    <md-datepicker-toggle mdSuffix [for]="pickerEndDate"></md-datepicker-toggle>
-                    <md-datepicker #pickerEndDate></md-datepicker>
-                </md-form-field>
+                <mat-form-field style="width:200px">
+                    <input matInput [matDatepicker]="pickerEndDate" placeholder="End Date" formControlName="endDate">
+                    <mat-datepicker-toggle mdSuffix [for]="pickerEndDate"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerEndDate></mat-datepicker>
+                </mat-form-field>
 
             </p>
             <p>
-                <md-form-field style="width:200px">
-                    <input type="text" mdInput placeholder="Scrum Master" formControlName="scrummaster" [mdAutocomplete]="auto">
-                </md-form-field>
+                <mat-form-field style="width:200px">
+                    <input type="text" matInput placeholder="Scrum Master" formControlName="scrummaster" [matAutocomplete]="auto">
+                </mat-form-field>
             </p>
             <p>
-                <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
-                    <md-option *ngFor="let user of users | async" [value]="user">
-                        {{ user.name }}
-                    </md-option>
-                </md-autocomplete>
+                <mat-form-field>
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                        <mat-option *ngFor="let user of users | async" [value]="user">
+                            {{ user.name }}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
             </p>
-        </md-dialog-content>
+        </mat-dialog-content>
 
     </div>
     <div class="dialog-action">
-        <md-dialog-actions align="end">
-            <button md-button color="secondary" md-dialog-close>CANCEL</button>
-            <button md-button color="primary" (click)="apply()" [disabled]="!sprintForm.valid">APPLY</button>
-        </md-dialog-actions>
+        <mat-dialog-actions align="end">
+            <button mat-button color="secondary" mat-dialog-close>CANCEL</button>
+            <button mat-button color="primary" (click)="apply()" [disabled]="!sprintForm.valid">APPLY</button>
+        </mat-dialog-actions>
     </div>
 </form>

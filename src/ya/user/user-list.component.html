@@ -1,20 +1,20 @@
-<md-card>
-    <md-card-title>
+<mat-card>
+    <mat-card-title>
         users
-    </md-card-title>
-    <md-card-subtitle>{{(users | async)?.length}} users</md-card-subtitle>
-    <md-divider></md-divider>
-    <md-card-content>
-        <md-list>
-            <md-list-item *ngFor="let user of users | async;">
-                <ngu-letter-avatar md-list-avatar avatar-data='{{user.name}}' avatar-shape='round' avatarborder='true'></ngu-letter-avatar>
-                <h3 md-line class="cursor-pointer"> {{user.name}} @{{ user.team }}</h3>
-                <p md-line>
+    </mat-card-title>
+    <mat-card-subtitle>{{(users | async)?.length}} users</mat-card-subtitle>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+        <mat-list>
+            <mat-list-item *ngFor="let user of users | async;">
+                <ngu-letter-avatar mat-list-avatar avatar-data='{{user.name}}' avatar-shape='round' avatarborder='true'></ngu-letter-avatar>
+                <h3 mat-line class="cursor-pointer"> {{user.name}} @{{ user.team }}</h3>
+                <p mat-line>
                     <span class="text-wrap">
                         #{{ user.role }}
                     </span>
                 </p>
-            </md-list-item>
-        </md-list>
-    </md-card-content>
-</md-card>
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+</mat-card>

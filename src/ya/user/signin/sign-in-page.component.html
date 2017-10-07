@@ -1,48 +1,48 @@
 <div class="positioner">
     <form [formGroup]="signInForm" autocomplete="off" novalidate>
-        <md-card>
+        <mat-card>
             
-            <md-card-title layout="row" layout-align="start center">
-                <span class="md-title ya-title">Ya-Scrum</span> <span class="md-title ya-sub-title">Login</span>
-            </md-card-title>
-            <md-card-subtitle>Sign In with your credentials</md-card-subtitle>
+            <mat-card-title layout="row" layout-align="start center">
+                <span class="mat-title ya-title">Ya-Scrum</span> <span class="mat-title ya-sub-title">Login</span>
+            </mat-card-title>
+            <mat-card-subtitle>Sign In with your credentials</mat-card-subtitle>
 
-            <md-divider></md-divider>
+            <mat-divider></mat-divider>
             
-            <md-progress-bar mode="indeterminate" *ngIf="isStandBy"></md-progress-bar>
+            <mat-progress-bar mode="indeterminate" *ngIf="isStandBy"></mat-progress-bar>
             
-            <md-card-content>
+            <mat-card-content>
                 <p>
-                    <md-form-field class="input-full-width">
-                        <input mdInput type="email" placeholder="Email" formControlName="email">
-                        <md-hint align="start">
+                    <mat-form-field class="input-full-width">
+                        <input matInput type="email" placeholder="Email" formControlName="email">
+                        <mat-hint align="start">
                             <span [hidden]="!signInForm.controls.email.errors?.required || signInForm.controls.email.pristine" class="tc-red-600">Required</span>
-                        </md-hint>
-                    </md-form-field>
+                        </mat-hint>
+                    </mat-form-field>
                 </p>
                 <p>
-                    <md-form-field class="input-full-width">
-                        <input mdInput type="password" placeholder="Password" formControlName="password">
-                        <md-hint align="start">
+                    <mat-form-field class="input-full-width">
+                        <input matInput type="password" placeholder="Password" formControlName="password">
+                        <mat-hint align="start">
                             <span [hidden]="!signInForm.controls.password.errors?.required || signInForm.controls.password.pristine" class="tc-red-600">Required</span>
-                        </md-hint>
-                    </md-form-field>
+                        </mat-hint>
+                    </mat-form-field>
                 </p>
                 <div id="invalid-auth-msg" *ngIf="invalidError" class="tc-red-600 text-center" flex>The email or password is incorrect. Please try again.</div>
-            </md-card-content>
+            </mat-card-content>
 
-            <md-card-actions>
+            <mat-card-actions>
                 <div layout="row">
-                    <button flex md-raised-button color="primary" [disabled]="!signInForm.valid || isStandBy" (click)="emailSignIn()" class="text-upper">Sign In</button>
+                    <button flex mat-raised-button color="primary" [disabled]="!signInForm.valid || isStandBy" (click)="emailSignIn()" class="text-upper">Sign In</button>
                 </div>
-            </md-card-actions>
+            </mat-card-actions>
 
-            <md-divider></md-divider>
+            <mat-divider></mat-divider>
 
-            <md-card-actions>
-                <a md-button color="primary" style="text-decoration: underline;" [disabled]="isStandBy" (click)="signUp()">Create new account</a>
-            </md-card-actions>
+            <mat-card-actions>
+                <a mat-button color="primary" style="text-decoration: underline;" [disabled]="isStandBy" (click)="signUp()">Create new account</a>
+            </mat-card-actions>
 
-        </md-card>
+        </mat-card>
     </form>
 </div>

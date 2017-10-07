@@ -2,43 +2,43 @@
     <h2>Edit Progress - Day {{progress?.day}}</h2>
 </div>
 <div class="dialog-content">
-    <md-dialog-content>
+    <mat-dialog-content>
         <form [formGroup]="storyForm" autocomplete="off" novalidate>
             <p>
-                <md-form-field class="input-width" color="accent">
-                    <input type="number" mdInput placeholder="Daily Progress" formControlName="daily">
-                </md-form-field>
+                <mat-form-field class="input-width" color="accent">
+                    <input type="number" matInput placeholder="Daily Progress" formControlName="daily">
+                </mat-form-field>
             </p>
-            <md-chip-list>
+            <mat-chip-list>
                 <table class="key-value-table">
                     <tbody>
                         <tr>
                             <td>Previous</td>
                             <td>
-                                <md-chip class="value-chip previous">{{progress?.previous}}</md-chip>
+                                <mat-chip class="value-chip previous">{{progress?.previous}}</mat-chip>
                             </td>
                         </tr>
                         <tr>
                             <td>Daily</td>
                             <td>
-                                <md-chip class="value-chip daily">{{progress?.daily}}</md-chip>
+                                <mat-chip class="value-chip daily">{{progress?.daily}}</mat-chip>
                             </td>
                         </tr>
                         <tr>
                             <td>Remaining</td>
                             <td>
-                                <md-chip class="value-chip remaining">{{progress?.remaining}}</md-chip>
+                                <mat-chip class="value-chip remaining">{{progress?.remaining}}</mat-chip>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-            </md-chip-list>
+            </mat-chip-list>
         </form>
-    </md-dialog-content>
+    </mat-dialog-content>
 </div>
 <div class="dialog-action">
-    <md-dialog-actions align="end">
-        <button md-button color="secondary" md-dialog-close>CANCEL</button>
-        <button md-button color="accent" (click)="apply()">APPLY</button>
-    </md-dialog-actions>
+    <mat-dialog-actions align="end">
+        <button mat-button color="secondary" mat-dialog-close>CANCEL</button>
+        <button mat-button color="accent" (click)="apply()">APPLY</button>
+    </mat-dialog-actions>
 </div>

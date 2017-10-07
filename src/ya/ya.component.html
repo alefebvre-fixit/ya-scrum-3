@@ -1,7 +1,7 @@
 <td-layout-nav>
   <div td-toolbar-content layout="row" layout-align="start center" flex>
-    <button md-icon-button class="td-menu-button" (click)="sidenav.toggle()" mdTooltip="Main menu">
-      <md-icon>menu</md-icon>
+    <button mat-icon-button class="td-menu-button" (click)="sidenav.toggle()" mdTooltip="Main menu">
+      <mat-icon>menu</mat-icon>
     </button>
     <span flex>Ya-Scrum</span>
 
@@ -10,13 +10,13 @@
     
     <span flex>
       
-      <button md-button [routerLink]="['/home']">
+      <button mat-button [routerLink]="['/home']">
         {{this.account?.group?.name }}
       </button>  
-      <button md-button [routerLink]="['/sprints']">
+      <button mat-button [routerLink]="['/sprints']">
         Sprints
       </button>  
-      <button md-button [routerLink]="['/stories']">
+      <button mat-button [routerLink]="['/stories']">
         Stories
       </button>  
 
@@ -25,41 +25,41 @@
 
 
     <span class="user-name">{{ (user | async)?.displayName }}</span>
-    <button md-icon-button [mdMenuTriggerFor]="menu">
-        <md-icon>account_circle</md-icon>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon>
     </button>
-    <md-menu #menu="mdMenu">
-      <button md-menu-item [routerLink]="['/account']">
-          <md-icon>settings</md-icon>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLink]="['/account']">
+          <mat-icon>settings</mat-icon>
           <span>Account Settings</span>
         </button>
-      <md-divider></md-divider>
-      <button md-menu-item (click)="signOut()">
-          <md-icon></md-icon>          
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="signOut()">
+          <mat-icon></mat-icon>          
         <span>Sign Out</span>
         </button>
-    </md-menu>
+    </mat-menu>
 
 
   </div>
-  <md-sidenav-container fullscreen>
-    <md-sidenav #sidenav mode="side" opened="false" style="width:257px;border-right:1px solid #ccc">
-      <div flex class="md-content bgc-grey-50">
-        <md-nav-list>
-          <a md-list-item [routerLink]="['/sprints']">
-            <md-icon>update</md-icon>Sprints</a>
-          <a md-list-item [routerLink]="['/stories']">
-            <md-icon>web</md-icon>Stories</a>
-          <md-divider></md-divider>
-          <a md-list-item [routerLink]="['/users']">
-            <md-icon>contacts</md-icon>Users</a>
-        </md-nav-list>
+  <mat-sidenav-container fullscreen>
+    <mat-sidenav #sidenav mode="side" opened="false" style="width:257px;border-right:1px solid #ccc">
+      <div flex class="mat-content bgc-grey-50">
+        <mat-nav-list>
+          <a mat-list-item [routerLink]="['/sprints']">
+            <mat-icon>update</mat-icon>Sprints</a>
+          <a mat-list-item [routerLink]="['/stories']">
+            <mat-icon>web</mat-icon>Stories</a>
+          <mat-divider></mat-divider>
+          <a mat-list-item [routerLink]="['/users']">
+            <mat-icon>contacts</mat-icon>Users</a>
+        </mat-nav-list>
       </div>
-    </md-sidenav>
+    </mat-sidenav>
     <div layout layout-fill class="bgc-white">
       <span flex>
          <router-outlet></router-outlet>
        </span>
     </div>
-  </md-sidenav-container>
+  </mat-sidenav-container>
 </td-layout-nav>

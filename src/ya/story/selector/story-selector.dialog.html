@@ -10,13 +10,13 @@
 </div>
 
 <div class="dialog-content">
-  <md-dialog-content>
+  <mat-dialog-content>
     <ya-story-selector-grid [sprint]="sprint" [stories]="filteredData"></ya-story-selector-grid>
-  </md-dialog-content>
+  </mat-dialog-content>
 </div>
 <div class="dialog-action">
-  <md-dialog-actions align="end">
-    <button md-button md-dialog-close>CANCEL</button>
-    <button md-button (click)="select()" color="primary">APPLY</button>
-  </md-dialog-actions>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>CANCEL</button>
+    <button mat-button (click)="select()" color="primary">APPLY</button>
+  </mat-dialog-actions>
 </div>

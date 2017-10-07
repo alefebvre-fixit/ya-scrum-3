@@ -1,8 +1,8 @@
-<md-card>
+<mat-card>
   <div class="card-header">
-    <md-card-title>Progress History</md-card-title>
+    <mat-card-title>Progress History</mat-card-title>
   </div>
-  <md-card-content>
+  <mat-card-content>
     <td-data-table #dataTable [data]="data" [columns]="columns" *ngIf="data && data.length > 0">
 
       <ng-template tdDataTableTemplate="day" let-value="value" let-row="row" let-column="column">
@@ -19,15 +19,15 @@
 
       <ng-template tdDataTableTemplate="edit" let-value="value" let-row="row" let-column="column">
         <div layout="row">
-          <button md-icon-button (click)="edit(row)"><md-icon>mode_edit</md-icon></button>
+          <button mat-icon-button (click)="edit(row)"><mat-icon>mode_edit</mat-icon></button>
         </div>
       </ng-template>
 
     </td-data-table>
 
-    <div class="md-padding"  *ngIf="!data || data.length <= 0" layout="row" layout-align="center center">
+    <div class="mat-padding"  *ngIf="!data || data.length <= 0" layout="row" layout-align="center center">
       <h3>Story not started yet</h3>
     </div>
     
-  </md-card-content>
-</md-card>
+  </mat-card-content>
+</mat-card>
