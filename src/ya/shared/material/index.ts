@@ -10,6 +10,13 @@ import {
   MatChipsModule,
   MatProgressBarModule,
   MatDatepickerModule,
+  MatNativeDateModule,
+  MatListModule,
+  MatDialogModule,
+  MatInputModule,
+  MatCheckboxModule,
+  MatSelectModule,
+  MatFormFieldModule,
 } from '@angular/material';
 
 @NgModule({
@@ -23,6 +30,14 @@ import {
     MatChipsModule,
     MatProgressBarModule,
     MatDatepickerModule,
+    MatNativeDateModule,
+    MatListModule,
+    MatDialogModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatSelectModule,
+    MatFormFieldModule,
+
   ],
   exports: [
     MatButtonModule,
@@ -34,6 +49,15 @@ import {
     MatChipsModule,
     MatProgressBarModule,
     MatDatepickerModule,
+    MatNativeDateModule,
+    MatListModule,
+    MatDialogModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatSelectModule,
+    MatFormFieldModule,
+
+
   ]
 })
-export class MaterialModule {}
+export class MaterialModule { }

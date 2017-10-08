@@ -8,22 +8,22 @@
         <mat-dialog-content>
             <p>
                 <mat-form-field style="width:60%">
-                    <input matInput placeholder="Title" formControlName="name">
+                    <input matInput type="text" placeholder="Title" formControlName="name">
                 </mat-form-field>
-                <mat-form-field>
-                    <mat-select placeholder="Type" formControlName="type" style="width:15%">
+                 <mat-form-field style="width:15%">
+                    <mat-select placeholder="Type" formControlName="type">
                         <mat-option *ngFor="let type of typeList" [value]="type.key">
                             {{type.value}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-form-field>
-                    <mat-select placeholder="Theme" formControlName="theme" style="width:15%">
+                <mat-form-field style="width:15%">
+                    <mat-select placeholder="Theme" formControlName="theme">
                         <mat-option *ngFor="let theme of themeList" [value]="theme">
                             {{theme}}
                         </mat-option>
                     </mat-select>
-                </mat-form-field>
+                </mat-form-field>  
             </p>
             <p>
                 <mat-form-field style="width:40%">

@@ -62,6 +62,15 @@ export class StoryEditDialogComponent implements OnInit {
 
   }
 
+    selectedValue: string;
+
+  foods = [
+    {value: 'steak-0', viewValue: 'Steak'},
+    {value: 'pizza-1', viewValue: 'Pizza'},
+    {value: 'tacos-2', viewValue: 'Tacos'}
+  ];
+
+
   apply() {
 
     this.story.name = this.storyForm.value.name;

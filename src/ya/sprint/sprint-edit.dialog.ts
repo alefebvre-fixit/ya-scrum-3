@@ -26,6 +26,7 @@ export class SprintEditDialogComponent implements OnInit {
     public userService: UserService,
     private _fb: FormBuilder
   ) {
+    console.log(data)
     this.sprint = data.sprint;
   }
 
